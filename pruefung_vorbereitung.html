@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Prüfungsvorbereitung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 60px;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: black;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 16px;
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .button {
+      background-color: hotpink;
+      color: black;
+      font-weight: bold;
+      padding: 15px 40px;
+      margin: 10px 0;
+      width: 90%;
+      max-width: 320px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+      display: block;
+    }
+
+    .button:hover {
+      background-color: deeppink;
+      color: white;
+    }
+
+    .note {
+      margin-top: 40px;
+      padding: 0 20px;
+      text-align: center;
+      font-weight: bold;
+      color: black;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
+      .note {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="revision_pruefung.html">Zurück</a>
+
+  <h1>Prüfungsvorbereitung</h1>
+
+  <a class="button" href="pruefung_vorbereitung_aufgaben.html">Aufgabenset</a>
+  <a class="button" href="pruefung_vorbereitung_zusatz.html">Zusätzliches</a>
+
+  <div class="note">
+    Die Unterlagen beinhalten NICHT alle prüfungsrelevanten Themen.
+  </div>
+</body>
+</html>
