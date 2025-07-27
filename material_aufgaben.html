@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zusätzliche Aufgaben – Material</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 60px 20px 20px;
+      color: black;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 800px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .input-box {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      background-color: #cce5ff;
+    }
+
+    button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .correct {
+      background-color: lightgreen !important;
+    }
+
+    .wrong {
+      color: red;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="material_einkauf.html">← Zurück</a>
+
+  <div class="section">
+    <h2>Aufgabe 1</h2>
+    <p>
+      • Bewertung der Fibu = 85%<br>
+      • Einkauf = ?<br>
+      • Aufwand = 1020<br>
+      • Verbrauch = 1200
+    </p>
+    <div class="input-box">
+      <input type="text" id="a1">
+      <button onclick="check('a1', 1410)">OK</button>
+    </div>
+    <div id="f1" class="wrong"></div>
+  </div>
+
+  <div class="section">
+    <h2>Aufgabe 2</h2>
+    <p>
+      • Bewertung der Fibu = 90%<br>
+      • Einkauf = 1800<br>
+      • Aufwand = ?<br>
+      • Verbrauch = 1600
+    </p>
+    <div class="input-box">
+      <input type="text" id="a2">
+      <button onclick="check('a2', 1450)">OK</button>
+    </div>
+    <div id="f2" class="wrong"></div>
+  </div>
+
+  <div class="section">
+    <h2>Aufgabe 3</h2>
+    <p>
+      • Bewertung der Fibu = 70%<br>
+      • Einkauf = 950<br>
+      • Aufwand = 1150<br>
+      • Verbrauch = ?
+    </p>
+    <div class="input-box">
+      <input type="text" id="a3">
+      <button onclick="check('a3', 1000)">OK</button>
+    </div>
+    <div id="f3" class="wrong"></div>
+  </div>
+
+  <div class="section">
+    <h2>Aufgabe 4</h2>
+    <p>
+      • Bewertung der Fibu = 60%<br>
+      • Einkauf = ?<br>
+      • Aufwand = 1350<br>
+      • Verbrauch = 1400
+    </p>
+    <div class="input-box">
+      <input type="text" id="a4">
+      <button onclick="check('a4', 1125)">OK</button>
+    </div>
+    <div id="f4" class="wrong"></div>
+  </div>
+
+  <div class="section">
+    <h2>Aufgabe 5</h2>
+    <p>
+      • Bewertung der Fibu = 80%<br>
+      • Einkauf = 1300<br>
+      • Aufwand = 1100<br>
+      • Verbrauch = ?
+    </p>
+    <div class="input-box">
+      <input type="text" id="a5">
+      <button onclick="check('a5', 1400)">OK</button>
+    </div>
+    <div id="f5" class="wrong"></div>
+  </div>
+
+  <div class="section">
+    <h2>Aufgabe 6</h2>
+    <p>
+      • Bewertung der Fibu = 65%<br>
+      • Einkauf = 2000<br>
+      • Aufwand = ?<br>
+      • Verbrauch = 1800
+    </p>
+    <div class="input-box">
+      <input type="text" id="a6">
+      <button onclick="check('a6', 1550)">OK</button>
+    </div>
+    <div id="f6" class="wrong"></div>
+  </div>
+
+  <script>
+    function check(id, solution) {
+      const input = document.getElementById(id);
+      const feedback = document.getElementById('f' + id.slice(1));
+      const entered = input.value.replace(',', '.').trim();
+      const enteredNum = parseFloat(entered);
+
+      if (!isNaN(enteredNum) && Math.abs(enteredNum - solution) < 0.01) {
+        input.classList.add("correct");
+        feedback.textContent = "Richtig ✅";
+        feedback.style.color = "green";
+      } else {
+        input.classList.remove("correct");
+        feedback.textContent = "Falsch ❌ – Richtige Lösung: " + solution;
+        feedback.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
