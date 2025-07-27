@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Zusätzliche Aufgaben – Produktionserfolgsrechnung</title>
   <style>
     body {
@@ -27,7 +27,7 @@
     .container {
       max-width: 1000px;
       margin: 80px auto 0;
-      background: rgba(255, 255, 200, 0.9);
+      background: rgba(180, 220, 255, 0.95); /* Hellblau */
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -55,16 +55,17 @@
       padding: 8px;
       text-align: center;
       border-bottom: 1px solid #ccc;
+      vertical-align: middle;
     }
 
     th {
-      background-color: #f7e885;
+      background-color: #cfe8ff;
     }
 
     input[type="text"] {
       padding: 6px;
       font-size: 16px;
-      width: 80px;
+      width: 100px;
       text-align: center;
       border-radius: 6px;
       border: 1px solid #ccc;
@@ -80,8 +81,8 @@
     }
 
     button {
-      margin-left: 8px;
-      padding: 6px 12px;
+      margin-left: 6px;
+      padding: 6px 10px;
       background-color: black;
       color: white;
       border: none;
@@ -113,7 +114,7 @@
         </tr>
       </thead>
       <tbody id="table-body">
-        <!-- Zeilen werden per JS geladen -->
+        <!-- JavaScript generiert hier alles -->
       </tbody>
     </table>
   </div>
@@ -137,51 +138,62 @@
 
     const tbody = document.getElementById("table-body");
 
-    data.forEach(([label, values], rowIndex) => {
-      const row = document.createElement("tr");
-      const labelCell = document.createElement("td");
-      labelCell.textContent = label;
-      row.appendChild(labelCell);
+    data.forEach(([rowLabel, values], rowIndex) => {
+      const tr = document.createElement("tr");
 
+      // Erste Zelle = Position (auch als ausfüllbares Feld)
+      const labelCell = document.createElement("td");
+      const labelInput = document.createElement("input");
+      labelInput.type = "text";
+      labelInput.id = `input-${rowIndex}-label`;
+      labelCell.appendChild(labelInput);
+
+      const labelBtn = document.createElement("button");
+      labelBtn.textContent = "OK";
+      labelBtn.onclick = () => check(labelInput, rowLabel);
+      labelCell.appendChild(labelBtn);
+      tr.appendChild(labelCell);
+
+      // Für Schweiz, Europa, Total
       values.forEach((correct, colIndex) => {
-        const cell = document.createElement("td");
+        const td = document.createElement("td");
+
         if (correct === "") {
-          cell.textContent = "";
-          row.appendChild(cell);
-          return;
+          td.textContent = "";
+        } else {
+          const input = document.createElement("input");
+          input.type = "text";
+          input.id = `input-${rowIndex}-${colIndex}`;
+
+          const button = document.createElement("button");
+          button.textContent = "OK";
+          button.onclick = () => check(input, correct);
+
+          td.appendChild(input);
+          td.appendChild(button);
         }
 
-        const input = document.createElement("input");
-        input.type = "text";
-        input.id = `input-${rowIndex}-${colIndex}`;
-
-        const button = document.createElement("button");
-        button.textContent = "OK";
-        button.onclick = () => check(input, correct);
-
-        cell.appendChild(input);
-        cell.appendChild(button);
-        row.appendChild(cell);
+        tr.appendChild(td);
       });
 
-      tbody.appendChild(row);
+      tbody.appendChild(tr);
     });
 
-    function normalize(value) {
-      return value.toLowerCase().replace(/[\s,.-]/g, '');
+    function normalize(val) {
+      return val.toLowerCase().replace(/[\s.,-]/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
 
-    function check(input, correct) {
+    function check(input, correctValue) {
       const given = normalize(input.value);
-      const expected = normalize(correct);
+      const expected = normalize(correctValue);
 
       if (given === expected) {
         input.classList.add("correct");
         input.classList.remove("wrong");
       } else {
-        input.classList.remove("correct");
         input.classList.add("wrong");
-        input.value = correct;
+        input.classList.remove("correct");
+        input.value = correctValue;
       }
     }
   </script>
