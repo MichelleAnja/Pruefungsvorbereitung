@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zuschlagskalkulation – Aufgaben</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 60px 20px;
+      color: black;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 80px auto 0;
+      background: rgba(180, 220, 255, 0.95); /* hellblauer Hintergrund */
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+      table-layout: fixed;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+      vertical-align: middle;
+    }
+
+    th:nth-child(1) { width: 45%; }
+    th:nth-child(2) { width: 25%; }
+    th:nth-child(3) { width: 30%; }
+
+    input[type="text"] {
+      padding: 6px;
+      font-size: 16px;
+      width: 100%;
+      max-width: 150px;
+      text-align: center;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    input.correct {
+      background-color: lightgreen;
+      color: black;
+    }
+
+    input.wrong {
+      color: red;
+    }
+
+    button {
+      margin-left: 6px;
+      padding: 6px 10px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      table, input, button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="zuschlagskalkulation.html">← Zurück</a>
+
+  <div class="container">
+    <h1>Zuschlagskalkulation – Zusätzliche Aufgabe</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Text</th>
+          <th>Abkürzung</th>
+          <th>Betrag</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const data = [
+      ["Einzelmaterial", "EM", ""],
+      ["Material-Gemeinkosten", "MGK", ""],
+      ["= Materialkosten", "MK", "Total"],
+      ["Einzellohnkosten", "EL", ""],
+      ["Fertigungsgemeinkosten", "FGK", ""],
+      ["Fertigungskosten", "FK", "Total"],
+      ["= Herstellkosten", "HK", "Total"],
+      ["Verwaltungs- und Vertriebsgemeinkosten", "VVGK", ""],
+      ["= Selbstkosten", "SK", ""],
+      ["Gewinn", "", "Total"],
+      ["= Nettoerlös", "NE", "100% – X%"],
+      ["Rabatt / Verhandlungsmarge", "", "X %"],
+      ["= Bruttobarangebots(verkaufs)preis ohne MWST", "98%", "100%", "Total"],
+      ["Skonto", "2%", "", ""],
+      ["= Bruttokreditangebots(verkaufs)preis ohne MWST", "100%", "100%", ""],
+      ["MWST 8.1%", "", "8.1%", ""],
+      ["Bruttokreditsangebotspreis inkl. MWST", "", "108.1%", "Total"]
+    ];
+
+    const tbody = document.getElementById("table-body");
+
+    data.forEach(([text, abk, betrag, optional3], rowIndex) => {
+      const tr = document.createElement("tr");
+
+      // Textfeld (ausfüllbar)
+      const tdText = document.createElement("td");
+      const inputText = document.createElement("input");
+      inputText.type = "text";
+      inputText.id = `text-${rowIndex}`;
+      tdText.appendChild(inputText);
+      const btnText = document.createElement("button");
+      btnText.textContent = "OK";
+      btnText.onclick = () => check(inputText, text);
+      tdText.appendChild(btnText);
+      tr.appendChild(tdText);
+
+      // Abkürzung (ausfüllbar)
+      const tdAbk = document.createElement("td");
+      const inputAbk = document.createElement("input");
+      inputAbk.type = "text";
+      inputAbk.id = `abk-${rowIndex}`;
+      tdAbk.appendChild(inputAbk);
+      const btnAbk = document.createElement("button");
+      btnAbk.textContent = "OK";
+      btnAbk.onclick = () => check(inputAbk, abk);
+      tdAbk.appendChild(btnAbk);
+      tr.appendChild(tdAbk);
+
+      // Betrag (teilweise fix)
+      const tdBetrag = document.createElement("td");
+      if (betrag === "") {
+        tdBetrag.textContent = "";
+      } else {
+        const inputBetrag = document.createElement("input");
+        inputBetrag.type = "text";
+        inputBetrag.id = `betrag-${rowIndex}`;
+        tdBetrag.appendChild(inputBetrag);
+        const btnBetrag = document.createElement("button");
+        btnBetrag.textContent = "OK";
+        btnBetrag.onclick = () => check(inputBetrag, betrag);
+        tdBetrag.appendChild(btnBetrag);
+      }
+      tr.appendChild(tdBetrag);
+
+      tbody.appendChild(tr);
+    });
+
+    function normalize(val) {
+      return val.toLowerCase().replace(/[\s.,%()-]/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function check(input, correctValue) {
+      const given = normalize(input.value);
+      const expected = normalize(correctValue);
+
+      if (given === expected) {
+        input.classList.add("correct");
+        input.classList.remove("wrong");
+      } else {
+        input.classList.add("wrong");
+        input.classList.remove("correct");
+        input.value = correctValue;
+      }
+    }
+  </script>
+</body>
+</html>
