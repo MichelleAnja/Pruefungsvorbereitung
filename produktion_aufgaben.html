@@ -27,7 +27,7 @@
     .container {
       max-width: 1000px;
       margin: 80px auto 0;
-      background: rgba(180, 220, 255, 0.95); /* Hellblau */
+      background: rgba(180, 220, 255, 0.95);
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -49,6 +49,7 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 16px;
+      table-layout: fixed;
     }
 
     th, td {
@@ -58,14 +59,25 @@
       vertical-align: middle;
     }
 
-    th {
-      background-color: #cfe8ff;
+    th:nth-child(1),
+    td:nth-child(1) {
+      width: 40%;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2),
+    th:nth-child(3),
+    td:nth-child(3),
+    th:nth-child(4),
+    td:nth-child(4) {
+      width: 20%;
     }
 
     input[type="text"] {
       padding: 6px;
       font-size: 16px;
-      width: 100px;
+      width: 100%;
+      max-width: 150px;
       text-align: center;
       border-radius: 6px;
       border: 1px solid #ccc;
@@ -113,9 +125,7 @@
           <th>Total</th>
         </tr>
       </thead>
-      <tbody id="table-body">
-        <!-- JavaScript generiert hier alles -->
-      </tbody>
+      <tbody id="table-body"></tbody>
     </table>
   </div>
 
@@ -138,10 +148,10 @@
 
     const tbody = document.getElementById("table-body");
 
-    data.forEach(([rowLabel, values], rowIndex) => {
+    data.forEach(([label, values], rowIndex) => {
       const tr = document.createElement("tr");
 
-      // Erste Zelle = Position (auch als ausfüllbares Feld)
+      // Position – auch ausfüllbar
       const labelCell = document.createElement("td");
       const labelInput = document.createElement("input");
       labelInput.type = "text";
@@ -150,11 +160,11 @@
 
       const labelBtn = document.createElement("button");
       labelBtn.textContent = "OK";
-      labelBtn.onclick = () => check(labelInput, rowLabel);
+      labelBtn.onclick = () => check(labelInput, label);
       labelCell.appendChild(labelBtn);
       tr.appendChild(labelCell);
 
-      // Für Schweiz, Europa, Total
+      // Zahlenfelder (Schweiz, Europa, Total)
       values.forEach((correct, colIndex) => {
         const td = document.createElement("td");
 
@@ -180,22 +190,4 @@
     });
 
     function normalize(val) {
-      return val.toLowerCase().replace(/[\s.,-]/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    }
-
-    function check(input, correctValue) {
-      const given = normalize(input.value);
-      const expected = normalize(correctValue);
-
-      if (given === expected) {
-        input.classList.add("correct");
-        input.classList.remove("wrong");
-      } else {
-        input.classList.add("wrong");
-        input.classList.remove("correct");
-        input.value = correctValue;
-      }
-    }
-  </script>
-</body>
-</html>
+      re
