@@ -112,69 +112,49 @@
 
   <script>
     const data = [
-      ["Einzelmaterial", "EM", ""],
-      ["Material-Gemeinkosten", "MGK", ""],
-      ["= Materialkosten", "MK", "Total"],
-      ["Einzellohnkosten", "EL", ""],
-      ["Fertigungsgemeinkosten", "FGK", ""],
-      ["Fertigungskosten", "FK", "Total"],
-      ["= Herstellkosten", "HK", "Total"],
-      ["Verwaltungs- und Vertriebsgemeinkosten", "VVGK", ""],
-      ["= Selbstkosten", "SK", ""],
-      ["Gewinn", "", "Total"],
-      ["= Nettoerlös", "NE", "100% – X%"],
-      ["Rabatt / Verhandlungsmarge", "", "X %"],
-      ["= Bruttobarangebots(verkaufs)preis ohne MWST", "98%", "100%", "Total"],
-      ["Skonto", "2%", "", ""],
-      ["= Bruttokreditangebots(verkaufs)preis ohne MWST", "100%", "100%", ""],
-      ["MWST 8.1%", "", "8.1%", ""],
-      ["Bruttokreditsangebotspreis inkl. MWST", "", "108.1%", "Total"]
+      [{ text: "Einzelmaterial", bf: true }, { text: "EM", bf: true }, { text: "", bf: true }],
+      [{ text: "Material-Gemeinkosten", bf: true }, { text: "MGK", bf: true }, { text: "", bf: true }],
+      [{ text: "= Materialkosten", bf: true }, { text: "MK", bf: true }, { text: "Total", bf: true }],
+      [{ text: "Einzellohnkosten", bf: true }, { text: "EL", bf: true }, { text: "", bf: true }],
+      [{ text: "Fertigungsgemeinkosten", bf: true }, { text: "FGK", bf: true }, { text: "", bf: true }],
+      [{ text: "Fertigungskosten", bf: true }, { text: "FK", bf: true }, { text: "Total", bf: true }],
+      [{ text: "= Herstellkosten", bf: true }, { text: "HK", bf: true }, { text: "Total", bf: true }],
+      [{ text: "Verwaltungs- und Vertriebsgemeinkosten", bf: true }, { text: "VVGK", bf: true }, { text: "", bf: true }],
+      [{ text: "= Selbstkosten", bf: true }, { text: "SK", bf: true }, { text: "", bf: true }],
+      [{ text: "Gewinn", bf: false }, { text: "", bf: false }, { text: "Total", bf: true }],
+      [{ text: "= Nettoerlös", bf: true }, { text: "NE", bf: true }, { text: "100% – X%", bf: true }],
+      [{ text: "Rabatt / Verhandlungsmarge", bf: true }, { text: "", bf: false }, { text: "X %", bf: true }],
+      [{ text: "= Bruttobarangebots(verkaufs)preis ohne MWST", bf: true }, { text: "98%", bf: false }, { text: "100%", bf: false }],
+      [{ text: "Skonto", bf: true }, { text: "2%", bf: false }, { text: "", bf: false }],
+      [{ text: "= Bruttokreditangebots(verkaufs)preis ohne MWST", bf: true }, { text: "100%", bf: false }, { text: "100%", bf: false }],
+      [{ text: "MWST 8.1%", bf: true }, { text: "", bf: false }, { text: "8.1%", bf: false }],
+      [{ text: "Bruttokreditsangebotspreis inkl. MWST", bf: true }, { text: "", bf: false }, { text: "108.1%", bf: false }]
     ];
 
     const tbody = document.getElementById("table-body");
 
-    data.forEach(([text, abk, betrag, optional3], rowIndex) => {
+    data.forEach((row, rowIndex) => {
       const tr = document.createElement("tr");
 
-      // Textfeld (ausfüllbar)
-      const tdText = document.createElement("td");
-      const inputText = document.createElement("input");
-      inputText.type = "text";
-      inputText.id = `text-${rowIndex}`;
-      tdText.appendChild(inputText);
-      const btnText = document.createElement("button");
-      btnText.textContent = "OK";
-      btnText.onclick = () => check(inputText, text);
-      tdText.appendChild(btnText);
-      tr.appendChild(tdText);
+      row.forEach((cell, colIndex) => {
+        const td = document.createElement("td");
 
-      // Abkürzung (ausfüllbar)
-      const tdAbk = document.createElement("td");
-      const inputAbk = document.createElement("input");
-      inputAbk.type = "text";
-      inputAbk.id = `abk-${rowIndex}`;
-      tdAbk.appendChild(inputAbk);
-      const btnAbk = document.createElement("button");
-      btnAbk.textContent = "OK";
-      btnAbk.onclick = () => check(inputAbk, abk);
-      tdAbk.appendChild(btnAbk);
-      tr.appendChild(tdAbk);
+        if (cell.bf) {
+          const input = document.createElement("input");
+          input.type = "text";
+          input.id = `cell-${rowIndex}-${colIndex}`;
+          td.appendChild(input);
 
-      // Betrag (teilweise fix)
-      const tdBetrag = document.createElement("td");
-      if (betrag === "") {
-        tdBetrag.textContent = "";
-      } else {
-        const inputBetrag = document.createElement("input");
-        inputBetrag.type = "text";
-        inputBetrag.id = `betrag-${rowIndex}`;
-        tdBetrag.appendChild(inputBetrag);
-        const btnBetrag = document.createElement("button");
-        btnBetrag.textContent = "OK";
-        btnBetrag.onclick = () => check(inputBetrag, betrag);
-        tdBetrag.appendChild(btnBetrag);
-      }
-      tr.appendChild(tdBetrag);
+          const button = document.createElement("button");
+          button.textContent = "OK";
+          button.onclick = () => check(input, cell.text);
+          td.appendChild(button);
+        } else {
+          td.textContent = cell.text;
+        }
+
+        tr.appendChild(td);
+      });
 
       tbody.appendChild(tr);
     });
@@ -199,3 +179,4 @@
   </script>
 </body>
 </html>
+
