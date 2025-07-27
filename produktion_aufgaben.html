@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zusätzliche Aufgaben – Produktionserfolgsrechnung</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 60px 20px;
+      color: black;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 80px auto 0;
+      background: rgba(255, 255, 200, 0.9);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      margin: 20px auto;
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #f7e885;
+    }
+
+    input[type="text"] {
+      padding: 6px;
+      font-size: 16px;
+      width: 80px;
+      text-align: center;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    input.correct {
+      background-color: lightgreen;
+      color: black;
+    }
+
+    input.wrong {
+      color: red;
+    }
+
+    button {
+      margin-left: 8px;
+      padding: 6px 12px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      table, input, button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="produktionserfolgsrechnung.html">← Zurück</a>
+
+  <div class="container">
+    <h1>Zusätzliche Aufgabe: Produktionserfolgsrechnung</h1>
+    <img src="produktions_bab.jpeg" alt="Produktions-BAB">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Schweiz</th>
+          <th>Europa</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <!-- Zeilen werden per JS geladen -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const data = [
+      ["Fakturierte Erlöse", ["-1500", "-1050", "-2550"]],
+      ["Erlösminderung", ["60", "42", "102"]],
+      ["Nettoerlös", ["-1440", "-1008", "-2448"]],
+      ["BÄ HF", ["30", "-20", "10"]],
+      ["BÄ FF", ["-70", "20", "-50"]],
+      ["Produktionsertrag", ["-1480", "1008", "2488"]],
+      ["Material", ["440", "510", "950"]],
+      ["Materialgemeinkosten", ["88", "102", "190"]],
+      ["Fertigungsgemeinkosten", ["512", "268", "780"]],
+      ["Verwaltungs- und Vertriebsgemeinkosten", ["240", "168", "408"]],
+      ["IST Betriebsgewinn Bebu", ["-200", "40", "-160"]],
+      ["Sachliche Abgrenzung", ["", "", "-10"]],
+      ["IST Betriebsgewinn Fibu", ["", "", "-170"]],
+    ];
+
+    const tbody = document.getElementById("table-body");
+
+    data.forEach(([label, values], rowIndex) => {
+      const row = document.createElement("tr");
+      const labelCell = document.createElement("td");
+      labelCell.textContent = label;
+      row.appendChild(labelCell);
+
+      values.forEach((correct, colIndex) => {
+        const cell = document.createElement("td");
+        if (correct === "") {
+          cell.textContent = "";
+          row.appendChild(cell);
+          return;
+        }
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = `input-${rowIndex}-${colIndex}`;
+
+        const button = document.createElement("button");
+        button.textContent = "OK";
+        button.onclick = () => check(input, correct);
+
+        cell.appendChild(input);
+        cell.appendChild(button);
+        row.appendChild(cell);
+      });
+
+      tbody.appendChild(row);
+    });
+
+    function normalize(value) {
+      return value.toLowerCase().replace(/[\s,.-]/g, '');
+    }
+
+    function check(input, correct) {
+      const given = normalize(input.value);
+      const expected = normalize(correct);
+
+      if (given === expected) {
+        input.classList.add("correct");
+        input.classList.remove("wrong");
+      } else {
+        input.classList.remove("correct");
+        input.classList.add("wrong");
+        input.value = correct;
+      }
+    }
+  </script>
+</body>
+</html>
