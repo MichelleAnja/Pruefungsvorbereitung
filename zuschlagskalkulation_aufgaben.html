@@ -27,10 +27,9 @@
     .container {
       max-width: 1000px;
       margin: 80px auto 0;
-      background: rgba(180, 220, 255, 0.95); /* hellblauer Hintergrund */
+      background: rgba(180, 220, 255, 0.95);
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     h1 {
@@ -84,12 +83,6 @@
       border-radius: 6px;
       cursor: pointer;
     }
-
-    @media (max-width: 600px) {
-      table, input, button {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -114,16 +107,16 @@
     const data = [
       [{ text: "Einzelmaterial", bf: true }, { text: "EM", bf: true }, { text: "", bf: true }],
       [{ text: "Material-Gemeinkosten", bf: true }, { text: "MGK", bf: true }, { text: "", bf: true }],
-      [{ text: "= Materialkosten", bf: true }, { text: "MK", bf: true }, { text: "Total", bf: true }],
+      [{ text: "= Materialkosten", bf: true }, { text: "MK", bf: true }, { text: "Total", bf: false }],
       [{ text: "Einzellohnkosten", bf: true }, { text: "EL", bf: true }, { text: "", bf: true }],
       [{ text: "Fertigungsgemeinkosten", bf: true }, { text: "FGK", bf: true }, { text: "", bf: true }],
-      [{ text: "Fertigungskosten", bf: true }, { text: "FK", bf: true }, { text: "Total", bf: true }],
-      [{ text: "= Herstellkosten", bf: true }, { text: "HK", bf: true }, { text: "Total", bf: true }],
+      [{ text: "Fertigungskosten", bf: true }, { text: "FK", bf: true }, { text: "Total", bf: false }],
+      [{ text: "= Herstellkosten", bf: true }, { text: "HK", bf: true }, { text: "Total", bf: false }],
       [{ text: "Verwaltungs- und Vertriebsgemeinkosten", bf: true }, { text: "VVGK", bf: true }, { text: "", bf: true }],
       [{ text: "= Selbstkosten", bf: true }, { text: "SK", bf: true }, { text: "", bf: true }],
-      [{ text: "Gewinn", bf: false }, { text: "", bf: false }, { text: "Total", bf: true }],
-      [{ text: "= Nettoerlös", bf: true }, { text: "NE", bf: true }, { text: "100% – X%", bf: true }],
-      [{ text: "Rabatt / Verhandlungsmarge", bf: true }, { text: "", bf: false }, { text: "X %", bf: true }],
+      [{ text: "Gewinn", bf: false }, { text: "", bf: false }, { text: "Total", bf: false }],
+      [{ text: "= Nettoerlös", bf: true }, { text: "NE", bf: true }, { text: "100% – X%", bf: false }],
+      [{ text: "Rabatt / Verhandlungsmarge", bf: true }, { text: "", bf: false }, { text: "X %", bf: false }],
       [{ text: "= Bruttobarangebots(verkaufs)preis ohne MWST", bf: true }, { text: "98%", bf: false }, { text: "100%", bf: false }],
       [{ text: "Skonto", bf: true }, { text: "2%", bf: false }, { text: "", bf: false }],
       [{ text: "= Bruttokreditangebots(verkaufs)preis ohne MWST", bf: true }, { text: "100%", bf: false }, { text: "100%", bf: false }],
@@ -179,4 +172,5 @@
   </script>
 </body>
 </html>
+
 
