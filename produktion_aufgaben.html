@@ -27,7 +27,7 @@
     .container {
       max-width: 1000px;
       margin: 80px auto 0;
-      background: rgba(180, 220, 255, 0.95);
+      background: rgba(180, 220, 255, 0.95); /* hellblau */
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -61,7 +61,7 @@
 
     th:nth-child(1),
     td:nth-child(1) {
-      width: 40%;
+      width: 45%;
     }
 
     th:nth-child(2),
@@ -70,7 +70,7 @@
     td:nth-child(3),
     th:nth-child(4),
     td:nth-child(4) {
-      width: 20%;
+      width: 18%;
     }
 
     input[type="text"] {
@@ -151,7 +151,7 @@
     data.forEach(([label, values], rowIndex) => {
       const tr = document.createElement("tr");
 
-      // Position – auch ausfüllbar
+      // Position-Feld
       const labelCell = document.createElement("td");
       const labelInput = document.createElement("input");
       labelInput.type = "text";
@@ -164,7 +164,7 @@
       labelCell.appendChild(labelBtn);
       tr.appendChild(labelCell);
 
-      // Zahlenfelder (Schweiz, Europa, Total)
+      // Zahlenfelder
       values.forEach((correct, colIndex) => {
         const td = document.createElement("td");
 
@@ -190,4 +190,23 @@
     });
 
     function normalize(val) {
-      re
+      return val.toLowerCase().replace(/[\s.,-]/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function check(input, correctValue) {
+      const given = normalize(input.value);
+      const expected = normalize(correctValue);
+
+      if (given === expected) {
+        input.classList.add("correct");
+        input.classList.remove("wrong");
+      } else {
+        input.classList.add("wrong");
+        input.classList.remove("correct");
+        input.value = correctValue;
+      }
+    }
+  </script>
+</body>
+</html>
+
