@@ -85,7 +85,7 @@
   <a class="back-link" href="buchung_bebu.html">← Zurück</a>
   <h2>Buchungen BEBU – Zusätzliche Aufgaben</h2>
 
-  <img src="buchung_bab.jpg" alt="Buchung BAB">
+  <img src="buchung_bab.jpeg" alt="Buchung BAB">
 
   <div class="info-box">
 Weitere Angaben:
@@ -146,43 +146,45 @@ Kostenträger:
 
   <table id="task-table">
     <tr>
-      <th>Soll</th>
-      <th>Haben</th>
+      <th>Soll 1</th>
+      <th>Soll 2</th>
+      <th>Haben 1</th>
+      <th>Haben 2</th>
       <th>Bezeichnung</th>
       <th>Betrag</th>
-      <th>Aktion</th>
+      <th>OK</th>
     </tr>
   </table>
 
   <script>
     const rows = [
-      ["(BF)L: 6700", "/", "(BF)L: 21", "Übrige Gemeinkosten", "165"],
-      ["(BF)L: 6700", "/", "(BF)L: 30", "Übrige Gemeinkosten", "90"],
-      ["(BF)L: 6700", "/", "(BF)L: 95", "Übrige Gemeinkosten (Privataufwand)", "18"],
-      ["(BF)L: 910", "/", "(BF)L: 20", "Umlage Gebäude", "37"],
-      ["(BF)L: 910", "/", "(BF)L: 21", "Umlage Gebäude", "50"],
-      ["(BF)L: 910", "/", "(BF)L: 30", "Umlage Gebäude", "37"],
-      ["(BF)L: 920", "/", "(BF)L: 40", "Umlage Materialstelle", "106"],
-      ["(BF)L: 920", "/", "(BF)L: 41", "Umlage Materialstelle", "99"],
-      ["(BF)L: 921", "/", "(BF)L: 40", "Umlage Fertigung", "525"],
-      ["(BF)L: 921", "/", "(BF)L: 41", "Umlage Fertigung", "275"],
-      ["(BF)L: 940", "/", "(BF)L: 50", "Abgabe HF an FF – Schweiz", "(BF)L: 966"],
-      ["(BF)L: 3900", "/", "(BF)L: 40", "BV / BÄ HF Schweiz", "(BF)L: 15"],
-      ["(BF)L: 941", "/", "(BF)L: 51", "Abgabe HF an FF – Europa", "(BF)L: 699"],
-      ["(BF)L: 3900", "/", "(BF)L: 41", "BV / BÄ HF Europa", "(BF)L: 25"],
-      ["Lager HF", "/", "(BF)L: 3900", "Anpassung stille Reserven HF", "(BF)L: 12"],
-      ["(BF)L: 950", "/", "(BF)L: 70", "Abgabe FF an Verkauf – Schweiz", "(BF)L: 896"],
-      ["Lager FF", "/", "(BF)L: 3900", "BV / BÄ FF Schweiz", "(BF)L: 70"],
-      ["(BF)L: 951", "/", "(BF)L: 71", "Abgabe FF an Verkauf – Europa", "(BF)L: 719"],
-      ["(BF)L: 3900", "/", "(BF)L: 51", "BV / BÄ FF Europa", "(BF)L: 20"],
-      ["(BF)L: 3901", "/", "Lager FF", "Anpassung stille Reserven FF", "(BF)L: 15"],
-      ["(BF)L: 930", "/", "(BF)L: 70", "Umlage VVGK", "206"],
-      ["(BF)L: 930", "/", "(BF)L: 71", "Umlage VVGK", "167"],
-      ["Debitoren", "/", "(BF)L: 3000", "Verkaufserträge", "1300"],
-      ["Debitoren", "/", "(BF)L: 3000", "Verkaufserträge", "1050"],
-      ["(BF)L: 3800", "/", "(BF)L: 98", "Erlösminderungen", "(BF)L: 86"],
-      ["(BF)L: 998", "/", "(BF)L: 70", "Verkaufserträge", "52"],
-      ["(BF)L: 998", "/", "(BF)L: 71", "Verkaufserträge", "42"]
+      ["(BF)L: 6700", "(BF)L: 21", "(BF)L: Kred/Flümi", "", "Übrige Gemeinkosten", "165"],
+      ["(BF)L: 6700", "(BF)L: 30", "(BF)L: Kred/Flümi", "", "Übrige Gemeinkosten", "90"],
+      ["(BF)L: 6700", "(BF)L: 95", "(BF)L: Kred/Flümi", "", "Übrige Gemeinkosten (Privataufwand)", "18"],
+      ["(BF)L: 910", "(BF)L: 20", "(BF)L: 910", "(BF)L: 10", "Umlage Gebäude", "37"],
+      ["(BF)L: 910", "(BF)L: 21", "(BF)L: 910", "(BF)L: 10", "Umlage Gebäude", "50"],
+      ["(BF)L: 910", "(BF)L: 30", "(BF)L: 910", "(BF)L: 10", "Umlage Gebäude", "37"],
+      ["(BF)L: 920", "(BF)L: 40", "(BF)L: 920", "(BF)L: 20", "Umlage Materialstelle", "106"],
+      ["(BF)L: 920", "(BF)L: 41", "(BF)L: 920", "(BF)L: 20", "Umlage Materialstelle", "99"],
+      ["(BF)L: 921", "(BF)L: 40", "(BF)L: 921", "(BF)L: 21", "Umlage Fertigung", "525"],
+      ["(BF)L: 921", "(BF)L: 41", "(BF)L: 921", "(BF)L: 21", "Umlage Fertigung", "275"],
+      ["(BF)L: 940", "(BF)L: 50", "(BF)L: 940", "(BF)L: 40", "Abgabe HF an FF – Schweiz", "(BF)L: 966"],
+      ["(BF)L: 3900", "(BF)L: 40", "Lager HF", "", "BV / BÄ HF Schweiz", "(BF)L: 15"],
+      ["(BF)L: 941", "(BF)L: 51", "(BF)L: 941", "(BF)L: 41", "Abgabe HF an FF – Europa", "(BF)L: 699"],
+      ["(BF)L: 3900", "(BF)L: 41", "Lager HF", "", "BV / BÄ HF Europa", "(BF)L: 25"],
+      ["Lager HF", "", "(BF)L: 3900", "(BF)L: 99", "Anpassung stille Reserven HF", "(BF)L: 12"],
+      ["(BF)L: 950", "(BF)L: 70", "(BF)L: 950", "(BF)L: 50", "Abgabe FF an Verkauf – Schweiz", "(BF)L: 896"],
+      ["Lager FF", "", "(BF)L: 3900", "(BF)L: 50", "BV / BÄ FF Schweiz", "(BF)L: 70"],
+      ["(BF)L: 951", "(BF)L: 71", "(BF)L: 951", "(BF)L: 51", "Abgabe FF an Verkauf – Europa", "(BF)L: 719"],
+      ["(BF)L: 3900", "(BF)L: 51", "Lager FF", "", "BV / BÄ FF Europa", "(BF)L: 20"],
+      ["(BF)L: 3901", "(BF)L: 99", "Lager FF", "", "Anpassung stille Reserven FF", "(BF)L: 15"],
+      ["(BF)L: 930", "(BF)L: 70", "(BF)L: 930", "(BF)L: 30", "Umlage VVGK", "206"],
+      ["(BF)L: 930", "(BF)L: 71", "(BF)L: 930", "(BF)L: 30", "Umlage VVGK", "167"],
+      ["Debitoren", "", "(BF)L: 3000", "(BF)L: 70", "Verkaufserträge", "1300"],
+      ["Debitoren", "", "(BF)L: 3000", "(BF)L: 71", "Verkaufserträge", "1050"],
+      ["(BF)L: 3800", "(BF)L: 98", "(BF)L: FLL", "", "Erlösminderungen", "(BF)L: 86"],
+      ["(BF)L: 998", "(BF)L: 70", "(BF)L: 998", "(BF)L: 98", "Verkaufserträge", "52"],
+      ["(BF)L: 998", "(BF)L: 71", "(BF)L: 998", "(BF)L: 98", "Verkaufserträge", "42"]
     ];
 
     const table = document.getElementById('task-table');
@@ -190,7 +192,7 @@ Kostenträger:
     rows.forEach((row, i) => {
       const tr = document.createElement('tr');
 
-      row.slice(0, 4).forEach((val, col) => {
+      row.forEach((val, col) => {
         const td = document.createElement('td');
         if (val.includes("(BF)L:")) {
           const correct = val.replace("(BF)L:", "").trim();
@@ -205,21 +207,6 @@ Kostenträger:
         }
         tr.appendChild(td);
       });
-
-      const amountVal = row[4];
-      const tdAmount = document.createElement('td');
-      if (amountVal.includes("(BF)L:")) {
-        const correct = amountVal.replace("(BF)L:", "").trim();
-        const input = document.createElement('input');
-        input.type = "text";
-        input.id = `input-${i}-4`;
-        input.dataset.correct = correct;
-        tdAmount.appendChild(input);
-      } else {
-        tdAmount.textContent = amountVal;
-        tdAmount.classList.add('fixed');
-      }
-      tr.appendChild(tdAmount);
 
       const actionTd = document.createElement('td');
       const button = document.createElement('button');
@@ -237,7 +224,7 @@ Kostenträger:
     }
 
     function checkRow(rowIndex) {
-      for (let col = 0; col <= 4; col++) {
+      for (let col = 0; col <= 5; col++) {
         const input = document.getElementById(`input-${rowIndex}-${col}`);
         if (!input) continue;
 
@@ -257,4 +244,5 @@ Kostenträger:
   </script>
 </body>
 </html>
+
 
