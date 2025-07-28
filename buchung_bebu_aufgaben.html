@@ -65,7 +65,7 @@
 
   <h2>Buchung BEBU – Zusätzliche Aufgaben</h2>
 
-  <img src="buchung_bab.jpg" alt="BAB Schema" />
+  <img src="buchungen_bab.jpg" alt="BAB Schema" />
 
   <div class="info-box">
     <strong>Weitere Angaben:</strong><br />
@@ -125,12 +125,124 @@
     71 Verkauf Europa
   </div>
 
-  <!-- Tabellenbereich wird hier automatisch eingefügt -->
-  <div class="info-box">
-    Die vollständige Tabelle mit interaktiven Buchungsfeldern wird jetzt erstellt und hinzugefügt. Ein Moment bitte...
-  </div>
-
-  <script>
+  <table>
+  <thead>
+    <tr>
+      <th>Soll 1</th>
+      <th>Soll 2</th>
+      <th>//</th>
+      <th>Haben 1</th>
+      <th>Haben 2</th>
+      <th>Bezeichnung</th>
+      <th>Betrag</th>
+      <th>OK</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="text" id="s1r1"></td>
+      <td><input type="text" id="s2r1"></td>
+      <td>//</td>
+      <td><input type="text" id="h1r1"></td>
+      <td><input type="text" id="h2r1"></td>
+      <td>Übrige Gemeinkosten</td>
+      <td>165</td>
+      <td><button class="ok-button" onclick="checkRow('s1r1','6700','s2r1','21','h1r1','Kred','h2r1','Flümi')">OK</button></td>
+    </tr>
+    <tr>
+      <td><input type="text" id="s1r2"></td>
+      <td><input type="text" id="s2r2"></td>
+      <td>//</td>
+      <td><input type="text" id="h1r2"></td>
+      <td><input type="text" id="h2r2"></td>
+      <td>Übrige Gemeinkosten</td>
+      <td>90</td>
+      <td><button class="ok-button" onclick="checkRow('s1r2','6700','s2r2','30','h1r2','Kred','h2r2','Flümi')">OK</button></td>
+    </tr>
+    <tr>
+      <td><input type="text" id="s1r3"></td>
+      <td><input type="text" id="s2r3"></td>
+      <td>//</td>
+      <td><input type="text" id="h1r3"></td>
+      <td><input type="text" id="h2r3"></td>
+      <td>Übrige Gemeinkosten (Privataufwand)</td>
+      <td>18</td>
+      <td><button class="ok-button" onclick="checkRow('s1r3','6700','s2r3','95','h1r3','Kred','h2r3','Flümi')">OK</button></td>
+    </tr>
+    <tr>
+      <td><input type="text" id="s1r4"></td>
+      <td><input type="text" id="s2r4"></td>
+      <td>//</td>
+      <td><input type="text" id="h1r4"></td>
+      <td><input type="text" id="h2r4"></td>
+      <td>Umlage Gebäude</td>
+      <td>37</td>
+      <td><button class="ok-button" onclick="checkRow('s1r4','910','s2r4','20','h1r4','910','h2r4','10')">OK</button></td>
+    </tr>
+    <tr>
+      <td><input type="text" id="s1r5"></td>
+      <td><input type="text" id="s2r5"></td>
+      <td>//</td>
+      <td><input type="text" id="h1r5"></td>
+      <td><input type="text" id="h2r5"></td>
+      <td>Umlage Gebäude</td>
+      <td>50</td>
+      <td><button class="ok-button" onclick="checkRow('s1r5','910','s2r5','21','h1r5','910','h2r5','10')">OK</button></td>
+    </tr>
+    <tr>
+      <td><input type="text" id="s1r6"></td>
+      <td><input type="text" id="s2r6"></td>
+      <td>//</td>
+      <td><input type="text" id="h1r6"></td>
+      <td><input type="text" id="h2r6"></td>
+      <td>Umlage Gebäude</td>
+      <td>37</td>
+      <td><button class="ok-button" onclick="checkRow('s1r6','910','s2r6','30','h1r6','910','h2r6','10')">OK</button></td>
+    </tr>
+    <tr>
+      <td><input type="text" id="s1r7"></td>
+      <td><input type="text" id="s2r7"></td>
+      <td>//</td>
+      <td><input type="text" id="h1r7"></td>
+      <td><input type="text" id="h2r7"></td>
+      <td>Umlage Materialstelle</td>
+      <td>106</td>
+      <td><button class="ok-button" onclick="checkRow('s1r7','920','s2r7','40','h1r7','920','h2r7','20')">OK</button></td>
+    </tr>
+    <tr>
+      <td><input type="text" id="s1r8"></td>
+      <td><input type="text" id="s2r8"></td>
+      <td>//</td>
+      <td><input type="text" id="h1r8"></td>
+      <td><input type="text" id="h2r8"></td>
+      <td>Umlage Materialstelle</td>
+      <td>99</td>
+      <td><button class="ok-button" onclick="checkRow('s1r8','920','s2r8','41','h1r8','920','h2r8','20')">OK</button></td>
+    </tr>
+    <tr>
+      <td><input type="text" id="s1r9"></td>
+      <td><input type="text" id="s2r9"></td>
+      <td>//</td>
+      <td><input type="text" id="h1r9"></td>
+      <td><input type="text" id="h2r9"></td>
+      <td>Umlage Fertigung</td>
+      <td>525</td>
+      <td><button class="ok-button" onclick="checkRow('s1r9','921','s2r9','40','h1r9','921','h2r9','21')">OK</button></td>
+    </tr>
+    <tr>
+      <td><input type="text" id="s1r10"></td>
+      <td><input type="text" id="s2r10"></td>
+      <td>//</td>
+      <td><input type="text" id="h1r10"></td>
+      <td><input type="text" id="h2r10"></td>
+      <td>Umlage Fertigung</td>
+      <td>275</td>
+      <td><button class="ok-button" onclick="checkRow('s1r10','921','s2r10','41','h1r10','921','h2r10','21')">OK</button></td>
+    </tr>
+    <!-- Fortsetzung folgt -->
+  </tbody>
+</table>
+<script>
     function normalize(txt) {
       return txt.toLowerCase().replace(/\s+/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
