@@ -21,6 +21,11 @@
       text-decoration: none;
     }
 
+    img {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -69,6 +74,9 @@
 <body>
   <a class="back-link" href="buchung_bebu.html">← Zurück</a>
   <h2>Buchungen BEBU – Zusätzliche Aufgaben</h2>
+
+  <img src="buchung_bab.jpeg" alt="Buchung BAB">
+
   <table id="task-table">
     <tr>
       <th>Soll</th>
@@ -81,33 +89,33 @@
 
   <script>
     const rows = [
-      ["6700", "21", "Kred/Flümi", "Übrige Gemeinkosten", "165"],
-      ["6700", "30", "Kred/Flümi", "Übrige Gemeinkosten", "90"],
-      ["6700", "95", "Kred/Flümi", "Übrige Gemeinkosten (Privataufwand)", "18"],
-      ["910", "20", "910 / 10", "Umlage Gebäude", "37"],
-      ["910", "21", "910 / 10", "Umlage Gebäude", "50"],
-      ["910", "30", "910 / 10", "Umlage Gebäude", "37"],
-      ["920", "40", "920 / 20", "Umlage Materialstelle", "106"],
-      ["920", "41", "920 / 20", "Umlage Materialstelle", "99"],
-      ["921", "40", "921 / 21", "Umlage Fertigung", "525"],
-      ["921", "41", "921 / 21", "Umlage Fertigung", "275"],
-      ["940", "50", "940 / 40", "Abgabe HF an FF – Schweiz", "966"],
-      ["3900", "40", "Lager HF", "BV / BÄ HF Schweiz (betriebswirtschaftlich)", "15"],
-      ["941", "51", "941 / 41", "Abgabe HF an FF -Europa", "699"],
-      ["3900", "41", "Lager HF", "BV / BÄ HF Europa (betriebswirtschaftlich)", "25"],
-      ["Lager HF", "", "3900 / 99", "Anpassung stille Reserven auf HF", "12"],
-      ["950", "70", "950 / 50", "Abgabe FF an Verkauf – Schweiz", "896"],
-      ["Lager FF", "", "3900 / 50", "BV / BÄ FF Schweiz (betriebswirtschaftlich)", "70"],
-      ["951", "71", "951 / 51", "Abgabe FF an Verkauf – Europa", "719"],
-      ["3900", "51", "Lager FF", "BV / BÄ FF Europa (betriebswirtschaftlich)", "20"],
-      ["3901", "99", "Lager FF", "Anpassung stille Reserven auf FF", "15"],
-      ["930", "70", "930 / 30", "Umlage VVGK", "206"],
-      ["930", "71", "930 / 30", "Umlage VVGK", "167"],
-      ["Debitoren", "", "3000 / 70", "Verkaufserträge", "1300"],
-      ["Debitoren", "", "3000 / 71", "Verkaufserträge", "1050"],
-      ["3800", "98", "FLL", "Erlösminderungen", "86"],
-      ["998", "70", "998 / 98", "Verkaufserträge", "52"],
-      ["998", "71", "998 / 98", "Verkaufserträge", "42"]
+      ["(BF)L: 6700", "/", "(BF)L: 21", "Übrige Gemeinkosten", "165"],
+      ["(BF)L: 6700", "/", "(BF)L: 30", "Übrige Gemeinkosten", "90"],
+      ["(BF)L: 6700", "/", "(BF)L: 95", "Übrige Gemeinkosten (Privataufwand)", "18"],
+      ["(BF)L: 910", "/", "(BF)L: 20", "Umlage Gebäude", "37"],
+      ["(BF)L: 910", "/", "(BF)L: 21", "Umlage Gebäude", "50"],
+      ["(BF)L: 910", "/", "(BF)L: 30", "Umlage Gebäude", "37"],
+      ["(BF)L: 920", "/", "(BF)L: 40", "Umlage Materialstelle", "106"],
+      ["(BF)L: 920", "/", "(BF)L: 41", "Umlage Materialstelle", "99"],
+      ["(BF)L: 921", "/", "(BF)L: 40", "Umlage Fertigung", "525"],
+      ["(BF)L: 921", "/", "(BF)L: 41", "Umlage Fertigung", "275"],
+      ["(BF)L: 940", "/", "(BF)L: 50", "Abgabe HF an FF – Schweiz", "(BF)L: 966"],
+      ["(BF)L: 3900", "/", "(BF)L: 40", "BV / BÄ HF Schweiz", "(BF)L: 15"],
+      ["(BF)L: 941", "/", "(BF)L: 51", "Abgabe HF an FF – Europa", "(BF)L: 699"],
+      ["(BF)L: 3900", "/", "(BF)L: 41", "BV / BÄ HF Europa", "(BF)L: 25"],
+      ["Lager HF", "/", "(BF)L: 3900", "Anpassung stille Reserven HF", "(BF)L: 12"],
+      ["(BF)L: 950", "/", "(BF)L: 70", "Abgabe FF an Verkauf – Schweiz", "(BF)L: 896"],
+      ["Lager FF", "/", "(BF)L: 3900", "BV / BÄ FF Schweiz", "(BF)L: 70"],
+      ["(BF)L: 951", "/", "(BF)L: 71", "Abgabe FF an Verkauf – Europa", "(BF)L: 719"],
+      ["(BF)L: 3900", "/", "(BF)L: 51", "BV / BÄ FF Europa", "(BF)L: 20"],
+      ["(BF)L: 3901", "/", "Lager FF", "Anpassung stille Reserven FF", "(BF)L: 15"],
+      ["(BF)L: 930", "/", "(BF)L: 70", "Umlage VVGK", "206"],
+      ["(BF)L: 930", "/", "(BF)L: 71", "Umlage VVGK", "167"],
+      ["Debitoren", "/", "(BF)L: 3000", "Verkaufserträge", "1300"],
+      ["Debitoren", "/", "(BF)L: 3000", "Verkaufserträge", "1050"],
+      ["(BF)L: 3800", "/", "(BF)L: 98", "Erlösminderungen", "(BF)L: 86"],
+      ["(BF)L: 998", "/", "(BF)L: 70", "Verkaufserträge", "52"],
+      ["(BF)L: 998", "/", "(BF)L: 71", "Verkaufserträge", "42"]
     ];
 
     const table = document.getElementById('task-table');
@@ -115,13 +123,14 @@
     rows.forEach((row, i) => {
       const tr = document.createElement('tr');
 
-      row.forEach((val, colIndex) => {
+      row.slice(0, 4).forEach((val, col) => {
         const td = document.createElement('td');
-        if (val.startsWith("BF")) {
-          const clean = val.replace("BF)L: ", "").trim();
+        if (val.includes("(BF)L:")) {
+          const correct = val.replace("(BF)L:", "").trim();
           const input = document.createElement('input');
           input.type = "text";
-          input.id = `input-${i}-${colIndex}`;
+          input.id = `input-${i}-${col}`;
+          input.dataset.correct = correct;
           td.appendChild(input);
         } else {
           td.textContent = val;
@@ -130,13 +139,29 @@
         tr.appendChild(td);
       });
 
+      const amountVal = row[4];
+      const tdAmount = document.createElement('td');
+      if (amountVal.includes("(BF)L:")) {
+        const correct = amountVal.replace("(BF)L:", "").trim();
+        const input = document.createElement('input');
+        input.type = "text";
+        input.id = `input-${i}-4`;
+        input.dataset.correct = correct;
+        tdAmount.appendChild(input);
+      } else {
+        tdAmount.textContent = amountVal;
+        tdAmount.classList.add('fixed');
+      }
+      tr.appendChild(tdAmount);
+
       const actionTd = document.createElement('td');
       const button = document.createElement('button');
       button.textContent = "OK";
       button.className = "ok-button";
-      button.onclick = () => checkRow(i, row);
+      button.onclick = () => checkRow(i);
       actionTd.appendChild(button);
       tr.appendChild(actionTd);
+
       table.appendChild(tr);
     });
 
@@ -144,23 +169,21 @@
       return text.toLowerCase().replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
 
-    function checkRow(rowIndex, rowData) {
-      for (let col = 0; col < 4; col++) {
-        const cellValue = rowData[col];
-        if (cellValue.startsWith("BF")) {
-          const correct = cellValue.replace("BF)L: ", "").trim();
-          const input = document.getElementById(`input-${rowIndex}-${col}`);
-          if (!input) continue;
-          const userInput = normalize(input.value);
-          const expected = normalize(correct);
-          if (userInput.includes(expected)) {
-            input.classList.remove("wrong");
-            input.classList.add("correct");
-          } else {
-            input.classList.remove("correct");
-            input.classList.add("wrong");
-            input.value = correct;
-          }
+    function checkRow(rowIndex) {
+      for (let col = 0; col <= 4; col++) {
+        const input = document.getElementById(`input-${rowIndex}-${col}`);
+        if (!input) continue;
+
+        const expected = normalize(input.dataset.correct);
+        const typed = normalize(input.value);
+
+        if (typed.includes(expected)) {
+          input.classList.remove("wrong");
+          input.classList.add("correct");
+        } else {
+          input.classList.remove("correct");
+          input.classList.add("wrong");
+          input.value = input.dataset.correct;
         }
       }
     }
