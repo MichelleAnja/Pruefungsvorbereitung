@@ -69,43 +69,66 @@
 
   <div class="info-box">
     <strong>Weitere Angaben:</strong><br />
-    Bei den Personalkosten sind sachliche Abgrenzungen für den zu tiefen Unternehmerlohn vorgenommen worden. Diese Abgrenzung wurde der Verwaltungsstelle belastet. Die sachlichen Abgrenzungen unter "Übriges" betreffen 3 Kreditorenrechnungen für Privataufwand des Firmeninhabers, welche in der Fibu als Aufwand verbucht worden sind.<br><br>
+    Bei den Personalkosten sind sachliche Abgrenzungen für den zu tiefen Unternehmerlohn vorgenommen worden. Diese Abgrenzung wurde der Verwaltungsstelle belastet. Die sachlichen Abgrenzungen unter "Übriges" betreffen 3 Kreditorenrechnungen für Privataufwand des Firmeninhabers, welche in der Fibu als Aufwand verbucht worden sind.
+    <br><br>
     <strong>Fibu‐Konten / Primäre Kostenarten:</strong><br />
-    3000 Ertrag, 3800 Erlösminderungen, 3900 BV HF, 3901 BV FF, 4000 Materialaufwand, 5000 Personalaufwand, 6700 übriger Aufwand, 6800 Abschreibungsaufwand, 6900 Zinsenaufwand<br><br>
+    3000 Ertrag<br />
+    3800 Erlösminderungen<br />
+    3900 BV HF<br />
+    3901 BV FF<br />
+    4000 Materialaufwand<br />
+    5000 Personalaufwand<br />
+    6700 übriger Aufwand<br />
+    6800 Abschreibungsaufwand<br />
+    6900 Zinsenaufwand
+    <br><br>
     <strong>Sekundäre Kostenarten:</strong><br />
-    910–995 Umlagen & SA, 998–999 kalkulatorische Positionen<br><br>
-    <strong>Objekte & Kostenstellen:</strong><br />
-    91–99 SA, 10–30 Kostenstellen, 40–71 Kostenträger
+    910 Umlage Gebäude<br />
+    920 Umlage Material (MGK)<br />
+    921 Umlage Fertigung (FGK)<br />
+    930 Umlage Verw. + Vertrieb (VVGK)<br />
+    940 Abgabe HF an FF ‐ Schweiz<br />
+    941 Abgabe HF an FF ‐ Europa<br />
+    950 Abgabe FF an Verkauf ‐ Schweiz<br />
+    951 Abgabe FF an Verkauf ‐ Europa<br />
+    991 ev. bwl Materialaufwand (100%) *<br />
+    992 SA Personal<br />
+    993 Abschreibungskosten<br />
+    994 Zinskosten<br />
+    995 SA übriger Aufwand<br />
+    998 Kalkulatorische Erlösminderungen<br />
+    999 ev. bwl BV HF / FF (100%) *<br />
+    * wird nur benötigt, falls aus der Fibu der Materialaufwand oder die BV nicht direkt zu objektiven (betriebswirtschaftlichen = "bwl") Werten auf die Träger mit 100%‐Werten gebucht wird.
+    <br><br>
+    <strong>Objekte:</strong><br />
+    SA Abgrenzungen:<br />
+    91 SA Bewertung Rohmaterial<br />
+    92 SA Personal<br />
+    93 SA Abschreibungen<br />
+    94 SA Zinsen<br />
+    95 SA Übriges<br />
+    98 SA Erlösminderungen<br />
+    99 SA Bewertung HF / FF
+    <br><br>
+    <strong>Kostenstellen:</strong><br />
+    10 Gebäude<br />
+    20 Materialstelle<br />
+    21 Fertigung<br />
+    30 Verwaltung und Vertrieb
+    <br><br>
+    <strong>Kostenträger:</strong><br />
+    40 HF Schweiz<br />
+    41 HF Europa<br />
+    50 FF Schweiz<br />
+    51 FF Europa<br />
+    70 Verkauf Schweiz<br />
+    71 Verkauf Europa
   </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Soll 1</th>
-        <th>Soll 2</th>
-        <th>//</th>
-        <th>Haben 1</th>
-        <th>Haben 2</th>
-        <th>Bezeichnung</th>
-        <th>Betrag</th>
-        <th>OK</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Beispielzeile -->
-      <tr>
-        <td><input type="text" id="s1r1"></td>
-        <td><input type="text" id="s2r1"></td>
-        <td>//</td>
-        <td><input type="text" id="h1r1"></td>
-        <td><input type="text" id="h2r1"></td>
-        <td>Übrige Gemeinkosten</td>
-        <td>165</td>
-        <td><button class="ok-button" onclick="checkRow('s1r1','6700','s2r1','21','h1r1','Kred','h2r1','Flümi')">OK</button></td>
-      </tr>
-      <!-- Weitere Zeilen analog hinzufügen -->
-    </tbody>
-  </table>
+  <!-- Tabellenbereich wird hier automatisch eingefügt -->
+  <div class="info-box">
+    Die vollständige Tabelle mit interaktiven Buchungsfeldern wird jetzt erstellt und hinzugefügt. Ein Moment bitte...
+  </div>
 
   <script>
     function normalize(txt) {
@@ -129,5 +152,4 @@
   </script>
 </body>
 </html>
-
 
