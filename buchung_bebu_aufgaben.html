@@ -63,20 +63,17 @@
 <body>
   <a class="back-link" href="buchung_bebu.html">← Zurück</a>
 
-  <h2>Buchung BEBU – Zusätzliche Aufgabe</h2>
+  <h2>Buchung BEBU – Zusätzliche Aufgaben</h2>
 
-  <img src="buchung_bab.jpeg" alt="BAB Schema" />
+  <img src="buchungen_bab.jpeg" alt="BAB Schema" />
 
   <div class="info-box">
     <strong>Weitere Angaben:</strong><br />
-    Bei den Personalkosten sind sachliche Abgrenzungen für den zu tiefen Unternehmerlohn vorgenommen worden. Diese Abgrenzung wurde der Verwaltungsstelle belastet. Die sachlichen Abgrenzungen unter "Übriges" betreffen 3 Kreditorenrechnungen für Privataufwand des Firmeninhabers, welche in der Fibu als Aufwand verbucht worden sind.
-    <br><br>
+    Bei den Personalkosten sind sachliche Abgrenzungen für den zu tiefen Unternehmerlohn vorgenommen worden. Diese Abgrenzung wurde der Verwaltungsstelle belastet. Die sachlichen Abgrenzungen unter "Übriges" betreffen 3 Kreditorenrechnungen für Privataufwand des Firmeninhabers, welche in der Fibu als Aufwand verbucht worden sind.<br><br>
     <strong>Fibu‐Konten / Primäre Kostenarten:</strong><br />
-    3000 Ertrag, 3800 Erlösminderungen, 3900 BV HF, 3901 BV FF, 4000 Materialaufwand, 5000 Personalaufwand, 6700 übriger Aufwand, 6800 Abschreibungsaufwand, 6900 Zinsenaufwand
-    <br><br>
+    3000 Ertrag, 3800 Erlösminderungen, 3900 BV HF, 3901 BV FF, 4000 Materialaufwand, 5000 Personalaufwand, 6700 übriger Aufwand, 6800 Abschreibungsaufwand, 6900 Zinsenaufwand<br><br>
     <strong>Sekundäre Kostenarten:</strong><br />
-    910–995 Umlagen & SA, 998–999 kalkulatorische Positionen
-    <br><br>
+    910–995 Umlagen & SA, 998–999 kalkulatorische Positionen<br><br>
     <strong>Objekte & Kostenstellen:</strong><br />
     91–99 SA, 10–30 Kostenstellen, 40–71 Kostenträger
   </div>
@@ -95,31 +92,18 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Beispielzeile -->
       <tr>
-        <td><input type="text" id="s1r1" /></td>
-        <td><input type="text" id="s2r1" /></td>
+        <td><input type="text" id="s1r1"></td>
+        <td><input type="text" id="s2r1"></td>
         <td>//</td>
-        <td><input type="text" id="h1r1" /></td>
-        <td></td>
+        <td><input type="text" id="h1r1"></td>
+        <td><input type="text" id="h2r1"></td>
         <td>Übrige Gemeinkosten</td>
         <td>165</td>
-        <td><button class="ok-button" onclick="checkRow('s1r1','6700','s2r1','21','h1r1','Kred/Flümi')">OK</button></td>
+        <td><button class="ok-button" onclick="checkRow('s1r1','6700','s2r1','21','h1r1','Kred','h2r1','Flümi')">OK</button></td>
       </tr>
-
-      <!-- Beispiel: weitere Zeilen bitte identisch hinzufügen -->
-      <!-- Zeile 2 -->
-      <tr>
-        <td><input type="text" id="s1r2" /></td>
-        <td><input type="text" id="s2r2" /></td>
-        <td>//</td>
-        <td><input type="text" id="h1r2" /></td>
-        <td></td>
-        <td>Übrige Gemeinkosten</td>
-        <td>90</td>
-        <td><button class="ok-button" onclick="checkRow('s1r2','6700','s2r2','30','h1r2','Kred/Flümi')">OK</button></td>
-      </tr>
-
-      <!-- Hier bitte weitere Zeilen nach dem selben Muster einfügen -->
+      <!-- Weitere Zeilen analog hinzufügen -->
     </tbody>
   </table>
 
@@ -128,21 +112,19 @@
       return txt.toLowerCase().replace(/\s+/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
 
-    function checkRow(id1, sol1, id2, sol2, id3, sol3) {
-      const f1 = document.getElementById(id1);
-      const f2 = document.getElementById(id2);
-      const f3 = document.getElementById(id3);
-      const a1 = normalize(f1.value);
-      const a2 = normalize(f2.value);
-      const a3 = normalize(f3.value);
-
-      const s1 = normalize(sol1);
-      const s2 = normalize(sol2);
-      const s3 = normalize(sol3);
-
-      if (a1 === s1) f1.classList.add("correct"); else { f1.value = sol1; f1.classList.add("wrong"); }
-      if (a2 === s2) f2.classList.add("correct"); else { f2.value = sol2; f2.classList.add("wrong"); }
-      if (a3 === s3) f3.classList.add("correct"); else { f3.value = sol3; f3.classList.add("wrong"); }
+    function checkRow(...args) {
+      for (let i = 0; i < args.length; i += 2) {
+        const field = document.getElementById(args[i]);
+        const solution = normalize(args[i + 1]);
+        const userInput = normalize(field.value);
+        if (userInput === solution) {
+          field.classList.add("correct");
+          field.classList.remove("wrong");
+        } else {
+          field.value = args[i + 1];
+          field.classList.add("wrong");
+        }
+      }
     }
   </script>
 </body>
