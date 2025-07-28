@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Buchungen BEBU – Zusätzliche Aufgaben</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d6ecff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #999;
+      vertical-align: middle;
+    }
+
+    th {
+      background-color: #b3d9ff;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .ok-button {
+      padding: 6px 12px;
+      margin-top: 4px;
+      background-color: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .correct {
+      background-color: #c0f5c0 !important;
+    }
+
+    .wrong {
+      color: red;
+    }
+
+    .fixed {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="buchung_bebu.html">← Zurück</a>
+  <h2>Buchungen BEBU – Zusätzliche Aufgaben</h2>
+  <table id="task-table">
+    <tr>
+      <th>Soll</th>
+      <th>Haben</th>
+      <th>Bezeichnung</th>
+      <th>Betrag</th>
+      <th>Aktion</th>
+    </tr>
+  </table>
+
+  <script>
+    const rows = [
+      ["6700", "21", "Kred/Flümi", "Übrige Gemeinkosten", "165"],
+      ["6700", "30", "Kred/Flümi", "Übrige Gemeinkosten", "90"],
+      ["6700", "95", "Kred/Flümi", "Übrige Gemeinkosten (Privataufwand)", "18"],
+      ["910", "20", "910 / 10", "Umlage Gebäude", "37"],
+      ["910", "21", "910 / 10", "Umlage Gebäude", "50"],
+      ["910", "30", "910 / 10", "Umlage Gebäude", "37"],
+      ["920", "40", "920 / 20", "Umlage Materialstelle", "106"],
+      ["920", "41", "920 / 20", "Umlage Materialstelle", "99"],
+      ["921", "40", "921 / 21", "Umlage Fertigung", "525"],
+      ["921", "41", "921 / 21", "Umlage Fertigung", "275"],
+      ["940", "50", "940 / 40", "Abgabe HF an FF – Schweiz", "966"],
+      ["3900", "40", "Lager HF", "BV / BÄ HF Schweiz (betriebswirtschaftlich)", "15"],
+      ["941", "51", "941 / 41", "Abgabe HF an FF -Europa", "699"],
+      ["3900", "41", "Lager HF", "BV / BÄ HF Europa (betriebswirtschaftlich)", "25"],
+      ["Lager HF", "", "3900 / 99", "Anpassung stille Reserven auf HF", "12"],
+      ["950", "70", "950 / 50", "Abgabe FF an Verkauf – Schweiz", "896"],
+      ["Lager FF", "", "3900 / 50", "BV / BÄ FF Schweiz (betriebswirtschaftlich)", "70"],
+      ["951", "71", "951 / 51", "Abgabe FF an Verkauf – Europa", "719"],
+      ["3900", "51", "Lager FF", "BV / BÄ FF Europa (betriebswirtschaftlich)", "20"],
+      ["3901", "99", "Lager FF", "Anpassung stille Reserven auf FF", "15"],
+      ["930", "70", "930 / 30", "Umlage VVGK", "206"],
+      ["930", "71", "930 / 30", "Umlage VVGK", "167"],
+      ["Debitoren", "", "3000 / 70", "Verkaufserträge", "1300"],
+      ["Debitoren", "", "3000 / 71", "Verkaufserträge", "1050"],
+      ["3800", "98", "FLL", "Erlösminderungen", "86"],
+      ["998", "70", "998 / 98", "Verkaufserträge", "52"],
+      ["998", "71", "998 / 98", "Verkaufserträge", "42"]
+    ];
+
+    const table = document.getElementById('task-table');
+
+    rows.forEach((row, i) => {
+      const tr = document.createElement('tr');
+
+      row.forEach((val, colIndex) => {
+        const td = document.createElement('td');
+        if (val.startsWith("BF")) {
+          const clean = val.replace("BF)L: ", "").trim();
+          const input = document.createElement('input');
+          input.type = "text";
+          input.id = `input-${i}-${colIndex}`;
+          td.appendChild(input);
+        } else {
+          td.textContent = val;
+          td.classList.add('fixed');
+        }
+        tr.appendChild(td);
+      });
+
+      const actionTd = document.createElement('td');
+      const button = document.createElement('button');
+      button.textContent = "OK";
+      button.className = "ok-button";
+      button.onclick = () => checkRow(i, row);
+      actionTd.appendChild(button);
+      tr.appendChild(actionTd);
+      table.appendChild(tr);
+    });
+
+    function normalize(text) {
+      return text.toLowerCase().replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function checkRow(rowIndex, rowData) {
+      for (let col = 0; col < 4; col++) {
+        const cellValue = rowData[col];
+        if (cellValue.startsWith("BF")) {
+          const correct = cellValue.replace("BF)L: ", "").trim();
+          const input = document.getElementById(`input-${rowIndex}-${col}`);
+          if (!input) continue;
+          const userInput = normalize(input.value);
+          const expected = normalize(correct);
+          if (userInput.includes(expected)) {
+            input.classList.remove("wrong");
+            input.classList.add("correct");
+          } else {
+            input.classList.remove("correct");
+            input.classList.add("wrong");
+            input.value = correct;
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
