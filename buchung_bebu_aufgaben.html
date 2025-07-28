@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buchungen BEBU – Zusätzliche Aufgaben</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buchung BEBU – Zusätzliche Aufgaben</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: url("hintergrund.jpg") no-repeat center center fixed;
-      background-size: cover;
-      margin: 0;
-      padding: 20px;
-      color: black;
-    }
-    .content {
-      background-color: #e6f2ff;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 1000px;
-      margin: auto;
+      background-color: #e0f0ff;
+      margin: 20px;
     }
     .back-link {
-      display: block;
+      display: inline-block;
       margin-bottom: 20px;
-      font-size: 18px;
       font-weight: bold;
       color: black;
       text-decoration: none;
@@ -32,133 +21,130 @@
       max-width: 100%;
       height: auto;
       margin-bottom: 20px;
+      border: 2px solid #aaa;
     }
-    pre {
-      background-color: white;
-      padding: 10px;
+    .info-box {
+      background: #ffffffcc;
+      padding: 20px;
+      margin-bottom: 30px;
       border-radius: 8px;
-      overflow-x: auto;
-      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.6;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      background-color: #f4fbff;
     }
     th, td {
       border: 1px solid #ccc;
       padding: 8px;
-      vertical-align: top;
       text-align: left;
+      vertical-align: top;
     }
     input[type="text"] {
       width: 100%;
-      padding: 5px;
       box-sizing: border-box;
+      padding: 6px;
     }
-    button {
+    .ok-button {
+      padding: 6px 10px;
       margin-top: 4px;
-      padding: 4px 10px;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+      font-size: 12px;
     }
-    .highlight {
+    .wrong {
       color: red;
     }
-  </style>
-  <script>
-    function checkAnswer(inputId, correct) {
-      const input = document.getElementById(inputId);
-      if (input.value.trim().toLowerCase() === correct.toLowerCase()) {
-        input.style.backgroundColor = 'lightgreen';
-      } else {
-        input.style.backgroundColor = '#ffe6e6';
-        input.value = correct;
-        input.classList.add('highlight');
-      }
+    .correct {
+      background-color: lightgreen;
     }
-  </script>
+  </style>
 </head>
 <body>
-  <div class="content">
-    <a class="back-link" href="buchung_bebu.html">← Zurück</a>
-    <img src="buchung_bab.jpeg" alt="BAB Bild">
-    <pre>Weitere Angaben:
-Bei den Personalkosten sind sachliche Abgrenzungen für den zu tiefen Unternehmerlohn vorgenommen worden. Diese Abgrenzung wurde der Verwaltungsstelle belastet. Die sachlichen Abgrenzungen unter "Übriges" betreffen 3 Kreditorenrechnungen für Privataufwand des Firmeninhabers, welche in der Fibu als Aufwand verbucht worden sind.
+  <a class="back-link" href="buchung_bebu.html">← Zurück</a>
 
-Fibu‐Konten / Primäre Kostenarten:
-3000 Ertrag 
-3800 Erlösminderungen 
-3900 BV HF 
-3901 BV FF 
-4000 Materialaufwand 
-5000 Personalaufwand 
-6700 übriger Aufwand 
-6800 Abschreibungsaufwand 
-6900 Zinsenaufwand
+  <h2>Buchung BEBU – Zusätzliche Aufgabe</h2>
 
-Sekundäre Kostenarten:
-910 Umlage Gebäude 
-920 Umlage Material (MGK) 
-921 Umlage Fertigung (FGK) 
-930 Umlage Verw. + Vertrieb (VVGK) 
-940 Abgabe HF an FF ‐ Schweiz 
-941 Abgabe HF an FF ‐ Europa 
-950 Abgabe FF an Verkauf ‐ Schweiz 
-951 Abgabe FF an Verkauf ‐ Europa 
-991 ev. bwl Materialaufwand (100%) * 
-992 SA Personal 
-993 Abschreibungskosten 
-994 Zinskosten 
-995 SA übriger Aufwand 
-998 Kalkulatorische Erlösminderungen 
-999 ev. bwl BV HF / FF (100%) * 
-*) wird nur benötigt, falls aus der Fibu der Materialaufwand oder die BV nicht direkt zu objektiven  (betriebswirtschaftlichen = "bwl") Werten auf die Träger mit 100%‐Werten gebucht wird.
+  <img src="buchung_bab.jpeg" alt="BAB Schema" />
 
-Objekte:
-SA Abgrenzungen: 
-91 SA Bewertung Rohmaterial 
-92 SA Personal 
-93 SA Abschreibungen 
-94 SA Zinsen 
-95 SA Übriges 
-98 SA Erlösminderungen 
-99 SA Bewertung HF / FF
+  <div class="info-box">
+    <strong>Weitere Angaben:</strong><br />
+    Bei den Personalkosten sind sachliche Abgrenzungen für den zu tiefen Unternehmerlohn vorgenommen worden. Diese Abgrenzung wurde der Verwaltungsstelle belastet. Die sachlichen Abgrenzungen unter "Übriges" betreffen 3 Kreditorenrechnungen für Privataufwand des Firmeninhabers, welche in der Fibu als Aufwand verbucht worden sind.
+    <br><br>
+    <strong>Fibu‐Konten / Primäre Kostenarten:</strong><br />
+    3000 Ertrag, 3800 Erlösminderungen, 3900 BV HF, 3901 BV FF, 4000 Materialaufwand, 5000 Personalaufwand, 6700 übriger Aufwand, 6800 Abschreibungsaufwand, 6900 Zinsenaufwand
+    <br><br>
+    <strong>Sekundäre Kostenarten:</strong><br />
+    910–995 Umlagen & SA, 998–999 kalkulatorische Positionen
+    <br><br>
+    <strong>Objekte & Kostenstellen:</strong><br />
+    91–99 SA, 10–30 Kostenstellen, 40–71 Kostenträger
+  </div>
 
-Kostenstellen:
-10 Gebäude 
-20 Materialstelle 
-21 Fertigung 
-30 Verwaltung und Vertrieb
-
-Kostenträger:
-40 HF Schweiz 
-41 HF Europa 
-50 FF Schweiz 
-51 FF Europa 
-70 Verkauf Schweiz 
-71 Verkauf Europa</pre>
-
-    <table>
+  <table>
+    <thead>
       <tr>
-        <th colspan="2">Soll</th>
-        <th colspan="2">Haben</th>
+        <th>Soll 1</th>
+        <th>Soll 2</th>
+        <th>//</th>
+        <th>Haben 1</th>
+        <th>Haben 2</th>
         <th>Bezeichnung</th>
         <th>Betrag</th>
+        <th>OK</th>
       </tr>
+    </thead>
+    <tbody>
       <tr>
-        <td><input id="soll1a" type="text"></td>
-        <td> / </td>
-        <td><input id="haben1a" type="text"></td>
-        <td> / </td>
+        <td><input type="text" id="s1r1" /></td>
+        <td><input type="text" id="s2r1" /></td>
+        <td>//</td>
+        <td><input type="text" id="h1r1" /></td>
+        <td></td>
         <td>Übrige Gemeinkosten</td>
-        <td>165 <button onclick="checkAnswer('soll1a', '6700');checkAnswer('haben1a', '21')">OK</button></td>
+        <td>165</td>
+        <td><button class="ok-button" onclick="checkRow('s1r1','6700','s2r1','21','h1r1','Kred/Flümi')">OK</button></td>
       </tr>
-    </table>
-  </div>
+
+      <!-- Beispiel: weitere Zeilen bitte identisch hinzufügen -->
+      <!-- Zeile 2 -->
+      <tr>
+        <td><input type="text" id="s1r2" /></td>
+        <td><input type="text" id="s2r2" /></td>
+        <td>//</td>
+        <td><input type="text" id="h1r2" /></td>
+        <td></td>
+        <td>Übrige Gemeinkosten</td>
+        <td>90</td>
+        <td><button class="ok-button" onclick="checkRow('s1r2','6700','s2r2','30','h1r2','Kred/Flümi')">OK</button></td>
+      </tr>
+
+      <!-- Hier bitte weitere Zeilen nach dem selben Muster einfügen -->
+    </tbody>
+  </table>
+
+  <script>
+    function normalize(txt) {
+      return txt.toLowerCase().replace(/\s+/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function checkRow(id1, sol1, id2, sol2, id3, sol3) {
+      const f1 = document.getElementById(id1);
+      const f2 = document.getElementById(id2);
+      const f3 = document.getElementById(id3);
+      const a1 = normalize(f1.value);
+      const a2 = normalize(f2.value);
+      const a3 = normalize(f3.value);
+
+      const s1 = normalize(sol1);
+      const s2 = normalize(sol2);
+      const s3 = normalize(sol3);
+
+      if (a1 === s1) f1.classList.add("correct"); else { f1.value = sol1; f1.classList.add("wrong"); }
+      if (a2 === s2) f2.classList.add("correct"); else { f2.value = sol2; f2.classList.add("wrong"); }
+      if (a3 === s3) f3.classList.add("correct"); else { f3.value = sol3; f3.classList.add("wrong"); }
+    }
+  </script>
 </body>
 </html>
 
