@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Unterschiede FER und OR</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 60px 20px;
+      color: black;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: hotpink;
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .question {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .question p {
+      margin-bottom: 10px;
+    }
+
+    .choice {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .choice.correct {
+      background-color: green !important;
+    }
+
+    .choice.wrong {
+      background-color: red !important;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="frw-theorie.html" class="back-button">← Zurück</a>
+  <h1>Unterschiede FER und OR</h1>
+
+  <div class="question" data-answer="OR">
+    <p>1. Stille Willkürreserven sind erlaubt.</p>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>2. Der Jahresbericht umfasst:<br>– Umfeld wirtschaftlich<br>– Kommentar Geschäftsjahr mit Kennzahlen<br>– Ausblick</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="OR">
+    <p>3. Der Jahresbericht umfasst:<br>– Anzahl Vollzeitstellen<br>– Durchführung Risikobeurteilung<br>– Geschäftslage, Forschung & Entwicklung<br>– Ausblick</p>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
+  </div>
+
+  <script>
+    function checkAnswer(element, correctAnswer) {
+      const parent = element.parentElement;
+      const buttons = parent.querySelectorAll('.choice');
+      buttons.forEach(btn => btn.onclick = null); // disable further clicks
+      if (element.innerText === correctAnswer) {
+        element.classList.add('correct');
+      } else {
+        element.classList.add('wrong');
+        buttons.forEach(btn => {
+          if (btn.innerText === correctAnswer) {
+            btn.classList.add('correct');
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>
