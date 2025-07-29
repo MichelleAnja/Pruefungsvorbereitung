@@ -99,6 +99,24 @@
           if (btn.innerText === correctAnswer) {
             btn.classList.add('correct');
           }
+            <div class="question" data-answer="FER">
+    <p>4. Wertschriften im Umlaufvermögen können nicht zum Kurswert bewertet werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="OR">
+    <p>5. Die Aktiven können zum beobachtbaren Marktpreis bewertet werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>6. Die Renditeliegenschaft kann nicht zum Marktpreis jedoch mit Wahlrecht zum aktuellem Wert bewertet werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
         });
       }
     }
