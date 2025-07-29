@@ -22,8 +22,8 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      background-color: hotpink;
-      color: black;
+      background-color: black;
+      color: white;
       font-weight: bold;
       padding: 10px 20px;
       border-radius: 8px;
@@ -85,21 +85,7 @@
     <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
     <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
   </div>
-
-  <script>
-    function checkAnswer(element, correctAnswer) {
-      const parent = element.parentElement;
-      const buttons = parent.querySelectorAll('.choice');
-      buttons.forEach(btn => btn.onclick = null); // disable further clicks
-      if (element.innerText === correctAnswer) {
-        element.classList.add('correct');
-      } else {
-        element.classList.add('wrong');
-        buttons.forEach(btn => {
-          if (btn.innerText === correctAnswer) {
-            btn.classList.add('correct');
-          }
-            <div class="question" data-answer="FER">
+  <div class="question" data-answer="FER">
     <p>4. Wertschriften im Umlaufvermögen können nicht zum Kurswert bewertet werden.</p>
     <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
     <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
@@ -112,14 +98,144 @@
   </div>
 
   <div class="question" data-answer="FER">
-    <p>6. Die Renditeliegenschaft kann nicht zum Marktpreis jedoch mit Wahlrecht zum aktuellem Wert bewertet werden.</p>
+    <p>6. Die Renditeliegenschaft kann nicht zum Marktpreis, jedoch mit Wahlrecht zum aktuellen Wert bewertet werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+  <div class="question" data-answer="FER">
+    <p>7. Finanzanlagen können zum historischen oder aktuellem Wert bewertet werden.</p>
     <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
     <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
   </div>
 
-        });
+  <div class="question" data-answer="FER">
+    <p>8. Es ist vorgeschrieben, dass bei der FW die Bilanzpositionen mit dem Stichtagskurs und Transaktionen mit dem Bankkurs oder Monatskurs verbucht werden müssen.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>9. Die Latenten Steuern müssen immer berücksichtigt werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+  <div class="question" data-answer="FER">
+    <p>10. Bei beiden ist das Prinzip der verlustfreien Bewertung gegeben. Bei welchem wird auf die POCM-Methode, wobei bei langfristigen Aufträgen pro Periode auch immer der anteilige Gewinn gezeigt werden darf, erwähnt?</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="OR">
+    <p>11. Bei wem ist das Umlaufvermögen in der Position „flüssige Mittel“ enthalten?</p>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
+  </div>
+
+  <div class="question" data-answer="OR">
+    <p>12. Das WB muss nicht zwingend ausgewiesen werden, es muss lediglich bei der Bewertung berücksichtigt sein.</p>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>13. Das WB auf Umlaufvermögen ist nur im Anhang.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>14. Rückstellungen können auch Teil des kurzfristigen Fremdkapitals sein.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>15. Zu dem langfristigem Fremdkapital können noch weitere Unterteilungen gemacht werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+  <div class="question" data-answer="OR">
+    <p>16. Das nicht einbezahlte Aktienkapital muss im Anlagevermögen ausgewiesen werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>17. Das nicht einbezahlte Aktienkapital wird im Eigenkapital ausgewiesen.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="OR">
+    <p>18. Die Gewinn- / Kapitalreserven werden in «gesetzliche» und «freiwillige» unterteilt.</p>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>19. Im Anhang müssen die Eventualverpflichtungen wie Leasingverbindlichkeiten, langfristige Mietverträge einzeln aufgezählt werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="OR">
+    <p>20. Im Anhang müssen nur Eventualverbindlichkeiten pauschal (ohne Ausführungen) und Leasingverbindlichkeiten aufgezählt werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
+  </div>
+  <div class="question" data-answer="FER">
+    <p>21. Die Verbindlichkeiten ggü. Vorsorgeeinrichtungen müssen in Form eines Rückstellungsspiegels und im Ausweis zu Vorsorgeplänen offengelegt werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="OR">
+    <p>22. Die ausstehenden Obligationsanleihen müssen im Anhang offengelegt werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>23. Die Beteiligungen und Optionen für Organe müssen in Form eines Anlagespiegels offengelegt werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="OR">
+    <p>24. Die Auflösung stiller Willkürreserven muss im Anhang offengelegt werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'OR')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>25. Die Rechnungslegungsgrundsätze müssen immer im Anhang erwähnt werden.</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <div class="question" data-answer="FER">
+    <p>26. Die außergewöhnlichen schwebenden Geschäfte und Risiken müssen im Anhang erwähnt werden (nicht nur als Risikobeurteilung).</p>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">OR</div>
+    <div class="choice" onclick="checkAnswer(this, 'FER')">FER</div>
+  </div>
+
+  <script>
+    function checkAnswer(element, correct) {
+      const parent = element.parentElement;
+      const buttons = parent.querySelectorAll('.choice');
+
+      buttons.forEach(btn => {
+        btn.style.backgroundColor = '#000'; // reset color
+        btn.style.color = 'white';
+      });
+
+      if (element.innerText === correct) {
+        element.style.backgroundColor = 'green';
+      } else {
+        element.style.backgroundColor = 'red';
       }
     }
   </script>
 </body>
 </html>
+
