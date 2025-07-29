@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Theoriefragen 1</title>
   <style>
     body {
@@ -9,113 +9,133 @@
       font-family: Arial, sans-serif;
       background: url("hintergrund.jpg") no-repeat center center fixed;
       background-size: cover;
-      padding: 60px 20px 20px 20px;
+      padding: 20px;
       color: black;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: lightgray;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     h1 {
       text-align: center;
       font-size: 28px;
-      margin-bottom: 40px;
+      margin-top: 60px;
     }
 
-    .zurueck {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      text-decoration: none;
-      font-weight: bold;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 8px;
-      background-color: lightgray;
-    }
-
-    .frage {
+    .question {
       margin-bottom: 30px;
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
     }
 
-    .antworten {
+    .options {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 10px;
     }
 
-    .antwort-button {
+    .options button {
       background-color: black;
       color: white;
+      padding: 10px 15px;
       border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
+      font-weight: bold;
     }
 
-    .antwort-button.richtig {
+    .options button.correct {
       background-color: green !important;
     }
 
-    .antwort-button.falsch {
+    .options button.incorrect {
       background-color: red !important;
     }
 
-    .antworten .nummer {
-      font-weight: bold;
-      margin-right: 10px;
-      align-self: center;
+    @media (max-width: 600px) {
+      .options {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
-  <a href="frw-theorie.html" class="zurueck">Zurück</a>
+  <a class="back-button" href="frw-theorie.html">Zurück</a>
+
   <h1>Theoriefragen 1</h1>
 
-  <div class="frage">
-    <p><strong>1.</strong> Die Vergleichbarkeit mit den Vorjahreszahlen wird bei erstmaliger Anwendung des Swiss GAAP FER sichergestellt, indem die Vorjahresbilanz ebenfalls nach Swiss GAAP FER zu zeigen ist.</p>
-    <div class="antworten">
-      <button class="antwort-button" onclick="pruefen(this, true)">richtig</button>
-      <button class="antwort-button" onclick="pruefen(this, false)">falsch</button>
+  <div class="question">
+    <p><strong>1.</strong> Die Vergleichbarkeit mit den Vorjahreszahlen wird bei erstmaliger Anwendung des Swiss GAAP FER sicher gestellt, indem die Vorjahresbilanz ebenfalls nach Swiss GAAP FER zu zeigen ist. (Inkl. die zusätzliche entsprechende Randziffer, ausser diese wird nicht verlangt.)</p>
+    <div class="options" data-answer="richtig">
+      <button onclick="checkAnswer(this, 'richtig')">&lt;richtig&gt;</button>
+      <button onclick="checkAnswer(this, 'falsch')">&lt;falsch&gt;</button>
     </div>
   </div>
 
-  <div class="frage">
-    <p><strong>2.</strong> Beim Prinzip der Stetigkeit [...] Ist eine solche Abweichung erlaubt?</p>
-    <div class="antworten">
-      <button class="antwort-button" onclick="pruefen(this, true)">ja</button>
-      <button class="antwort-button" onclick="pruefen(this, false)">nein</button>
+  <div class="question">
+    <p><strong>2.</strong> Beim Prinzip der Stetigkeit. Z.B. bei Schätzungsänderungen (Nutzungsdauer von Anlagevermögen) ist eine Abweichung angezeigt und muss im Anhang offengelegt werden. Z.B. bei Fehlern in früheren Jahresrechnungen sind diese im Anhang zu erläutern und die Vorjahreszahlen ebenfalls anzupassen. Ist eine solche Abweichung erlaubt?</p>
+    <div class="options" data-answer="ja">
+      <button onclick="checkAnswer(this, 'ja')">&lt;ja&gt;</button>
+      <button onclick="checkAnswer(this, 'nein')">&lt;nein&gt;</button>
     </div>
   </div>
 
-  <div class="frage">
-    <p><strong>3.</strong> Welcher Begriff wird hier beschrieben?<br>Dieser Wert stellt den erzielbaren Verkaufswert am Markt dar unter Abzug von direkten Verkaufskosten.</p>
-    <div class="antworten">
-      <button class="antwort-button" onclick="pruefen(this, true)">Netto-Marktwert</button>
+  <div class="question">
+    <p><strong>3.</strong> Welcher Begriff wird hier beschrieben?<br>
+    Dieser Wert stellt den erzielbaren Verkaufswert am Markt dar unter Abzug von direkten Verkaufskosten (z.B. bei eingeschlossener „Gratislieferung“).</p>
+    <div class="options" data-answer="Netto-Marktwert">
+      <button onclick="checkAnswer(this, 'Netto-Marktwert')">&lt;Netto-Marktwert&gt;</button>
+      <button onclick="checkAnswer(this, 'Veräusserungswert')">&lt;Veräusserungswert&gt;</button>
+      <button onclick="checkAnswer(this, 'Buchwert')">&lt;Buchwert&gt;</button>
     </div>
   </div>
 
-  <div class="frage">
+  <div class="question">
     <p><strong>4.</strong> Wie wird der erzielbare Wert ermittelt?</p>
-    <div class="antworten">
-      <button class="antwort-button" onclick="pruefen(this, true)">Höhere Wert aus Netto-Marktwert und Nutzwert</button>
+    <div class="options" data-answer="Höhere Wert aus Netto-Marktwert und Nutzwert.">
+      <button onclick="checkAnswer(this, 'Höhere Wert aus Netto-Marktwert und Nutzwert.')">&lt;Höhere Wert aus Netto-Marktwert und Nutzwert.&gt;</button>
+      <button onclick="checkAnswer(this, 'Netto-Marktwert abzüglich Abschreibungen')">&lt;Netto-Marktwert abzüglich Abschreibungen&gt;</button>
+      <button onclick="checkAnswer(this, 'Anschaffungswert oder Nutzwert')">&lt;Anschaffungswert oder Nutzwert&gt;</button>
     </div>
   </div>
 
-  <div class="frage">
-    <p><strong>5.</strong> Vom festgestellten Verpflichtungsbetrag [...] wird eine Abzinsung vorgenommen. Diese Rechnung führt dann zum _____.</p>
-    <div class="antworten">
-      <button class="antwort-button" onclick="pruefen(this, true)">Barwert</button>
+  <div class="question">
+    <p><strong>5.</strong> Vom festgestellten Verpflichtungsbetrag (nomineller Betrag), der in Zukunft anfallen wird, wird eine Abzinsung vorgenommen. Diese Rechnung führt dann zum ________.</p>
+    <div class="options" data-answer="Barwert">
+      <button onclick="checkAnswer(this, 'Barwert')">&lt;Barwert&gt;</button>
+      <button onclick="checkAnswer(this, 'Nominalwert')">&lt;Nominalwert&gt;</button>
+      <button onclick="checkAnswer(this, 'Buchwert')">&lt;Buchwert&gt;</button>
     </div>
   </div>
 
   <script>
-    function pruefen(button, istRichtig) {
-      if (button.classList.contains("richtig") || button.classList.contains("falsch")) return;
-      if (istRichtig) {
-        button.classList.add("richtig");
-      } else {
-        button.classList.add("falsch");
-      }
+    function checkAnswer(button, correctValue) {
+      const container = button.parentElement;
+      const answer = container.getAttribute('data-answer');
+
+      // disable all buttons after click
+      const buttons = container.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent.replace(/[<>]/g, '') === answer) {
+          btn.classList.add('correct');
+        } else if (btn === button) {
+          btn.classList.add('incorrect');
+        }
+      });
     }
   </script>
 </body>
 </html>
+
