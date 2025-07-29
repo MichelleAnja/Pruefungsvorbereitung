@@ -11,20 +11,23 @@
       background-size: cover;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
       min-height: 100vh;
-      padding: 20px;
+      padding-top: 40px;
       box-sizing: border-box;
     }
 
     .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
       background-color: hotpink;
       color: black;
       font-weight: bold;
       padding: 10px 20px;
       border-radius: 8px;
       text-decoration: none;
-      width: fit-content;
-      margin-bottom: 20px;
       transition: background-color 0.3s;
     }
 
@@ -33,44 +36,42 @@
       color: white;
     }
 
-    .content {
-      background-color: rgba(255, 192, 203, 0.9); /* halbtransparentes Rosa */
-      padding: 30px;
-      border-radius: 16px;
-      max-width: 600px;
-      margin: 0 auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      font-size: 28px;
+    .button {
+      background-color: hotpink;
       color: black;
+      font-weight: bold;
+      padding: 15px 40px;
+      margin: 10px 0;
+      width: 300px;
       text-align: center;
-      margin: 0;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+      display: block;
     }
 
-    @media (max-width: 600px) {
-      .content {
-        padding: 20px;
-      }
+    .button:hover {
+      background-color: deeppink;
+      color: white;
+    }
 
-      h1 {
-        font-size: 24px;
+    @media (max-width: 400px) {
+      .button {
+        width: 90%;
       }
 
       .back-button {
-        padding: 8px 16px;
         font-size: 14px;
+        padding: 8px 16px;
       }
     }
   </style>
 </head>
 <body>
+
   <a href="index.html" class="back-button">← Zurück</a>
 
-  <div class="content">
-    <h1>Theorieaufgaben</h1>
-    <!-- Hier kannst du Inhalte zu FRW/Theorieaufgaben einfügen -->
-  </div>
+  <a class="button" href="#">Theorieaufgaben</a> <!-- Hier später den echten Link einfügen -->
+
 </body>
 </html>
