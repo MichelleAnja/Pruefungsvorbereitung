@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Theoriefragen 1</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 60px 20px 20px 20px;
+      color: black;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 40px;
+    }
+
+    .zurueck {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 8px;
+      background-color: lightgray;
+    }
+
+    .frage {
+      margin-bottom: 30px;
+    }
+
+    .antworten {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .antwort-button {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .antwort-button.richtig {
+      background-color: green !important;
+    }
+
+    .antwort-button.falsch {
+      background-color: red !important;
+    }
+
+    .antworten .nummer {
+      font-weight: bold;
+      margin-right: 10px;
+      align-self: center;
+    }
+  </style>
+</head>
+<body>
+  <a href="frw-theorie.html" class="zurueck">Zurück</a>
+  <h1>Theoriefragen 1</h1>
+
+  <div class="frage">
+    <p><strong>1.</strong> Die Vergleichbarkeit mit den Vorjahreszahlen wird bei erstmaliger Anwendung des Swiss GAAP FER sichergestellt, indem die Vorjahresbilanz ebenfalls nach Swiss GAAP FER zu zeigen ist.</p>
+    <div class="antworten">
+      <button class="antwort-button" onclick="pruefen(this, true)">richtig</button>
+      <button class="antwort-button" onclick="pruefen(this, false)">falsch</button>
+    </div>
+  </div>
+
+  <div class="frage">
+    <p><strong>2.</strong> Beim Prinzip der Stetigkeit [...] Ist eine solche Abweichung erlaubt?</p>
+    <div class="antworten">
+      <button class="antwort-button" onclick="pruefen(this, true)">ja</button>
+      <button class="antwort-button" onclick="pruefen(this, false)">nein</button>
+    </div>
+  </div>
+
+  <div class="frage">
+    <p><strong>3.</strong> Welcher Begriff wird hier beschrieben?<br>Dieser Wert stellt den erzielbaren Verkaufswert am Markt dar unter Abzug von direkten Verkaufskosten.</p>
+    <div class="antworten">
+      <button class="antwort-button" onclick="pruefen(this, true)">Netto-Marktwert</button>
+    </div>
+  </div>
+
+  <div class="frage">
+    <p><strong>4.</strong> Wie wird der erzielbare Wert ermittelt?</p>
+    <div class="antworten">
+      <button class="antwort-button" onclick="pruefen(this, true)">Höhere Wert aus Netto-Marktwert und Nutzwert</button>
+    </div>
+  </div>
+
+  <div class="frage">
+    <p><strong>5.</strong> Vom festgestellten Verpflichtungsbetrag [...] wird eine Abzinsung vorgenommen. Diese Rechnung führt dann zum _____.</p>
+    <div class="antworten">
+      <button class="antwort-button" onclick="pruefen(this, true)">Barwert</button>
+    </div>
+  </div>
+
+  <script>
+    function pruefen(button, istRichtig) {
+      if (button.classList.contains("richtig") || button.classList.contains("falsch")) return;
+      if (istRichtig) {
+        button.classList.add("richtig");
+      } else {
+        button.classList.add("falsch");
+      }
+    }
+  </script>
+</body>
+</html>
