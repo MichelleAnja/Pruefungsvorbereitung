@@ -139,7 +139,6 @@
       const input = document.createElement('input');
       input.type = 'text';
       input.className = 'input-field';
-      input.placeholder = '(Blaues Feld)';
       input.id = `input-${index}`;
 
       const button = document.createElement('button');
@@ -148,10 +147,10 @@
       button.onclick = () => {
         const userInput = input.value.toLowerCase().replace(/\s+/g, '');
         const correct = item.solution.toLowerCase().replace(/\s+/g, '');
-        if (userInput.includes(correct) || correct.includes(userInput)) {
+        if (userInput === correct) {
           input.style.backgroundColor = '#90ee90'; // grün
         } else {
-          input.style.backgroundColor = '#add8e6'; // hellblau bleibt
+          input.style.backgroundColor = '#add8e6'; // zurück auf hellblau
         }
       };
 
@@ -164,3 +163,4 @@
   </script>
 </body>
 </html>
+
