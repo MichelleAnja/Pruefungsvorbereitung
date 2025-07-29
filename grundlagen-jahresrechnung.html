@@ -2,7 +2,6 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Grundlagen der Jahresrechnung</title>
   <style>
     body {
@@ -10,68 +9,61 @@
       font-family: Arial, sans-serif;
       background: url("hintergrund.jpg") no-repeat center center fixed;
       background-size: cover;
-      padding: 60px 20px 20px;
-    }
-
-    a.zurueck {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-      font-size: 18px;
-      background-color: lightgray;
-      padding: 10px 20px;
-      border-radius: 8px;
+      padding: 60px 20px 20px 20px;
     }
 
     h1 {
       text-align: center;
       color: black;
-      margin-bottom: 40px;
     }
 
-    .question {
-      background-color: rgba(255, 255, 255, 0.85);
+    .zurueck {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: lightgray;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .frage {
+      margin: 30px auto;
+      max-width: 800px;
+      background-color: rgba(255, 255, 255, 0.8);
       padding: 20px;
       border-radius: 10px;
-      margin-bottom: 30px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
-    .question p {
-      font-weight: bold;
-      margin-bottom: 15px;
+    .antworten {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
     }
 
-    .choice {
-      display: inline-block;
+    .antwort {
       background-color: black;
       color: white;
       padding: 10px 20px;
-      margin: 5px 5px 5px 0;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      user-select: none;
     }
 
-    .choice.correct {
+    .antwort.richtig {
       background-color: green !important;
     }
 
-    .choice.incorrect {
+    .antwort.falsch {
       background-color: red !important;
     }
 
-    @media (max-width: 600px) {
-      .choice {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-      }
+    .antwortnummer {
+      margin-right: 5px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -79,62 +71,88 @@
   <a href="theorieaufgaben.html" class="zurueck">Zurück</a>
   <h1>Grundlagen der Jahresrechnung</h1>
 
-  <div class="question" data-answer="fortgeführt wird">
-    <p>1. Fortführung: Die Bewertung der Positionen der Jahresrechnung beruht auf der Annahme, dass die Unternehmung _______ (muss für mind. 12 Monate gegeben sein).</p>
-    <div class="choice" onclick="checkAnswer(this, 'fortgeführt wird')">stabil bleibt</div>
-    <div class="choice" onclick="checkAnswer(this, 'fortgeführt wird')">fortgeführt wird</div>
-    <div class="choice" onclick="checkAnswer(this, 'fortgeführt wird')">liquidiert wird</div>
+  <div class="frage">
+    <p><strong>1. Fortführung:</strong><br>Die Bewertung der Positionen der Jahresrechnung beruht auf der Annahme, dass die Unternehmung _______ (muss für mind. 12 Monate gegeben sein).</p>
+    <div class="antworten">
+      <div class="antwort" data-loesung="false">stabil bleibt</div>
+      <div class="antwort" data-loesung="true">fortgeführt wird</div>
+      <div class="antwort" data-loesung="false">liquidiert wird</div>
+    </div>
   </div>
 
-  <div class="question" data-answer="praktischen">
-    <p>2. Wirtschaftliche Betrachtungsweise: Die tatsächlichen wirtschaftlichen Begebenheiten gehen der ______ Form vor.</p>
-    <div class="choice" onclick="checkAnswer(this, 'praktischen')">rechtlichen</div>
-    <div class="choice" onclick="checkAnswer(this, 'praktischen')">praktischen</div>
+  <div class="frage">
+    <p><strong>2. Wirtschaftliche Betrachtungsweise:</strong><br>Die tatsächlichen wirtschaftlichen Begebenheiten gehen der ______ Form vor.</p>
+    <div class="antworten">
+      <div class="antwort" data-loesung="false">rechtlichen</div>
+      <div class="antwort" data-loesung="true">praktischen</div>
+    </div>
   </div>
 
-  <div class="question">
-    <p>3. Zeitliche Abgrenzung: Die Auswirkungen von Geschäftsvorfällen werden erfasst, wenn diese ____1____ und nicht bei ____2____.</p>
-    <div class="choice" onclick="checkAnswer(this, 'auftreten')">1: Liquiditäten fliessen</div>
-    <div class="choice" onclick="checkAnswer(this, 'auftreten')">1: auftreten</div>
-    <div class="choice" onclick="checkAnswer(this, 'auftreten')">1: vermutet werden</div>
-    <div class="choice" onclick="checkAnswer(this, 'Rechnungsstellung / Geldfluss')">2: Eintritt</div>
-    <div class="choice" onclick="checkAnswer(this, 'Rechnungsstellung / Geldfluss')">2: Rechnungsstellung / Geldfluss</div>
-    <div class="choice" onclick="checkAnswer(this, 'Rechnungsstellung / Geldfluss')">2: Verdacht</div>
+  <div class="frage">
+    <p><strong>3. Zeitliche Abgrenzung:</strong><br>Die Auswirkungen von Geschäftsvorfällen werden erfasst, wenn diese ____1____ und nicht bei ____2_____.</p>
+    <div class="antworten">
+      <div class="antworten">
+        <span class="antwortnummer">1:</span>
+        <div class="antwort" data-loesung="false">Liquiditäten fliessen</div>
+        <div class="antwort" data-loesung="true">auftreten</div>
+        <div class="antwort" data-loesung="false">vermutet werden</div>
+      </div>
+      <div class="antworten">
+        <span class="antwortnummer">2:</span>
+        <div class="antwort" data-loesung="false">Eintritt</div>
+        <div class="antwort" data-loesung="true">Rechnungsstellung / Geldfluss</div>
+        <div class="antwort" data-loesung="false">Verdacht</div>
+      </div>
+    </div>
   </div>
 
-  <div class="question" data-answer="Ertragsfall">
-    <p>4. Sachliche Abgrenzung: Alle Aufwendungen, die dazu dienen bestimmte Erträge zu erzielen, müssen entsprechend dem _____ in der Erfolgsrechnung erfasst werden.</p>
-    <div class="choice" onclick="checkAnswer(this, 'Ertragsfall')">Rechnungsdatum</div>
-    <div class="choice" onclick="checkAnswer(this, 'Ertragsfall')">Zahlungsdatum</div>
-    <div class="choice" onclick="checkAnswer(this, 'Ertragsfall')">Ertragsfall</div>
+  <div class="frage">
+    <p><strong>4. Sachliche Abgrenzung:</strong><br>Alle Aufwendungen, die dazu dienen bestimmte Erträge zu erzielen, müssen entsprechend dem _____ in der Erfolgsrechnung erfasst werden.</p>
+    <div class="antworten">
+      <div class="antwort" data-loesung="false">Rechnungsdatum</div>
+      <div class="antwort" data-loesung="false">Zahlungsdatum</div>
+      <div class="antwort" data-loesung="true">Ertragsfall</div>
+    </div>
   </div>
 
-  <div class="question">
-    <p>5. Vorsichtsprinzip: Bei Ungewissheit in der Bewertung ist die weniger __1__ zu wählen. ➔ Es dürfen __2__ willkürliche/n stille Reserven gebildet werden.</p>
-    <div class="choice" onclick="checkAnswer(this, 'optimistische')">1: optimistische</div>
-    <div class="choice" onclick="checkAnswer(this, 'optimistische')">1: pessimistische</div>
-    <div class="choice" onclick="checkAnswer(this, 'keine')">2: zusätzliche</div>
-    <div class="choice" onclick="checkAnswer(this, 'keine')">2: keine</div>
+  <div class="frage">
+    <p><strong>5. Vorsichtsprinzip:</strong><br>Bei Ungewissheit in der Bewertung (mehrere gleichbedeutende Varianten) ist die weniger __1__ zu wählen. ➔ Es dürfen __2__ willkürliche/n stillen Reserven gebildet werden.</p>
+    <div class="antworten">
+      <div class="antworten">
+        <span class="antwortnummer">1:</span>
+        <div class="antwort" data-loesung="true">optimistische</div>
+        <div class="antwort" data-loesung="false">pessimistische</div>
+      </div>
+      <div class="antworten">
+        <span class="antwortnummer">2:</span>
+        <div class="antwort" data-loesung="true">keine</div>
+        <div class="antwort" data-loesung="false">zusätzliche</div>
+      </div>
+    </div>
   </div>
 
-  <div class="question" data-answer="nur">
-    <p>6. Bruttoprinzip: Verrechnungen sind ___ in sachlich begründeten und angezeigten Fällen erlaubt.</p>
-    <div class="choice" onclick="checkAnswer(this, 'nur')">nie</div>
-    <div class="choice" onclick="checkAnswer(this, 'nur')">nur</div>
-    <div class="choice" onclick="checkAnswer(this, 'nur')">selten</div>
+  <div class="frage">
+    <p><strong>6. Bruttoprinzip:</strong><br>Aktiven und Passiven sowie Aufwand und Ertrag müssen je separat ausgewiesen werden. Verrechnungen sind ___ in sachlich begründeten und angezeigten Fällen erlaubt.</p>
+    <div class="antworten">
+      <div class="antwort" data-loesung="false">nie</div>
+      <div class="antwort" data-loesung="true">nur</div>
+      <div class="antwort" data-loesung="false">selten</div>
+    </div>
   </div>
 
   <script>
-    function checkAnswer(el, correct) {
-      const isCorrect = el.textContent.includes(correct);
-      const allChoices = el.parentElement.querySelectorAll('.choice');
+    const antwortButtons = document.querySelectorAll('.antwort');
 
-      allChoices.forEach(choice => {
-        choice.classList.remove('correct', 'incorrect');
+    antwortButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const isCorrect = button.dataset.loesung === "true";
+
+        // Nur wenn noch keine Farbe gesetzt wurde
+        if (!button.classList.contains("richtig") && !button.classList.contains("falsch")) {
+          button.classList.add(isCorrect ? 'richtig' : 'falsch');
+        }
       });
-
-      el.classList.add(isCorrect ? 'correct' : 'incorrect');
-    }
+    });
   </script>
 </body>
 </html>
