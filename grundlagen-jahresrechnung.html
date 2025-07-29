@@ -10,150 +10,140 @@
       background: url("hintergrund.jpg") no-repeat center center fixed;
       background-size: cover;
       padding: 60px 20px 20px 20px;
+      color: black;
     }
 
     h1 {
       text-align: center;
-      color: black;
+      font-size: 28px;
+      margin-bottom: 40px;
     }
 
     .zurueck {
       position: absolute;
       top: 20px;
       left: 20px;
-      background-color: lightgray;
+      text-decoration: none;
+      font-weight: bold;
       color: black;
       padding: 10px 20px;
       border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
+      background-color: lightgray;
     }
 
     .frage {
-      margin: 30px auto;
-      max-width: 800px;
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 10px;
+      margin-bottom: 30px;
     }
 
     .antworten {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
       margin-top: 10px;
-      flex-wrap: wrap;
     }
 
-    .antwort {
+    .antwort-button {
       background-color: black;
       color: white;
+      border: none;
       padding: 10px 20px;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      user-select: none;
     }
 
-    .antwort.richtig {
+    .antwort-button.richtig {
       background-color: green !important;
     }
 
-    .antwort.falsch {
+    .antwort-button.falsch {
       background-color: red !important;
     }
 
-    .antwortnummer {
-      margin-right: 5px;
+    .antworten .nummer {
       font-weight: bold;
+      margin-right: 10px;
+      align-self: center;
     }
   </style>
 </head>
 <body>
-  <a href="theorieaufgaben.html" class="zurueck">Zurück</a>
+  <a href="frw-theorie.html" class="zurueck">Zurück</a>
   <h1>Grundlagen der Jahresrechnung</h1>
 
   <div class="frage">
-    <p><strong>1. Fortführung:</strong><br>Die Bewertung der Positionen der Jahresrechnung beruht auf der Annahme, dass die Unternehmung _______ (muss für mind. 12 Monate gegeben sein).</p>
+    <p><strong>1.</strong> Fortführung:<br>Die Bewertung der Positionen der Jahresrechnung beruht auf der Annahme, dass die Unternehmung _______ (muss für mind. 12 Monate gegeben sein).</p>
     <div class="antworten">
-      <div class="antwort" data-loesung="false">stabil bleibt</div>
-      <div class="antwort" data-loesung="true">fortgeführt wird</div>
-      <div class="antwort" data-loesung="false">liquidiert wird</div>
+      <button class="antwort-button" onclick="pruefen(this, false)">stabil bleibt</button>
+      <button class="antwort-button" onclick="pruefen(this, true)">fortgeführt wird</button>
+      <button class="antwort-button" onclick="pruefen(this, false)">liquidiert wird</button>
     </div>
   </div>
 
   <div class="frage">
-    <p><strong>2. Wirtschaftliche Betrachtungsweise:</strong><br>Die tatsächlichen wirtschaftlichen Begebenheiten gehen der ______ Form vor.</p>
+    <p><strong>2.</strong> Wirtschaftliche Betrachtungsweise:<br>Die tatsächlichen wirtschaftlichen Begebenheiten gehen der ______ Form vor.</p>
     <div class="antworten">
-      <div class="antwort" data-loesung="false">rechtlichen</div>
-      <div class="antwort" data-loesung="true">praktischen</div>
+      <button class="antwort-button" onclick="pruefen(this, false)">rechtlichen</button>
+      <button class="antwort-button" onclick="pruefen(this, true)">praktischen</button>
     </div>
   </div>
 
   <div class="frage">
-    <p><strong>3. Zeitliche Abgrenzung:</strong><br>Die Auswirkungen von Geschäftsvorfällen werden erfasst, wenn diese ____1____ und nicht bei ____2_____.</p>
+    <p><strong>3.</strong> Zeitliche Abgrenzung:<br>Die Jahresrechnung ist auf der Grundlage der Periodenabgrenzungen zu erstellen. Die Auswirkungen von Geschäftsvorfällen werden erfasst, wenn diese ____1____ und nicht bei ____2____.</p>
     <div class="antworten">
-      <div class="antworten">
-        <span class="antwortnummer">1:</span>
-        <div class="antwort" data-loesung="false">Liquiditäten fliessen</div>
-        <div class="antwort" data-loesung="true">auftreten</div>
-        <div class="antwort" data-loesung="false">vermutet werden</div>
-      </div>
-      <div class="antworten">
-        <span class="antwortnummer">2:</span>
-        <div class="antwort" data-loesung="false">Eintritt</div>
-        <div class="antwort" data-loesung="true">Rechnungsstellung / Geldfluss</div>
-        <div class="antwort" data-loesung="false">Verdacht</div>
-      </div>
+      <span class="nummer">1:</span>
+      <button class="antwort-button" onclick="pruefen(this, false)">Liquiditäten fliessen</button>
+      <button class="antwort-button" onclick="pruefen(this, true)">auftreten</button>
+      <button class="antwort-button" onclick="pruefen(this, false)">vermutet werden</button>
+    </div>
+    <div class="antworten">
+      <span class="nummer">2:</span>
+      <button class="antwort-button" onclick="pruefen(this, false)">Eintritt</button>
+      <button class="antwort-button" onclick="pruefen(this, true)">Rechnungsstellung / Geldfluss</button>
+      <button class="antwort-button" onclick="pruefen(this, false)">Verdacht</button>
     </div>
   </div>
 
   <div class="frage">
-    <p><strong>4. Sachliche Abgrenzung:</strong><br>Alle Aufwendungen, die dazu dienen bestimmte Erträge zu erzielen, müssen entsprechend dem _____ in der Erfolgsrechnung erfasst werden.</p>
+    <p><strong>4.</strong> Sachliche Abgrenzung:<br>Alle Aufwendungen, die dazu dienen, bestimmte Erträge zu erzielen, müssen entsprechend dem _____ in der Erfolgsrechnung erfasst werden.</p>
     <div class="antworten">
-      <div class="antwort" data-loesung="false">Rechnungsdatum</div>
-      <div class="antwort" data-loesung="false">Zahlungsdatum</div>
-      <div class="antwort" data-loesung="true">Ertragsfall</div>
+      <button class="antwort-button" onclick="pruefen(this, false)">Rechnungsdatum</button>
+      <button class="antwort-button" onclick="pruefen(this, false)">Zahlungsdatum</button>
+      <button class="antwort-button" onclick="pruefen(this, true)">Ertragsfall</button>
     </div>
   </div>
 
   <div class="frage">
-    <p><strong>5. Vorsichtsprinzip:</strong><br>Bei Ungewissheit in der Bewertung (mehrere gleichbedeutende Varianten) ist die weniger __1__ zu wählen. ➔ Es dürfen __2__ willkürliche/n stillen Reserven gebildet werden.</p>
+    <p><strong>5.</strong> Vorsichtsprinzip:<br>Bei Ungewissheit in der Bewertung (mehrere gleichbedeutende Varianten) ist die weniger __1__ zu wählen. ➔ Es dürfen __2__ willkürliche/n stille Reserven gebildet werden.</p>
     <div class="antworten">
-      <div class="antworten">
-        <span class="antwortnummer">1:</span>
-        <div class="antwort" data-loesung="true">optimistische</div>
-        <div class="antwort" data-loesung="false">pessimistische</div>
-      </div>
-      <div class="antworten">
-        <span class="antwortnummer">2:</span>
-        <div class="antwort" data-loesung="true">keine</div>
-        <div class="antwort" data-loesung="false">zusätzliche</div>
-      </div>
+      <span class="nummer">1:</span>
+      <button class="antwort-button" onclick="pruefen(this, true)">optimistische</button>
+      <button class="antwort-button" onclick="pruefen(this, false)">pessimistische</button>
+    </div>
+    <div class="antworten">
+      <span class="nummer">2:</span>
+      <button class="antwort-button" onclick="pruefen(this, false)">zusätzliche</button>
+      <button class="antwort-button" onclick="pruefen(this, true)">keine</button>
     </div>
   </div>
 
   <div class="frage">
-    <p><strong>6. Bruttoprinzip:</strong><br>Aktiven und Passiven sowie Aufwand und Ertrag müssen je separat ausgewiesen werden. Verrechnungen sind ___ in sachlich begründeten und angezeigten Fällen erlaubt.</p>
+    <p><strong>6.</strong> Bruttoprinzip:<br>Aktiven und Passiven sowie Aufwand und Ertrag müssen je separat ausgewiesen werden. Verrechnungen sind ___ in sachlich begründeten und angezeigten Fällen erlaubt.</p>
     <div class="antworten">
-      <div class="antwort" data-loesung="false">nie</div>
-      <div class="antwort" data-loesung="true">nur</div>
-      <div class="antwort" data-loesung="false">selten</div>
+      <button class="antwort-button" onclick="pruefen(this, false)">nie</button>
+      <button class="antwort-button" onclick="pruefen(this, true)">nur</button>
+      <button class="antwort-button" onclick="pruefen(this, false)">selten</button>
     </div>
   </div>
 
   <script>
-    const antwortButtons = document.querySelectorAll('.antwort');
-
-    antwortButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const isCorrect = button.dataset.loesung === "true";
-
-        // Nur wenn noch keine Farbe gesetzt wurde
-        if (!button.classList.contains("richtig") && !button.classList.contains("falsch")) {
-          button.classList.add(isCorrect ? 'richtig' : 'falsch');
-        }
-      });
-    });
+    function pruefen(button, istRichtig) {
+      if (button.classList.contains("richtig") || button.classList.contains("falsch")) return;
+      if (istRichtig) {
+        button.classList.add("richtig");
+      } else {
+        button.classList.add("falsch");
+      }
+    }
   </script>
 </body>
 </html>
-
