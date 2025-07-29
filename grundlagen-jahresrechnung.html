@@ -1,3 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grundlagen der Jahresrechnung</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 60px 20px 20px;
+    }
+
+    a.zurueck {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-size: 18px;
+      background-color: lightgray;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+
+    h1 {
+      text-align: center;
+      color: black;
+      margin-bottom: 40px;
+    }
+
+    .question {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .question p {
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .choice {
+      display: inline-block;
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      margin: 5px 5px 5px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .choice.correct {
+      background-color: green !important;
+    }
+
+    .choice.incorrect {
+      background-color: red !important;
+    }
+
+    @media (max-width: 600px) {
+      .choice {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="theorieaufgaben.html" class="zurueck">Zurück</a>
+  <h1>Grundlagen der Jahresrechnung</h1>
+
   <div class="question" data-answer="fortgeführt wird">
     <p>1. Fortführung: Die Bewertung der Positionen der Jahresrechnung beruht auf der Annahme, dass die Unternehmung _______ (muss für mind. 12 Monate gegeben sein).</p>
     <div class="choice" onclick="checkAnswer(this, 'fortgeführt wird')">stabil bleibt</div>
@@ -42,3 +123,19 @@
     <div class="choice" onclick="checkAnswer(this, 'nur')">nur</div>
     <div class="choice" onclick="checkAnswer(this, 'nur')">selten</div>
   </div>
+
+  <script>
+    function checkAnswer(el, correct) {
+      const isCorrect = el.textContent.includes(correct);
+      const allChoices = el.parentElement.querySelectorAll('.choice');
+
+      allChoices.forEach(choice => {
+        choice.classList.remove('correct', 'incorrect');
+      });
+
+      el.classList.add(isCorrect ? 'correct' : 'incorrect');
+    }
+  </script>
+</body>
+</html>
+
