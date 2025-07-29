@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formeln BeBu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 60px 20px 20px;
+      color: black;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .formula-block {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 20px;
+      margin: 15px auto;
+      border-radius: 10px;
+      max-width: 700px;
+    }
+
+    .formula-label {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .input-field {
+      flex-grow: 1;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #add8e6; /* hellblau */
+      transition: background-color 0.3s;
+    }
+
+    .ok-button {
+      padding: 8px 16px;
+      font-weight: bold;
+      background-color: hotpink;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .ok-button:hover {
+      background-color: deeppink;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="kostenrechnung.html">← Zurück</a>
+  <h1>Formeln Betriebsbuchhaltung</h1>
+
+  <div id="formulas-container"></div>
+
+  <script>
+    const formulas = [
+      {
+        label: "Variable Kosten gem. Mini-Max-Methode",
+        solution: "Differenz der Kosten / Differenz der Leistung"
+      },
+      {
+        label: "Zuschlagssatz Material-GK",
+        solution: "Material-GK / Fertigungsstunden x 100"
+      },
+      {
+        label: "Zuschlagssatz Fertigungs-GK",
+        solution: "Fertigungs-GK / Fertigungsstunden x100"
+      },
+      {
+        label: "Zuschlagssatz VVGK",
+        solution: "VVGK / Herstellkosten x 100"
+      },
+      {
+        label: "Wertmässige Gewinnschwelle (notwendiger Monatsumsatz in CHF)",
+        solution: "Fixe Kosten / DB-Marge"
+      },
+      {
+        label: "Fixes Gewinnziel mengenmässig (notwendiger Umsatz für CHF x Gewinn)",
+        solution: "Fixkosten + Gewinn / DB"
+      },
+      {
+        label: "Relatives Gewinnziel mengenmässig je Stk (notwendiger Umsatz in CHF für Rendite von x%)",
+        solution: "Fixkosten / DB ./. Gewinn je Stück"
+      },
+      {
+        label: "Mengenmässige Gewinnschwelle (Notwendige Stückzahl zur Erreichung der Gewinnschwelle)",
+        solution: "Fixe Kosten / DB je Stück"
+      },
+      {
+        label: "Fixes Gewinnziel je Stück mengenmässig (notwendiger Umsatz für Gewinn von CHF X)",
+        solution: "Fixkosten + Gewinn / DB je Stück"
+      },
+      {
+        label: "Relatives Gewinnziel mengenmässig je Stk (notwendiger Umsatz in CHF für Rendite von x%)",
+        solution: "Fixkosten / DB ./. Gewinn je Stück"
+      }
+    ];
+
+    const container = document.getElementById('formulas-container');
+
+    formulas.forEach((item, index) => {
+      const block = document.createElement('div');
+      block.className = 'formula-block';
+
+      const label = document.createElement('div');
+      label.className = 'formula-label';
+      label.textContent = item.label;
+
+      const inputGroup = document.createElement('div');
+      inputGroup.className = 'input-group';
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'input-field';
+      input.placeholder = '(Blaues Feld)';
+      input.id = `input-${index}`;
+
+      const button = document.createElement('button');
+      button.className = 'ok-button';
+      button.textContent = 'OK';
+      button.onclick = () => {
+        const userInput = input.value.toLowerCase().replace(/\s+/g, '');
+        const correct = item.solution.toLowerCase().replace(/\s+/g, '');
+        if (userInput.includes(correct) || correct.includes(userInput)) {
+          input.style.backgroundColor = '#90ee90'; // grün
+        } else {
+          input.style.backgroundColor = '#add8e6'; // hellblau bleibt
+        }
+      };
+
+      inputGroup.appendChild(input);
+      inputGroup.appendChild(button);
+      block.appendChild(label);
+      block.appendChild(inputGroup);
+      container.appendChild(block);
+    });
+  </script>
+</body>
+</html>
