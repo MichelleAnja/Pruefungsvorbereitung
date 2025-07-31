@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grössenkriterien FER-Anwendung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #fdfdfd;
+    }
+    h2 {
+      background-color: pink;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .question {
+      margin-top: 30px;
+    }
+    .option {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 5px;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .option.correct {
+      background-color: green !important;
+    }
+    .option.incorrect {
+      background-color: red !important;
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: lightgray;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<a class="back-button" href="frw-theorie-fer.html">Zurück</a>
+
+<h2>Grössenkriterien FER-Anwendung</h2>
+<p>Was ist anzuwenden? Zwingend die Kern-FER oder gesamte FER-Standards. Ebenfalls anwählen, falls FER 30 (Konzernrechnung) anzuwenden ist.</p>
+
+<div class="question">
+  <p>1. Jahr 1: Bilanzsumme: 9.5 Mio. Jahresumsatz: 18.7 Mio. Vollzeitstellen: 53<br>
+     Jahr 2: Bilanzsumme: 9.8 Mio. Jahresumsatz: 19.2 Mio. Vollzeitstellen: 56<br>
+     Jahr 3: Bilanzsumme: 10.3 Mio. Jahresumsatz: 19.9 Mio. Vollzeitstellen: 58</p>
+  <div class="option">Kern-FER</div>
+  <div class="option correct">Ganze FER</div>
+  <div class="option">FER 30</div>
+</div>
+
+<div class="question">
+  <p>2. Jahr 3: Bilanzsumme: 7 Mio. Jahresumsatz: 14 Mio. Vollzeitstellen: 35</p>
+  <div class="option correct">Kern-FER</div>
+  <div class="option">Ganze FER</div>
+  <div class="option">FER 30</div>
+</div>
+
+<div class="question">
+  <p>3. Jahr 1: Bilanzsumme: 14.1 Mio. Jahresumsatz: 26.8 Mio. Vollzeitstellen: 50<br>
+     Jahr 2: Bilanzsumme: 12.0 Mio. Jahresumsatz: 23.8 Mio. Vollzeitstellen: 48<br>
+     Jahr 3: Bilanzsumme: 10.6 Mio. Jahresumsatz: 19.7 Mio. Vollzeitstellen: 46</p>
+  <div class="option">Kern-FER</div>
+  <div class="option correct">Ganze FER</div>
+  <div class="option">FER 30</div>
+</div>
+
+<div class="question">
+  <p>4. Familienholding mit 3 Beteiligungen<br>
+     Jahr 1: Bilanzsumme: 8.2 Mio. Jahresumsatz: 17.4 Mio. Vollzeitstellen: 51<br>
+     Jahr 2: Bilanzsumme: 7.9 Mio. Jahresumsatz: 18.2 Mio. Vollzeitstellen: 51<br>
+     Jahr 3: Bilanzsumme: 10.5 Mio. Jahresumsatz: 18.4 Mio. Vollzeitstellen: 49</p>
+  <div class="option correct">Kern-FER</div>
+  <div class="option">Ganze FER</div>
+  <div class="option correct">FER 30</div>
+</div>
+
+<div class="question">
+  <p>5. Holding mit mehreren Tochtergesellschaften<br>
+     Jahr 1: Bilanzsumme: 850 Mio. Jahresumsatz: 1.5 Mrd. Vollzeitstellen: 3’200<br>
+     Jahr 2: Bilanzsumme: 897 Mio. Jahresumsatz: 1.52 Mrd. Vollzeitstellen: 3’240<br>
+     Jahr 3: Bilanzsumme: 960 Mio. Jahresumsatz: 1.67 Mrd. Vollzeitstellen: 3’310</p>
+  <div class="option">Kern-FER</div>
+  <div class="option correct">Ganze FER</div>
+  <div class="option correct">FER 30</div>
+</div>
+
+<div class="question">
+  <p>6. Jahr 1: Bilanzsumme: 49 Mio. Jahresumsatz: 19.2 Mio. Vollzeitstellen: 37<br>
+     Jahr 2: Bilanzsumme: 46 Mio. Jahresumsatz: 17.8 Mio. Vollzeitstellen: 36<br>
+     Jahr 3: Bilanzsumme: 43 Mio. Jahresumsatz: 16.5 Mio. Vollzeitstellen: 34</p>
+  <div class="option correct">Kern-FER</div>
+  <div class="option">Ganze FER</div>
+  <div class="option">FER 30</div>
+</div>
+
+<script>
+  const options = document.querySelectorAll(".option");
+  options.forEach(option => {
+    option.addEventListener("click", () => {
+      const parent = option.parentElement;
+      const siblings = parent.querySelectorAll(".option");
+      siblings.forEach(btn => {
+        btn.classList.remove("correct", "incorrect");
+        if (btn.textContent.trim() === btn.classList.contains("correct") ? btn.textContent.trim() : "") {
+          btn.classList.add("correct");
+        } else if (btn !== option) {
+          btn.classList.add("incorrect");
+        }
+      });
+      if (option.classList.contains("correct")) {
+        option.classList.add("correct");
+      } else {
+        option.classList.add("incorrect");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
