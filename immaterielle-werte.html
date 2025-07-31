@@ -1,179 +1,157 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aktivierung Immaterielle Werte</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-image: url('hintergrund.jpg');
+      font-family: sans-serif;
+      background-image: url('/img/bg-lernen.png');
       background-size: cover;
-      background-repeat: no-repeat;
       margin: 0;
-      padding: 40px;
+      padding: 2rem;
+      color: #000;
     }
-
     a {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: #333;
-      color: white;
-      padding: 10px 15px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #000;
       text-decoration: none;
-      border-radius: 5px;
-    }
-
-    h1 {
-      text-align: center;
-      color: black;
-    }
-
-    .einleitung {
-      font-size: 18px;
-      margin-bottom: 30px;
-      color: black;
       font-weight: bold;
     }
-
-    .frage {
-      margin-bottom: 40px;
-      color: black;
-      font-size: 16px;
+    .question {
+      margin-bottom: 2rem;
     }
-
-    .option {
-      display: inline-block;
-      background-color: black;
-      color: white;
-      padding: 8px 16px;
-      margin: 10px 10px 0 0;
-      border-radius: 6px;
+    .options button {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-right: 1rem;
       cursor: pointer;
-      user-select: none;
-      transition: background-color 0.3s;
     }
-
-    .option.richtig {
-      background-color: green !important;
+    .options button.correct {
+      background-color: green;
     }
-
-    .option.falsch {
-      background-color: red !important;
+    .options button.incorrect {
+      background-color: red;
     }
-
-    .begruendung {
-      margin-top: 10px;
-      font-style: italic;
-      color: black;
+    .feedback {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: #000;
     }
   </style>
 </head>
 <body>
+  <a href="/html/frw-theorie-fer">&larr; Zurück</a>
+  <h2>Aktivierung Immaterielle Werte</h2>
+  <p>Handelt es sich hier jeweils um aktivierbare immaterielle Werte?</p>
 
-<a href="frw-theorie-fer.html">Zurück</a>
-<h1>Aktivierung Immaterielle Werte</h1>
+  <div id="quiz"></div>
 
-<div class="einleitung">
-  Handelt es sich hier jeweils um aktivierbare immaterielle Werte?
-</div>
+  <script>
+    const data = [
+      {
+        q: "1. Kauf eines Patents für die Nutzung eines Fertigungsverfahrens innerhalb der nächsten 10 Jahre, das erfolgsversprechend ist (Umsatzschätzungen vorhanden).",
+        correct: "ja",
+        feedback: ""
+      },
+      {
+        q: "2. Kauf einer Idee für den Bau von neuartigen Meerwasserentsalzungsanlagen. Die Idee soll innerhalb der nächsten ca. 5 Jahre entwickelt werden. Ob es dafür einen reellen Markt gibt, muss zuerst noch untersucht werden.",
+        correct: "nein",
+        feedback: "Kein zuverlässiger Nutzen in der Zukunft."
+      },
+      {
+        q: "3. Kosten für die Forschung an neuen Wirkstoffen in einem Pharma-Unternehmen. Bei Erfolgen wird dann entschieden, ob daraus Medikamente entwickelt werden.",
+        correct: "nein",
+        feedback: "Gilt als Grundlagenforschung."
+      },
+      {
+        q: "4. Gekaufter Kundenstamm eines Konkurrenzunternehmens.",
+        correct: "ja",
+        feedback: ""
+      },
+      {
+        q: "5. Weiterbildungskosten eines Nachwuchskadermitarbeiters (es besteht keine arbeitsvertragliche Verpflichtung), der Mitarbeiter wird wahrscheinlich noch mind. 5 Jahre bleiben.",
+        correct: "nein",
+        feedback: "Kein Nutzen"
+      },
+      {
+        q: "6. Die Gründungskosten sollen aktiviert und über 5 Jahre abgeschrieben werden.",
+        correct: "nein",
+        feedback: "Kein Nutzen"
+      },
+      {
+        q: "7. Eigener, selbst erarbeiteter, Kundenstamm.",
+        correct: "nein",
+        feedback: "Aufwendungen nicht separat messbar"
+      },
+      {
+        q: "8. Es sind Restrukturierungskosten angefallen, die innerhalb der nächsten 2 Jahre (zuverlässige Schätzung) durch Kosteneinsparungen kompensiert sein werden.",
+        correct: "ja",
+        feedback: ""
+      },
+      {
+        q: "9. Wir eröffnen einen neuen McDonalds. Wir bezahlen dafür nebst der jährlichen Gebühr einen einmaligen Betrag als neuer Franchisenehmer an McDonalds.",
+        correct: "ja",
+        feedback: ""
+      },
+      {
+        q: "10. Wir haben uns exklusiv die Förderrechte für Erdgas im Luzerner Entlebuch gesichert und dafür 250‘000 bezahlt. Ob, wo und wie viel Vorkommen vorhanden ist werden wir im nächsten Jahr untersuchen.",
+        correct: "nein",
+        feedback: "Kein zuverlässiger Nutzen in der Zukunft"
+      },
+      {
+        q: "11. Die Migon Software GmbH hat eine iOS-App entwickelt. Marktuntersuchungen zur Folge ist das Absatzpotential gross, die Entwicklungskosten sind mehrfaches gedeckt.",
+        correct: "ja",
+        feedback: ""
+      },
+      {
+        q: "12. Unsere Unternehmung hat in der ganzen Schweiz einen ausgezeichneten Ruf. Diesen haben wir u.a. dadurch erreicht, dass wir grössere Summen in Werbung investiert haben, wo wir auf die Topqualität unserer Produkte aufmerksam machen.",
+        correct: "nein",
+        feedback: "Nicht identifizierbar"
+      }
+    ];
 
-<script>
-  function prüfen(option, korrekt, begruendung = '') {
-    const parent = option.parentElement;
-    const alleOptionen = parent.querySelectorAll('.option');
-    alleOptionen.forEach(opt => opt.classList.remove('richtig', 'falsch'));
+    const container = document.getElementById("quiz");
 
-    if (option.dataset.wert === korrekt) {
-      option.classList.add('richtig');
-    } else {
-      option.classList.add('falsch');
-    }
+    data.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "question";
 
-    const existierenderHinweis = parent.querySelector('.begruendung');
-    if (existierenderHinweis) existierenderHinweis.remove();
+      const p = document.createElement("p");
+      p.textContent = item.q;
 
-    if (begruendung && option.dataset.wert !== korrekt) {
-      const p = document.createElement('div');
-      p.classList.add('begruendung');
-      p.textContent = begruendung;
-      parent.appendChild(p);
-    }
-  }
-</script>
+      const options = document.createElement("div");
+      options.className = "options";
 
-<!-- Fragen 1 bis 12 -->
-<div class="frage">
-  1. Kauf eines Patents für die Nutzung eines Fertigungsverfahrens innerhalb der nächsten 10 Jahre, das erfolgsversprechend ist (Umsatzschätzungen vorhanden).<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
-</div>
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
 
-<div class="frage">
-  2. Kauf einer Idee für den Bau von neuartigen Meerwasserentsalzungsanlagen. Die Idee soll innerhalb der nächsten ca. 5 Jahre entwickelt werden. Ob es dafür einen reellen Markt gibt, muss zuerst noch untersucht werden.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein', 'Kein zuverlässiger Nutzen in der Zukunft.')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein', 'Kein zuverlässiger Nutzen in der Zukunft.')">nein</div>
-</div>
+      ["ja", "nein"].forEach((choice) => {
+        const btn = document.createElement("button");
+        btn.textContent = choice;
+        btn.onclick = () => {
+          const isCorrect = choice === item.correct;
+          btn.className = isCorrect ? "correct" : "incorrect";
+          Array.from(options.children).forEach((b) => {
+            b.disabled = true;
+            if (b.textContent === item.correct) b.className = "correct";
+            else b.className = "incorrect";
+          });
+          feedback.textContent = item.feedback || (isCorrect ? "Korrekt." : "Falsch.");
+        };
+        options.appendChild(btn);
+      });
 
-<div class="frage">
-  3. Kosten für die Forschung an neuen Wirkstoffen in einem Pharma-Unternehmen. Bei Erfolgen wird dann entschieden, ob daraus Medikamente entwickelt werden.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein', 'Gilt als Grundlagenforschung.')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein', 'Gilt als Grundlagenforschung.')">nein</div>
-</div>
-
-<div class="frage">
-  4. Gekaufter Kundenstamm eines Konkurrenzunternehmens.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
-</div>
-
-<div class="frage">
-  5. Weiterbildungskosten eines Nachwuchskadermitarbeiters (es besteht keine arbeitsvertragliche Verpflichtung), der Mitarbeiter wird wahrscheinlich noch mind. 5 Jahre bleiben.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein', 'Kein Nutzen')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein', 'Kein Nutzen')">nein</div>
-</div>
-
-<div class="frage">
-  6. Die Gründungskosten sollen aktiviert und über 5 Jahre abgeschrieben werden.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein', 'Kein Nutzen')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein', 'Kein Nutzen')">nein</div>
-</div>
-
-<div class="frage">
-  7. Eigener, selbst erarbeiteter, Kundenstamm.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein', 'Aufwendungen nicht separat messbar')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein', 'Aufwendungen nicht separat messbar')">nein</div>
-</div>
-
-<div class="frage">
-  8. Es sind Restrukturierungskosten angefallen, die innerhalb der nächsten 2 Jahre (zuverlässige Schätzung) durch Kosteneinsparungen kompensiert sein werden.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
-</div>
-
-<div class="frage">
-  9. Wir eröffnen einen neuen McDonalds. Wir bezahlen dafür nebst der jährlichen Gebühr einen einmaligen Betrag als neuer Franchisenehmer an McDonalds.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
-</div>
-
-<div class="frage">
-  10. Wir haben uns exklusiv die Förderrechte für Erdgas im Luzerner Entlebuch gesichert und dafür 250‘000 bezahlt. Ob, wo und wie viel Vorkommen vorhanden ist werden wir im nächsten Jahr untersuchen.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein', 'Kein zuverlässiger Nutzen in der Zukunft')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein', 'Kein zuverlässiger Nutzen in der Zukunft')">nein</div>
-</div>
-
-<div class="frage">
-  11. Die Migon Software GmbH hat eine iOS-App entwickelt. Marktuntersuchungen zur Folge ist das Absatzpotential gross, die Entwicklungskosten sind mehrfaches gedeckt.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
-</div>
-
-<div class="frage">
-  12. Unsere Unternehmung hat in der ganzen Schweiz einen ausgezeichneten Ruf. Diesen haben wir u.a. dadurch erreicht, dass wir grössere Summen in Werbung investiert haben, wo wir auf die Topqualität unserer Produkte aufmerksam machen.<br>
-  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein', 'Nicht identifizierbar')">ja</div>
-  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein', 'Nicht identifizierbar')">nein</div>
-</div>
-
+      div.appendChild(p);
+      div.appendChild(options);
+      div.appendChild(feedback);
+      container.appendChild(div);
+    });
+  </script>
 </body>
 </html>
+
