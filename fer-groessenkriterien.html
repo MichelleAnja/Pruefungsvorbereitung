@@ -2,167 +2,164 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Grössenkriterien FER-Anwendung</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f2f2;
       margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
       padding: 20px;
+      color: black;
     }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background-color: #f7f2f2;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .question {
-      margin-bottom: 30px;
-      padding: 15px;
-      background-color: #f7f2f2;
-      border-radius: 8px;
-      border-left: 5px solid #444;
-    }
-    .answers button {
-      background-color: black;
-      color: white;
-      border: none;
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: lightgray;
+      color: black;
       padding: 10px 20px;
-      margin: 5px 10px 0 0;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .answers button.correct {
-      background-color: green;
-    }
-    .answers button.incorrect {
-      background-color: red;
-    }
-    .back-link {
-      display: inline-block;
-      margin-bottom: 20px;
-      color: #333;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      border: 2px solid #333;
-      padding: 5px 10px;
-      border-radius: 5px;
     }
-    .back-link:hover {
-      background-color: #ddd;
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-top: 60px;
+    }
+
+    .question {
+      margin-bottom: 30px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .options button {
+      background-color: black;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .options button.correct {
+      background-color: green !important;
+    }
+
+    .options button.incorrect {
+      background-color: red !important;
+    }
+
+    @media (max-width: 600px) {
+      .options {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a href="frw-theorie-fer.html" class="back-link">← Zurück</a>
-    <h1>Grössenkriterien FER-Anwendung</h1>
+  <a class="back-button" href="frw-theorie-fer.html">Zurück</a>
 
-    <div class="question">
-      <p>
-        Jahr 1: Bilanzsumme: 9.5 Mio. / Jahresumsatz: 18.7 Mio. / Vollzeitstellen: 53<br>
-        Jahr 2: Bilanzsumme: 9.8 Mio. / Jahresumsatz: 19.2 Mio. / Vollzeitstellen: 56<br>
-        Jahr 3: Bilanzsumme: 10.3 Mio. / Jahresumsatz: 19.9 Mio. / Vollzeitstellen: 58
-      </p>
-      <div class="answers">
-        <button onclick="check(this, 'Ganze FER')">Kern-FER</button>
-        <button onclick="check(this, 'Ganze FER')">Ganze FER</button>
-        <button onclick="check(this, 'Ganze FER')">FER 30</button>
-      </div>
+  <h1>Grössenkriterien FER-Anwendung</h1>
+
+  <div class="question">
+    <p><strong>1.</strong><br>
+      Jahr 1: Bilanzsumme: 9.5 Mio. | Jahresumsatz: 18.7 Mio. | Vollzeitstellen: 53<br>
+      Jahr 2: Bilanzsumme: 9.8 Mio. | Jahresumsatz: 19.2 Mio. | Vollzeitstellen: 56<br>
+      Jahr 3: Bilanzsumme: 10.3 Mio. | Jahresumsatz: 19.9 Mio. | Vollzeitstellen: 58
+    </p>
+    <div class="options" data-answer="Ganze FER">
+      <button onclick="checkAnswer(this, 'Ganze FER')">Kern-FER</button>
+      <button onclick="checkAnswer(this, 'Ganze FER')">Ganze FER</button>
+      <button onclick="checkAnswer(this, 'Ganze FER')">FER 30</button>
     </div>
+  </div>
 
-    <div class="question">
-      <p>
-        Jahr 1: Bilanzsumme: / Jahresumsatz: / Vollzeitstellen: <br>
-        Jahr 2: Bilanzsumme: / Jahresumsatz: / Vollzeitstellen: <br>
-        Jahr 3: Bilanzsumme: 7 Mio. / Jahresumsatz: 14 Mio. / Vollzeitstellen: 35
-      </p>
-      <div class="answers">
-        <button onclick="check(this, 'Kern-FER')">Kern-FER</button>
-        <button onclick="check(this, 'Kern-FER')">Ganze FER</button>
-        <button onclick="check(this, 'Kern-FER')">FER 30</button>
-      </div>
+  <div class="question">
+    <p><strong>2.</strong><br>
+      Jahr 1: — | Jahr 2: — <br>
+      Jahr 3: Bilanzsumme: 7 Mio. | Jahresumsatz: 14 Mio. | Vollzeitstellen: 35
+    </p>
+    <div class="options" data-answer="Kern-FER">
+      <button onclick="checkAnswer(this, 'Kern-FER')">Kern-FER</button>
+      <button onclick="checkAnswer(this, 'Kern-FER')">Ganze FER</button>
+      <button onclick="checkAnswer(this, 'Kern-FER')">FER 30</button>
     </div>
+  </div>
 
-    <div class="question">
-      <p>
-        Jahr 1: Bilanzsumme: 14.1 Mio. / Jahresumsatz: 26.8 Mio. / Vollzeitstellen: 50<br>
-        Jahr 2: Bilanzsumme: 12.0 Mio. / Jahresumsatz: 23.8 Mio. / Vollzeitstellen: 48<br>
-        Jahr 3: Bilanzsumme: 10.6 Mio. / Jahresumsatz: 19.7 Mio. / Vollzeitstellen: 46
-      </p>
-      <div class="answers">
-        <button onclick="check(this, 'Ganze FER')">Kern-FER</button>
-        <button onclick="check(this, 'Ganze FER')">Ganze FER</button>
-        <button onclick="check(this, 'Ganze FER')">FER 30</button>
-      </div>
+  <div class="question">
+    <p><strong>3.</strong><br>
+      Jahr 1: Bilanzsumme: 14.1 Mio. | Jahresumsatz: 26.8 Mio. | Vollzeitstellen: 50<br>
+      Jahr 2: Bilanzsumme: 12.0 Mio. | Jahresumsatz: 23.8 Mio. | Vollzeitstellen: 48<br>
+      Jahr 3: Bilanzsumme: 10.6 Mio. | Jahresumsatz: 19.7 Mio. | Vollzeitstellen: 46
+    </p>
+    <div class="options" data-answer="Ganze FER">
+      <button onclick="checkAnswer(this, 'Ganze FER')">Kern-FER</button>
+      <button onclick="checkAnswer(this, 'Ganze FER')">Ganze FER</button>
+      <button onclick="checkAnswer(this, 'Ganze FER')">FER 30</button>
     </div>
+  </div>
 
-    <div class="question">
-      <p>
-        Familienholding mit 3 Beteiligungen<br>
-        Jahr 1: Bilanzsumme: 8.2 Mio. / Jahresumsatz: 17.4 Mio. / Vollzeitstellen: 51<br>
-        Jahr 2: Bilanzsumme: 7.9 Mio. / Jahresumsatz: 18.2 Mio. / Vollzeitstellen: 51<br>
-        Jahr 3: Bilanzsumme: 10.5 Mio. / Jahresumsatz: 18.4 Mio. / Vollzeitstellen: 49
-      </p>
-      <div class="answers">
-        <button onclick="checkMulti(this, ['Kern-FER','FER 30'])">Kern-FER</button>
-        <button onclick="checkMulti(this, ['Kern-FER','FER 30'])">Ganze FER</button>
-        <button onclick="checkMulti(this, ['Kern-FER','FER 30'])">FER 30</button>
-      </div>
+  <div class="question">
+    <p><strong>4.</strong> Familienholding mit 3 Beteiligungen<br>
+      Jahr 1: Bilanzsumme: 8.2 Mio. | Jahresumsatz: 17.4 Mio. | Vollzeitstellen: 51<br>
+      Jahr 2: Bilanzsumme: 7.9 Mio. | Jahresumsatz: 18.2 Mio. | Vollzeitstellen: 51<br>
+      Jahr 3: Bilanzsumme: 10.5 Mio. | Jahresumsatz: 18.4 Mio. | Vollzeitstellen: 49
+    </p>
+    <div class="options" data-answer="Kern-FER FER 30">
+      <button onclick="checkAnswer(this, 'Kern-FER FER 30')">Kern-FER</button>
+      <button onclick="checkAnswer(this, 'Kern-FER FER 30')">Ganze FER</button>
+      <button onclick="checkAnswer(this, 'Kern-FER FER 30')">FER 30</button>
     </div>
+  </div>
 
-    <div class="question">
-      <p>
-        Holding mit mehreren Tochtergesellschaften<br>
-        Jahr 1: Bilanzsumme: 850 Mio. / Jahresumsatz: 1.5 Mrd. / Vollzeitstellen: 3’200<br>
-        Jahr 2: Bilanzsumme: 897 Mio. / Jahresumsatz: 1.52 Mrd. / Vollzeitstellen: 3’240<br>
-        Jahr 3: Bilanzsumme: 960 Mio. / Jahresumsatz: 1.67 Mrd. / Vollzeitstellen: 3’310
-      </p>
-      <div class="answers">
-        <button onclick="checkMulti(this, ['Ganze FER','FER 30'])">Kern-FER</button>
-        <button onclick="checkMulti(this, ['Ganze FER','FER 30'])">Ganze FER</button>
-        <button onclick="checkMulti(this, ['Ganze FER','FER 30'])">FER 30</button>
-      </div>
+  <div class="question">
+    <p><strong>5.</strong> Holding mit mehreren Tochtergesellschaften<br>
+      Jahr 1: Bilanzsumme: 850 Mio. | Jahresumsatz: 1.5 Mrd. | Vollzeitstellen: 3’200<br>
+      Jahr 2: Bilanzsumme: 897 Mio. | Jahresumsatz: 1.52 Mrd. | Vollzeitstellen: 3’240<br>
+      Jahr 3: Bilanzsumme: 960 Mio. | Jahresumsatz: 1.67 Mrd. | Vollzeitstellen: 3’310
+    </p>
+    <div class="options" data-answer="Ganze FER FER 30">
+      <button onclick="checkAnswer(this, 'Ganze FER FER 30')">Kern-FER</button>
+      <button onclick="checkAnswer(this, 'Ganze FER FER 30')">Ganze FER</button>
+      <button onclick="checkAnswer(this, 'Ganze FER FER 30')">FER 30</button>
     </div>
+  </div>
 
-    <div class="question">
-      <p>
-        Jahr 1: Bilanzsumme: 49 Mio. / Jahresumsatz: 19.2 Mio. / Vollzeitstellen: 37<br>
-        Jahr 2: Bilanzsumme: 46 Mio. / Jahresumsatz: 17.8 Mio. / Vollzeitstellen: 36<br>
-        Jahr 3: Bilanzsumme: 43 Mio. / Jahresumsatz: 16.5 Mio. / Vollzeitstellen: 34
-      </p>
-      <div class="answers">
-        <button onclick="check(this, 'Kern-FER')">Kern-FER</button>
-        <button onclick="check(this, 'Kern-FER')">Ganze FER</button>
-        <button onclick="check(this, 'Kern-FER')">FER 30</button>
-      </div>
+  <div class="question">
+    <p><strong>6.</strong><br>
+      Jahr 1: Bilanzsumme: 49 Mio. | Jahresumsatz: 19.2 Mio. | Vollzeitstellen: 37<br>
+      Jahr 2: Bilanzsumme: 46 Mio. | Jahresumsatz: 17.8 Mio. | Vollzeitstellen: 36<br>
+      Jahr 3: Bilanzsumme: 43 Mio. | Jahresumsatz: 16.5 Mio. | Vollzeitstellen: 34
+    </p>
+    <div class="options" data-answer="Kern-FER">
+      <button onclick="checkAnswer(this, 'Kern-FER')">Kern-FER</button>
+      <button onclick="checkAnswer(this, 'Kern-FER')">Ganze FER</button>
+      <button onclick="checkAnswer(this, 'Kern-FER')">FER 30</button>
     </div>
   </div>
 
   <script>
-    function check(button, correct) {
-      const buttons = button.parentElement.querySelectorAll('button');
-      buttons.forEach(btn => {
-        btn.disabled = true;
-        if (btn.textContent.trim() === correct) {
-          btn.classList.add('correct');
-        } else {
-          btn.classList.add('incorrect');
-        }
-      });
-    }
+    function checkAnswer(button, correctValues) {
+      const container = button.parentElement;
+      const correctAnswers = correctValues.split(" ");
+      const buttons = container.querySelectorAll("button");
 
-    function checkMulti(button, correctArray) {
-      const buttons = button.parentElement.querySelectorAll('button');
       buttons.forEach(btn => {
         btn.disabled = true;
-        if (correctArray.includes(btn.textContent.trim())) {
+        if (correctAnswers.includes(btn.textContent.trim())) {
           btn.classList.add('correct');
-        } else {
+        } else if (btn === button) {
           btn.classList.add('incorrect');
         }
       });
