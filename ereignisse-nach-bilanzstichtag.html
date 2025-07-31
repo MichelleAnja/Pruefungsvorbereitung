@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ereignisse nach dem Bilanzstichtag</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 20px;
+      color: black;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: lightgray;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-top: 60px;
+    }
+
+    .question {
+      margin-bottom: 30px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .options button {
+      background-color: black;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .options button.correct {
+      background-color: green !important;
+    }
+
+    .options button.incorrect {
+      background-color: red !important;
+    }
+
+    @media (max-width: 600px) {
+      .options {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="frw-theorie.html">Zurück</a>
+
+  <h1>Ereignisse nach dem Bilanzstichtag</h1>
+
+  <div class="question">
+    <p><strong>1.</strong> Nach dem Bilanzstichtag (vor Erstellung der Jahresrechnung) ist der EURO Kurs um knapp 20% gesunken. Der Buchkursverlust ist wesentlich.</p>
+    <div class="options" data-answer="Anhang">
+      <button onclick="checkAnswer(this, 'Anhang')">Anhang</button>
+      <button onclick="checkAnswer(this, 'Jahresrechnung (Rückstellung)')">Jahresrechnung (Rückstellung)</button>
+      <button onclick="checkAnswer(this, 'kein Ausweis')">kein Ausweis</button>
+    </div>
+  </div>
+
+  <div class="question">
+    <p><strong>2.</strong> Nach dem Bilanzstichtag werden neu Wertschriften zugunsten eines KK-Kredites bei der Bank verpfändet.</p>
+    <div class="options" data-answer="kein Ausweis">
+      <button onclick="checkAnswer(this, 'Anhang')">Anhang</button>
+      <button onclick="checkAnswer(this, 'Jahresrechnung (Rückstellung)')">Jahresrechnung (Rückstellung)</button>
+      <button onclick="checkAnswer(this, 'kein Ausweis')">kein Ausweis</button>
+    </div>
+  </div>
+
+  <div class="question">
+    <p><strong>3.</strong> Unsere unternehmenseigene Pensionskassenstiftung hat im Jahr 20_1 grosse Buchverluste eingefahren. Wenn sie sich bis Ende 20_2 nicht erholt, müssen wir Sanierungsbeiträge leisten.</p>
+    <div class="options" data-answer="Jahresrechnung (Rückstellung)">
+      <button onclick="checkAnswer(this, 'Anhang')">Anhang</button>
+      <button onclick="checkAnswer(this, 'Jahresrechnung (Rückstellung)')">Jahresrechnung (Rückstellung)</button>
+      <button onclick="checkAnswer(this, 'kein Ausweis')">kein Ausweis</button>
+    </div>
+  </div>
+
+  <div class="question">
+    <p><strong>4.</strong> Am 06.01.20_2 wird bekannt, dass für einen verlorenen grossen Rechtsstreit aus 20_1 Kosten von 100 anfallen werden. Eine Rückstellung per 31.12.20_1 über 50 ist bereits gebucht.</p>
+    <div class="options" data-answer="Jahresrechnung (Rückstellung)">
+      <button onclick="checkAnswer(this, 'Anhang')">Anhang</button>
+      <button onclick="checkAnswer(this, 'Jahresrechnung (Rückstellung)')">Jahresrechnung (Rückstellung)</button>
+      <button onclick="checkAnswer(this, 'kein Ausweis')">kein Ausweis</button>
+    </div>
+  </div>
+
+  <div class="question">
+    <p><strong>5.</strong> Im Jahr 20_2 soll für total 3 Mio. mit dem Bau eines neuen Verwaltungsgebäudes begonnen werden.</p>
+    <div class="options" data-answer="kein Ausweis">
+      <button onclick="checkAnswer(this, 'Anhang')">Anhang</button>
+      <button onclick="checkAnswer(this, 'Jahresrechnung (Rückstellung)')">Jahresrechnung (Rückstellung)</button>
+      <button onclick="checkAnswer(this, 'kein Ausweis')">kein Ausweis</button>
+    </div>
+  </div>
+
+  <div class="question">
+    <p><strong>6.</strong> Der Verwaltungsrat beabsichtigt, die Sparte Solar Mitte 20_2 zu verkaufen. Dies würde direkte Verkaufskosten von ca. 250‘000 verursachen.</p>
+    <div class="options" data-answer="Anhang">
+      <button onclick="checkAnswer(this, 'Anhang')">Anhang</button>
+      <button onclick="checkAnswer(this, 'Jahresrechnung (Rückstellung)')">Jahresrechnung (Rückstellung)</button>
+      <button onclick="checkAnswer(this, 'kein Ausweis')">kein Ausweis</button>
+    </div>
+  </div>
+
+  <script>
+    function checkAnswer(button, correctValue) {
+      const container = button.parentElement;
+      const answer = container.getAttribute('data-answer');
+
+      const buttons = container.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === answer) {
+          btn.classList.add('correct');
+        } else if (btn === button) {
+          btn.classList.add('incorrect');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
