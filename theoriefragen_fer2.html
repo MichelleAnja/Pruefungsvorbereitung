@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Theorie Fragen FER 2</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 20px;
+      color: black;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: lightgray;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-top: 60px;
+    }
+
+    .question {
+      margin-bottom: 40px;
+    }
+
+    .options {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .options button {
+      background-color: black;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .options button.correct {
+      background-color: green !important;
+    }
+
+    .options button.incorrect {
+      background-color: red !important;
+    }
+
+    .explanation {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: rgba(255,255,255,0.8);
+      border-left: 5px solid #333;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="frw-theorie-fer.html">Zurück</a>
+  <h1>Theorie Fragen FER 2</h1>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    const questions = [
+      { text: "Eine voll fremdvermietete Liegenschaft wird zu den historischen Anschaffungskosten bewertet und über die Nutzungsdauer abgeschrieben.", answer: "richtig" },
+      { text: "Die Unternehmung verzichtet gänzlich darauf selbst geschaffene immaterielle Werte zu aktivieren (z.B. ein speziell entwickeltes Fertigungsverfahren). Es können selbst erarbeitete immaterielle Werte aktiviert werden, es besteht aber kein Zwang.", answer: "richtig" },
+      { text: "Eine Unternehmung hat ihre Gründungskosten aktiviert und schreibt diese über 5 Jahre linear ab.", answer: "falsch", explanation: "Gründungskosten sind nach FER 2/38 nicht aktivierbar (kein Nutzen)." },
+      { text: "Pharma AG forscht an einem neuen Wirkstoff. Es ist zum jetzigen Zeitpunkt noch ungewiss, ob diese Forschung zum Erfolg (Entwicklung von Medikamenten) führt. Im Hinblick auf einen möglichen zukünftigen Nutzen werden die hälftigen Kosten aktiviert.", answer: "falsch", explanation: "Allgemeine Forschungskosten sind nach FER 2/36 nicht aktivierungsfähig (auch nicht teilweise)." },
+      { text: "Von der Pharma AG wird ein neues Medikament entwickelt, von dem noch nicht beurteilt werden kann, ob es jemals Marktreife erlangt und verkauft wird. Die Entwicklungskosten wurden alle dem Aufwand belastet.", answer: "richtig", explanation: "Nach FER 2/35 und 36 ist nicht klar, ob das Medikament jemals einen Nutzen bringen wird. Deshalb sind diese Entwicklungskosten der Erfolgsrechnung zu belasten." },
+      { text: "Die Entwicklung des neuen Medikamentes ist abgeschlossen. Die Umsätze können nun konkret berechnet und verlässlich geschätzt werden, es wird ein absoluter Verkaufsschlager. Deshalb werden die Entwicklungskosten von Nr. 5 (vorheriges Geschäftsjahr) jetzt noch aktiviert.", answer: "falsch", explanation: "FER verbietet generell eine nachträgliche Aktivierung von Kosten, die bereits der Erfolgsrechnung belastet wurden (FER 10/6 → in FER 2 nicht explizit erwähnt)." },
+      { text: "Die Fehlmann Optik AG übernimmt die Frauchiger Optik AG samt Mitarbeiter- und Kundenstamm. Dieser mitbezahlte immaterielle Vermögenswert wird aktiviert. Die Abschreibungsdauer für Kunden- und Mitarbeiterstamm beträgt 5 Jahre.", answer: "falsch", explanation: "Nach FER 2/37 darf bei personenbezogenen immateriellen Werten die Abschreibungsdauer 5 Jahre nicht überschreiten." },
+      { text: "Zahnpasta Produktions AG hat ihre Geschäftsliegenschaft teilweise fremdvermietet. Die Immobilie wird zum aktuellen Wert eingesetzt.", answer: "falsch", explanation: "Das Wahlrecht nach FER 2/11 gilt nur für Liegenschaften, die ausschliesslich Renditezwecken dienen." },
+      { text: "Die Allfinanz AG besitzt nicht börsenkotierte Wertschriften der Lagerhäuser AG, Aarau. Die Aktien werden regelmässig ausserbörslich per Telefon gehandelt und deshalb zum letztgehandelten Kurs bewertet.", answer: "richtig", explanation: "Ein regelmässiger ausserbörslicher Handel gilt nach FER 2/7 als Vorliegen eines aktuellen Wertes." },
+    ];
+
+    const container = document.getElementById('quiz-container');
+
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.className = 'question';
+      div.innerHTML = `
+        <p><strong>${i + 1}.</strong> ${q.text}</p>
+        <div class="options">
+          <button onclick="checkAnswer(this, '${q.answer}', ${i})">richtig</button>
+          <button onclick="checkAnswer(this, '${q.answer}', ${i})">falsch</button>
+        </div>
+        <div id="explanation-${i}" class="explanation">${q.explanation || ''}</div>
+      `;
+      container.appendChild(div);
+    });
+
+    function checkAnswer(button, correct, index) {
+      const container = button.parentElement;
+      const buttons = container.querySelectorAll('button');
+      const userChoice = button.textContent.trim();
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent.trim() === correct) {
+          btn.classList.add('correct');
+        } else if (btn === button) {
+          btn.classList.add('incorrect');
+        }
+      });
+      const exp = document.getElementById('explanation-' + index);
+      if (exp && exp.textContent.trim() !== '') {
+        exp.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
