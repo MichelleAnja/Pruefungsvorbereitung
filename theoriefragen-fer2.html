@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Theorie Fragen 2</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 20px;
+      color: black;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: lightgray;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-top: 60px;
+    }
+
+    .question {
+      margin-bottom: 30px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .options button {
+      background-color: black;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .options button.correct {
+      background-color: green !important;
+    }
+
+    .options button.incorrect {
+      background-color: red !important;
+    }
+
+    @media (max-width: 600px) {
+      .options {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="frw-theorie-fer.html">Zurück</a>
+
+  <h1>Theorie Fragen 2</h1>
+
+  <div class="question">
+    <p><strong>1.</strong> Was ist der Zweck von Swiss GAAP FER?</p>
+    <div class="options" data-answer="Transparenz durch true and fair view,günstiges Verhältnis von Nutzen und Kosten">
+      <button onclick="checkAnswer(this, 'Transparenz durch true and fair view,günstiges Verhältnis von Nutzen und Kosten')">Transparenz durch true and fair view</button>
+      <button onclick="checkAnswer(this, 'Transparenz durch true and fair view,günstiges Verhältnis von Nutzen und Kosten')">günstiges Verhältnis von Nutzen und Kosten</button>
+      <button onclick="checkAnswer(this, 'Transparenz durch true and fair view,günstiges Verhältnis von Nutzen und Kosten')">Möglichst tiefe Steuerlast</button>
+      <button onclick="checkAnswer(this, 'Transparenz durch true and fair view,günstiges Verhältnis von Nutzen und Kosten')">Bilanzverkürzung durch Abschreibungen</button>
+    </div>
+  </div>
+
+  <div class="question">
+    <p><strong>2.</strong> Ist der FER-Abschluss steuerlich massgebend?</p>
+    <div class="options" data-answer="nein">
+      <button onclick="checkAnswer(this, 'nein')">ja</button>
+      <button onclick="checkAnswer(this, 'nein')">nein</button>
+    </div>
+  </div>
+
+  <div class="question">
+    <p><strong>3.</strong> Wie wird der Leser der Jahresrechnung darüber informiert, ob nur Kern-FER oder die ganze FER angewendet werden?</p>
+    <div class="options" data-answer="Offenlegung im Anhang">
+      <button onclick="checkAnswer(this, 'Offenlegung im Anhang')">Hinweis auf der Titelseite</button>
+      <button onclick="checkAnswer(this, 'Offenlegung im Anhang')">Offenlegung im Anhang</button>
+      <button onclick="checkAnswer(this, 'Offenlegung im Anhang')">Keine Verpflichtung zur Information</button>
+    </div>
+  </div>
+
+  <script>
+    function checkAnswer(button, correctValue) {
+      const container = button.parentElement;
+      const answers = container.getAttribute('data-answer').split(',');
+
+      const buttons = container.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        const text = btn.textContent.trim();
+        if (answers.includes(text)) {
+          btn.classList.add('correct');
+        } else if (btn === button) {
+          btn.classList.add('incorrect');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
