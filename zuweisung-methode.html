@@ -3,154 +3,167 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aktivierung Immaterielle Werte</title>
+  <title>Theoriefragen Zuweisung Methode</title>
   <style>
     body {
       font-family: sans-serif;
-      background-image: url('/img/bg-lernen.png');
+      background: url('background.jpg') no-repeat center center fixed;
       background-size: cover;
-      margin: 0;
+      color: black;
       padding: 2rem;
-      color: #000;
     }
-    a {
-      display: inline-block;
-      margin-bottom: 1rem;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 2rem;
+      border-radius: 10px;
     }
-    .question {
+    h1 {
       margin-bottom: 2rem;
     }
-    .options button {
-      background-color: #000;
-      color: #fff;
-      border: none;
+    .question {
+      margin: 1.5rem 0;
+    }
+    .options {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .option {
+      background-color: black;
+      color: white;
       padding: 0.5rem 1rem;
-      margin-right: 1rem;
+      border-radius: 5px;
       cursor: pointer;
+      user-select: none;
     }
-    .options button.correct {
-      background-color: green;
+    .option.correct {
+      background-color: green !important;
     }
-    .options button.incorrect {
-      background-color: red;
+    .option.incorrect {
+      background-color: red !important;
     }
     .feedback {
       margin-top: 0.5rem;
-      font-size: 0.95rem;
-      color: #000;
+      font-style: italic;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <a href="/html/frw-theorie-fer">&larr; Zurück</a>
-  <h2>Aktivierung Immaterielle Werte</h2>
-  <p>Handelt es sich hier jeweils um aktivierbare immaterielle Werte?</p>
+  <div class="container">
+    <a href="frw-theorie-fer.html" class="back-link">&larr; Zurück</a>
+    <h1>Theoriefragen Zuweisung Methode</h1>
 
-  <div id="quiz"></div>
+    <script>
+      function selectAnswer(el, isCorrect, feedback) {
+        const siblings = el.parentElement.querySelectorAll('.option');
+        siblings.forEach(btn => btn.classList.remove('correct', 'incorrect'));
+        el.classList.add(isCorrect ? 'correct' : 'incorrect');
 
-  <script>
-    const data = [
-      {
-        q: "1. Kauf eines Patents für die Nutzung eines Fertigungsverfahrens innerhalb der nächsten 10 Jahre, das erfolgsversprechend ist (Umsatzschätzungen vorhanden).",
-        correct: "ja",
-        feedback: ""
-      },
-      {
-        q: "2. Kauf einer Idee für den Bau von neuartigen Meerwasserentsalzungsanlagen. Die Idee soll innerhalb der nächsten ca. 5 Jahre entwickelt werden. Ob es dafür einen reellen Markt gibt, muss zuerst noch untersucht werden.",
-        correct: "nein",
-        feedback: "Kein zuverlässiger Nutzen in der Zukunft."
-      },
-      {
-        q: "3. Kosten für die Forschung an neuen Wirkstoffen in einem Pharma-Unternehmen. Bei Erfolgen wird dann entschieden, ob daraus Medikamente entwickelt werden.",
-        correct: "nein",
-        feedback: "Gilt als Grundlagenforschung."
-      },
-      {
-        q: "4. Gekaufter Kundenstamm eines Konkurrenzunternehmens.",
-        correct: "ja",
-        feedback: ""
-      },
-      {
-        q: "5. Weiterbildungskosten eines Nachwuchskadermitarbeiters (es besteht keine arbeitsvertragliche Verpflichtung), der Mitarbeiter wird wahrscheinlich noch mind. 5 Jahre bleiben.",
-        correct: "nein",
-        feedback: "Kein Nutzen"
-      },
-      {
-        q: "6. Die Gründungskosten sollen aktiviert und über 5 Jahre abgeschrieben werden.",
-        correct: "nein",
-        feedback: "Kein Nutzen"
-      },
-      {
-        q: "7. Eigener, selbst erarbeiteter, Kundenstamm.",
-        correct: "nein",
-        feedback: "Aufwendungen nicht separat messbar"
-      },
-      {
-        q: "8. Es sind Restrukturierungskosten angefallen, die innerhalb der nächsten 2 Jahre (zuverlässige Schätzung) durch Kosteneinsparungen kompensiert sein werden.",
-        correct: "ja",
-        feedback: ""
-      },
-      {
-        q: "9. Wir eröffnen einen neuen McDonalds. Wir bezahlen dafür nebst der jährlichen Gebühr einen einmaligen Betrag als neuer Franchisenehmer an McDonalds.",
-        correct: "ja",
-        feedback: ""
-      },
-      {
-        q: "10. Wir haben uns exklusiv die Förderrechte für Erdgas im Luzerner Entlebuch gesichert und dafür 250‘000 bezahlt. Ob, wo und wie viel Vorkommen vorhanden ist werden wir im nächsten Jahr untersuchen.",
-        correct: "nein",
-        feedback: "Kein zuverlässiger Nutzen in der Zukunft"
-      },
-      {
-        q: "11. Die Migon Software GmbH hat eine iOS-App entwickelt. Marktuntersuchungen zur Folge ist das Absatzpotential gross, die Entwicklungskosten sind mehrfaches gedeckt.",
-        correct: "ja",
-        feedback: ""
-      },
-      {
-        q: "12. Unsere Unternehmung hat in der ganzen Schweiz einen ausgezeichneten Ruf. Diesen haben wir u.a. dadurch erreicht, dass wir grössere Summen in Werbung investiert haben, wo wir auf die Topqualität unserer Produkte aufmerksam machen.",
-        correct: "nein",
-        feedback: "Nicht identifizierbar"
+        const feedbackEl = el.parentElement.parentElement.querySelector('.feedback');
+        feedbackEl.textContent = feedback;
       }
-    ];
+    </script>
 
-    const container = document.getElementById("quiz");
+    <div class="question">
+      1. Die Completed Contract Methode entspricht vom Wesen her der Lösung des Obligationenrechts (Realisationsprinzip).
+      <div class="options">
+        <div class="option" onclick="selectAnswer(this, true, '')">richtig</div>
+        <div class="option" onclick="selectAnswer(this, false, '')">falsch</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
 
-    data.forEach((item, index) => {
-      const div = document.createElement("div");
-      div.className = "question";
+    <div class="question">
+      2. Die POC-Methode muss angewendet werden, wenn die entsprechenden Kriterien erfüllt sind.
+      <div class="options">
+        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
+        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
 
-      const p = document.createElement("p");
-      p.textContent = item.q;
+    <div class="question">
+      3. Alle Aufträge, die für die Unternehmung wesentlich sind, sind nach der POC-Methode zu erfassen.
+      <div class="options">
+        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
+        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
 
-      const options = document.createElement("div");
-      options.className = "options";
+    <div class="question">
+      4. Erkennbare Verluste sind nach der POC-Methode anteilmässig gemäss Fertigstellungsgrad zu erfassen.
+      <div class="options">
+        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
+        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
 
-      const feedback = document.createElement("div");
-      feedback.className = "feedback";
+    <div class="question">
+      5. Branchen, die typischer Weise langfristige Aufträge aufweisen, müssen nicht alle Kriterien erfüllen um nach der POC-Methode zu bilanzieren.
+      <div class="options">
+        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
+        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
 
-      ["ja", "nein"].forEach((choice) => {
-        const btn = document.createElement("button");
-        btn.textContent = choice;
-        btn.onclick = () => {
-          const isCorrect = choice === item.correct;
-          btn.className = isCorrect ? "correct" : "incorrect";
-          Array.from(options.children).forEach((b) => {
-            b.disabled = true;
-            if (b.textContent === item.correct) b.className = "correct";
-            else b.className = "incorrect";
-          });
-          feedback.textContent = item.feedback || (isCorrect ? "Korrekt." : "Falsch.");
-        };
-        options.appendChild(btn);
-      });
+    <div class="question">
+      6. Aufwand plus Marge-Aufträgen sollte es in der Regel nicht zu Verlusten kommen.
+      <div class="options">
+        <div class="option" onclick="selectAnswer(this, true, '')">richtig</div>
+        <div class="option" onclick="selectAnswer(this, false, '')">falsch</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
 
-      div.appendChild(p);
-      div.appendChild(options);
-      div.appendChild(feedback);
-      container.appendChild(div);
-    });
-  </script>
+    <div class="question">
+      7. Ein Dienstleister (z.B. Architekt) kann den Fertigstellungsgrad seiner langfristigen Aufträge sinnvollerweise mit der Efforts Extended-Methode bestimmen.
+      <div class="options">
+        <div class="option" onclick="selectAnswer(this, true, '')">richtig</div>
+        <div class="option" onclick="selectAnswer(this, false, '')">falsch</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="question">
+      8. Wenn die Cost-to-Cost-Methode angewendet wird, dann muss keine jährliche Restschätzung der Kosten gemacht werden. Das ursprüngliche Auftragsbudget behält dann während der ganzen Auftragsdauer seine Gültigkeit.
+      <div class="options">
+        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
+        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="question">
+      9. Die POC-Methode darf nicht angewendet werden wenn der Auftraggeber wahrscheinlich zahlungsunfähig ist.
+      <div class="options">
+        <div class="option" onclick="selectAnswer(this, true, '')">richtig</div>
+        <div class="option" onclick="selectAnswer(this, false, '')">falsch</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="question">
+      10. Nach der CC-Methode dürfen immer nur die laufenden Kosten aktiviert werden (ohne Gewinnanteil). Dafür entfällt eine jährliche Neubeurteilung der prognostizierten Restkosten.
+      <div class="options">
+        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
+        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+  </div>
 </body>
 </html>
+
