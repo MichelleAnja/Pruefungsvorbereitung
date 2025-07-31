@@ -1,165 +1,164 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Theoriefragen Zuweisung Methode</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url('hintergrundbild.jpg');
-            background-size: cover;
-            background-position: center;
-            margin: 0;
-            padding: 0;
-            color: black;
-        }
+  <meta charset="UTF-8">
+  <title>Theoriefragen Zuweisung Methode</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('hintergrundbild.jpg');
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      color: black;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 30px;
-            border-radius: 12px;
-        }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      /* Weißer Hintergrund entfernt */
+    }
 
-        h2 {
-            margin-bottom: 20px;
-        }
+    h2 {
+      margin-bottom: 20px;
+    }
 
-        .question {
-            margin-bottom: 25px;
-        }
+    .question {
+      margin-bottom: 25px;
+    }
 
-        .options {
-            display: flex;
-            gap: 10px;
-            margin-top: 8px;
-        }
+    .options {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
 
-        .option {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 8px;
-            background-color: black;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
+    .option {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-        .option.correct {
-            background-color: green !important;
-        }
+    .option.correct {
+      background-color: green !important;
+    }
 
-        .option.incorrect {
-            background-color: red !important;
-        }
+    .option.incorrect {
+      background-color: red !important;
+    }
 
-        a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-            background-color: #ddd;
-            padding: 6px 12px;
-            border-radius: 6px;
-        }
+    a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      background-color: #ddd;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
 
-        a:hover {
-            background-color: #bbb;
-        }
-    </style>
+    a:hover {
+      background-color: #bbb;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <a href="frw-theorie-fer.html">← Zurück</a>
-        <h2>Theoriefragen Zuweisung Methode</h2>
+  <div class="container">
+    <a href="frw-theorie-fer.html">← Zurück</a>
+    <h2>Theoriefragen Zuweisung Methode</h2>
 
-        <div class="question">1. Die Completed Contract Methode entspricht vom Wesen her der Lösung des Obligationenrechts (Realisationsprinzip).
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this, true)">richtig</button>
-                <button class="option" onclick="checkAnswer(this, false)">falsch</button>
-            </div>
-        </div>
-
-        <div class="question">2. Die POC-Methode muss angewendet werden, wenn die entsprechenden Kriterien erfüllt sind.
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this, false)">richtig</button>
-                <button class="option" onclick="checkAnswer(this, true)">falsch</button>
-            </div>
-        </div>
-
-        <div class="question">3. Alle Aufträge, die für die Unternehmung wesentlich sind, sind nach der POC-Methode zu erfassen
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this, false)">richtig</button>
-                <button class="option" onclick="checkAnswer(this, true)">falsch</button>
-            </div>
-        </div>
-
-        <div class="question">4. Erkennbare Verluste sind nach der POC-Methode anteilmässig gemäss Fertigstellungsgrad zu erfassen.
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this, false)">richtig</button>
-                <button class="option" onclick="checkAnswer(this, true)">falsch</button>
-            </div>
-        </div>
-
-        <div class="question">5. Branchen, die typischer Weise langfristige Aufträge aufweisen, müssen nicht alle Kriterien erfüllen um nach der POC-Methode zu bilanzieren.
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this, false)">richtig</button>
-                <button class="option" onclick="checkAnswer(this, true)">falsch</button>
-            </div>
-        </div>
-
-        <div class="question">6. Aufwand plus Marge-Aufträgen sollte es in der Regel nicht zu Verlusten kommen.
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this, true)">richtig</button>
-                <button class="option" onclick="checkAnswer(this, false)">falsch</button>
-            </div>
-        </div>
-
-        <div class="question">7. Ein Dienstleister (z.B. Architekt) kann den Fertigstellungsgrad seiner langfristigen Aufträge sinnvollerweise mit der Efforts Extended-Methode bestimmen.
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this, true)">richtig</button>
-                <button class="option" onclick="checkAnswer(this, false)">falsch</button>
-            </div>
-        </div>
-
-        <div class="question">8. Wenn die Cost-to-Cost-Methode angewendet wird, dann muss keine jährliche Restschätzung der Kosten gemacht werden. Das ursprüngliche Auftragsbudget behält dann während der ganzen Auftragsdauer seine Gültigkeit.
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this, false)">richtig</button>
-                <button class="option" onclick="checkAnswer(this, true)">falsch</button>
-            </div>
-        </div>
-
-        <div class="question">9. Die POC-Methode darf nicht angewendet werden wenn der Auftraggeber wahrscheinlich zahlungsunfähig ist.
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this, true)">richtig</button>
-                <button class="option" onclick="checkAnswer(this, false)">falsch</button>
-            </div>
-        </div>
-
-        <div class="question">10. Nach der CC-Methode dürfen immer nur die laufenden Kosten aktiviert werden (ohne Gewinnanteil). Dafür entfällt eine jährliche Neubeurteilung der prognostizierten Restkosten.
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this, false)">richtig</button>
-                <button class="option" onclick="checkAnswer(this, true)">falsch</button>
-            </div>
-        </div>
-
+    <div class="question">1. Die Completed Contract Methode entspricht vom Wesen her der Lösung des Obligationenrechts (Realisationsprinzip).
+      <div class="options">
+        <button class="option" onclick="checkAnswer(this, true)">richtig</button>
+        <button class="option" onclick="checkAnswer(this, false)">falsch</button>
+      </div>
     </div>
 
-    <script>
-        function checkAnswer(button, isCorrect) {
-            const parent = button.parentElement;
-            const buttons = parent.querySelectorAll('.option');
+    <div class="question">2. Die POC-Methode muss angewendet werden, wenn die entsprechenden Kriterien erfüllt sind.
+      <div class="options">
+        <button class="option" onclick="checkAnswer(this, false)">richtig</button>
+        <button class="option" onclick="checkAnswer(this, true)">falsch</button>
+      </div>
+    </div>
 
-            buttons.forEach(btn => {
-                btn.disabled = true;
-                if (btn === button) {
-                    btn.classList.add(isCorrect ? 'correct' : 'incorrect');
-                } else {
-                    const correctAnswer = btn.textContent.toLowerCase() === 'richtig' ? isCorrect : !isCorrect;
-                    if (correctAnswer) btn.classList.add('correct');
-                }
-            });
+    <div class="question">3. Alle Aufträge, die für die Unternehmung wesentlich sind, sind nach der POC-Methode zu erfassen
+      <div class="options">
+        <button class="option" onclick="checkAnswer(this, false)">richtig</button>
+        <button class="option" onclick="checkAnswer(this, true)">falsch</button>
+      </div>
+    </div>
+
+    <div class="question">4. Erkennbare Verluste sind nach der POC-Methode anteilmässig gemäss Fertigstellungsgrad zu erfassen.
+      <div class="options">
+        <button class="option" onclick="checkAnswer(this, false)">richtig</button>
+        <button class="option" onclick="checkAnswer(this, true)">falsch</button>
+      </div>
+    </div>
+
+    <div class="question">5. Branchen, die typischer Weise langfristige Aufträge aufweisen, müssen nicht alle Kriterien erfüllen um nach der POC-Methode zu bilanzieren.
+      <div class="options">
+        <button class="option" onclick="checkAnswer(this, false)">richtig</button>
+        <button class="option" onclick="checkAnswer(this, true)">falsch</button>
+      </div>
+    </div>
+
+    <div class="question">6. Aufwand plus Marge-Aufträgen sollte es in der Regel nicht zu Verlusten kommen.
+      <div class="options">
+        <button class="option" onclick="checkAnswer(this, true)">richtig</button>
+        <button class="option" onclick="checkAnswer(this, false)">falsch</button>
+      </div>
+    </div>
+
+    <div class="question">7. Ein Dienstleister (z.B. Architekt) kann den Fertigstellungsgrad seiner langfristigen Aufträge sinnvollerweise mit der Efforts Extended-Methode bestimmen.
+      <div class="options">
+        <button class="option" onclick="checkAnswer(this, true)">richtig</button>
+        <button class="option" onclick="checkAnswer(this, false)">falsch</button>
+      </div>
+    </div>
+
+    <div class="question">8. Wenn die Cost-to-Cost-Methode angewendet wird, dann muss keine jährliche Restschätzung der Kosten gemacht werden. Das ursprüngliche Auftragsbudget behält dann während der ganzen Auftragsdauer seine Gültigkeit.
+      <div class="options">
+        <button class="option" onclick="checkAnswer(this, false)">richtig</button>
+        <button class="option" onclick="checkAnswer(this, true)">falsch</button>
+      </div>
+    </div>
+
+    <div class="question">9. Die POC-Methode darf nicht angewendet werden wenn der Auftraggeber wahrscheinlich zahlungsunfähig ist.
+      <div class="options">
+        <button class="option" onclick="checkAnswer(this, true)">richtig</button>
+        <button class="option" onclick="checkAnswer(this, false)">falsch</button>
+      </div>
+    </div>
+
+    <div class="question">10. Nach der CC-Methode dürfen immer nur die laufenden Kosten aktiviert werden (ohne Gewinnanteil). Dafür entfällt eine jährliche Neubeurteilung der prognostizierten Restkosten.
+      <div class="options">
+        <button class="option" onclick="checkAnswer(this, false)">richtig</button>
+        <button class="option" onclick="checkAnswer(this, true)">falsch</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkAnswer(button, isCorrect) {
+      const parent = button.parentElement;
+      const buttons = parent.querySelectorAll('.option');
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn === button) {
+          btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+        } else {
+          const correctAnswer = btn.textContent.toLowerCase() === 'richtig' ? isCorrect : !isCorrect;
+          if (correctAnswer) btn.classList.add('correct');
         }
-    </script>
+      });
+    }
+  </script>
 </body>
 </html>
 
