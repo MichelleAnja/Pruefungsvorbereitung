@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Aussagen zur Bewertung</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 20px;
+      color: black;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: lightgray;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-top: 60px;
+    }
+
+    .question {
+      margin-bottom: 40px;
+    }
+
+    .options {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .options button {
+      background-color: black;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .options button.correct {
+      background-color: green !important;
+    }
+
+    .options button.incorrect {
+      background-color: red !important;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      font-style: italic;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="frw-theorie-fer.html">Zurück</a>
+  <h1>Aussagen zur Bewertung</h1>
+
+  <div class="question" data-correct="falsch" data-feedback="Es handelt sich hierbei um die Bewertungsgrundlage (FER 2/2).">
+    <p><strong>1.</strong> Als Bewertungsgrundsätze gelten historische und aktuelle Werte.</p>
+    <div class="options">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch')">falsch</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="richtig">
+    <p><strong>2.</strong> Im Anhang sind sämtliche Bewertungsgrundlagen und -grundsätze offenzulegen.</p>
+    <div class="options">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch')">falsch</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="falsch" data-feedback="Innerhalb einer Bilanzposition dürfen keine unterschiedlichen Bewertungsgrundlagen und - grundsätze angewendet werden (FER 2/3), ausser es findet eine Aufschlüsselung im Anhang statt.">
+    <p><strong>3.</strong> Wir haben eine Position „Liegenschaften“ in der Bilanz. Darin befinden sich je zwei Geschäftshäuser (zu historischen Werten) und zwei Renditeliegenschaften (zu aktuellen Werten).</p>
+    <div class="options">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch')">falsch</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="falsch" data-feedback="Innerhalb der gleichen Bilanzposition müssen beide Objekte entweder zu historischen oder zu aktuellen Werten bewertet werden. Im Weiteren müssen sämtliche Renditesachanlagen einheitlich bewertet werden (FER 2/3).">
+    <p><strong>4.</strong> Wir haben eine Position „Renditeliegenschaften“ in der Bilanz. Darin sind zwei Kapitalanlagehäuser enthalten, davon wird gemäss Wahlrecht je eine zum historischen und zum aktuellen Wert bewertet.</p>
+    <div class="options">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch')">falsch</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="richtig">
+    <p><strong>5.</strong> Produktionsanlagen schreiben wir immer über 5 Jahre linear ab. Eine Spezialanlage in der gleichen Bilanzposition schreiben wir über 3 Jahre ab und vermerken dies im Anhang.</p>
+    <div class="options">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch')">falsch</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="falsch" data-feedback="Es müsste vermerkt sein, dass Wertschriften ohne aktuellen Marktwert zu Anschaffungskosten abzüglich allfälliger Wertbeeinträchtigungen erfasst werden (FER 2/3).">
+    <p><strong>6.</strong> Im Anhang wird folgendes vermerkt zur Position Wertschriften im UV: Bewertung zu aktuellen Werten Eine nicht gehandelte Aktie ist jetzt zum Anschaffungswert drin.</p>
+    <div class="options">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch')">falsch</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="richtig">
+    <p><strong>7.</strong> Forderungen aus L&L mit Einzelwertberichtigungen dürfen zusammen mit solchen mit Pauschal WB ausgewiesen werden. Bewertet werden müssen diese getrennt (Einzelbewertung).</p>
+    <div class="options">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch')">falsch</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="falsch" data-feedback="Abschreibungen dürfen nicht nach steuerlichen Maximalsätzen bemessen werden, sondern sind möglich objektiv anzusetzen (FER 2/22).">
+    <p><strong>8.</strong> Für Abschreibungen werden generell die linearen Sätze des Merkblattes der eidg. Steuerverwaltung verwendet.</p>
+    <div class="options">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch')">falsch</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="falsch" data-feedback="Der Verkaufspreis auf dem Absatzmarkt abzüglich direkter Verkaufskosten (nicht auf dem Beschaffungsmarkt) → FER 2/26">
+    <p><strong>9.</strong> Bei Warenvorräten gilt der Wiederbeschaffungswert als Nettomarktwert.</p>
+    <div class="options">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch')">falsch</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <script>
+    function checkAnswer(button, selectedValue) {
+      const question = button.closest('.question');
+      const correctValue = question.dataset.correct;
+      const feedbackText = question.dataset.feedback || "";
+      const buttons = question.querySelectorAll('button');
+      const feedbackBox = question.querySelector('.feedback');
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent.trim() === correctValue) {
+          btn.classList.add('correct');
+        }
+        if (btn.textContent.trim() === selectedValue && selectedValue !== correctValue) {
+          btn.classList.add('incorrect');
+        }
+      });
+
+      if (feedbackText) {
+        feedbackBox.textContent = feedbackText;
+        feedbackBox.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
