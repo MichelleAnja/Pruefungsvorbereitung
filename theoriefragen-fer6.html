@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Theoriefragen FER 6</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('hintergrund.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 40px;
+    }
+
+    a {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #333;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+      color: black;
+    }
+
+    .einleitung {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: black;
+      font-weight: bold;
+    }
+
+    .frage {
+      margin-bottom: 30px;
+      color: black;
+      font-size: 16px;
+    }
+
+    .option {
+      display: inline-block;
+      background-color: black;
+      color: white;
+      padding: 8px 16px;
+      margin: 10px 10px 0 0;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .option.richtig {
+      background-color: green !important;
+    }
+
+    .option.falsch {
+      background-color: red !important;
+    }
+  </style>
+</head>
+<body>
+
+<a href="frw-theorie-fer.html">Zurück</a>
+<h1>Theoriefragen FER 6</h1>
+
+<div class="einleitung">
+  Sind folgende Tatbestände gem. FER 6 im Anhang offen zu legen?
+</div>
+
+<script>
+  function prüfen(option, korrekt) {
+    const parent = option.parentElement;
+    const alleOptionen = parent.querySelectorAll('.option');
+    alleOptionen.forEach(opt => opt.classList.remove('richtig', 'falsch'));
+
+    if (option.dataset.wert === korrekt) {
+      option.classList.add('richtig');
+    } else {
+      option.classList.add('falsch');
+    }
+  }
+</script>
+
+<div class="frage">
+  1. Schuldbrief auf Liegenschaft, Hypothek zurückbezahlt<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
+</div>
+
+<div class="frage">
+  2. Bewertungsgrundlagen für das ganze Anlagevermögen<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
+</div>
+
+<div class="frage">
+  3. Lombardkreditlimite, CHF 100'000 genutzt<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
+</div>
+
+<div class="frage">
+  4. Fahrzeug des CFO wird über 5 Jahre auf Null abgeschrieben<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
+</div>
+
+<div class="frage">
+  5. Nicht betriebsnotwendige Finanzanlagen zu aktuellen Werten bilanziert<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
+</div>
+
+<div class="frage">
+  6. Arbeitsgerichtsverfahren wegen Überzeit – wohl Nachzahlung<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
+</div>
+
+<div class="frage">
+  7. Neue Nutzungsdauer von 40 Jahren für Betriebsliegenschaft<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
+</div>
+
+<div class="frage">
+  8. Wertschriften falsch bilanziert, neu korrekt zum aktuellen Wert<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
+</div>
+
+<div class="frage">
+  9. Langfristige Aufträge neu POCM-Methode<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
+</div>
+
+<div class="frage">
+  10. Kapitalanlageliegenschaften neu zu aktuellen Werten<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
+</div>
+
+<div class="frage">
+  11. Garantiearbeiten im Vorjahr zu optimistisch geschätzt<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
+</div>
+
+<div class="frage">
+  12. Keine Vorjahreszahlen in Bilanz und ER<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
+</div>
+
+<div class="frage">
+  13. Termingeschäft mit unklarer Zahlungsverpflichtung<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
+</div>
+
+<div class="frage">
+  14. Delkredere zu tief, GV noch ausstehend<br>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
+</div>
+
+</body>
+</html>
