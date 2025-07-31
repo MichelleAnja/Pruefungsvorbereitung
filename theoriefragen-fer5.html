@@ -11,17 +11,17 @@
       background-repeat: no-repeat;
       margin: 0;
       padding: 20px;
-      color: #000;
+      color: white;
     }
     .zurueck {
       position: absolute;
       top: 20px;
       left: 20px;
-      background-color: #ddd;
+      background-color: #555;
       padding: 10px 15px;
       text-decoration: none;
       border-radius: 5px;
-      color: #000;
+      color: white;
       font-weight: bold;
     }
     h1 {
@@ -30,24 +30,26 @@
     }
     .einleitung {
       font-weight: bold;
-      margin: 20px 0 30px 0;
-      padding: 10px;
-      background-color: rgba(255,255,255,0.6);
-      border-radius: 10px;
+      margin: 30px 0 20px 0;
+      font-size: 18px;
     }
     .frage {
-      margin-bottom: 25px;
-      padding: 10px;
-      background-color: rgba(255,255,255,0.6);
+      background-color: #000;
+      padding: 20px;
+      margin-bottom: 20px;
       border-radius: 10px;
+    }
+    .frage input[type="radio"] {
+      margin-left: 10px;
+      margin-right: 5px;
     }
     .feedback {
       display: none;
-      margin-top: 8px;
+      margin-top: 10px;
       font-weight: bold;
     }
     .korrekt {
-      color: green;
+      color: #00ff00;
     }
     .falsch {
       color: red;
@@ -71,99 +73,99 @@
     Müssen diese Geschäftsfälle unter dem Titel «Ausserbilanzgeschäfte» nach FER 5 im Anhang der Jahresrechnung ausgewiesen werden? (unter Anwendung der Kern-FER)
   </div>
 
-  <!-- Frageblöcke -->
+  <!-- Fragen -->
   <div class="frage">
-    1. Gewährte Bürgschaft ohne wahrscheinlichen Mittelabfluss<br>
-    <input type="radio" name="f1" value="ja" onclick="prüfen(this, 'ja')"> ja
-    <input type="radio" name="f1" value="nein" onclick="prüfen(this, 'ja')"> nein
+    1. Gewährte Bürgschaft ohne wahrscheinlichen Mittelabfluss
+    <input type="radio" name="f1" value="ja" onclick="prüfen(this, 'ja')">ja
+    <input type="radio" name="f1" value="nein" onclick="prüfen(this, 'ja')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    2. Mindestabnahmemenge für Material bei einem Lieferanten während 5 Jahren.<br>
-    <input type="radio" name="f2" value="ja" onclick="prüfen(this, 'ja')"> ja
-    <input type="radio" name="f2" value="nein" onclick="prüfen(this, 'ja')"> nein
+    2. Mindestabnahmemenge für Material bei einem Lieferanten während 5 Jahren.
+    <input type="radio" name="f2" value="ja" onclick="prüfen(this, 'ja')">ja
+    <input type="radio" name="f2" value="nein" onclick="prüfen(this, 'ja')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    3. Ein nicht bilanziertes Leasing mit Restlaufzeit 18 Monate (ohne Kündigungsmöglichkeit)<br>
-    <input type="radio" name="f3" value="ja" onclick="prüfen(this, 'ja')"> ja
-    <input type="radio" name="f3" value="nein" onclick="prüfen(this, 'ja')"> nein
+    3. Ein nicht bilanziertes Leasing mit Restlaufzeit 18 Monate (ohne Kündigungsmöglichkeit)
+    <input type="radio" name="f3" value="ja" onclick="prüfen(this, 'ja')">ja
+    <input type="radio" name="f3" value="nein" onclick="prüfen(this, 'ja')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    4. Gewährte Bürgschaft mit wahrscheinlichem Mittelabfluss.<br>
-    <input type="radio" name="f4" value="ja" onclick="prüfen(this, 'nein')"> ja
-    <input type="radio" name="f4" value="nein" onclick="prüfen(this, 'nein')"> nein
+    4. Gewährte Bürgschaft mit wahrscheinlichem Mittelabfluss.
+    <input type="radio" name="f4" value="ja" onclick="prüfen(this, 'nein')">ja
+    <input type="radio" name="f4" value="nein" onclick="prüfen(this, 'nein')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    5. Vertragliche Verpflichtung gegenüber der öffentlichen Hand ein Grundstück zu überbauen.<br>
-    <input type="radio" name="f5" value="ja" onclick="prüfen(this, 'ja')"> ja
-    <input type="radio" name="f5" value="nein" onclick="prüfen(this, 'ja')"> nein
+    5. Vertragliche Verpflichtung gegenüber der öffentlichen Hand ein Grundstück zu überbauen.
+    <input type="radio" name="f5" value="ja" onclick="prüfen(this, 'ja')">ja
+    <input type="radio" name="f5" value="nein" onclick="prüfen(this, 'ja')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    6. Mietvertrag mit einer Laufzeit von 5 Jahren (kündbar mit einer Frist von 6 Monaten)<br>
-    <input type="radio" name="f6" value="ja" onclick="prüfen(this, 'nein')"> ja
-    <input type="radio" name="f6" value="nein" onclick="prüfen(this, 'nein')"> nein
+    6. Mietvertrag mit einer Laufzeit von 5 Jahren (kündbar mit einer Frist von 6 Monaten)
+    <input type="radio" name="f6" value="ja" onclick="prüfen(this, 'nein')">ja
+    <input type="radio" name="f6" value="nein" onclick="prüfen(this, 'nein')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    7. Wir gewähren auf unserem Produkt „Mario“ eine Garantie von 2 Jahren. Da aber keine Garantiefälle wahrscheinlich sind, wurde keine Rückstellung gebildet.<br>
-    <input type="radio" name="f7" value="ja" onclick="prüfen(this, 'ja')"> ja
-    <input type="radio" name="f7" value="nein" onclick="prüfen(this, 'ja')"> nein
+    7. Garantie von 2 Jahren auf Produkt „Mario“, keine Rückstellung gebildet
+    <input type="radio" name="f7" value="ja" onclick="prüfen(this, 'ja')">ja
+    <input type="radio" name="f7" value="nein" onclick="prüfen(this, 'ja')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    8. Umweltschäden aus unserer Tätigkeit (noch nicht aufgetreten) haben wir eine Versicherungsdeckung bis CHF 5 Mio. Im schlimmsten Fall ist eine Schadenssumme von CHF 8 Mio. möglich.<br>
-    <input type="radio" name="f8" value="ja" onclick="prüfen(this, 'ja')"> ja
-    <input type="radio" name="f8" value="nein" onclick="prüfen(this, 'ja')"> nein
+    8. Umweltschäden möglich bis CHF 8 Mio., Versicherung deckt CHF 5 Mio.
+    <input type="radio" name="f8" value="ja" onclick="prüfen(this, 'ja')">ja
+    <input type="radio" name="f8" value="nein" onclick="prüfen(this, 'ja')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    9. Wir haben eine Zusammenarbeit in Forschung & Entwicklung mit einem anderen Unternehmen. Die Zusammenarbeit besteht in Form einer einfachen Gesellschaft mit Solidarhaftung.<br>
-    <input type="radio" name="f9" value="ja" onclick="prüfen(this, 'ja')"> ja
-    <input type="radio" name="f9" value="nein" onclick="prüfen(this, 'ja')"> nein
+    9. F&E-Zusammenarbeit mit Solidarhaftung in einfacher Gesellschaft
+    <input type="radio" name="f9" value="ja" onclick="prüfen(this, 'ja')">ja
+    <input type="radio" name="f9" value="nein" onclick="prüfen(this, 'ja')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    10. Ein Geschäftsleitungsmitglied steht im 2. Amtsjahr eines dreijährigen Fixvertrages mit einem geschuldeten Gesamthonorar von Fr. 2,1 Mio.<br>
-    <input type="radio" name="f10" value="ja" onclick="prüfen(this, 'ja')"> ja
-    <input type="radio" name="f10" value="nein" onclick="prüfen(this, 'ja')"> nein
+    10. GL-Mitglied im 2. Jahr eines 3-Jahres-Vertrags mit CHF 2.1 Mio. Honorar
+    <input type="radio" name="f10" value="ja" onclick="prüfen(this, 'ja')">ja
+    <input type="radio" name="f10" value="nein" onclick="prüfen(this, 'ja')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    11. Die Verwaltungsräte sind auf eine Dauer von 1 Jahr fix gewählt (Jahreshonorar fest geschuldet Fr. 250‘000) und es finden jährlich an der GV Neuwahlen statt.<br>
-    <input type="radio" name="f11" value="ja" onclick="prüfen(this, 'nein')"> ja
-    <input type="radio" name="f11" value="nein" onclick="prüfen(this, 'nein')"> nein
+    11. Verwaltungsräte jährlich fix gewählt, Honorar CHF 250‘000
+    <input type="radio" name="f11" value="ja" onclick="prüfen(this, 'nein')">ja
+    <input type="radio" name="f11" value="nein" onclick="prüfen(this, 'nein')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    12. Die Unternehmung hat bei seinem Lieferanten eine Bestellung getätigt, aus dem Waren während der nächsten 12 Monate regelmässig geliefert werden.<br>
-    <input type="radio" name="f12" value="ja" onclick="prüfen(this, 'nein')"> ja
-    <input type="radio" name="f12" value="nein" onclick="prüfen(this, 'nein')"> nein
+    12. Regelmässige Warenlieferung aus Bestellung über 12 Monate
+    <input type="radio" name="f12" value="ja" onclick="prüfen(this, 'nein')">ja
+    <input type="radio" name="f12" value="nein" onclick="prüfen(this, 'nein')">nein
     <div class="feedback"></div>
   </div>
 
   <div class="frage">
-    13. Gemäss Reglement unserer Pensionskassenstiftung müssen wir ca. CHF 0,5 Mio. der Unterdeckung Ende aktuelles Geschäftsjahr tragen.<br>
-    <input type="radio" name="f13" value="ja" onclick="prüfen(this, 'nein')"> ja
-    <input type="radio" name="f13" value="nein" onclick="prüfen(this, 'nein')"> nein
+    13. Verpflichtung zur Deckung Pensionskassenunterdeckung CHF 0.5 Mio.
+    <input type="radio" name="f13" value="ja" onclick="prüfen(this, 'nein')">ja
+    <input type="radio" name="f13" value="nein" onclick="prüfen(this, 'nein')">nein
     <div class="feedback"></div>
   </div>
-
 </body>
 </html>
+
 
 
