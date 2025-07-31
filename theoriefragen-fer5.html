@@ -1,143 +1,87 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Theoriefragen FER 3</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url("hintergrund.jpg") no-repeat center center fixed;
-      background-size: cover;
-      padding: 20px;
-      color: black;
-    }
-
-    .back-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: lightgray;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 28px;
-      margin-top: 60px;
-    }
-
-    .question {
-      margin-bottom: 40px;
-    }
-
-    .options {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-
-    .options button {
-      background-color: black;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .options button.correct {
-      background-color: green !important;
-    }
-
-    .options button.incorrect {
-      background-color: red !important;
-    }
-
-    .explanation {
-      margin-top: 10px;
-      font-style: italic;
-      display: none;
-    }
-
-    @media (max-width: 600px) {
-      .options {
-        flex-direction: column;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Theoriefragen FER 5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .antworten button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .korrekt {
+            background-color: #c8e6c9;
+        }
+        .feedback {
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <a class="back-button" href="frw-theorie-fer.html">Zurück</a>
+    <h1>Theoriefragen FER 5</h1>
 
-  <h1>Theoriefragen FER 3</h1>
+    <div id="fragen"></div>
 
-  <!-- Fragenblock -->
-  <script>
-    const fragen = [
-      ["Das Delkredere zum Debitorenbestand wird in einer Vorkolonne in der Bilanz subtrahiert.", "falsch", "Gemäss FER 3/5 gehören Wertberichtigungen auf Positionen des Umlaufvermögens in den Anhang."],
-      ["Eine Kosmetikfirma weist unter Sachanlagen eine separate Position Fahrzeuge aus, diese bilden den grössten Teil der Sachanlagen.", "richtig", "Nach FER 3/3 und 3/14 gehören Fahrzeuge zu den übrigen Sachanlagen. Ein spezieller Ausweis ist aber zugelassen."],
-      ["Bei einer Investmentcompany ist eine 30%- Kapitalbeteiligung in der Position Beteiligungen enthalten, die zwecks Kursgewinn innert max. 10 Monaten wieder verkauft sein soll.", "falsch", "Nach FER 3/15 gehört der langfristige Anlagezweck immer dazu, um Titel in der Position Beteiligungen zu zeigen. Diese Beteiligung müsste im Umlaufvermögen unter den Wertschriften aufgeführt werden."],
-      ["Die Elektronik AG hat Garantierückstellungen (Garantiedauer 1 Jahr) sowie die Prozessrückstellung für einen Rechtsstreit (erwartete Zahlung in 3 Jahren, nicht operativ) in einer Position „Rückstellungen“ zusammengefasst.", "falsch", "Gemäss FER 3/2 sind kurzfristige (hier Garantierückstellungen) und langfristige (hier Prozessrückstellungen) Rückstellungen klar zu unterscheiden."],
-      ["Die Position Aktienkapital beinhaltet Inhaber und Namenaktien. Diese beiden Titelarten werden im Anhang ausgewiesen.", "richtig", "Gemäss FER 3/3 sind die Titelkategorien entweder in der Bilanz oder im Anhang auszuweisen."],
-      ["Das nicht einbezahlte Aktienkapital soll innerhalb der nächsten 12 Monate eingefordert werden, deshalb wird es als Forderungen ausgewiesen.", "falsch", "FER 3/2 sieht immer den Ausweis von nicht einbezahltem Grundkapital als Minusposten im Eigenkapital vor."],
-      ["Die Futschi AG besitzt zwei Aktienpakete, die in der Position „Beteiligungen“ enthalten sind. Diese haben einen Verkehrswert von je CHF 2,5 Mio. mit Kapitalanteil 12% und 28%.", "falsch", "Nach FER 3/15 gehören nur Kapitalanteile von mind. 20% zu den Beteiligungen. Somit ist das 12%-Packet unter Wertschriften in den Finanzanlagen auszuweisen."],
-      ["Beim Umsatzkostenverfahren muss der Personalaufwand im Anhang gezeigt werden.", "richtig", "Diese Information fehlt beim Umsatzkostenverfahren gegenüber dem Gesamtkostenverfahren."],
-      ["Die Warburg AG betitelt das betriebliche Ergebnis nach FER 3/7 als EBIT.", "richtig", "Nach FER 3/20 sind Ergebnisse der ER sachgerecht zu bezeichnen. Der EBIT entspricht dem."],
-      ["In der Erfolgsrechnung wird nur der Finanzerfolg ausgewiesen. Im Anhang erfolgt dann die Detailerläuterung was davon Finanzaufwand und Finanzertrag ist.", "richtig", "Nach FER 3/9 sind Finanzaufwand und Finanzertrag in der Bilanz oder im Anhang separat zu zeigen."],
-      ["In der Jahresrechnung unter „Immobilien“ ist das Firmengebäude sowie eine Baulandreserve aufgeführt (keine Details im Anhang).", "falsch", "Nach FER 3/3 sind unbebaute Grundstücke sowie Grundstücke und Bauten separat auszuweisen (Bilanz oder Anhang)."],
-      ["Eine FER-Unternehmung darf das Umsatzkostenverfahren nur anwenden, wenn dies im Land ihres Sitzes üblich ist.", "falsch", "Nach FER 3/6 steht dieses Wahlrecht jeder FER-Unternehmung zu."]
-    ];
+    <script>
+        const fragen = [
+            { text: "1. Gewährte Bürgschaft ohne wahrscheinlichen Mittelabfluss", korrekt: "ja" },
+            { text: "2. Mindestabnahmemenge für Material bei einem Lieferanten während 5 Jahren.", korrekt: "ja" },
+            { text: "3. Ein nicht bilanziertes Leasing mit Restlaufzeit 18 Monate (ohne Kündigungsmöglichkeit)", korrekt: "ja" },
+            { text: "4. Gewährte Bürgschaft mit wahrscheinlichem Mittelabfluss.", korrekt: "nein" },
+            { text: "5. Vertragliche Verpflichtung gegenüber der öffentlichen Hand ein Grundstück zu überbauen.", korrekt: "ja" },
+            { text: "6. Mietvertrag mit einer Laufzeit von 5 Jahren (kündbar mit einer Frist von 6 Monaten)", korrekt: "nein" },
+            { text: "7. Wir gewähren auf unserem Produkt \"Mario\" eine Garantie von 2 Jahren. Da aber keine Garantiefälle wahrscheinlich sind, wurde keine Rückstellung gebildet.", korrekt: "ja" },
+            { text: "8. Umweltschäden aus unserer Tätigkeit (noch nicht aufgetreten) haben wir eine Versicherungsdeckung bis CHF 5 Mio. Im schlimmsten Fall ist eine Schadenssumme von CHF 8 Mio. möglich.", korrekt: "ja" },
+            { text: "9. Wir haben eine Zusammenarbeit in Forschung & Entwicklung mit einem anderen Unternehmen. Die Zusammenarbeit besteht in Form einer einfachen Gesellschaft mit Solidarhaftung.", korrekt: "ja" },
+            { text: "10. Ein Geschäftsleitungsmitglied steht im 2. Amtsjahr eines dreijährigen Fixvertrages mit einem geschuldeten Gesamthonorar von Fr. 2,1 Mio.", korrekt: "ja" },
+            { text: "11. Die Verwaltungsräte sind auf eine Dauer von 1 Jahr fix gewählt (Jahreshonorar fest geschuldet Fr. 250‘000) und es finden jährlich an der GV Neuwahlen statt.", korrekt: "nein" },
+            { text: "12. Die Unternehmung hat bei seinem Lieferanten eine Bestellung getätigt, aus dem Waren während der nächsten 12 Monate regelmässig geliefert werden.", korrekt: "nein" },
+            { text: "13. Gemäss Reglement unserer Pensionskassenstiftung müssen wir ca. CHF 0,5 Mio. der Unterdeckung Ende aktuelles Geschäftsjahr tragen.", korrekt: "nein" },
+        ];
 
-    window.onload = function () {
-      const container = document.body;
-      fragen.forEach((frage, index) => {
-        const fragDiv = document.createElement("div");
-        fragDiv.className = "question";
-        const p = document.createElement("p");
-        p.innerHTML = `<strong>${index + 1}.</strong> ${frage[0]}`;
-        const optDiv = document.createElement("div");
-        optDiv.className = "options";
-        optDiv.setAttribute("data-answer", frage[1]);
-        const richtig = document.createElement("button");
-        richtig.textContent = "richtig";
-        const falsch = document.createElement("button");
-        falsch.textContent = "falsch";
-        const expl = document.createElement("div");
-        expl.className = "explanation";
+        const container = document.getElementById("fragen");
 
-        [richtig, falsch].forEach(btn => {
-          btn.onclick = function () {
-            const correct = frage[1];
-            const buttons = [richtig, falsch];
-            buttons.forEach(b => {
-              b.disabled = true;
-              if (b.textContent.trim().toLowerCase() === correct.toLowerCase()) {
-                b.classList.add("correct");
-              } else if (b === btn) {
-                b.classList.add("incorrect");
-              }
+        fragen.forEach((frage, index) => {
+            const div = document.createElement("div");
+            div.classList.add("question");
+
+            const p = document.createElement("p");
+            p.textContent = frage.text;
+            div.appendChild(p);
+
+            const btnContainer = document.createElement("div");
+            btnContainer.classList.add("antworten");
+
+            ["ja", "nein"].forEach(antwort => {
+                const btn = document.createElement("button");
+                btn.textContent = antwort;
+                btn.onclick = () => {
+                    if (antwort === frage.korrekt) {
+                        btn.classList.add("korrekt");
+                    } else {
+                        btn.style.opacity = 0.5;
+                    }
+                };
+                btnContainer.appendChild(btn);
             });
-            expl.style.display = 'block';
-            expl.textContent = frage[2];
-          };
+
+            div.appendChild(btnContainer);
+
+            const feedback = document.createElement("div");
+            feedback.classList.add("feedback");
+            div.appendChild(feedback);
+
+            container.appendChild(div);
         });
-
-        optDiv.appendChild(richtig);
-        optDiv.appendChild(falsch);
-        fragDiv.appendChild(p);
-        fragDiv.appendChild(optDiv);
-        fragDiv.appendChild(expl);
-        container.appendChild(fragDiv);
-      });
-    }
-  </script>
-
+    </script>
 </body>
 </html>
+
