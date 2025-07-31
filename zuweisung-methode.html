@@ -4,166 +4,159 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Theoriefragen Zuweisung Methode</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body {
-      font-family: sans-serif;
-      background: url('background.jpg') no-repeat center center fixed;
+      font-family: Arial, sans-serif;
+      background-image: url('background.jpg');
       background-size: cover;
-      color: black;
-      padding: 2rem;
+      background-position: center;
+      color: #000;
+      margin: 0;
+      padding: 0;
     }
     .container {
       max-width: 800px;
-      margin: auto;
-      background-color: rgba(255, 255, 255, 0.85);
-      padding: 2rem;
+      margin: 50px auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px;
       border-radius: 10px;
     }
     h1 {
-      margin-bottom: 2rem;
+      font-size: 24px;
+      margin-bottom: 20px;
     }
     .question {
-      margin: 1.5rem 0;
+      margin-bottom: 20px;
     }
-    .options {
-      display: flex;
-      gap: 1rem;
-      margin-top: 0.5rem;
-    }
-    .option {
+    .answers button {
       background-color: black;
       color: white;
-      padding: 0.5rem 1rem;
+      border: none;
+      padding: 10px 20px;
+      margin-right: 10px;
       border-radius: 5px;
       cursor: pointer;
-      user-select: none;
     }
-    .option.correct {
-      background-color: green !important;
+    .answers button.correct {
+      background-color: green;
     }
-    .option.incorrect {
-      background-color: red !important;
+    .answers button.wrong {
+      background-color: red;
     }
     .feedback {
-      margin-top: 0.5rem;
-      font-style: italic;
+      margin-top: 10px;
+      font-weight: bold;
     }
     .back-link {
-      display: inline-block;
-      margin-bottom: 2rem;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: black;
+      color: white;
+      padding: 10px 15px;
       text-decoration: none;
-      color: black;
-      font-weight: bold;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
+  <a class="back-link" href="frw-theorie-fer.html">Zurück</a>
   <div class="container">
-    <a href="frw-theorie-fer.html" class="back-link">&larr; Zurück</a>
     <h1>Theoriefragen Zuweisung Methode</h1>
-
-    <script>
-      function selectAnswer(el, isCorrect, feedback) {
-        const siblings = el.parentElement.querySelectorAll('.option');
-        siblings.forEach(btn => btn.classList.remove('correct', 'incorrect'));
-        el.classList.add(isCorrect ? 'correct' : 'incorrect');
-
-        const feedbackEl = el.parentElement.parentElement.querySelector('.feedback');
-        feedbackEl.textContent = feedback;
-      }
-    </script>
-
-    <div class="question">
-      1. Die Completed Contract Methode entspricht vom Wesen her der Lösung des Obligationenrechts (Realisationsprinzip).
-      <div class="options">
-        <div class="option" onclick="selectAnswer(this, true, '')">richtig</div>
-        <div class="option" onclick="selectAnswer(this, false, '')">falsch</div>
+    <div class="question" data-correct="richtig">
+      <p>1. Die Completed Contract Methode entspricht vom Wesen her der Lösung des Obligationenrechts (Realisationsprinzip).</p>
+      <div class="answers">
+        <button>richtig</button>
+        <button>falsch</button>
       </div>
-      <div class="feedback"></div>
     </div>
-
-    <div class="question">
-      2. Die POC-Methode muss angewendet werden, wenn die entsprechenden Kriterien erfüllt sind.
-      <div class="options">
-        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
-        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+    <div class="question" data-correct="falsch">
+      <p>2. Die POC-Methode muss angewendet werden, wenn die entsprechenden Kriterien erfüllt sind.</p>
+      <div class="answers">
+        <button>richtig</button>
+        <button>falsch</button>
       </div>
-      <div class="feedback"></div>
     </div>
-
-    <div class="question">
-      3. Alle Aufträge, die für die Unternehmung wesentlich sind, sind nach der POC-Methode zu erfassen.
-      <div class="options">
-        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
-        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+    <div class="question" data-correct="falsch">
+      <p>3. Alle Aufträge, die für die Unternehmung wesentlich sind, sind nach der POC-Methode zu erfassen</p>
+      <div class="answers">
+        <button>richtig</button>
+        <button>falsch</button>
       </div>
-      <div class="feedback"></div>
     </div>
-
-    <div class="question">
-      4. Erkennbare Verluste sind nach der POC-Methode anteilmässig gemäss Fertigstellungsgrad zu erfassen.
-      <div class="options">
-        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
-        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+    <div class="question" data-correct="falsch">
+      <p>4. Erkennbare Verluste sind nach der POC-Methode anteilmässig gemäss Fertigstellungsgrad zu erfassen.</p>
+      <div class="answers">
+        <button>richtig</button>
+        <button>falsch</button>
       </div>
-      <div class="feedback"></div>
     </div>
-
-    <div class="question">
-      5. Branchen, die typischer Weise langfristige Aufträge aufweisen, müssen nicht alle Kriterien erfüllen um nach der POC-Methode zu bilanzieren.
-      <div class="options">
-        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
-        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+    <div class="question" data-correct="falsch">
+      <p>5. Branchen, die typischer Weise langfristige Aufträge aufweisen, müssen nicht alle Kriterien erfüllen um nach der POC-Methode zu bilanzieren.</p>
+      <div class="answers">
+        <button>richtig</button>
+        <button>falsch</button>
       </div>
-      <div class="feedback"></div>
     </div>
-
-    <div class="question">
-      6. Aufwand plus Marge-Aufträgen sollte es in der Regel nicht zu Verlusten kommen.
-      <div class="options">
-        <div class="option" onclick="selectAnswer(this, true, '')">richtig</div>
-        <div class="option" onclick="selectAnswer(this, false, '')">falsch</div>
+    <div class="question" data-correct="richtig">
+      <p>6. Aufwand plus Marge-Aufträgen sollte es in der Regel nicht zu Verlusten kommen.</p>
+      <div class="answers">
+        <button>richtig</button>
+        <button>falsch</button>
       </div>
-      <div class="feedback"></div>
     </div>
-
-    <div class="question">
-      7. Ein Dienstleister (z.B. Architekt) kann den Fertigstellungsgrad seiner langfristigen Aufträge sinnvollerweise mit der Efforts Extended-Methode bestimmen.
-      <div class="options">
-        <div class="option" onclick="selectAnswer(this, true, '')">richtig</div>
-        <div class="option" onclick="selectAnswer(this, false, '')">falsch</div>
+    <div class="question" data-correct="richtig">
+      <p>7. Ein Dienstleister (z.B. Architekt) kann den Fertigstellungsgrad seiner langfristigen Aufträge sinnvollerweise mit der Efforts Extended-Methode bestimmen.</p>
+      <div class="answers">
+        <button>richtig</button>
+        <button>falsch</button>
       </div>
-      <div class="feedback"></div>
     </div>
-
-    <div class="question">
-      8. Wenn die Cost-to-Cost-Methode angewendet wird, dann muss keine jährliche Restschätzung der Kosten gemacht werden. Das ursprüngliche Auftragsbudget behält dann während der ganzen Auftragsdauer seine Gültigkeit.
-      <div class="options">
-        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
-        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+    <div class="question" data-correct="falsch">
+      <p>8. Wenn die Cost-to-Cost-Methode angewendet wird, dann muss keine jährliche Restschätzung der Kosten gemacht werden. Das ursprüngliche Auftragsbudget behält dann während der ganzen Auftragsdauer seine Gültigkeit.</p>
+      <div class="answers">
+        <button>richtig</button>
+        <button>falsch</button>
       </div>
-      <div class="feedback"></div>
     </div>
-
-    <div class="question">
-      9. Die POC-Methode darf nicht angewendet werden wenn der Auftraggeber wahrscheinlich zahlungsunfähig ist.
-      <div class="options">
-        <div class="option" onclick="selectAnswer(this, true, '')">richtig</div>
-        <div class="option" onclick="selectAnswer(this, false, '')">falsch</div>
+    <div class="question" data-correct="richtig">
+      <p>9. Die POC-Methode darf nicht angewendet werden wenn der Auftraggeber wahrscheinlich zahlungsunfähig ist.</p>
+      <div class="answers">
+        <button>richtig</button>
+        <button>falsch</button>
       </div>
-      <div class="feedback"></div>
     </div>
-
-    <div class="question">
-      10. Nach der CC-Methode dürfen immer nur die laufenden Kosten aktiviert werden (ohne Gewinnanteil). Dafür entfällt eine jährliche Neubeurteilung der prognostizierten Restkosten.
-      <div class="options">
-        <div class="option" onclick="selectAnswer(this, false, '')">richtig</div>
-        <div class="option" onclick="selectAnswer(this, true, '')">falsch</div>
+    <div class="question" data-correct="falsch">
+      <p>10. Nach der CC-Methode dürfen immer nur die laufenden Kosten aktiviert werden (ohne Gewinnanteil). Dafür entfällt eine jährliche Neubeurteilung der prognostizierten Restkosten.</p>
+      <div class="answers">
+        <button>richtig</button>
+        <button>falsch</button>
       </div>
-      <div class="feedback"></div>
     </div>
-
   </div>
+  <script>
+    const questions = document.querySelectorAll(".question");
+    questions.forEach((question) => {
+      const buttons = question.querySelectorAll("button");
+      const correct = question.dataset.correct;
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          buttons.forEach((b) => {
+            b.disabled = true;
+            if (b.textContent === correct) {
+              b.classList.add("correct");
+            } else {
+              if (b !== btn) b.classList.remove("wrong");
+            }
+          });
+          if (btn.textContent !== correct) {
+            btn.classList.add("wrong");
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
 
