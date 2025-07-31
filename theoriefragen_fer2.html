@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Theorie Fragen FER 2</title>
+  <title>Theoriefragen FER 2</title>
   <style>
     body {
       margin: 0;
@@ -39,6 +39,7 @@
       display: flex;
       gap: 10px;
       margin-top: 10px;
+      flex-wrap: wrap;
     }
 
     .options button {
@@ -61,63 +62,119 @@
 
     .explanation {
       margin-top: 10px;
-      padding: 10px;
-      background-color: rgba(255,255,255,0.8);
-      border-left: 5px solid #333;
+      font-style: italic;
       display: none;
+    }
+
+    @media (max-width: 600px) {
+      .options {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
   <a class="back-button" href="frw-theorie-fer.html">Zurück</a>
-  <h1>Theorie Fragen FER 2</h1>
 
-  <div id="quiz-container"></div>
+  <h1>Theoriefragen FER 2</h1>
+
+  <div class="question">
+    <p><strong>1.</strong> Eine voll fremdvermietete Liegenschaft wird zu den historischen Anschaffungskosten bewertet und über die Nutzungsdauer abgeschrieben.</p>
+    <div class="options" data-answer="richtig">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'richtig')">falsch</button>
+    </div>
+  </div>
+
+  <div class="question">
+    <p><strong>2.</strong> Die Unternehmung verzichtet gänzlich darauf selbst geschaffene immaterielle Werte zu aktivieren (z.B. ein speziell entwickeltes Fertigungsverfahren). Es können selbst erarbeitete immaterielle Werte aktiviert werden, es besteht aber kein Zwang.</p>
+    <div class="options" data-answer="richtig">
+      <button onclick="checkAnswer(this, 'richtig')">richtig</button>
+      <button onclick="checkAnswer(this, 'richtig')">falsch</button>
+    </div>
+  </div>
+
+  <div class="question">
+    <p><strong>3.</strong> Eine Unternehmung hat ihre Gründungskosten aktiviert und schreibt diese über 5 Jahre linear ab.</p>
+    <div class="options" data-answer="falsch">
+      <button onclick="checkAnswer(this, 'falsch', 'Gründungskosten sind nach FER 2/38 nicht aktivierbar (kein Nutzen).')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch', 'Gründungskosten sind nach FER 2/38 nicht aktivierbar (kein Nutzen).')">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <div class="question">
+    <p><strong>4.</strong> Pharma AG forscht an einem neuen Wirkstoff. Es ist zum jetzigen Zeitpunkt noch ungewiss, ob diese Forschung zum Erfolg (Entwicklung von Medikamenten) führt. Im Hinblick auf einen möglichen zukünftigen Nutzen werden die hälftigen Kosten aktiviert.</p>
+    <div class="options" data-answer="falsch">
+      <button onclick="checkAnswer(this, 'falsch', 'Allgemeine Forschungskosten sind nach FER 2/36 nicht aktivierungsfähig (auch nicht teilweise).')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch', 'Allgemeine Forschungskosten sind nach FER 2/36 nicht aktivierungsfähig (auch nicht teilweise).')">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <div class="question">
+    <p><strong>5.</strong> Von der Pharma AG wird ein neues Medikament entwickelt, von dem noch nicht beurteilt werden kann, ob es jemals Marktreife erlangt und verkauft wird. Die Entwicklungskosten wurden alle dem Aufwand belastet.</p>
+    <div class="options" data-answer="richtig">
+      <button onclick="checkAnswer(this, 'richtig', 'Nach FER 2/35 und 36 ist nicht klar, ob das Medikament jemals einen Nutzen bringen wird. Deshalb sind diese Entwicklungskosten der Erfolgsrechnung zu belasten.')">richtig</button>
+      <button onclick="checkAnswer(this, 'richtig', 'Nach FER 2/35 und 36 ist nicht klar, ob das Medikament jemals einen Nutzen bringen wird. Deshalb sind diese Entwicklungskosten der Erfolgsrechnung zu belasten.')">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <div class="question">
+    <p><strong>6.</strong> Die Entwicklung des neuen Medikamentes ist abgeschlossen. Die Umsätze können nun konkret berechnet und verlässlich geschätzt werden, es wird ein absoluter Verkaufsschlager. Deshalb werden die Entwicklungskosten von Nr. 5 (vorheriges Geschäftsjahr) jetzt noch aktiviert.</p>
+    <div class="options" data-answer="falsch">
+      <button onclick="checkAnswer(this, 'falsch', 'FER verbietet generell eine nachträgliche Aktivierung von Kosten, die bereits der Erfolgsrechnung belastet wurden (FER 10/6 → in FER 2 nicht explizit erwähnt).')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch', 'FER verbietet generell eine nachträgliche Aktivierung von Kosten, die bereits der Erfolgsrechnung belastet wurden (FER 10/6 → in FER 2 nicht explizit erwähnt).')">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <div class="question">
+    <p><strong>7.</strong> Die Fehlmann Optik AG übernimmt die Frauchiger Optik AG samt Mitarbeiter- und Kundenstamm. Dieser mitbezahlte immaterielle Vermögenswert wird aktiviert. Die Abschreibungsdauer für Kunden- und Mitarbeiterstamm beträgt 5 Jahre.</p>
+    <div class="options" data-answer="falsch">
+      <button onclick="checkAnswer(this, 'falsch', 'Nach FER 2/37 darf bei personenbezogenen immateriellen Werten die Abschreibungsdauer 5 Jahre nicht überschreiten.')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch', 'Nach FER 2/37 darf bei personenbezogenen immateriellen Werten die Abschreibungsdauer 5 Jahre nicht überschreiten.')">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <div class="question">
+    <p><strong>8.</strong> Zahnpasta Produktions AG hat ihre Geschäftsliegenschaft teilweise fremdvermietet. Die Immobilie wird zum aktuellen Wert eingesetzt.</p>
+    <div class="options" data-answer="falsch">
+      <button onclick="checkAnswer(this, 'falsch', 'Das Wahlrecht nach FER 2/11 gilt nur für Liegenschaften, die ausschliesslich Renditezwecken dienen.')">richtig</button>
+      <button onclick="checkAnswer(this, 'falsch', 'Das Wahlrecht nach FER 2/11 gilt nur für Liegenschaften, die ausschliesslich Renditezwecken dienen.')">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <div class="question">
+    <p><strong>9.</strong> Die Allfinanz AG besitzt nicht börsenkotierte Wertschriften der Lagerhäuser AG, Aarau. Die Aktien werden regelmässig ausserbörslich per Telefon gehandelt und deshalb zum letztgehandelten Kurs bewertet.</p>
+    <div class="options" data-answer="richtig">
+      <button onclick="checkAnswer(this, 'richtig', 'Ein regelmässiger ausserbörslicher Handel gilt nach FER 2/7 als Vorliegen eines aktuellen Wertes')">richtig</button>
+      <button onclick="checkAnswer(this, 'richtig', 'Ein regelmässiger ausserbörslicher Handel gilt nach FER 2/7 als Vorliegen eines aktuellen Wertes')">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
 
   <script>
-    const questions = [
-      { text: "Eine voll fremdvermietete Liegenschaft wird zu den historischen Anschaffungskosten bewertet und über die Nutzungsdauer abgeschrieben.", answer: "richtig" },
-      { text: "Die Unternehmung verzichtet gänzlich darauf selbst geschaffene immaterielle Werte zu aktivieren (z.B. ein speziell entwickeltes Fertigungsverfahren). Es können selbst erarbeitete immaterielle Werte aktiviert werden, es besteht aber kein Zwang.", answer: "richtig" },
-      { text: "Eine Unternehmung hat ihre Gründungskosten aktiviert und schreibt diese über 5 Jahre linear ab.", answer: "falsch", explanation: "Gründungskosten sind nach FER 2/38 nicht aktivierbar (kein Nutzen)." },
-      { text: "Pharma AG forscht an einem neuen Wirkstoff. Es ist zum jetzigen Zeitpunkt noch ungewiss, ob diese Forschung zum Erfolg (Entwicklung von Medikamenten) führt. Im Hinblick auf einen möglichen zukünftigen Nutzen werden die hälftigen Kosten aktiviert.", answer: "falsch", explanation: "Allgemeine Forschungskosten sind nach FER 2/36 nicht aktivierungsfähig (auch nicht teilweise)." },
-      { text: "Von der Pharma AG wird ein neues Medikament entwickelt, von dem noch nicht beurteilt werden kann, ob es jemals Marktreife erlangt und verkauft wird. Die Entwicklungskosten wurden alle dem Aufwand belastet.", answer: "richtig", explanation: "Nach FER 2/35 und 36 ist nicht klar, ob das Medikament jemals einen Nutzen bringen wird. Deshalb sind diese Entwicklungskosten der Erfolgsrechnung zu belasten." },
-      { text: "Die Entwicklung des neuen Medikamentes ist abgeschlossen. Die Umsätze können nun konkret berechnet und verlässlich geschätzt werden, es wird ein absoluter Verkaufsschlager. Deshalb werden die Entwicklungskosten von Nr. 5 (vorheriges Geschäftsjahr) jetzt noch aktiviert.", answer: "falsch", explanation: "FER verbietet generell eine nachträgliche Aktivierung von Kosten, die bereits der Erfolgsrechnung belastet wurden (FER 10/6 → in FER 2 nicht explizit erwähnt)." },
-      { text: "Die Fehlmann Optik AG übernimmt die Frauchiger Optik AG samt Mitarbeiter- und Kundenstamm. Dieser mitbezahlte immaterielle Vermögenswert wird aktiviert. Die Abschreibungsdauer für Kunden- und Mitarbeiterstamm beträgt 5 Jahre.", answer: "falsch", explanation: "Nach FER 2/37 darf bei personenbezogenen immateriellen Werten die Abschreibungsdauer 5 Jahre nicht überschreiten." },
-      { text: "Zahnpasta Produktions AG hat ihre Geschäftsliegenschaft teilweise fremdvermietet. Die Immobilie wird zum aktuellen Wert eingesetzt.", answer: "falsch", explanation: "Das Wahlrecht nach FER 2/11 gilt nur für Liegenschaften, die ausschliesslich Renditezwecken dienen." },
-      { text: "Die Allfinanz AG besitzt nicht börsenkotierte Wertschriften der Lagerhäuser AG, Aarau. Die Aktien werden regelmässig ausserbörslich per Telefon gehandelt und deshalb zum letztgehandelten Kurs bewertet.", answer: "richtig", explanation: "Ein regelmässiger ausserbörslicher Handel gilt nach FER 2/7 als Vorliegen eines aktuellen Wertes." },
-    ];
-
-    const container = document.getElementById('quiz-container');
-
-    questions.forEach((q, i) => {
-      const div = document.createElement('div');
-      div.className = 'question';
-      div.innerHTML = `
-        <p><strong>${i + 1}.</strong> ${q.text}</p>
-        <div class="options">
-          <button onclick="checkAnswer(this, '${q.answer}', ${i})">richtig</button>
-          <button onclick="checkAnswer(this, '${q.answer}', ${i})">falsch</button>
-        </div>
-        <div id="explanation-${i}" class="explanation">${q.explanation || ''}</div>
-      `;
-      container.appendChild(div);
-    });
-
-    function checkAnswer(button, correct, index) {
+    function checkAnswer(button, correctValue, explanationText = '') {
       const container = button.parentElement;
       const buttons = container.querySelectorAll('button');
-      const userChoice = button.textContent.trim();
+      const explanation = container.nextElementSibling;
+
       buttons.forEach(btn => {
         btn.disabled = true;
-        if (btn.textContent.trim() === correct) {
+        if (btn.textContent.trim().toLowerCase() === correctValue.toLowerCase()) {
           btn.classList.add('correct');
         } else if (btn === button) {
           btn.classList.add('incorrect');
         }
       });
-      const exp = document.getElementById('explanation-' + index);
-      if (exp && exp.textContent.trim() !== '') {
-        exp.style.display = 'block';
+
+      if (explanationText && explanation) {
+        explanation.style.display = 'block';
+        explanation.textContent = explanationText;
       }
     }
   </script>
