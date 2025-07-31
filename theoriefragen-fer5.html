@@ -11,8 +11,8 @@
       background-repeat: no-repeat;
       margin: 0;
       padding: 40px;
-      color: white;
     }
+
     a {
       position: absolute;
       top: 20px;
@@ -23,40 +23,45 @@
       text-decoration: none;
       border-radius: 5px;
     }
+
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      color: black;
     }
+
     .einleitung {
       font-size: 18px;
       margin-bottom: 30px;
+      color: black;
       font-weight: bold;
     }
+
     .frage {
-      background-color: #000;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      color: black;
+      font-size: 16px;
     }
-    label {
-      margin-right: 20px;
+
+    .option {
+      display: inline-block;
+      background-color: black;
+      color: white;
+      padding: 8px 16px;
+      margin: 10px 10px 0 0;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s;
     }
-    .feedback {
-      display: none;
-      margin-top: 10px;
-      font-style: italic;
+
+    .option.richtig {
+      background-color: green !important;
+    }
+
+    .option.falsch {
+      background-color: red !important;
     }
   </style>
-  <script>
-    function zeigen(radio, korrekt) {
-      const frage = radio.closest('.frage');
-      const feedback = frage.querySelector('.feedback');
-      const istKorrekt = radio.value === korrekt;
-      feedback.style.display = 'block';
-      feedback.style.color = istKorrekt ? '#0f0' : '#f00';
-      feedback.textContent = istKorrekt ? 'Richtig!' : 'Falsch!';
-    }
-  </script>
 </head>
 <body>
 
@@ -67,98 +72,100 @@
   Müssen diese Geschäftsfälle unter dem Titel «Ausserbilanzgeschäfte» nach FER 5 im Anhang der Jahresrechnung ausgewiesen werden? (unter Anwendung der Kern-FER)
 </div>
 
+<script>
+  function prüfen(option, korrekt) {
+    const parent = option.parentElement;
+    const alleOptionen = parent.querySelectorAll('.option');
+    alleOptionen.forEach(opt => opt.classList.remove('richtig', 'falsch'));
+
+    if (option.dataset.wert === korrekt) {
+      option.classList.add('richtig');
+    } else {
+      option.classList.add('falsch');
+    }
+  }
+</script>
+
 <div class="frage">
   1. Gewährte Bürgschaft ohne wahrscheinlichen Mittelabfluss<br>
-  <label><input type="radio" name="f1" value="ja" onclick="zeigen(this, 'ja')"> ja</label>
-  <label><input type="radio" name="f1" value="nein" onclick="zeigen(this, 'ja')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
 </div>
 
 <div class="frage">
   2. Mindestabnahmemenge für Material bei einem Lieferanten während 5 Jahren.<br>
-  <label><input type="radio" name="f2" value="ja" onclick="zeigen(this, 'ja')"> ja</label>
-  <label><input type="radio" name="f2" value="nein" onclick="zeigen(this, 'ja')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
 </div>
 
 <div class="frage">
   3. Ein nicht bilanziertes Leasing mit Restlaufzeit 18 Monate (ohne Kündigungsmöglichkeit)<br>
-  <label><input type="radio" name="f3" value="ja" onclick="zeigen(this, 'ja')"> ja</label>
-  <label><input type="radio" name="f3" value="nein" onclick="zeigen(this, 'ja')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
 </div>
 
 <div class="frage">
   4. Gewährte Bürgschaft mit wahrscheinlichem Mittelabfluss.<br>
-  <label><input type="radio" name="f4" value="ja" onclick="zeigen(this, 'nein')"> ja</label>
-  <label><input type="radio" name="f4" value="nein" onclick="zeigen(this, 'nein')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
 </div>
 
 <div class="frage">
   5. Vertragliche Verpflichtung gegenüber der öffentlichen Hand ein Grundstück zu überbauen.<br>
-  <label><input type="radio" name="f5" value="ja" onclick="zeigen(this, 'ja')"> ja</label>
-  <label><input type="radio" name="f5" value="nein" onclick="zeigen(this, 'ja')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
 </div>
 
 <div class="frage">
   6. Mietvertrag mit einer Laufzeit von 5 Jahren (kündbar mit einer Frist von 6 Monaten)<br>
-  <label><input type="radio" name="f6" value="ja" onclick="zeigen(this, 'nein')"> ja</label>
-  <label><input type="radio" name="f6" value="nein" onclick="zeigen(this, 'nein')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
 </div>
 
 <div class="frage">
   7. Garantie von 2 Jahren auf Produkt „Mario“, keine Rückstellung gebildet<br>
-  <label><input type="radio" name="f7" value="ja" onclick="zeigen(this, 'ja')"> ja</label>
-  <label><input type="radio" name="f7" value="nein" onclick="zeigen(this, 'ja')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
 </div>
 
 <div class="frage">
   8. Umweltschäden möglich bis CHF 8 Mio., Versicherung deckt CHF 5 Mio.<br>
-  <label><input type="radio" name="f8" value="ja" onclick="zeigen(this, 'ja')"> ja</label>
-  <label><input type="radio" name="f8" value="nein" onclick="zeigen(this, 'ja')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
 </div>
 
 <div class="frage">
   9. F&E-Zusammenarbeit mit Solidarhaftung in einfacher Gesellschaft<br>
-  <label><input type="radio" name="f9" value="ja" onclick="zeigen(this, 'ja')"> ja</label>
-  <label><input type="radio" name="f9" value="nein" onclick="zeigen(this, 'ja')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
 </div>
 
 <div class="frage">
   10. GL-Mitglied im 2. Jahr eines 3-Jahres-Vertrags mit CHF 2.1 Mio. Honorar<br>
-  <label><input type="radio" name="f10" value="ja" onclick="zeigen(this, 'ja')"> ja</label>
-  <label><input type="radio" name="f10" value="nein" onclick="zeigen(this, 'ja')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'ja')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'ja')">nein</div>
 </div>
 
 <div class="frage">
   11. Verwaltungsräte jährlich fix gewählt, Honorar CHF 250‘000<br>
-  <label><input type="radio" name="f11" value="ja" onclick="zeigen(this, 'nein')"> ja</label>
-  <label><input type="radio" name="f11" value="nein" onclick="zeigen(this, 'nein')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
 </div>
 
 <div class="frage">
   12. Regelmässige Warenlieferung aus Bestellung über 12 Monate<br>
-  <label><input type="radio" name="f12" value="ja" onclick="zeigen(this, 'nein')"> ja</label>
-  <label><input type="radio" name="f12" value="nein" onclick="zeigen(this, 'nein')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
 </div>
 
 <div class="frage">
   13. Verpflichtung zur Deckung Pensionskassenunterdeckung CHF 0.5 Mio.<br>
-  <label><input type="radio" name="f13" value="ja" onclick="zeigen(this, 'nein')"> ja</label>
-  <label><input type="radio" name="f13" value="nein" onclick="zeigen(this, 'nein')"> nein</label>
-  <div class="feedback"></div>
+  <div class="option" data-wert="ja" onclick="prüfen(this, 'nein')">ja</div>
+  <div class="option" data-wert="nein" onclick="prüfen(this, 'nein')">nein</div>
 </div>
 
 </body>
 </html>
+
 
 
