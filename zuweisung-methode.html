@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aktivierung Immaterielle Werte</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-image: url('/img/bg-lernen.png');
+      background-size: cover;
+      margin: 0;
+      padding: 2rem;
+      color: #000;
+    }
+    a {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .question {
+      margin-bottom: 2rem;
+    }
+    .options button {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-right: 1rem;
+      cursor: pointer;
+    }
+    .options button.correct {
+      background-color: green;
+    }
+    .options button.incorrect {
+      background-color: red;
+    }
+    .feedback {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <a href="/html/frw-theorie-fer">&larr; Zurück</a>
+  <h2>Aktivierung Immaterielle Werte</h2>
+  <p>Handelt es sich hier jeweils um aktivierbare immaterielle Werte?</p>
+
+  <div id="quiz"></div>
+
+  <script>
+    const data = [
+      {
+        q: "1. Kauf eines Patents für die Nutzung eines Fertigungsverfahrens innerhalb der nächsten 10 Jahre, das erfolgsversprechend ist (Umsatzschätzungen vorhanden).",
+        correct: "ja",
+        feedback: ""
+      },
+      {
+        q: "2. Kauf einer Idee für den Bau von neuartigen Meerwasserentsalzungsanlagen. Die Idee soll innerhalb der nächsten ca. 5 Jahre entwickelt werden. Ob es dafür einen reellen Markt gibt, muss zuerst noch untersucht werden.",
+        correct: "nein",
+        feedback: "Kein zuverlässiger Nutzen in der Zukunft."
+      },
+      {
+        q: "3. Kosten für die Forschung an neuen Wirkstoffen in einem Pharma-Unternehmen. Bei Erfolgen wird dann entschieden, ob daraus Medikamente entwickelt werden.",
+        correct: "nein",
+        feedback: "Gilt als Grundlagenforschung."
+      },
+      {
+        q: "4. Gekaufter Kundenstamm eines Konkurrenzunternehmens.",
+        correct: "ja",
+        feedback: ""
+      },
+      {
+        q: "5. Weiterbildungskosten eines Nachwuchskadermitarbeiters (es besteht keine arbeitsvertragliche Verpflichtung), der Mitarbeiter wird wahrscheinlich noch mind. 5 Jahre bleiben.",
+        correct: "nein",
+        feedback: "Kein Nutzen"
+      },
+      {
+        q: "6. Die Gründungskosten sollen aktiviert und über 5 Jahre abgeschrieben werden.",
+        correct: "nein",
+        feedback: "Kein Nutzen"
+      },
+      {
+        q: "7. Eigener, selbst erarbeiteter, Kundenstamm.",
+        correct: "nein",
+        feedback: "Aufwendungen nicht separat messbar"
+      },
+      {
+        q: "8. Es sind Restrukturierungskosten angefallen, die innerhalb der nächsten 2 Jahre (zuverlässige Schätzung) durch Kosteneinsparungen kompensiert sein werden.",
+        correct: "ja",
+        feedback: ""
+      },
+      {
+        q: "9. Wir eröffnen einen neuen McDonalds. Wir bezahlen dafür nebst der jährlichen Gebühr einen einmaligen Betrag als neuer Franchisenehmer an McDonalds.",
+        correct: "ja",
+        feedback: ""
+      },
+      {
+        q: "10. Wir haben uns exklusiv die Förderrechte für Erdgas im Luzerner Entlebuch gesichert und dafür 250‘000 bezahlt. Ob, wo und wie viel Vorkommen vorhanden ist werden wir im nächsten Jahr untersuchen.",
+        correct: "nein",
+        feedback: "Kein zuverlässiger Nutzen in der Zukunft"
+      },
+      {
+        q: "11. Die Migon Software GmbH hat eine iOS-App entwickelt. Marktuntersuchungen zur Folge ist das Absatzpotential gross, die Entwicklungskosten sind mehrfaches gedeckt.",
+        correct: "ja",
+        feedback: ""
+      },
+      {
+        q: "12. Unsere Unternehmung hat in der ganzen Schweiz einen ausgezeichneten Ruf. Diesen haben wir u.a. dadurch erreicht, dass wir grössere Summen in Werbung investiert haben, wo wir auf die Topqualität unserer Produkte aufmerksam machen.",
+        correct: "nein",
+        feedback: "Nicht identifizierbar"
+      }
+    ];
+
+    const container = document.getElementById("quiz");
+
+    data.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "question";
+
+      const p = document.createElement("p");
+      p.textContent = item.q;
+
+      const options = document.createElement("div");
+      options.className = "options";
+
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      ["ja", "nein"].forEach((choice) => {
+        const btn = document.createElement("button");
+        btn.textContent = choice;
+        btn.onclick = () => {
+          const isCorrect = choice === item.correct;
+          btn.className = isCorrect ? "correct" : "incorrect";
+          Array.from(options.children).forEach((b) => {
+            b.disabled = true;
+            if (b.textContent === item.correct) b.className = "correct";
+            else b.className = "incorrect";
+          });
+          feedback.textContent = item.feedback || (isCorrect ? "Korrekt." : "Falsch.");
+        };
+        options.appendChild(btn);
+      });
+
+      div.appendChild(p);
+      div.appendChild(options);
+      div.appendChild(feedback);
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>
