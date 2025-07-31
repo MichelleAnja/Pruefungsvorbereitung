@@ -1,87 +1,169 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Theoriefragen FER 5</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .question {
-            margin-bottom: 20px;
-        }
-        .antworten button {
-            margin-right: 10px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        .korrekt {
-            background-color: #c8e6c9;
-        }
-        .feedback {
-            margin-top: 10px;
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Theoriefragen FER 5</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('hintergrund.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 20px;
+      color: #000;
+    }
+    .zurueck {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #ddd;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      color: #000;
+      font-weight: bold;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .einleitung {
+      font-weight: bold;
+      margin: 20px 0 30px 0;
+      padding: 10px;
+      background-color: rgba(255,255,255,0.6);
+      border-radius: 10px;
+    }
+    .frage {
+      margin-bottom: 25px;
+      padding: 10px;
+      background-color: rgba(255,255,255,0.6);
+      border-radius: 10px;
+    }
+    .feedback {
+      display: none;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+    .korrekt {
+      color: green;
+    }
+    .falsch {
+      color: red;
+    }
+  </style>
+  <script>
+    function prüfen(radio, korrekt) {
+      const frage = radio.closest('.frage');
+      const feedback = frage.querySelector('.feedback');
+      const istRichtig = radio.value === korrekt;
+      feedback.style.display = 'block';
+      feedback.textContent = istRichtig ? "Richtig!" : "Falsch!";
+      feedback.className = 'feedback ' + (istRichtig ? 'korrekt' : 'falsch');
+    }
+  </script>
 </head>
 <body>
-    <h1>Theoriefragen FER 5</h1>
+  <a href="index.html" class="zurueck">Zurück</a>
+  <h1>Theoriefragen FER 5</h1>
+  <div class="einleitung">
+    Müssen diese Geschäftsfälle unter dem Titel «Ausserbilanzgeschäfte» nach FER 5 im Anhang der Jahresrechnung ausgewiesen werden? (unter Anwendung der Kern-FER)
+  </div>
 
-    <div id="fragen"></div>
+  <!-- Frageblöcke -->
+  <div class="frage">
+    1. Gewährte Bürgschaft ohne wahrscheinlichen Mittelabfluss<br>
+    <input type="radio" name="f1" value="ja" onclick="prüfen(this, 'ja')"> ja
+    <input type="radio" name="f1" value="nein" onclick="prüfen(this, 'ja')"> nein
+    <div class="feedback"></div>
+  </div>
 
-    <script>
-        const fragen = [
-            { text: "1. Gewährte Bürgschaft ohne wahrscheinlichen Mittelabfluss", korrekt: "ja" },
-            { text: "2. Mindestabnahmemenge für Material bei einem Lieferanten während 5 Jahren.", korrekt: "ja" },
-            { text: "3. Ein nicht bilanziertes Leasing mit Restlaufzeit 18 Monate (ohne Kündigungsmöglichkeit)", korrekt: "ja" },
-            { text: "4. Gewährte Bürgschaft mit wahrscheinlichem Mittelabfluss.", korrekt: "nein" },
-            { text: "5. Vertragliche Verpflichtung gegenüber der öffentlichen Hand ein Grundstück zu überbauen.", korrekt: "ja" },
-            { text: "6. Mietvertrag mit einer Laufzeit von 5 Jahren (kündbar mit einer Frist von 6 Monaten)", korrekt: "nein" },
-            { text: "7. Wir gewähren auf unserem Produkt \"Mario\" eine Garantie von 2 Jahren. Da aber keine Garantiefälle wahrscheinlich sind, wurde keine Rückstellung gebildet.", korrekt: "ja" },
-            { text: "8. Umweltschäden aus unserer Tätigkeit (noch nicht aufgetreten) haben wir eine Versicherungsdeckung bis CHF 5 Mio. Im schlimmsten Fall ist eine Schadenssumme von CHF 8 Mio. möglich.", korrekt: "ja" },
-            { text: "9. Wir haben eine Zusammenarbeit in Forschung & Entwicklung mit einem anderen Unternehmen. Die Zusammenarbeit besteht in Form einer einfachen Gesellschaft mit Solidarhaftung.", korrekt: "ja" },
-            { text: "10. Ein Geschäftsleitungsmitglied steht im 2. Amtsjahr eines dreijährigen Fixvertrages mit einem geschuldeten Gesamthonorar von Fr. 2,1 Mio.", korrekt: "ja" },
-            { text: "11. Die Verwaltungsräte sind auf eine Dauer von 1 Jahr fix gewählt (Jahreshonorar fest geschuldet Fr. 250‘000) und es finden jährlich an der GV Neuwahlen statt.", korrekt: "nein" },
-            { text: "12. Die Unternehmung hat bei seinem Lieferanten eine Bestellung getätigt, aus dem Waren während der nächsten 12 Monate regelmässig geliefert werden.", korrekt: "nein" },
-            { text: "13. Gemäss Reglement unserer Pensionskassenstiftung müssen wir ca. CHF 0,5 Mio. der Unterdeckung Ende aktuelles Geschäftsjahr tragen.", korrekt: "nein" },
-        ];
+  <div class="frage">
+    2. Mindestabnahmemenge für Material bei einem Lieferanten während 5 Jahren.<br>
+    <input type="radio" name="f2" value="ja" onclick="prüfen(this, 'ja')"> ja
+    <input type="radio" name="f2" value="nein" onclick="prüfen(this, 'ja')"> nein
+    <div class="feedback"></div>
+  </div>
 
-        const container = document.getElementById("fragen");
+  <div class="frage">
+    3. Ein nicht bilanziertes Leasing mit Restlaufzeit 18 Monate (ohne Kündigungsmöglichkeit)<br>
+    <input type="radio" name="f3" value="ja" onclick="prüfen(this, 'ja')"> ja
+    <input type="radio" name="f3" value="nein" onclick="prüfen(this, 'ja')"> nein
+    <div class="feedback"></div>
+  </div>
 
-        fragen.forEach((frage, index) => {
-            const div = document.createElement("div");
-            div.classList.add("question");
+  <div class="frage">
+    4. Gewährte Bürgschaft mit wahrscheinlichem Mittelabfluss.<br>
+    <input type="radio" name="f4" value="ja" onclick="prüfen(this, 'nein')"> ja
+    <input type="radio" name="f4" value="nein" onclick="prüfen(this, 'nein')"> nein
+    <div class="feedback"></div>
+  </div>
 
-            const p = document.createElement("p");
-            p.textContent = frage.text;
-            div.appendChild(p);
+  <div class="frage">
+    5. Vertragliche Verpflichtung gegenüber der öffentlichen Hand ein Grundstück zu überbauen.<br>
+    <input type="radio" name="f5" value="ja" onclick="prüfen(this, 'ja')"> ja
+    <input type="radio" name="f5" value="nein" onclick="prüfen(this, 'ja')"> nein
+    <div class="feedback"></div>
+  </div>
 
-            const btnContainer = document.createElement("div");
-            btnContainer.classList.add("antworten");
+  <div class="frage">
+    6. Mietvertrag mit einer Laufzeit von 5 Jahren (kündbar mit einer Frist von 6 Monaten)<br>
+    <input type="radio" name="f6" value="ja" onclick="prüfen(this, 'nein')"> ja
+    <input type="radio" name="f6" value="nein" onclick="prüfen(this, 'nein')"> nein
+    <div class="feedback"></div>
+  </div>
 
-            ["ja", "nein"].forEach(antwort => {
-                const btn = document.createElement("button");
-                btn.textContent = antwort;
-                btn.onclick = () => {
-                    if (antwort === frage.korrekt) {
-                        btn.classList.add("korrekt");
-                    } else {
-                        btn.style.opacity = 0.5;
-                    }
-                };
-                btnContainer.appendChild(btn);
-            });
+  <div class="frage">
+    7. Wir gewähren auf unserem Produkt „Mario“ eine Garantie von 2 Jahren. Da aber keine Garantiefälle wahrscheinlich sind, wurde keine Rückstellung gebildet.<br>
+    <input type="radio" name="f7" value="ja" onclick="prüfen(this, 'ja')"> ja
+    <input type="radio" name="f7" value="nein" onclick="prüfen(this, 'ja')"> nein
+    <div class="feedback"></div>
+  </div>
 
-            div.appendChild(btnContainer);
+  <div class="frage">
+    8. Umweltschäden aus unserer Tätigkeit (noch nicht aufgetreten) haben wir eine Versicherungsdeckung bis CHF 5 Mio. Im schlimmsten Fall ist eine Schadenssumme von CHF 8 Mio. möglich.<br>
+    <input type="radio" name="f8" value="ja" onclick="prüfen(this, 'ja')"> ja
+    <input type="radio" name="f8" value="nein" onclick="prüfen(this, 'ja')"> nein
+    <div class="feedback"></div>
+  </div>
 
-            const feedback = document.createElement("div");
-            feedback.classList.add("feedback");
-            div.appendChild(feedback);
+  <div class="frage">
+    9. Wir haben eine Zusammenarbeit in Forschung & Entwicklung mit einem anderen Unternehmen. Die Zusammenarbeit besteht in Form einer einfachen Gesellschaft mit Solidarhaftung.<br>
+    <input type="radio" name="f9" value="ja" onclick="prüfen(this, 'ja')"> ja
+    <input type="radio" name="f9" value="nein" onclick="prüfen(this, 'ja')"> nein
+    <div class="feedback"></div>
+  </div>
 
-            container.appendChild(div);
-        });
-    </script>
+  <div class="frage">
+    10. Ein Geschäftsleitungsmitglied steht im 2. Amtsjahr eines dreijährigen Fixvertrages mit einem geschuldeten Gesamthonorar von Fr. 2,1 Mio.<br>
+    <input type="radio" name="f10" value="ja" onclick="prüfen(this, 'ja')"> ja
+    <input type="radio" name="f10" value="nein" onclick="prüfen(this, 'ja')"> nein
+    <div class="feedback"></div>
+  </div>
+
+  <div class="frage">
+    11. Die Verwaltungsräte sind auf eine Dauer von 1 Jahr fix gewählt (Jahreshonorar fest geschuldet Fr. 250‘000) und es finden jährlich an der GV Neuwahlen statt.<br>
+    <input type="radio" name="f11" value="ja" onclick="prüfen(this, 'nein')"> ja
+    <input type="radio" name="f11" value="nein" onclick="prüfen(this, 'nein')"> nein
+    <div class="feedback"></div>
+  </div>
+
+  <div class="frage">
+    12. Die Unternehmung hat bei seinem Lieferanten eine Bestellung getätigt, aus dem Waren während der nächsten 12 Monate regelmässig geliefert werden.<br>
+    <input type="radio" name="f12" value="ja" onclick="prüfen(this, 'nein')"> ja
+    <input type="radio" name="f12" value="nein" onclick="prüfen(this, 'nein')"> nein
+    <div class="feedback"></div>
+  </div>
+
+  <div class="frage">
+    13. Gemäss Reglement unserer Pensionskassenstiftung müssen wir ca. CHF 0,5 Mio. der Unterdeckung Ende aktuelles Geschäftsjahr tragen.<br>
+    <input type="radio" name="f13" value="ja" onclick="prüfen(this, 'nein')"> ja
+    <input type="radio" name="f13" value="nein" onclick="prüfen(this, 'nein')"> nein
+    <div class="feedback"></div>
+  </div>
+
 </body>
 </html>
+
 
