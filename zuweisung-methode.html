@@ -18,7 +18,6 @@
       max-width: 800px;
       margin: 50px auto;
       padding: 30px;
-      /* Weißer Hintergrund entfernt */
     }
 
     h2 {
@@ -57,7 +56,6 @@
       text-decoration: none;
       color: black;
       font-weight: bold;
-      background-color: #ddd;
       padding: 6px 12px;
       border-radius: 6px;
     }
@@ -145,22 +143,12 @@
 
   <script>
     function checkAnswer(button, isCorrect) {
-      const parent = button.parentElement;
-      const buttons = parent.querySelectorAll('.option');
-
-      buttons.forEach(btn => {
-        btn.disabled = true;
-        if (btn === button) {
-          btn.classList.add(isCorrect ? 'correct' : 'incorrect');
-        } else {
-          const correctAnswer = btn.textContent.toLowerCase() === 'richtig' ? isCorrect : !isCorrect;
-          if (correctAnswer) btn.classList.add('correct');
-        }
-      });
+      const buttons = button.parentElement.querySelectorAll('.option');
+      buttons.forEach(btn => btn.disabled = true);
+      button.classList.add(isCorrect ? 'correct' : 'incorrect');
     }
   </script>
 </body>
 </html>
-
 
 
