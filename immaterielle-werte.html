@@ -1,46 +1,68 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aktivierung Immaterielle Werte</title>
+  <meta charset="UTF-8">
+  <title>Aussagen zur Bewertung</title>
   <style>
     body {
-      font-family: sans-serif;
-      background-image: url('/img/bg-lernen.png');
-      background-size: cover;
       margin: 0;
-      padding: 2rem;
-      color: #000;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 20px;
+      color: black;
     }
-    a {
-      display: inline-block;
-      margin-bottom: 1rem;
-      color: #000;
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: lightgray;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
     }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-top: 60px;
+    }
+
     .question {
-      margin-bottom: 2rem;
+      margin-bottom: 40px;
     }
+
+    .options {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
     .options button {
-      background-color: #000;
-      color: #fff;
+      background-color: black;
+      color: white;
+      padding: 10px 15px;
       border: none;
-      padding: 0.5rem 1rem;
-      margin-right: 1rem;
+      border-radius: 6px;
       cursor: pointer;
+      font-weight: bold;
     }
+
     .options button.correct {
-      background-color: green;
+      background-color: green !important;
     }
+
     .options button.incorrect {
-      background-color: red;
+      background-color: red !important;
     }
+
     .feedback {
-      margin-top: 0.5rem;
-      font-size: 0.95rem;
-      color: #000;
+      margin-top: 10px;
+      font-style: italic;
+      display: none;
     }
   </style>
 </head>
