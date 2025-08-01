@@ -67,7 +67,7 @@
   </style>
 </head>
 <body>
-  <a href="/html/frw-theorie-fer.html">&larr; Zurück</a>
+  <a href="/html/frw-theorie-fer.html" class="back-button">&larr; Zurück</a>
   <h2>Aktivierung Immaterielle Werte</h2>
   <p>Handelt es sich hier jeweils um aktivierbare immaterielle Werte?</p>
 
@@ -157,13 +157,20 @@
         btn.textContent = choice;
         btn.onclick = () => {
           const isCorrect = choice === item.correct;
-          btn.className = isCorrect ? "correct" : "incorrect";
+
           Array.from(options.children).forEach((b) => {
             b.disabled = true;
-            if (b.textContent === item.correct) b.className = "correct";
-            else b.className = "incorrect";
+            if (b.textContent === item.correct) {
+              b.classList.add("correct");
+            }
           });
+
+          if (!isCorrect) {
+            btn.classList.add("incorrect");
+          }
+
           feedback.textContent = item.feedback || (isCorrect ? "Korrekt." : "Falsch.");
+          feedback.style.display = "block";
         };
         options.appendChild(btn);
       });
