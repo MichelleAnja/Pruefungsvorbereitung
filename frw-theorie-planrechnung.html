@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theorie – Zahlungen</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding: 60px 20px 20px;
+      color: black;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 80px auto 0;
+      background: rgba(255, 255, 200, 0.9);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f4f4a6;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      table {
+        font-size: 16px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="frw.html">← Zurück</a>
+
+  <div class="container">
+    <h1>Zahlungen von Kunden / Zahlungen an Lieferanten</h1>
+
+    <p>«Die Zahlungen von Kunden erfolgen zu je 1/3 im gleichen Monat, nach 30 Tagen und zu nach 60 Tagen»:</p>
+    <ul>
+      <li>450 (Ertrag JAN): 150 im JAN, FEB, MÄRZ</li>
+      <li>360 (Ertrag FEB): 120 im FEB, MÄRZ, später</li>
+      <li>300 (Ertrag MÄRZ): 100 im MÄRZ, später</li>
+      <li>400 (FLL aus Vorjahr): 220 im JAN, 180 im FEB (1/3 bereits im Dez bezahlt)</li>
+    </ul>
+    <p>Schlussbestand FLL aus später: 320</p>
+
+    <table>
+      <tr>
+        <th> </th>
+        <th>DEZ</th>
+        <th>JAN</th>
+        <th>FEB</th>
+        <th>MÄRZ</th>
+        <th>SPÄTER</th>
+      </tr>
+      <tr>
+        <td>AB FLL</td>
+        <td>400</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Ertrag</td>
+        <td></td>
+        <td>450</td>
+        <td>360</td>
+        <td>300</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Zahlungen von Kunden</td>
+        <td></td>
+        <td>370 (150, 220)</td>
+        <td>450 (150, 120, 180)</td>
+        <td>370 (150, 120, 100)</td>
+        <td>120, 200</td>
+      </tr>
+    </table>
+
+    <p>«Der Einkauf erfolgt einen Monat vor dem Verkauf, Zahlung erfolgt zu 80% nach 30 Tagen und zu 20% nach 60 Tagen»:</p>
+    <ul>
+      <li>Aufwand FEB 240 → Einkauf JAN</li>
+      <li>FEB-Zahlung: 192 (80% von 240), 48 später (20%)</li>
+      <li>Aufwand MÄRZ 200 → Einkauf FEB</li>
+      <li>MÄRZ-Zahlung: 160 (80% von 200), 40 später</li>
+      <li>VLL Schlussbestand: 350 → spätere Zahlung 40, rest 310</li>
+    </ul>
+
+    <table>
+      <tr>
+        <th> </th>
+        <th>DEZ</th>
+        <th>JAN</th>
+        <th>FEB</th>
+        <th>MÄRZ</th>
+        <th>SPÄTER</th>
+      </tr>
+      <tr>
+        <td>AB VLL</td>
+        <td>380</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Aufwand</td>
+        <td>300</td>
+        <td>240</td>
+        <td>200</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Einkauf</td>
+        <td></td>
+        <td>240</td>
+        <td>200</td>
+        <td>310</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>VLL</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>350</td>
+      </tr>
+      <tr>
+        <td>Zahlungen an Lieferanten</td>
+        <td>270</td>
+        <td>302 (110, 192)</td>
+        <td>208 (48, 160)</td>
+        <td>40</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
