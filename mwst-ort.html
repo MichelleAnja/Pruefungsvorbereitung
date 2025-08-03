@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ort der Leistung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 20px;
+      color: black;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 900px;
+      margin: 50px auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    .task {
+      margin-bottom: 30px;
+    }
+    .question {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .options button {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .options button.correct {
+      background-color: green;
+    }
+    .options button.incorrect {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ort der Leistung</h1>
+    <div id="quiz"></div>
+  </div>
+  <script>
+    const quizData = [
+      { q: "1. Die in Zürich ansässige DL AG berät die in Paris (FR) ansässige OUT SA in Strategiefragen.", options: ["Zürich", "Paris"], correct: 1 },
+      { q: "2. Die Huber AG verkauft der Luxus AG einen Sessel ab einem Auslieferungslager in Chur (GR).", options: ["Zürich", "Luzern", "Chur", "Olten"], correct: 2 },
+      { q: "3. Die Spedi AG stellt den Transport von Chur nach Luzern der Huber AG in Rechnung.", options: ["Zürich", "Luzern", "Chur", "Olten"], correct: 0 },
+      { q: "4. H.M. GmbH in Reinach repariert das Dach einer Einzelperson in Elsass (FR).", options: ["Reinach", "Elsass"], correct: 1 },
+      { q: "5. Die Immo AG aus Zug vermietet einem Ehepaar aus Berlin eine in Bilbao liegende Ferienwohnung.", options: ["Zug", "Berlin", "Bilbao"], correct: 2 },
+      { q: "6. Die SBB vermietet der DB eine Lokomotive. Der Lokführer fährt von Thun nach Mannheim.", options: ["Basel", "Berlin", "Thun", "Mannheim"], correct: 2 },
+      { q: "7. Der FCZ spielt in Mailand ein Freundschaftsspiel und erhält eine Gage.", options: ["Zürich", "Mailand"], correct: 1 },
+      { q: "8. Die Impex AG verkauft Kunstgegenstände, die im Zollfreilager Zürich-Flughafen verbleiben.", options: ["Baar", "Moskau", "Zollfreilager-Zürich-Flughafen"], correct: 2 },
+      { q: "8.2 Inland oder Ausland?", options: ["Inland", "Ausland"], correct: 0 },
+      { q: "9. Die Online Trade AG verkauft Ware ab Konstanz an Kundin in Aarau.", options: ["Zug", "Konstanz", "Aarau"], correct: 1 },
+      { q: "10. Trip AG verkauft Flug und Hotel an Herrn Ott.", options: ["Horw", "Luzern", "Ibiza"], correct: 0 },
+      { q: "11. Die SBB verkauft einer Reisegruppe eine Bahnreise von Zürich nach Zermatt.", options: ["Bern", "Schweiz", "Stockholm", "Strecke Zürich-Zermatt"], correct: 3 },
+      { q: "12. Ist Samnaun Inland oder Ausland?", options: ["Inland", "Ausland"], correct: 0 }
+    ];
+
+    const quizContainer = document.getElementById("quiz");
+
+    quizData.forEach((item, index) => {
+      const taskDiv = document.createElement("div");
+      taskDiv.className = "task";
+
+      const question = document.createElement("div");
+      question.className = "question";
+      question.innerText = item.q;
+      taskDiv.appendChild(question);
+
+      const optionsDiv = document.createElement("div");
+      optionsDiv.className = "options";
+
+      item.options.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = `<${opt}>`;
+        btn.addEventListener("click", () => {
+          const buttons = optionsDiv.querySelectorAll("button");
+          buttons.forEach((b, j) => {
+            b.disabled = true;
+            if (j === item.correct) {
+              b.classList.add("correct");
+            }
+            if (j === i && j !== item.correct) {
+              b.classList.add("incorrect");
+            }
+          });
+        });
+        optionsDiv.appendChild(btn);
+      });
+
+      taskDiv.appendChild(optionsDiv);
+      quizContainer.appendChild(taskDiv);
+    });
+  </script>
+</body>
+</html>
