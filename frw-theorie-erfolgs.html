@@ -2,110 +2,87 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Erfolgsbezogene Analyse</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: url('hintergrund.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    input.correct {
+      background-color: #d1fae5; /* grün */
+      border-color: #10b981;
+    }
+    input.incorrect {
+      background-color: #fee2e2; /* rot */
+      border-color: #ef4444;
+    }
+  </style>
 </head>
-<body class="bg-cover bg-center min-h-screen" style="background-image: url('hintergrund.jpg');">
-  <div class="bg-black bg-opacity-60 min-h-screen px-4 py-6">
-    <a href="javascript:history.back()" class="text-white text-sm underline mb-4 inline-block">← Zurück</a>
-    <h1 class="text-2xl font-bold text-white mb-6">Erfolgsbezogene Analyse</h1>
+<body class="min-h-screen p-4">
+  <a href="javascript:history.back()" class="text-white underline text-sm mb-4 inline-block">← Zurück</a>
+  <h1 class="text-2xl text-white font-bold mb-6">Erfolgsbezogene Analyse</h1>
 
-    <div class="grid gap-6">
+  <div class="grid gap-6 max-w-2xl">
 
-      <!-- Alle Items -->
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">1. Kapitalrentabilität:</p>
-        <p class="mb-2">(BF)L: Ergebnis / Kapitaleinsatz</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">2. Umsatzrentabilität:</p>
-        <p class="mb-2">(BF)L: Ergebnis / Umsatz</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">3. Rentabilität des Eigenkapitals:</p>
-        <p class="mb-2">(BF)L: Gewinn / Eigenkapital</p>
-        <p class="italic text-gray-700 mb-2">Sie muss deutlich über dem Zinsfuss für das FK liegen, weil die Eigentümer ein höheres Risiko tragen als die Gläubiger.</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">4. Leverage-Effekt (positiv):</p>
-        <p class="mb-2">Die Eigenkapitalrentabilität lässt sich durch den Einsatz von Fremdkapital überproportional steigern, sofern die FK-Zinsen niedriger sind als die Gesamtkapitalrentabilität.</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben (z. B. positive Hebelwirkung)" />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">5. Leverage-Effekt (negativ):</p>
-        <p class="mb-2">Fällt die Eigenkapitalrentabilität mit zunehmender Fremdfinanzierung überproportional, sobald die Gesamtkapitalrentabilität unter den Zinssatz für das Fremdkapital sinkt.</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben (z. B. negative Hebelwirkung)" />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">6. Rentabilität des Gesamtkapitals:</p>
-        <p class="mb-2">(BF)L: EBIT / Gesamtkapital</p>
-        <p class="italic text-gray-700 mb-2">Der Wert sollte zwischen Zinsfuss für FK und EK-Rentabilität liegen.</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">7. Kapitalumschlag:</p>
-        <p class="mb-2">(BF)L: Umsatz / Kapital</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">8. Rentabilität des investierten Kapitals:</p>
-        <p class="mb-2">(BF)L: Gewinn + Zinsen / investiertes Kapital</p>
-        <p class="italic text-gray-700 mb-2">Ein Mehrwert entsteht, wenn die erzielte Rentabilität höher ist als die Kapitalkosten.</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">9. Bruttogewinnmarge:</p>
-        <p class="mb-2">(BF)L: Bruttogewinn / Umsatz</p>
-        <p class="italic text-gray-700 mb-2">Zeigt, wie viel % nach Warenaufwand verbleiben.</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">10. EBIT-Marge:</p>
-        <p class="mb-2">(BF)L: EBIT / Sales</p>
-        <p class="italic text-gray-700 mb-2">Misst Wirtschaftlichkeit ohne Finanzergebnis.</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">11. (Rein-) Gewinnmarge:</p>
-        <p class="mb-2">(BF)L: Gewinn / Umsatz</p>
-        <p class="italic text-gray-700 mb-2">Branchenabhängig: meist zwischen 1–5 %</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">12. Deckungsbeitragsmarge:</p>
-        <p class="mb-2">(BF)L: Deckungsbeitrag / Umsatz</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow">
-        <p class="font-semibold mb-2">13. Ausschüttungsquote:</p>
-        <p class="mb-2">(BF)L: Dividende / Gewinn</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
-      <div class="bg-white bg-opacity-90 rounded-xl p-4 shadow mb-12">
-        <p class="font-semibold mb-2">14. Book-to-bill-ratio:</p>
-        <p class="mb-2">(BF)L: Auftragseingang / Fakturierter Umsatz</p>
-        <input type="text" class="w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-      </div>
-
+    <!-- Beispiel eines Aufgaben-Blocks -->
+    <div class="bg-white bg-opacity-90 p-4 rounded-xl shadow">
+      <p class="font-semibold mb-2">1. Kapitalrentabilität:</p>
+      <p class="mb-2">Formel: <input type="text" data-answer="Ergebnis / Kapitaleinsatz" class="input-field w-full p-2 rounded border" placeholder="Formel eingeben" /></p>
     </div>
+
+    <div class="bg-white bg-opacity-90 p-4 rounded-xl shadow">
+      <p class="font-semibold mb-2">4. Leverage-Effekt (positiv):</p>
+      <p class="mb-2">Die Eigenkapitalrentabilität lässt sich durch den Einsatz von Fremdkapital überproportional steigern, sofern die FK-Zinsen niedriger sind als die Gesamtkapitalrentabilität.</p>
+      <input type="text" data-answer="positive Hebelwirkung" class="input-field w-full p-2 rounded border" placeholder="Antwort eingeben..." />
+    </div>
+
+    <div class="bg-white bg-opacity-90 p-4 rounded-xl shadow">
+      <p class="font-semibold mb-2">6. Rentabilität des Gesamtkapitals:</p>
+      <p class="mb-2">Formel: <input type="text" data-answer="EBIT / Gesamtkapital" class="input-field w-full p-2 rounded border" placeholder="Formel eingeben" /></p>
+      <p class="hidden mt-2 text-sm text-gray-700 italic info">Der Wert der Gesamtkapitalrentabilität sollte zwischen dem Zinsfuss für das FK und der Eigenkapitalrentabilität liegen.</p>
+    </div>
+
+    <!-- Weitere Aufgaben kannst du einfach so erweitern -->
+    <!--
+    <div class="...">
+      <p>Frage...</p>
+      <input type="text" data-answer="korrekte Antwort" class="input-field ..." />
+      <p class="hidden info">Zusatztext ...</p>
+    </div>
+    -->
+
   </div>
+
+  <script>
+    document.querySelectorAll('.input-field').forEach(input => {
+      input.addEventListener('blur', () => {
+        const correct = input.dataset.answer.trim().toLowerCase();
+        const user = input.value.trim().toLowerCase();
+
+        input.classList.remove('correct', 'incorrect');
+
+        if (user === correct) {
+          input.classList.add('correct');
+        } else {
+          input.classList.add('incorrect');
+          if (!input.nextElementSibling || !input.nextElementSibling.classList.contains('correction')) {
+            const correction = document.createElement('p');
+            correction.className = 'correction text-sm text-red-600 mt-1';
+            correction.textContent = `Korrekt wäre: ${input.dataset.answer}`;
+            input.insertAdjacentElement('afterend', correction);
+          }
+        }
+
+        // Zeige evtl. Zusatzinfo
+        const info = input.parentElement.querySelector('.info');
+        if (info) info.classList.remove('hidden');
+      });
+    });
+  </script>
 </body>
 </html>
+
 
