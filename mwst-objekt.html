@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steuerobjekte der Inlandsteuer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('hintergrund.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 900px;
+      margin: 100px auto;
+    }
+    h2 {
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 30px;
+    }
+    .question p {
+      margin: 0 0 10px 0;
+      font-weight: bold;
+    }
+    .options button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-right: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .options button.correct {
+      background-color: green;
+    }
+    .options button.incorrect {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Steuerobjekte der Inlandsteuer</h2>
+
+    <div class="question">
+      <p>1. Liegt eine Leistung im Sinne der MWST vor, wenn eine MWST-pflichtige Person ihre Aktiven durch das Konkursamt angeordnet und durchgeführt veräußert?</p>
+      <div class="options" data-answer="ja">
+        <button>ja</button>
+        <button>nein</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>2. Sind Schadenersatzzahlungen von Versicherungen eine Leistung im Sinne der MWST?</p>
+      <div class="options" data-answer="nein">
+        <button>ja</button>
+        <button>nein</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>3. Lösen Spenden und Subventionen eine Umsatzsteuer aus?</p>
+      <div class="options" data-answer="nein">
+        <button>ja</button>
+        <button>nein</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>4. Stellt die Tätigkeit des Verwaltungsrates eine Leistung im Sinne der MWST dar?</p>
+      <div class="options" data-answer="nein">
+        <button>ja</button>
+        <button>nein</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>5. Sind Abwasser- und Kanalisationsgebühren einer Gemeinde steuerbar?</p>
+      <div class="options" data-answer="ja">
+        <button>ja</button>
+        <button>nein</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>6. Wie sind Wassergebühren einer Gemeinde steuerbar?</p>
+      <div class="options" data-answer="zum reduzierten Satz">
+        <button>gar nicht</button>
+        <button>Normal</button>
+        <button>zum reduzierten Satz</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>7. Ein Kur- und Verkehrsverein erhält Kurtaxe. Welchen Einfluss können diese auf die MWST haben?</p>
+      <div class="options" data-answer="Vorsteuerkürzung">
+        <button>Umsatzsteuer</button>
+        <button>Vorsteuerkürzung</button>
+        <button>Keinen</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>8. Die Auto AG in Zürich vermietet seinen in London wohnhaften Kunden ein Auto für die Rundreise in der Schweiz. Wo ist der Ort der steuerbaren Leistung?</p>
+      <div class="options" data-answer="Zürich">
+        <button>Zürich</button>
+        <button>London</button>
+        <button>Gefahrene/ Fahrende Strecke</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>9. Die Abfall GmbH aus Graubünden entsorgt im Auftrag der Gemeinde Lustenau (AT) den Abfall der Gemeindebewohner.</p>
+      <div class="options" data-answer="Dienstleistung">
+        <button>Lieferung</button>
+        <button>Dienstleistung</button>
+      </div>
+      <div class="options" data-answer="Lustenau">
+        <button>Graubünden</button>
+        <button>Lustenau</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>10. Architekturleistungen eines in Zug ansässigen Einzelunternehmens für eine Liegenschaft in Berlin.</p>
+      <div class="options" data-answer="Berlin">
+        <button>Zug</button>
+        <button>Berlin</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>11. Ein in Luzern ansässiges Transportunternehmen transportiert im Auftrag der in Basel ansässigen Bon SA eine Ladung Käse von Zürich nach Paris.</p>
+      <div class="options" data-answer="Basel">
+        <button>Luzern</button>
+        <button>Basel</button>
+        <button>Zürich</button>
+        <button>Paris</button>
+      </div>
+      <div class="options" data-answer="Export">
+        <button>Export</button>
+        <button>Steuer geschuldet</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>12. Ein Tennisspieler aus Zürich wirbt an einem Tennisturnier in Basel für die Frankfurter Bank.</p>
+      <div class="options" data-answer="Frankfurt">
+        <button>Zürich</button>
+        <button>Basel</button>
+        <button>Frankfurt</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>13. Stellt das Vermieten einer Bankschließfaches eine steuerbare Leistung dar?</p>
+      <div class="options" data-answer="ja">
+        <button>ja</button>
+        <button>nein</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>14. Kann eine Versicherung auf Versicherungsleistungen optieren?</p>
+      <div class="options" data-answer="nein">
+        <button>ja</button>
+        <button>nein</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const allOptions = document.querySelectorAll('.options');
+    allOptions.forEach(group => {
+      const correct = group.getAttribute('data-answer');
+      const buttons = group.querySelectorAll('button');
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          buttons.forEach(btn => btn.disabled = true);
+          if (button.textContent === correct) {
+            button.classList.add('correct');
+          } else {
+            button.classList.add('incorrect');
+            buttons.forEach(btn => {
+              if (btn.textContent === correct) btn.classList.add('correct');
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
