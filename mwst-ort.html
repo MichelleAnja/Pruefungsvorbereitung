@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ort der Leistung</title>
   <style>
     body {
@@ -10,100 +10,201 @@
       background: url("hintergrund.jpg") no-repeat center center fixed;
       background-size: cover;
       margin: 0;
-      padding: 20px;
+      padding: 40px 20px;
       color: black;
     }
+
     .container {
+      max-width: 1000px;
+      margin: auto;
       background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
       padding: 40px;
-      max-width: 900px;
-      margin: 50px auto;
+      border-radius: 12px;
     }
-    h1 {
+
+    h2 {
       text-align: center;
     }
-    .task {
-      margin-bottom: 30px;
-    }
+
     .question {
-      font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 25px;
     }
-    .options button {
-      background-color: black;
+
+    .question p {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .answers button {
+      background: black;
       color: white;
       border: none;
-      padding: 10px 20px;
-      margin: 5px;
-      border-radius: 8px;
+      padding: 8px 14px;
+      margin-right: 10px;
+      margin-top: 5px;
       cursor: pointer;
-      transition: 0.3s;
+      border-radius: 6px;
     }
-    .options button.correct {
-      background-color: green;
+
+    .answers button.correct {
+      background: green !important;
     }
-    .options button.incorrect {
-      background-color: red;
+
+    .answers button.incorrect {
+      background: red !important;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Ort der Leistung</h1>
-    <div id="quiz"></div>
+    <a class="back-link" href="mwst.html">← Zurück</a>
+    <h2>Ort der Leistung</h2>
+
+    <div class="question" data-answer="Paris">
+      <p>1. Die in Zürich ansässige DL AG berät die in Paris (FR) ansässige OUT SA in Strategiefragen.</p>
+      <div class="answers">
+        <button>Zürich</button>
+        <button>Paris</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Chur">
+      <p>2. Die in Zürich ansässige Huber AG verkauft der in Luzern ansässigen Luxus AG einen Sessel ab einem Auslieferungslager in Chur (GR).</p>
+      <div class="answers">
+        <button>Zürich</button>
+        <button>Luzern</button>
+        <button>Chur</button>
+        <button>Olten</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Zürich">
+      <p>3. Die Spedi AG stellt den Transport von Chur nach Luzern der Huber AG in Rechnung.</p>
+      <div class="answers">
+        <button>Zürich</button>
+        <button>Luzern</button>
+        <button>Chur</button>
+        <button>Olten</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Elsass">
+      <p>4. H.M. GmbH in Reinach repariert das Dach einer Einzelperson in Elsass (FR).</p>
+      <div class="answers">
+        <button>Reinach</button>
+        <button>Elsass</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Bilbao">
+      <p>5. Die Immo AG aus Zug vermietet einem Ehepaar aus Berlin eine in Bilbao liegende Ferienwohnung für 2 Wochen.</p>
+      <div class="answers">
+        <button>Zug</button>
+        <button>Berlin</button>
+        <button>Bilbao</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Thun">
+      <p>6. Die SBB aus Basel vermietet der DB aus Berlin eine Lokomotive. Ein Lokführer führt diese von Thun nach Mannheim.</p>
+      <div class="answers">
+        <button>Basel</button>
+        <button>Berlin</button>
+        <button>Thun</button>
+        <button>Mannheim</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Mailand">
+      <p>7. Der FCZ spielt in Mailand ein Freundschaftsspiel und erhält dafür eine Gage.</p>
+      <div class="answers">
+        <button>Zürich</button>
+        <button>Mailand</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Zollfreilager-Zürich-Flughafen">
+      <p>8. Die Impex AG verkauft der Huskin AG Kunstwerke, die im Zollfreilager-Zürich-Flughafen bleiben.</p>
+      <div class="answers">
+        <button>Baar</button>
+        <button>Moskau</button>
+        <button>Zollfreilager-Zürich-Flughafen</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Inland">
+      <p>8.2. Wo befindet sich die Lieferung rechtlich?</p>
+      <div class="answers">
+        <button>Inland</button>
+        <button>Ausland</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Konstanz">
+      <p>9. Die Online Trade AG liefert aus einem Lager in Konstanz nach Aarau.</p>
+      <div class="answers">
+        <button>Zug</button>
+        <button>Konstanz</button>
+        <button>Aarau</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Horw">
+      <p>10. Das Reisebüro Trip AG in Horw verkauft Herrn Ott ein Hotelarrangement auf Ibiza.</p>
+      <div class="answers">
+        <button>Horw</button>
+        <button>Luzern</button>
+        <button>Ibiza</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Strecke Zürich-Zermatt">
+      <p>11. Die SBB verkauft einer Reisegruppe eine Bahnfahrt von Zürich nach Zermatt.</p>
+      <div class="answers">
+        <button>Bern</button>
+        <button>Schweiz</button>
+        <button>Stockholm</button>
+        <button>Strecke Zürich-Zermatt</button>
+      </div>
+    </div>
+
+    <div class="question" data-answer="Inland">
+      <p>12. Ist Samnaun Inland oder Ausland?</p>
+      <div class="answers">
+        <button>Inland</button>
+        <button>Ausland</button>
+      </div>
+    </div>
   </div>
+
   <script>
-    const quizData = [
-      { q: "1. Die in Zürich ansässige DL AG berät die in Paris (FR) ansässige OUT SA in Strategiefragen.", options: ["Zürich", "Paris"], correct: 1 },
-      { q: "2. Die Huber AG verkauft der Luxus AG einen Sessel ab einem Auslieferungslager in Chur (GR).", options: ["Zürich", "Luzern", "Chur", "Olten"], correct: 2 },
-      { q: "3. Die Spedi AG stellt den Transport von Chur nach Luzern der Huber AG in Rechnung.", options: ["Zürich", "Luzern", "Chur", "Olten"], correct: 0 },
-      { q: "4. H.M. GmbH in Reinach repariert das Dach einer Einzelperson in Elsass (FR).", options: ["Reinach", "Elsass"], correct: 1 },
-      { q: "5. Die Immo AG aus Zug vermietet einem Ehepaar aus Berlin eine in Bilbao liegende Ferienwohnung.", options: ["Zug", "Berlin", "Bilbao"], correct: 2 },
-      { q: "6. Die SBB vermietet der DB eine Lokomotive. Der Lokführer fährt von Thun nach Mannheim.", options: ["Basel", "Berlin", "Thun", "Mannheim"], correct: 2 },
-      { q: "7. Der FCZ spielt in Mailand ein Freundschaftsspiel und erhält eine Gage.", options: ["Zürich", "Mailand"], correct: 1 },
-      { q: "8. Die Impex AG verkauft Kunstgegenstände, die im Zollfreilager Zürich-Flughafen verbleiben.", options: ["Baar", "Moskau", "Zollfreilager-Zürich-Flughafen"], correct: 2 },
-      { q: "8.2 Inland oder Ausland?", options: ["Inland", "Ausland"], correct: 0 },
-      { q: "9. Die Online Trade AG verkauft Ware ab Konstanz an Kundin in Aarau.", options: ["Zug", "Konstanz", "Aarau"], correct: 1 },
-      { q: "10. Trip AG verkauft Flug und Hotel an Herrn Ott.", options: ["Horw", "Luzern", "Ibiza"], correct: 0 },
-      { q: "11. Die SBB verkauft einer Reisegruppe eine Bahnreise von Zürich nach Zermatt.", options: ["Bern", "Schweiz", "Stockholm", "Strecke Zürich-Zermatt"], correct: 3 },
-      { q: "12. Ist Samnaun Inland oder Ausland?", options: ["Inland", "Ausland"], correct: 0 }
-    ];
-
-    const quizContainer = document.getElementById("quiz");
-
-    quizData.forEach((item, index) => {
-      const taskDiv = document.createElement("div");
-      taskDiv.className = "task";
-
-      const question = document.createElement("div");
-      question.className = "question";
-      question.innerText = item.q;
-      taskDiv.appendChild(question);
-
-      const optionsDiv = document.createElement("div");
-      optionsDiv.className = "options";
-
-      item.options.forEach((opt, i) => {
-        const btn = document.createElement("button");
-        btn.innerText = `<${opt}>`;
-        btn.addEventListener("click", () => {
-          const buttons = optionsDiv.querySelectorAll("button");
-          buttons.forEach((b, j) => {
-            b.disabled = true;
-            if (j === item.correct) {
-              b.classList.add("correct");
-            }
-            if (j === i && j !== item.correct) {
-              b.classList.add("incorrect");
-            }
-          });
+    document.querySelectorAll('.question').forEach(q => {
+      const correct = q.dataset.answer;
+      const buttons = q.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.disabled = true);
+          if (btn.textContent.trim() === correct.trim()) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.add('incorrect');
+            buttons.forEach(b => {
+              if (b.textContent.trim() === correct.trim()) {
+                b.classList.add('correct');
+              }
+            });
+          }
         });
-        optionsDiv.appendChild(btn);
       });
-
-      taskDiv.appendChild(optionsDiv);
-      quizContainer.appendChild(taskDiv);
     });
   </script>
 </body>
