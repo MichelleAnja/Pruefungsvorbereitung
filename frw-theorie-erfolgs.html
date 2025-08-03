@@ -4,82 +4,204 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Erfolgsbezogene Analyse</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background-image: url('hintergrund.jpg');
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
     }
-    input.correct {
-      background-color: #d1fae5; /* grün */
-      border-color: #10b981;
+
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    input.incorrect {
-      background-color: #fee2e2; /* rot */
-      border-color: #ef4444;
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .input-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .input-box input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+      font-size: 16px;
+    }
+
+    .input-box button {
+      margin-left: 10px;
+      padding: 10px 16px;
+      font-size: 16px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .correct {
+      background-color: lightgreen !important;
+      color: black !important;
+    }
+
+    .wrong {
+      background-color: lightcoral !important;
+      color: black !important;
+    }
+
+    .explanation {
+      margin-top: 10px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .options button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
     }
   </style>
 </head>
-<body class="min-h-screen p-4">
-  <a href="javascript:history.back()" class="text-white underline text-sm mb-4 inline-block">← Zurück</a>
-  <h1 class="text-2xl text-white font-bold mb-6">Erfolgsbezogene Analyse</h1>
-
-  <div class="grid gap-6 max-w-2xl">
-
-    <!-- Beispiel eines Aufgaben-Blocks -->
-    <div class="bg-white bg-opacity-90 p-4 rounded-xl shadow">
-      <p class="font-semibold mb-2">1. Kapitalrentabilität:</p>
-      <p class="mb-2">Formel: <input type="text" data-answer="Ergebnis / Kapitaleinsatz" class="input-field w-full p-2 rounded border" placeholder="Formel eingeben" /></p>
-    </div>
-
-    <div class="bg-white bg-opacity-90 p-4 rounded-xl shadow">
-      <p class="font-semibold mb-2">4. Leverage-Effekt (positiv):</p>
-      <p class="mb-2">Die Eigenkapitalrentabilität lässt sich durch den Einsatz von Fremdkapital überproportional steigern, sofern die FK-Zinsen niedriger sind als die Gesamtkapitalrentabilität.</p>
-      <input type="text" data-answer="positive Hebelwirkung" class="input-field w-full p-2 rounded border" placeholder="Antwort eingeben..." />
-    </div>
-
-    <div class="bg-white bg-opacity-90 p-4 rounded-xl shadow">
-      <p class="font-semibold mb-2">6. Rentabilität des Gesamtkapitals:</p>
-      <p class="mb-2">Formel: <input type="text" data-answer="EBIT / Gesamtkapital" class="input-field w-full p-2 rounded border" placeholder="Formel eingeben" /></p>
-      <p class="hidden mt-2 text-sm text-gray-700 italic info">Der Wert der Gesamtkapitalrentabilität sollte zwischen dem Zinsfuss für das FK und der Eigenkapitalrentabilität liegen.</p>
-    </div>
-
-    <!-- Weitere Aufgaben kannst du einfach so erweitern -->
-    <!--
-    <div class="...">
-      <p>Frage...</p>
-      <input type="text" data-answer="korrekte Antwort" class="input-field ..." />
-      <p class="hidden info">Zusatztext ...</p>
-    </div>
-    -->
-
+<body>
+  <div class="section">
+    <a class="back-link" href="frw-theorie-analyse.html">← Zurück</a>
   </div>
 
+  <div id="quiz-container"></div>
+
   <script>
-    document.querySelectorAll('.input-field').forEach(input => {
-      input.addEventListener('blur', () => {
-        const correct = input.dataset.answer.trim().toLowerCase();
-        const user = input.value.trim().toLowerCase();
+    function normalize(text) {
+      return text.toLowerCase().replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
 
-        input.classList.remove('correct', 'incorrect');
+    function checkWord(inputId, correctWord, feedbackId, explanation = "") {
+      const input = document.getElementById(inputId);
+      const feedback = document.getElementById(feedbackId);
+      const userAnswer = normalize(input.value);
+      const correctAnswer = normalize(correctWord);
 
-        if (user === correct) {
-          input.classList.add('correct');
-        } else {
-          input.classList.add('incorrect');
-          if (!input.nextElementSibling || !input.nextElementSibling.classList.contains('correction')) {
-            const correction = document.createElement('p');
-            correction.className = 'correction text-sm text-red-600 mt-1';
-            correction.textContent = `Korrekt wäre: ${input.dataset.answer}`;
-            input.insertAdjacentElement('afterend', correction);
-          }
+      feedback.innerHTML = "";
+
+      if (userAnswer === correctAnswer) {
+        input.classList.add("correct");
+        input.classList.remove("wrong");
+        feedback.textContent = "Richtig! ✅";
+        feedback.style.color = "green";
+      } else {
+        input.classList.add("wrong");
+        input.classList.remove("correct");
+        input.value = correctWord;
+        feedback.textContent = "Falsch. Richtige Antwort: " + correctWord;
+        feedback.style.color = "red";
+      }
+
+      if (explanation) {
+        const info = document.createElement('div');
+        info.className = 'explanation';
+        info.textContent = explanation;
+        feedback.appendChild(info);
+      }
+    }
+
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation = "") {
+      const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) {
+          btn.classList.add('correct');
         }
-
-        // Zeige evtl. Zusatzinfo
-        const info = input.parentElement.querySelector('.info');
-        if (info) info.classList.remove('hidden');
+        if (idx === clickedIndex && idx !== correctIndex) {
+          btn.classList.add('wrong');
+        }
       });
+
+      const feedback = document.getElementById('f_' + groupId);
+      feedback.style.display = 'block';
+      feedback.innerHTML = explanation || "";
+    }
+
+    const tasks = [
+      { q: "1. Kapitalrentabilität:", id: "e1", type: "text", answer: "Ergebnis / Kapitaleinsatz" },
+      { q: "2. Umsatzrentabilität:", id: "e2", type: "text", answer: "Ergebnis / Umsatz" },
+      { q: "3. Rentabilität des Eigenkapitals:", id: "e3", type: "text", answer: "Gewinn / Eigenkapital", explanation: "Sie muss deutlich über dem Zinsfuss für das FK liegen, weil die Eigentümer ein höheres Risiko tragen als die Gläubiger." },
+      { q: "4. Was ist hier zum Leverage-Effekt beschrieben:<br><positive Hebelwirkung> <negative Hebelwirkung>", id: "e4", type: "mc", options: ["positive Hebelwirkung", "negative Hebelwirkung"], correct: 0, explanation: "Wenn die FK-Zinsen unter der Gesamtkapitalrentabilität liegen, wirkt sich Fremdfinanzierung positiv aus." },
+      { q: "5. Was ist hier zum Leverage-Effekt beschrieben:<br><positive Hebelwirkung> <negative Hebelwirkung>", id: "e5", type: "mc", options: ["positive Hebelwirkung", "negative Hebelwirkung"], correct: 1, explanation: "Wenn die Gesamtkapitalrentabilität unter den FK-Zins sinkt, wirkt sich Fremdfinanzierung negativ aus." },
+      { q: "6. Rentabilität des Gesamtkapitals:", id: "e6", type: "text", answer: "EBIT / Gesamtkapital", explanation: "Der Wert der Gesamtkapitalrentabilität sollte zwischen dem Zinsfuss für das FK und der Eigenkapitalrentabilität liegen." },
+      { q: "7. Kapitalumschlag:", id: "e7", type: "text", answer: "Umsatz / Kapital" },
+      { q: "8. Rentabilität des investierten Kapitals:", id: "e8", type: "text", answer: "Gewinn + Zinsen / investiertes Kapital", explanation: "Ein Mehrwert entsteht, wenn die von einer Unternehmung erzielte Rentabilität höher ist als die dabei verursachten Kapitalkosten." },
+      { q: "9. Bruttogewinnmarge (Handelsmarge):", id: "e9", type: "text", answer: "Bruttogewinn / Umsatz", explanation: "Sie zeigt, wie viel vom Umsatz nach Warenaufwand bleibt, um Gemeinkosten zu decken und Gewinn zu erzielen." },
+      { q: "10. EBIT-Marge:", id: "e10", type: "text", answer: "EBIT / Sales", explanation: "Damit wird die Wirtschaftlichkeit der Leistungserstellung ohne Berücksichtigung des Finanzergebnisses gemessen." },
+      { q: "11. (Rein-) Gewinnmarge:", id: "e11", type: "text", answer: "Gewinn / Umsatz", explanation: "Die Gewinnmargen sind branchenabhängig. Die meisten Werte liegen zwischen 1 – 5%." },
+      { q: "12. Deckungsbeitragsmarge:", id: "e12", type: "text", answer: "Deckungsbeitrag / Umsatz" },
+      { q: "13. Ausschüttungsquote:", id: "e13", type: "text", answer: "Dividende / Gewinn" },
+      { q: "14. Book-to-bill-ratio:", id: "e14", type: "text", answer: "Auftragseingang / Fakturierter Umsatz" }
+    ];
+
+    const container = document.getElementById("quiz-container");
+
+    tasks.forEach(task => {
+      const section = document.createElement("div");
+      section.className = "section";
+      section.innerHTML = `<h2>${task.q}</h2>`;
+
+      if (task.type === "mc") {
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+        task.options.forEach((opt, index) => {
+          const btn = document.createElement("button");
+          btn.innerText = opt;
+          btn.dataset.group = task.id;
+          btn.onclick = () => selectOptionGroup(task.id, task.correct, index, task.explanation || "");
+          optionsDiv.appendChild(btn);
+        });
+        section.appendChild(optionsDiv);
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        fb.style.display = "none";
+        section.appendChild(fb);
+      } else {
+        const inputBox = document.createElement("div");
+        inputBox.className = "input-box";
+        inputBox.innerHTML = `<input type='text' id='${task.id}' placeholder='Formel eingeben...'>
+          <button onclick="checkWord('${task.id}', \`${task.answer}\`, 'f_${task.id}', \`${task.explanation || ''}\`)">OK</button>`;
+        section.appendChild(inputBox);
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        section.appendChild(fb);
+      }
+
+      container.appendChild(section);
     });
   </script>
 </body>
