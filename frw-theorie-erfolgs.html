@@ -3,54 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rentabilitätskennzahlen Trainer</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f9f9f9;
-      padding: 2rem;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    .task {
-      background: white;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
-
-    .task h3 {
-      margin-top: 0;
-    }
-
-    .options button {
-      margin: 0.3rem;
-      padding: 0.5rem 1rem;
-    }
-
-    .explanation {
-      margin-top: 0.5rem;
-      font-style: italic;
-      color: #444;
-    }
-
-    input[type="text"] {
-      padding: 0.5rem;
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .check-btn {
-      margin-top: 0.5rem;
-    }
-  </style>
+  <title>Trainer Rentabilitätskennzahlen</title>
 </head>
 <body>
-  <h1>Trainer: Rentabilitätskennzahlen</h1>
+  <h2>Trainer: Rentabilitätskennzahlen</h2>
 
   <div id="app"></div>
 
@@ -59,8 +15,8 @@
       { q: "1. Kapitalrentabilität:", id: "e1", type: "text", answer: "Ergebnis / Kapitaleinsatz" },
       { q: "2. Umsatzrentabilität:", id: "e2", type: "text", answer: "Ergebnis / Umsatz" },
       { q: "3. Rentabilität des Eigenkapitals:", id: "e3", type: "text", answer: "Gewinn / Eigenkapital", explanation: "Sie muss deutlich über dem Zinsfuss für das FK liegen, weil die Eigentümer ein höheres Risiko tragen als die Gläubiger." },
-      { q: "4. Was ist hier zum Leverage-Effekt beschrieben:", id: "e4", type: "mc", options: ["positive Hebelwirkung", "negative Hebelwirkung"], correct: 0, explanationBefore: "Wenn die FK-Zinsen unter der Gesamtkapitalrentabilität liegen, wirkt sich Fremdfinanzierung positiv aus." },
-      { q: "5. Was ist hier zum Leverage-Effekt beschrieben:", id: "e5", type: "mc", options: ["positive Hebelwirkung", "negative Hebelwirkung"], correct: 1, explanationBefore: "Wenn die Gesamtkapitalrentabilität unter den FK-Zins sinkt, wirkt sich Fremdfinanzierung negativ aus." },
+      { q: "4. Was ist hier zum Leverage-Effekt beschrieben:", id: "e4", type: "mc", options: ["positive Hebelwirkung", "negative Hebelwirkung"], correct: 0, showBefore: "Wenn die FK-Zinsen unter der Gesamtkapitalrentabilität liegen, wirkt sich Fremdfinanzierung positiv aus." },
+      { q: "5. Was ist hier zum Leverage-Effekt beschrieben:", id: "e5", type: "mc", options: ["positive Hebelwirkung", "negative Hebelwirkung"], correct: 1, showBefore: "Wenn die Gesamtkapitalrentabilität unter den FK-Zins sinkt, wirkt sich Fremdfinanzierung negativ aus." },
       { q: "6. Rentabilität des Gesamtkapitals:", id: "e6", type: "text", answer: "EBIT / Gesamtkapital", explanation: "Der Wert der Gesamtkapitalrentabilität sollte zwischen dem Zinsfuss für das FK und der Eigenkapitalrentabilität liegen." },
       { q: "7. Kapitalumschlag:", id: "e7", type: "text", answer: "Umsatz / Kapital" },
       { q: "8. Rentabilität des investierten Kapitals:", id: "e8", type: "text", answer: "Gewinn + Zinsen / investiertes Kapital", explanation: "Ein Mehrwert entsteht, wenn die von einer Unternehmung erzielte Rentabilität höher ist als die dabei verursachten Kapitalkosten." },
@@ -75,84 +31,73 @@
     const app = document.getElementById("app");
 
     tasks.forEach(task => {
-      const section = document.createElement("div");
-      section.className = "task";
+      const div = document.createElement("div");
+      const label = document.createElement("label");
+      label.innerText = task.q;
+      div.appendChild(label);
 
-      const h3 = document.createElement("h3");
-      h3.innerText = task.q;
-      section.appendChild(h3);
-
-      if (task.explanationBefore) {
-        const expl = document.createElement("div");
-        expl.className = "explanation";
-        expl.style.display = "block";
-        expl.textContent = task.explanationBefore;
-        section.appendChild(expl);
+      if (task.showBefore) {
+        const info = document.createElement("div");
+        info.style.fontStyle = "italic";
+        info.style.margin = "4px 0";
+        info.innerText = task.showBefore;
+        div.appendChild(info);
       }
 
       if (task.type === "text") {
         const input = document.createElement("input");
         input.type = "text";
         input.id = task.id;
-        section.appendChild(input);
+        div.appendChild(input);
 
-        const btn = document.createElement("button");
-        btn.innerText = "Prüfen";
-        btn.className = "check-btn";
-        btn.onclick = () => checkText(task.id, task.answer, task.explanation || "");
-        section.appendChild(btn);
+        const button = document.createElement("button");
+        button.innerText = "Prüfen";
+        button.onclick = () => checkText(task.id, task.answer, task.explanation || "");
+        div.appendChild(button);
       }
 
       if (task.type === "mc") {
-        const optionsDiv = document.createElement("div");
-        optionsDiv.className = "options";
         task.options.forEach((opt, index) => {
-          const btn = document.createElement("button");
-          btn.innerText = opt;
-          btn.dataset.group = task.id;
-          btn.onclick = () => selectOptionGroup(task.id, task.correct, index, task.explanation || "");
-          optionsDiv.appendChild(btn);
+          const button = document.createElement("button");
+          button.innerText = opt;
+          button.onclick = () => checkMC(task.id, index, task.correct, task.explanation || "");
+          div.appendChild(button);
         });
-        section.appendChild(optionsDiv);
       }
 
-      const fb = document.createElement("div");
-      fb.id = "f_" + task.id;
-      fb.className = "explanation";
-      fb.style.display = "none";
-      section.appendChild(fb);
+      const feedback = document.createElement("div");
+      feedback.id = "f_" + task.id;
+      feedback.style.marginTop = "4px";
+      feedback.style.fontStyle = "italic";
+      div.appendChild(feedback);
 
-      app.appendChild(section);
+      div.style.marginBottom = "1em";
+      app.appendChild(div);
     });
 
-    function checkText(id, expected, explanation) {
+    function checkText(id, answer, explanation) {
       const input = document.getElementById(id);
       const feedback = document.getElementById("f_" + id);
-      if (input.value.trim().toLowerCase() === expected.trim().toLowerCase()) {
+      if (input.value.trim().toLowerCase() === answer.trim().toLowerCase()) {
         feedback.innerText = "✅ Richtig!";
       } else {
-        feedback.innerText = "❌ Falsch. Richtige Antwort: " + expected;
+        feedback.innerText = "❌ Falsch. Richtige Antwort: " + answer;
       }
-      if (explanation) feedback.innerText += " – " + explanation;
-      feedback.style.display = "block";
+      if (explanation) {
+        feedback.innerText += " – " + explanation;
+      }
     }
 
-    function selectOptionGroup(id, correct, chosen, explanation) {
-      const groupButtons = document.querySelectorAll(`button[data-group='${id}']`);
-      groupButtons.forEach((btn, idx) => {
-        btn.disabled = true;
-        if (idx === correct) btn.style.backgroundColor = "#c8e6c9";
-        else if (idx === chosen) btn.style.backgroundColor = "#ffcdd2";
-      });
-
-      const fb = document.getElementById("f_" + id);
-      if (correct === chosen) {
-        fb.innerText = "✅ Richtig!";
+    function checkMC(id, selected, correct, explanation) {
+      const feedback = document.getElementById("f_" + id);
+      if (selected === correct) {
+        feedback.innerText = "✅ Richtig!";
       } else {
-        fb.innerText = "❌ Falsch.";
+        feedback.innerText = "❌ Falsch.";
       }
-      if (explanation) fb.innerText += " – " + explanation;
-      fb.style.display = "block";
+      if (explanation) {
+        feedback.innerText += " – " + explanation;
+      }
     }
   </script>
 </body>
