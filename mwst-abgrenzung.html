@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lieferung vs. Dienstleistung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .options button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+
+    .correct {
+      background-color: lightgreen !important;
+      color: black !important;
+    }
+
+    .wrong {
+      background-color: lightcoral !important;
+      color: black !important;
+    }
+
+    .explanation {
+      margin-top: 10px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="mwst.html">← Zurück</a>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    function selectOptionGroup(groupId, correctIndex, clickedIndex) {
+      const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) {
+          btn.classList.add('correct');
+        }
+        if (idx === clickedIndex && idx !== correctIndex) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      if (clickedIndex !== correctIndex) {
+        const feedback = document.getElementById('f_' + groupId);
+        feedback.style.display = 'block';
+        feedback.textContent = "Richtige Antwort: " + buttons[correctIndex].innerText;
+      }
+    }
+
+    const tasks = [
+      { q: "1. Verkauf einer Banane", correct: 0 },
+      { q: "2. Ausarbeiten einer steuerlichen Einsprache durch einen Anwalt.", correct: 1 },
+      { q: "3. Einstellen des Ölbrenners durch eine Heizungsinstallationsfirma.", correct: 0 },
+      { q: "4. Impfen des Hundes durch den Tierarzt.", correct: 0 },
+      { q: "5. Fahrzeugvermietung", correct: 0 },
+      { q: "6. Reinigung und Bügeln von Hemden", correct: 0 },
+      { q: "7. Reinigung von Strassen, Schneeräumung", correct: 0 },
+      { q: "8. Pflügen und Eggen des Bodens", correct: 1 },
+      { q: "9. Beförderung von Personen", correct: 1 },
+      { q: "10. Vermieten von Tennisschlägern", correct: 0 },
+      { q: "11. Verpackungsleistungen (Ware & Material)", correct: 0 },
+      { q: "12. Erstellen von Bauten", correct: 0 },
+      { q: "13. Befördern von Gegenständen", correct: 1 },
+      { q: "14. Überlassen von Patenten, Marken und Lizenzen", correct: 1 },
+      { q: "15. Verkauf von Software auf CD-ROM", correct: 0 },
+      { q: "16. Verkauf von Software mittels Internet-Download", correct: 1 },
+      { q: "17. Architektur- und Ingenieurleistungen", correct: 1 },
+      { q: "18. Beurkundung von Rechtsgeschäften", correct: 1 },
+      { q: "19. Vermietung von Personal (Temporärbüros)", correct: 1 },
+      { q: "20. Übernachtung in einem Hotel", correct: 1 },
+      { q: "21. Vermietung eines einzelnen Campingplatzes", correct: 1 },
+      { q: "22. Eintritt in ein Freibad", correct: 1 },
+    ];
+
+    const container = document.getElementById("quiz-container");
+
+    tasks.forEach((task, i) => {
+      const section = document.createElement("div");
+      section.className = "section";
+      const id = "q" + (i + 1);
+      section.innerHTML = `<h2>${task.q}</h2>`;
+
+      const optionsDiv = document.createElement("div");
+      optionsDiv.className = "options";
+
+      ["Lieferung", "Dienstleistung"].forEach((opt, index) => {
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.dataset.group = id;
+        btn.onclick = () => selectOptionGroup(id, task.correct, index);
+        optionsDiv.appendChild(btn);
+      });
+
+      section.appendChild(optionsDiv);
+
+      const fb = document.createElement("div");
+      fb.id = "f_" + id;
+      fb.className = "explanation";
+      fb.style.display = "none";
+      section.appendChild(fb);
+
+      container.appendChild(section);
+    });
+  </script>
+</body>
+</html>
