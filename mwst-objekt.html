@@ -1,197 +1,173 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Steuerobjekte der Inlandsteuer</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: url('hintergrund.jpg') no-repeat center center fixed;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
       background-size: cover;
       margin: 0;
       padding: 40px 20px;
       color: black;
     }
+
     .container {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
-      padding: 40px;
+      padding: 30px;
       max-width: 900px;
-      margin: 100px auto;
+      margin: 40px auto;
     }
+
     h2 {
-      text-align: center;
+      margin-top: 0;
     }
+
     .question {
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
-    .question p {
-      margin: 0 0 10px 0;
-      font-weight: bold;
-    }
-    .options button {
-      background-color: #333;
+
+    .option {
+      display: inline-block;
+      background: black;
       color: white;
-      border: none;
-      padding: 10px 20px;
-      margin-right: 10px;
-      border-radius: 6px;
+      padding: 6px 14px;
+      margin: 5px;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background 0.3s;
     }
-    .options button.correct {
-      background-color: green;
+
+    .option.correct {
+      background: green;
     }
-    .options button.incorrect {
-      background-color: red;
+
+    .option.incorrect {
+      background: red;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <a class="back-link" href="mwst.html">← Zurück</a>
     <h2>Steuerobjekte der Inlandsteuer</h2>
 
-    <div class="question">
-      <p>1. Liegt eine Leistung im Sinne der MWST vor, wenn eine MWST-pflichtige Person ihre Aktiven durch das Konkursamt angeordnet und durchgeführt veräußert?</p>
-      <div class="options" data-answer="ja">
-        <button>ja</button>
-        <button>nein</button>
-      </div>
+    <div class="question" data-answer="ja">1. Liegt eine Leistung im Sinne der MWST vor, wenn eine MWST-pflichtige Person ihre Aktiven durch das Konkursamt angeordnet und durchgeführt veräussert?
+      <div class="option">ja</div>
+      <div class="option">nein</div>
     </div>
 
-    <div class="question">
-      <p>2. Sind Schadenersatzzahlungen von Versicherungen eine Leistung im Sinne der MWST?</p>
-      <div class="options" data-answer="nein">
-        <button>ja</button>
-        <button>nein</button>
-      </div>
+    <div class="question" data-answer="nein">2. Sind Schadenersatzzahlungen von Versicherungen eine Leistung im Sinne der MWST?
+      <div class="option">ja</div>
+      <div class="option">nein</div>
     </div>
 
-    <div class="question">
-      <p>3. Lösen Spenden und Subventionen eine Umsatzsteuer aus?</p>
-      <div class="options" data-answer="nein">
-        <button>ja</button>
-        <button>nein</button>
-      </div>
+    <div class="question" data-answer="nein">3. Lösen Spenden und Subventionen eine Umsatzsteuer aus?
+      <div class="option">ja</div>
+      <div class="option">nein</div>
     </div>
 
-    <div class="question">
-      <p>4. Stellt die Tätigkeit des Verwaltungsrates eine Leistung im Sinne der MWST dar?</p>
-      <div class="options" data-answer="nein">
-        <button>ja</button>
-        <button>nein</button>
-      </div>
+    <div class="question" data-answer="nein">4. Stellt die Tätigkeit des Verwaltungsrates eine Leistung im Sinne der MWST dar?
+      <div class="option">ja</div>
+      <div class="option">nein</div>
     </div>
 
-    <div class="question">
-      <p>5. Sind Abwasser- und Kanalisationsgebühren einer Gemeinde steuerbar?</p>
-      <div class="options" data-answer="ja">
-        <button>ja</button>
-        <button>nein</button>
-      </div>
+    <div class="question" data-answer="ja">5. Sind Abwasser- und Kanalisationsgebühren einer Gemeinde steuerbar?
+      <div class="option">ja</div>
+      <div class="option">nein</div>
     </div>
 
-    <div class="question">
-      <p>6. Wie sind Wassergebühren einer Gemeinde steuerbar?</p>
-      <div class="options" data-answer="zum reduzierten Satz">
-        <button>gar nicht</button>
-        <button>Normal</button>
-        <button>zum reduzierten Satz</button>
-      </div>
+    <div class="question" data-answer="zum reduzierten Satz">6. Wie sind Wassergebühren einer Gemeinde steuerbar?
+      <div class="option">gar nicht</div>
+      <div class="option">Normal</div>
+      <div class="option">zum reduzierten Satz</div>
     </div>
 
-    <div class="question">
-      <p>7. Ein Kur- und Verkehrsverein erhält Kurtaxe. Welchen Einfluss können diese auf die MWST haben?</p>
-      <div class="options" data-answer="Vorsteuerkürzung">
-        <button>Umsatzsteuer</button>
-        <button>Vorsteuerkürzung</button>
-        <button>Keinen</button>
-      </div>
+    <div class="question" data-answer="Vorsteuerkürzung">7. Ein Kur- und Verkehrsverein erhält Kurtaxe. Welchen Einfluss können diese auf die MWST haben?
+      <div class="option">Umsatzsteuer</div>
+      <div class="option">Vorsteuerkürzung</div>
+      <div class="option">Keinen</div>
     </div>
 
-    <div class="question">
-      <p>8. Die Auto AG in Zürich vermietet seinen in London wohnhaften Kunden ein Auto für die Rundreise in der Schweiz. Wo ist der Ort der steuerbaren Leistung?</p>
-      <div class="options" data-answer="Zürich">
-        <button>Zürich</button>
-        <button>London</button>
-        <button>Gefahrene/ Fahrende Strecke</button>
-      </div>
+    <div class="question" data-answer="Zürich">8. Die Auto AG in Zürich vermietet seinen in London wohnhaften Kunden ein Auto für die Rundreise in der Schweiz. Wo ist der Ort der steuerbaren Leistung?
+      <div class="option">Zürich</div>
+      <div class="option">London</div>
+      <div class="option">Gefahrene/ Fahrende Strecke</div>
     </div>
 
-    <div class="question">
-      <p>9. Die Abfall GmbH aus Graubünden entsorgt im Auftrag der Gemeinde Lustenau (AT) den Abfall der Gemeindebewohner.</p>
-      <div class="options" data-answer="Dienstleistung">
-        <button>Lieferung</button>
-        <button>Dienstleistung</button>
-      </div>
-      <div class="options" data-answer="Lustenau">
-        <button>Graubünden</button>
-        <button>Lustenau</button>
-      </div>
+    <div class="question" data-answer="Dienstleistung">9.1 Die Abfall GmbH aus Graubünden entsorgt im Auftrag der Gemeinde Lustenau (AT) den Abfall der Gemeindebewohner. Was liegt vor?
+      <div class="option">Lieferung</div>
+      <div class="option">Dienstleistung</div>
+    </div>
+    <div class="question" data-answer="Lustenau">9.2 Ort der Leistung:
+      <div class="option">Graubünden</div>
+      <div class="option">Lustenau</div>
     </div>
 
-    <div class="question">
-      <p>10. Architekturleistungen eines in Zug ansässigen Einzelunternehmens für eine Liegenschaft in Berlin.</p>
-      <div class="options" data-answer="Berlin">
-        <button>Zug</button>
-        <button>Berlin</button>
-      </div>
+    <div class="question" data-answer="Berlin">10. Architekturleistungen eines in Zug ansässigen Einzelunternehmens für eine Liegenschaft in Berlin.
+      <div class="option">Zug</div>
+      <div class="option">Berlin</div>
     </div>
 
-    <div class="question">
-      <p>11. Ein in Luzern ansässiges Transportunternehmen transportiert im Auftrag der in Basel ansässigen Bon SA eine Ladung Käse von Zürich nach Paris.</p>
-      <div class="options" data-answer="Basel">
-        <button>Luzern</button>
-        <button>Basel</button>
-        <button>Zürich</button>
-        <button>Paris</button>
-      </div>
-      <div class="options" data-answer="Export">
-        <button>Export</button>
-        <button>Steuer geschuldet</button>
-      </div>
+    <div class="question" data-answer="Basel">11.1 Transportauftrag Käse von Zürich nach Paris. Wer schuldet Steuer?
+      <div class="option">Luzern</div>
+      <div class="option">Basel</div>
+      <div class="option">Zürich</div>
+      <div class="option">Paris</div>
+    </div>
+    <div class="question" data-answer="Export">11.2 Wie wird dieser Transport steuerlich behandelt?
+      <div class="option">Export</div>
+      <div class="option">Steuer geschuldet</div>
     </div>
 
-    <div class="question">
-      <p>12. Ein Tennisspieler aus Zürich wirbt an einem Tennisturnier in Basel für die Frankfurter Bank.</p>
-      <div class="options" data-answer="Frankfurt">
-        <button>Zürich</button>
-        <button>Basel</button>
-        <button>Frankfurt</button>
-      </div>
+    <div class="question" data-answer="Frankfurt">12. Ein Tennisspieler aus Zürich wirbt an einem Tennisturnier in Basel für die Frankfurter Bank.
+      <div class="option">Zürich</div>
+      <div class="option">Basel</div>
+      <div class="option">Frankfurt</div>
     </div>
 
-    <div class="question">
-      <p>13. Stellt das Vermieten einer Bankschließfaches eine steuerbare Leistung dar?</p>
-      <div class="options" data-answer="ja">
-        <button>ja</button>
-        <button>nein</button>
-      </div>
+    <div class="question" data-answer="ja">13. Stellt das Vermieten einer Bankschliessfaches eine steuerbare Leistung dar?
+      <div class="option">ja</div>
+      <div class="option">nein</div>
     </div>
 
-    <div class="question">
-      <p>14. Kann eine Versicherung auf Versicherungsleistungen optieren?</p>
-      <div class="options" data-answer="nein">
-        <button>ja</button>
-        <button>nein</button>
-      </div>
+    <div class="question" data-answer="nein">14. Kann eine Versicherung auf Versicherungsleistungen optieren?
+      <div class="option">ja</div>
+      <div class="option">nein</div>
     </div>
   </div>
 
   <script>
-    const allOptions = document.querySelectorAll('.options');
-    allOptions.forEach(group => {
-      const correct = group.getAttribute('data-answer');
-      const buttons = group.querySelectorAll('button');
-      buttons.forEach(button => {
-        button.addEventListener('click', () => {
-          buttons.forEach(btn => btn.disabled = true);
-          if (button.textContent === correct) {
-            button.classList.add('correct');
+    document.querySelectorAll('.question').forEach(question => {
+      const correct = question.dataset.answer;
+
+      question.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', () => {
+          if (question.classList.contains('answered')) return;
+
+          question.classList.add('answered');
+          const selected = option.textContent.trim();
+
+          if (selected === correct) {
+            option.classList.add('correct');
           } else {
-            button.classList.add('incorrect');
-            buttons.forEach(btn => {
-              if (btn.textContent === correct) btn.classList.add('correct');
+            option.classList.add('incorrect');
+            question.querySelectorAll('.option').forEach(opt => {
+              if (opt.textContent.trim() === correct) {
+                opt.classList.add('correct');
+              }
             });
           }
         });
