@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bilanzanalyse – Aufgabenset</title>
   <style>
     body {
@@ -93,7 +93,7 @@
 </head>
 <body>
   <div class="section">
-    <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
+    <a class="back-link" href="frw.html">← Zurück</a>
   </div>
 
   <div id="quiz-container"></div>
@@ -106,10 +106,12 @@
     function checkWord(inputId, correctWord, feedbackId, explanation = "") {
       const input = document.getElementById(inputId);
       const feedback = document.getElementById(feedbackId);
-      const answer = normalize(input.value);
-      const correct = normalize(correctWord);
+      const userAnswer = normalize(input.value);
+      const correctAnswer = normalize(correctWord);
 
-      if (answer === correct) {
+      feedback.innerHTML = ""; // Reset vorheriger Text
+
+      if (userAnswer === correctAnswer) {
         input.classList.add("correct");
         input.classList.remove("wrong");
         feedback.textContent = "Richtig! ✅";
@@ -117,7 +119,7 @@
       } else {
         input.classList.add("wrong");
         input.classList.remove("correct");
-        input.value = correctWord;
+        input.value = correctWord; // Korrektur anzeigen
         feedback.textContent = "Falsch. Richtige Antwort: " + correctWord;
         feedback.style.color = "red";
       }
@@ -144,26 +146,26 @@
 
       const feedback = document.getElementById('f_' + groupId);
       feedback.style.display = 'block';
-      feedback.innerHTML = explanation;
+      feedback.innerHTML = explanation || "";
     }
 
     const tasks = [
-      { q: "1. Fremdfinanzierungsgrad:", id: "a1", type: "text", answer: "Fremdkapital" },
+      { q: "1. Fremdfinanzierungsgrad:", id: "a1", type: "text", answer: "Fremdkapital / Gesamtkapital" },
       { q: "2. Wie hoch sollte der Fremdfinanzierungsgrad sein?", id: "a2", type: "mc", options: ["10 – 40%", "40 – 70%", "50 – 80%"], correct: 1 },
-      { q: "3. Eigenfinanzierungsgrad", id: "a3", type: "text", answer: "Eigenkapital" },
+      { q: "3. Eigenfinanzierungsgrad", id: "a3", type: "text", answer: "Eigenkapital / Gesamtkapitel" },
       { q: "4. Wie hoch sollte der Eigenfinanzierungsgrad sein?", id: "a4", type: "mc", options: ["30 – 60%", "50 – 80%", "60 – 85%"], correct: 0 },
-      { q: "5. Selbstfinanzierungsgrad:", id: "a5", type: "text", answer: "Gewinnreserven", explanation: "Es lässt sich prüfen, in welchem Ausmass die Unternehmung sich aus erarbeiteten Mitteln selbst finanzieren kann oder will." },
-      { q: "6. Intensität des Umlaufvermögens:", id: "a6", type: "text", answer: "Umlaufvermögen", explanation: "Der Richtwert ist abhängig von der Art des Unternehmens. Bei Holding ist der Richtwert anders als bei üblichen Gesellschaften." },
-      { q: "7. Intensität des Anlagevermögens:", id: "a7", type: "text", answer: "Anlagevermögen", explanation: "Eine hohe Anlageintensität hat grosse Fixkosten in Form von Abschreibungen und Kapitalzinsen zur Folge." },
-      { q: "8. Liquiditätsgrad 1:", id: "a8", type: "text", answer: "Flüssige Mittel" },
+      { q: "5. Selbstfinanzierungsgrad:", id: "a5", type: "text", answer: "Gewinnreserven / Eigenkapital", explanation: "Es lässt sich prüfen, in welchem Ausmass die Unternehmung sich aus erarbeiteten Mitteln selbst finanzieren kann oder will." },
+      { q: "6. Intensität des Umlaufvermögens:", id: "a6", type: "text", answer: "Umlaufvermögen / Gesamtvermögen", explanation: "Der Richtwert ist abhängig von der Art des Unternehmens. Bei Holding ist der Richtwert anders als bei üblichen Gesellschaften." },
+      { q: "7. Intensität des Anlagevermögens:", id: "a7", type: "text", answer: "Anlagevermögen / Gesamtvermögen", explanation: "Eine hohe Anlageintensität hat grosse Fixkosten in Form von Abschreibungen und Kapitalzinsen zur Folge." },
+      { q: "8. Liquiditätsgrad 1:", id: "a8", type: "text", answer: "Flüssige (liquide) Mittel / Kurzfristiges Fremdkapital" },
       { q: "9. Wie hoch sollte der Liquiditätsgrad 1 sein?", id: "a9", type: "mc", options: ["10 – 35%", "20 – 50%", "30 – 55%"], correct: 0, explanation: "Es besteht ein Zielkonflikt zwischen Liquidität und Rentabilität." },
-      { q: "10. Liquiditätsgrad 2:", id: "a10", type: "text", answer: "Forderungen" },
+      { q: "10. Liquiditätsgrad 2:", id: "a10", type: "text", answer: "Flüssige (liquide) Mittel + Forderungen / kurzfristiges Fremdkapital" },
       { q: "11. Wie hoch sollte der Liquiditätsgrad 2 sein?", id: "a11", type: "mc", options: ["mind. 80%", "mind. 90%", "mind. 100%"], correct: 2 },
-      { q: "12. Liquiditätsgrad 3:", id: "a12", type: "text", answer: "Umlaufvermögen" },
+      { q: "12. Liquiditätsgrad 3:", id: "a12", type: "text", answer: "Umlaufvermögen / kurzfristiges Fremdkapital" },
       { q: "13. Wie hoch sollte der Liquiditätsgrad 3 sein?", id: "a13", type: "mc", options: ["120 – 180%", "150 – 200%", "170 – 220%"], correct: 1 },
-      { q: "14. Anlagedeckungsgrad 1:", id: "a14", type: "text", answer: "Eigenkapital" },
+      { q: "14. Anlagedeckungsgrad 1:", id: "a14", type: "text", answer: "Eigenkapital / Anlagevermögen" },
       { q: "15. Wie hoch sollte der Anlagedeckungsgrad sein?", id: "a15", type: "mc", options: ["55-85%", "65-90%", "75-100%"], correct: 2 },
-      { q: "16. Anlagedeckungsgrad 2:", id: "a16", type: "text", answer: "Selbstkapital" },
+      { q: "16. Anlagedeckungsgrad 2:", id: "a16", type: "text", answer: "Eigenkapital + langfristiges Selbstkapital / Anlagevermögen" },
       { q: "17. Wie hoch sollte der Anlagedeckungsgrad 2 sein?", id: "a17", type: "mc", options: ["mind. 100%", "mind. 110%", "mind. 120%"], correct: 0 },
       { q: "18. Wie wird der Anlagedeckungsgrad 2 auch noch genannt?", id: "a18", type: "text", answer: "goldene Bilanzregel", explanation: "Sie verlangt, dass langfristig investiertes Vermögen auch langfristig finanziert wird, am besten mit Eigenkapital und sonst mit Fremdkapital." }
     ];
@@ -194,8 +196,8 @@
       } else {
         const inputBox = document.createElement("div");
         inputBox.className = "input-box";
-        inputBox.innerHTML = `<input type='text' id='${task.id}' placeholder='Begriff eingeben...'>
-          <button onclick="checkWord('${task.id}', '${task.answer}', 'f_${task.id}', \"${task.explanation || ''}\")">OK</button>`;
+        inputBox.innerHTML = `<input type='text' id='${task.id}' placeholder='Formel eingeben...'>
+          <button onclick="checkWord('${task.id}', \`${task.answer}\`, 'f_${task.id}', \`${task.explanation || ''}\`)">OK</button>`;
         section.appendChild(inputBox);
         const fb = document.createElement("div");
         fb.id = "f_" + task.id;
