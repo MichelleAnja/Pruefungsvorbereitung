@@ -56,10 +56,12 @@
 
     .correct {
       background-color: lightgreen !important;
+      color: black !important;
     }
 
     .wrong {
       background-color: lightcoral !important;
+      color: black !important;
     }
 
     .explanation {
@@ -79,16 +81,6 @@
       color: white;
     }
 
-    .options button.correct {
-      background-color: lightgreen !important;
-      color: black;
-    }
-
-    .options button.wrong {
-      background-color: lightcoral !important;
-      color: black;
-    }
-
     .back-link {
       display: inline-block;
       margin-bottom: 20px;
@@ -101,8 +93,10 @@
 </head>
 <body>
   <div class="section">
-    <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
+    <a class="back-link" href="frw.html">← Zurück</a>
   </div>
+
+  <div id="quiz-container"></div>
 
   <script>
     function normalize(text) {
@@ -117,49 +111,39 @@
 
       if (answer.includes(correct)) {
         input.classList.add('correct');
+        input.classList.remove('wrong');
         feedback.textContent = "Richtig! ✅";
-        feedback.style.color = 'green';
-        if (explanation) {
-          const info = document.createElement('div');
-          info.className = 'explanation';
-          info.textContent = explanation;
-          feedback.appendChild(info);
-        }
       } else {
         input.classList.add('wrong');
-        input.value = correctAnswer;
+        input.classList.remove('correct');
         feedback.textContent = "Falsch. Die richtige Antwort ist: " + correctAnswer;
-        feedback.style.color = 'red';
-        if (explanation) {
-          const info = document.createElement('div');
-          info.className = 'explanation';
-          info.textContent = explanation;
-          feedback.appendChild(info);
-        }
-      }
-    }
-
-    function selectOption(button, isCorrect, feedbackId, allButtons, explanation = "") {
-      allButtons.forEach(btn => btn.disabled = true);
-
-      if (isCorrect) {
-        button.classList.add('correct');
-      } else {
-        button.classList.add('wrong');
-        const correctBtn = allButtons.find(b => b.dataset.correct === "true");
-        if (correctBtn) correctBtn.classList.add('correct');
       }
 
-      const feedback = document.getElementById(feedbackId);
-      feedback.style.display = 'block';
-      feedback.style.color = 'black';
       if (explanation) {
-        feedback.innerHTML = explanation;
+        const info = document.createElement('div');
+        info.className = 'explanation';
+        info.textContent = explanation;
+        feedback.appendChild(info);
       }
     }
-  </script>
 
-  <script>
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation = "") {
+      const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) {
+          btn.classList.add('correct');
+        }
+        if (idx === clickedIndex && idx !== correctIndex) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      const feedback = document.getElementById('f_' + groupId);
+      feedback.style.display = 'block';
+      feedback.innerHTML = explanation;
+    }
+
     const tasks = [
       { q: "1. Fremdfinanzierungsgrad:", id: "a1", answer: "Fremdkapital / Gesamtkapital" },
       { q: "2. Wie hoch sollte der Fremdfinanzierungsgrad sein?", id: "a2", type: "mc", options: ["10 – 40%", "40 – 70%", "50 – 80%"], correct: 1 },
@@ -181,29 +165,45 @@
       { q: "18. Wie wird der Anlagedeckungsgrad 2 auch noch genannt?", id: "a18", answer: "goldene Bilanzregel", explanation: "Sie verlangt, dass langfristig investiertes Vermögen auch langfristig finanziert wird, am besten mit Eigenkapital und sonst mit Fremdkapital." }
     ];
 
-    for (const task of tasks) {
-      document.write(`<div class='section'><h2>${task.q}</h2>`);
+    const container = document.getElementById("quiz-container");
+
+    tasks.forEach(task => {
+      const section = document.createElement("div");
+      section.className = "section";
+      section.innerHTML = `<h2>${task.q}</h2>`;
+
       if (task.type === "mc") {
-        document.write(`<div class='options'>`);
-        const btns = [];
-        task.options.forEach((opt, i) => {
-          const isCorrect = i === task.correct;
-          const btnId = `btn_${task.id}_${i}`;
-          document.write(`<button id='${btnId}' data-correct='${isCorrect}' onclick=\"selectOption(this, ${isCorrect}, 'f_${task.id}', [${task.options.map((_, j) => `document.getElementById('btn_${task.id}_${j}')`).join(',')}], \"${task.explanation || ''}\")\">${opt}</button>`);
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+        task.options.forEach((opt, index) => {
+          const btn = document.createElement("button");
+          btn.innerText = opt;
+          btn.dataset.group = task.id;
+          btn.onclick = () => selectOptionGroup(task.id, task.correct, index, task.explanation || "");
+          optionsDiv.appendChild(btn);
         });
-        document.write(`</div><div id='f_${task.id}' class='explanation' style='display:none'></div>`);
+        section.appendChild(optionsDiv);
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        fb.style.display = "none";
+        section.appendChild(fb);
       } else {
-        document.write(`
-          <div class='input-box'>
-            <input type='text' id='${task.id}' placeholder='Antwort eingeben...'>
-            <button onclick=\"checkAnswer('${task.id}', '${task.answer}', 'f_${task.id}', \"${task.explanation || ''}\")\">OK</button>
-          </div>
-          <div id='f_${task.id}' class='explanation'></div>
-        `);
+        const inputBox = document.createElement("div");
+        inputBox.className = "input-box";
+        inputBox.innerHTML = `<input type='text' id='${task.id}' placeholder='Antwort eingeben...'>
+          <button onclick="checkAnswer('${task.id}', '${task.answer}', 'f_${task.id}', \"${task.explanation || ''}\")">OK</button>`;
+        section.appendChild(inputBox);
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        section.appendChild(fb);
       }
-      document.write(`</div>`);
-    }
+
+      container.appendChild(section);
+    });
   </script>
 </body>
 </html>
+
 
