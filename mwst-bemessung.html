@@ -62,4 +62,108 @@
 </head>
 <body>
 <a class="back-link" href="mwst.html">← Zurück</a>
-<h2 style="text-align:
+<h2 style="text-align:center">Bemessungsgrundlage / Entgelt / Entgeltsminderung</h2>
+<div id="form"></div>
+
+<script>
+const questions = [
+  {
+    q: "Eine Arbeitnehmerin erwirbt diverse Produkte für CHF 800.00. Der Ladenpreis beläuft sich auf CHF 1'000.00. (Beiträge inkl. allfällige MWST). Welcher Betrag ist massgebend für die Berechnung der MWST (inkl)?",
+    options: ["CHF 800", "CHF 1’000"],
+    correct: "CHF 800"
+  },
+  {
+    q: "Eine Mitarbeiterin erhält von ihrem Arbeitgeber zum Geburtstag eine Porzellanvase aus dem Verkaufssortiment. Der Ladenpreis inkl. MWST ist CHF 1'500.00. Zusätzlich erhält sie jedes Jahr ein Halbtax der SBB von CHF 175.00. Welcher Betrag ist massgebend für die Bemessungsgrundlage der MWST (inkl)?",
+    options: ["CHF 1’675", "CHF 1’500", "CHF 175", "CHF 0"],
+    correct: "CHF 1’500"
+  },
+  {
+    q: "Ein Unternehmen hat für einen Kunden ein neues Fabrikgebäude gebaut. Da dieser Kunde nicht die ganzen Kosten decken konnten, wurden die offenen Forderungen per 30. Juni des Jahres n in ein Darlehen mit einem Zinssatz von 4% umgewandelt. Die CHF 6'000 Zinsen werden per 31.12. bezahlt. Da es der Firma finanziell schlecht geht, meldet sie per 31.03. des Jahres n+2 den Konkurs. Auf welchen Betrag ist die MWST in diesem Zusammenhang geschuldet?",
+    options: ["CHF 300’000", "CHF 306’000", "CHF 6’000"],
+    correct: "CHF 300’000",
+    extra: "Die Zahlungsunfähigkeit kann aufgrund des Konkurses nicht als Entgeltminderung geltend gemacht werden, da es sich um ein Darlehen handelt und nicht um eine Kundenforderung."
+  },
+  {
+    q: "Eine Kundenrechnung wird nicht bezahlt. Es wird die Betreibung eingeleitet. Die Kundenrechnung wird durch den Zahlungsbefehl bezahlt. Ist auf die vorgeschossenen Betreibungsgebühren sowie auf die Verzugszinsen Umsatzsteuer abzurechnen?",
+    options: ["ja", "nein"],
+    correct: "nein"
+  },
+  {
+    q: "Ein Kunde kann die Rechnung nicht zahlen. Es wird ein Zahlungsabkommen vereinbart. Durch das Zahlungsabkommen wird ein Teilzahlungszuschlag von CHF 500.- vereinbart. Ist auf den Zahlungszuschlag Umsatzsteuer abzuliefern?",
+    options: ["ja", "nein"],
+    correct: "ja"
+  },
+  {
+    q: "Ein Zeitschriftenverlag verkauft ein «Aboset» von normalerweise CHF 110.00, welches sich aus CHF 100.- für die Zeitschriften und CHF 10.- für einen Kugelschreiber zusammensetzt, für den Aktionspreis von CHF 80.00. Welcher Steuersatz ist abzurechnen?",
+    options: ["2.6% und 8.1% anteilig", "8.1%", "2.6%"],
+    correct: "2.6%",
+    extra: "Es werden selbständige Leistungen erbracht, die steuerlich nicht gleich zu behandeln sind. Diese werden jedoch zu einem Gesamtentgelt (Pauschalpreis) fakturiert und mindestens 70% aller Leistungen zusammen steuerlich gleichbehandelt. Art. 19 Abs. 2 MWSTG."
+  },
+  {
+    q: "Die Zoohandlung in Basel verrechnet dem Kunden folgende Leistungen: 3 Papageien für CHF 200.00 (8.1%), Vogelfutter für CHF 100.00 (2.6%), Mäuse für Fütterungszwecke für CHF 100.00 (2.6%), 9 Zierfische für CHF 200.00 (8.1%), Verpackung und Transport für CHF 150.00 (2.6% / 8.1%). Wie ist die Verpackung und der Transport zu versteuern?",
+    options: ["2.6% und 8.1% anteilig", "8.1%", "2.6%"],
+    correct: "2.6% und 8.1% anteilig",
+    extra: "Die Aufteilung sollte wertmässig erfolgen. Wenn das nicht praktikabel ist, können Nebenkosten proportional nach dem Gesamtwert verteilt oder zum Normalsatz versteuert werden."
+  },
+  {
+    q: "Das Modehaus in Wetzikon stellt folgende Rechnung an ihren Kunden: 2 Paar Hosen CHF 180, 1 Paar Socken CHF 500, Post-Zustellkosten Inland CHF 20, Kosten für Express-Luftfracht (Direktimport aus Malaysia auf Wunsch; mit 0% MWST) CHF 300. Auf welchen Betrag ist die Umsatzsteuer geschuldet?",
+    options: ["CHF 680", "CHF 700", "CHF 1’000"],
+    correct: "CHF 1’000",
+    extra: "Der gesamte Rechnungsbetrag unterliegt der Steuer zum Normalsatz. Zum Entgelt gehört alles, was der Empfänger als Gegenleistung aufwendet. Art. 24 Abs. 1 MWSTG."
+  },
+  {
+    q: "Ein Gartenbauunternehmen stellt folgende Rechnung: Anpflanzen von Zierbäumen CHF 400, 10 Zierbäume CHF 500, Mulch und anderes Abdeckmaterial CHF 50. Zu welchem Satz muss der Mulch versteuert werden?",
+    options: ["8.1%", "2.6%"],
+    correct: "8.1%",
+    extra: "Wenn Mulch im Rahmen eines Werkvertrags geliefert wird, gilt er als Nebenleistung zur Hauptleistung und ist zum Normalsatz zu versteuern. Art. 19 Abs. 4 MWSTG."
+  },
+  {
+    q: "Ein Kunstwerk wird von einem nicht im MWST-Register eingetragenen Bildhauer für CHF 20'000 gekauft. Drei Monate später wird das Kunstwerk für CHF 31'000 verkauft. Wie wird der Prozess steuerlich behandelt?",
+    options: ["Vorsteuer und Umsatzsteuer", "Fiktiver Vorsteuerabzug", "Margenbesteuerung"],
+    correct: "Margenbesteuerung"
+  },
+  {
+    q: "Wie ist die Bemessungsgrundlage der Margenbesteuerung?",
+    options: ["CHF 31’000", "CHF 20’000", "CHF 11’000"],
+    correct: "CHF 11’000"
+  }
+];
+
+const container = document.getElementById("form");
+questions.forEach((item, index) => {
+  const section = document.createElement("div");
+  section.className = "section";
+  const id = `feedback${index+1}`;
+
+  const optionsHTML = item.options.map(opt => `
+    <button onclick="selectOption(this, '${opt}', '${item.correct}', '${id}', ${JSON.stringify(item.extra || '')})">${opt}</button>
+  `).join('');
+
+  section.innerHTML = `
+    <h2>${index + 1}. ${item.q}</h2>
+    <div class="options">
+      ${optionsHTML}
+    </div>
+    <div id="${id}" class="explanation"></div>
+  `;
+  container.appendChild(section);
+});
+
+function selectOption(button, chosen, correct, feedbackId, extraText) {
+  const buttons = button.parentElement.querySelectorAll('button');
+  buttons.forEach(btn => btn.disabled = true);
+  const feedback = document.getElementById(feedbackId);
+  feedback.style.display = 'block';
+  if (chosen === correct) {
+    button.classList.add('correct');
+    feedback.innerHTML = `Richtig! ✅<br>${extraText || ''}`;
+    feedback.style.color = 'green';
+  } else {
+    button.classList.add('wrong');
+    feedback.innerHTML = `Falsch ❌ – Richtige Antwort: ${correct}<br>${extraText || ''}`;
+    feedback.style.color = 'red';
+  }
+}
+</script>
+</body>
+</html>
