@@ -27,7 +27,7 @@
       margin-bottom: 16px;
       font-weight: normal;
     }
-    .options button, .options input[type="text"] {
+    .options button {
       margin: 5px;
       padding: 10px 16px;
       font-size: 16px;
@@ -39,9 +39,11 @@
     }
     .correct {
       background-color: lightgreen !important;
+      color: black !important;
     }
     .wrong {
       background-color: lightcoral !important;
+      color: black !important;
     }
     .explanation {
       margin-top: 10px;
@@ -60,128 +62,4 @@
 </head>
 <body>
 <a class="back-link" href="mwst.html">← Zurück</a>
-<h2 style="text-align:center">Bemessungsgrundlage / Entgelt / Entgeltsminderung</h2>
-<div id="form"></div>
-
-<script>
-const questions = [
-  {
-    q: "Eine Arbeitnehmerin erwirbt diverse Produkte für CHF 800.00...\nWelcher Betrag ist massgebend für die Berechnung der MWST(inkl)?",
-    options: ["CHF 800", "CHF 1’000"],
-    correct: "CHF 800"
-  },
-  {
-    q: "Eine Mitarbeiterin erhält von ihrem Arbeitgeber...\nWelcher Betrag ist massgebend für die Bemessungsgrundlage der MWST (Inkl)?",
-    options: ["CHF 1’675", "CHF 1’500", "CHF 175", "CHF 0"],
-    correct: "CHF 1’500"
-  },
-  {
-    q: "Ein Unternehmen hat für einen Kunden ein neues Fabrikgebäude gebaut...\nAuf welchen Betrag ist die MWST in diesem Zusammenhang geschuldet?",
-    options: ["CHF 300’000", "CHF 306’000", "CHF 6’000"],
-    correct: "CHF 300’000",
-    extra: "Die Zahlungsunfähigkeit... handelt und nicht um eine Kundenforderung."
-  },
-  {
-    q: "Eine Kundenrechnung wird nicht bezahlt... Umsatzsteuer abzurechnen?",
-    options: ["ja", "nein"],
-    correct: "nein"
-  },
-  {
-    q: "Ein Kunde kann die Rechnung nicht zahlen... Umsatzsteuer abzuliefern?",
-    options: ["ja", "nein"],
-    correct: "ja"
-  },
-  {
-    q: "Ein Zeitschriftenverlag verkauft ein «Aboset»...\nWelcher Steuersatz ist abzurechnen?",
-    options: ["2.6% und 8.1% anteilig", "8.1%", "2.6%"],
-    correct: "2.6%",
-    extra: "Es werden selbständige Leistungen... Art. 19 Abs. 2 MWSTG"
-  },
-  {
-    q: "Die Zoohandlung in Basel verrechnet dem Kunden folgende Leistungen...\nWie ist die Verpackung und den Transport zu versteuern?",
-    options: ["2.6% und 8.1% anteilig", "8.1%", "2.6%"],
-    correct: "2.6% und 8.1% anteilig",
-    extra: "Grundsätzlich wäre die Aufteilung... könnten die Verpackungs- und Transportkosten zum Normalsatz abgerechnet werden."
-  },
-  {
-    q: "Das Modehaus in Wetzikon stellt folgende Rechnung...\nAuf welchen Betrag ist die Umsatzsteuer geschuldet?",
-    options: ["CHF 680", "CHF 700", "CHF 1’000"],
-    correct: "CHF 1’000",
-    extra: "Der gesamte Rechnungsbetrag... Art. 24 Abs. 1 MWSTG)"
-  },
-  {
-    q: "Ein Gartenbauunternehmen stellt folgende Rechnung...\nZu welchem Satz muss der Mulch versteuert werden?",
-    options: ["8.1%", "2.6%"],
-    correct: "8.1%",
-    extra: "wenn sie im Rahmen einer solchen... der Steuer zum Normalsatz."
-  },
-  {
-    q: "Ein Kunstwerk wird von einem nicht im MWST-Register...\nWie wird der Prozess steuerlich behandelt?",
-    options: ["Vorsteuer und Umsatzsteuer", "Fiktiver Vorsteuerabzug", "Margenbesteuerung"],
-    correct: "Margenbesteuerung"
-  },
-  {
-    q: "Wie ist die Bemessungsgrundlage der Margenbesteuerung?",
-    options: ["CHF 31’000", "CHF 20’000", "CHF 11’000"],
-    correct: "CHF 11’000"
-  }
-];
-
-const container = document.getElementById("form");
-questions.forEach((item, index) => {
-  const section = document.createElement("div");
-  section.className = "section";
-  const id = `feedback${index+1}`;
-
-  const optionsHTML = item.options ? item.options.map(opt => `
-    <button onclick="selectOption(this, '${opt}' === '${item.correct}', '${id}', '${item.correct}', ${JSON.stringify(item.extra || '')})">${opt}</button>
-  `).join('') : `
-    <input type="text" placeholder="Antwort eingeben" onblur="checkInput(this, '${item.correct}', '${id}', ${JSON.stringify(item.extra || '')})">
-  `;
-
-  section.innerHTML = `
-    <h2>${index + 1}. ${item.q}</h2>
-    <div class="options">
-      ${optionsHTML}
-    </div>
-    <div id="${id}" class="explanation"></div>
-  `;
-  container.appendChild(section);
-});
-
-function selectOption(button, isCorrect, feedbackId, correctText, extraText) {
-  const buttons = button.parentElement.querySelectorAll('button');
-  buttons.forEach(btn => btn.disabled = true);
-  const feedback = document.getElementById(feedbackId);
-  feedback.style.display = 'block';
-  if (isCorrect) {
-    button.classList.add('correct');
-    feedback.innerHTML = `Richtig! ✅<br>${extraText || ''}`;
-    feedback.style.color = 'green';
-  } else {
-    button.classList.add('wrong');
-    feedback.innerHTML = `Falsch ❌ – Richtige Antwort: ${correctText}<br>${extraText || ''}`;
-    feedback.style.color = 'red';
-  }
-}
-
-function checkInput(input, correctAnswer, feedbackId, extraText) {
-  const feedback = document.getElementById(feedbackId);
-  feedback.style.display = 'block';
-  const userAnswer = input.value.trim().toLowerCase();
-  const correct = correctAnswer.trim().toLowerCase();
-  if (userAnswer === correct) {
-    input.classList.add('correct');
-    feedback.innerHTML = `Richtig! ✅<br>${extraText || ''}`;
-    feedback.style.color = 'green';
-  } else {
-    input.classList.add('wrong');
-    feedback.innerHTML = `Falsch ❌ – Richtige Antwort: ${correctAnswer}<br>${extraText || ''}`;
-    feedback.style.color = 'red';
-  }
-  input.disabled = true;
-}
-</script>
-</body>
-</html>
-
+<h2 style="text-align:
