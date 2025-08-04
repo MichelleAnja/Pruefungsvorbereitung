@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bemessungsgrundlage / Entgelt – Quiz</title>
   <style>
     body {
@@ -66,79 +66,80 @@
 <script>
 const questions = [
   {
-    q: "Eine Arbeitnehmerin erwirbt diverse Produkte für CHF 800.00. Der Ladenpreis beläuft sich auf CHF 1'000.00. (Beiträge inkl. Allfällige MWST) Welcher Betrag ist massgebend für die Berechnung der MWST(inkl)?",
+    q: "1. Eine Arbeitnehmerin erwirbt diverse Produkte für CHF 800.00. Der Ladenpreis beläuft sich auf CHF 1'000.00. (Beiträge inkl. allfällige MWST). Welcher Betrag ist massgebend für die Berechnung der MWST (inkl)?",
     options: ["CHF 800", "CHF 1’000"],
     correct: "CHF 800"
   },
   {
-    q: "Eine Mitarbeiterin erhält von ihrem Arbeitgeber zum Geburtstag eine Porzellanvase aus dem Verkaufssortiment. Der Ladenpreis inkl. MWST ist CHF 1'500.00. Zusätzlich erhält sie jedes Jahr ein Halbtax der SBB von CHF 175.00. Welcher Betrag ist massgebend für die Bemessungsgrundlage der MWST (Inkl)?",
+    q: "2. Eine Mitarbeiterin erhält von ihrem Arbeitgeber zum Geburtstag eine Porzellanvase aus dem Verkaufssortiment. Der Ladenpreis inkl. MWST ist CHF 1'500.00. Zusätzlich erhält sie jedes Jahr ein Halbtax der SBB von CHF 175.00. Welcher Betrag ist massgebend für die Bemessungsgrundlage der MWST (inkl)?",
     options: ["CHF 1’675", "CHF 1’500", "CHF 175", "CHF 0"],
     correct: "CHF 1’500"
   },
   {
-    q: "Ein Unternehmen hat für einen Kunden ein neues Fabrikgebäude gebaut. Da dieser Kunde nicht die ganzen Kosten decken konnten, wurden die offenen Forderungen per 30. Juni des Jahres n in ein Darlehen mit einem Zinssatz von 4% umgewandelt. Die CHF 6'000 Zinsen werden per 31.12. bezahlt. Da es der Firma finanziell schlecht geht, meldet sie per 31.03. des Jahres n+2 den Konkurs. Auf welchen Betrag ist die MWST in diesem Zusammenhang geschuldet?",
+    q: "3. Ein Unternehmen baut für einen Kunden ein Fabrikgebäude. Die offenen Forderungen werden in ein Darlehen (CHF 300'000) mit 4% Zins umgewandelt. Zinsen CHF 6'000 bis 31.12. Der Kunde geht am 31.03.n+2 in Konkurs. Auf welchen Betrag ist die MWST geschuldet?",
     options: ["CHF 300’000", "CHF 306’000", "CHF 6’000"],
     correct: "CHF 300’000",
     extra: "Die Zahlungsunfähigkeit kann aufgrund des Konkurses nicht als Entgeltminderung geltend gemacht werden, da es sich um ein Darlehen handelt und nicht um eine Kundenforderung."
   },
   {
-    q: "Eine Kundenrechnung wird nicht bezahlt. Es wird die Betreibung eingeleitet. Die Kundenrechnung wird durch den Zahlungsbefehl bezahlt, ist auf die vorgeschossenen Betreibungsgebühren sowie auf die Verzugszinsen Umsatzsteuer abzurechnen?",
+    q: "4. Eine Kundenrechnung wird nicht bezahlt, aber durch einen Zahlungsbefehl beglichen. Ist auf Betreibungsgebühren & Verzugszinsen MWST geschuldet?",
     options: ["ja", "nein"],
     correct: "nein"
   },
   {
-    q: "Ein Kunde kann die Rechnung nicht zahlen. Es wird ein Zahlungsabkommen vereinbart. Durch das Zahlungsabkommen wird ein Teilzahlungszuschlag von CHF 500.- vereinbart. Ist auf den Zahlungsumschlag Umsatzsteuer abzuliefern?",
+    q: "5. Ein Kunde kann nicht zahlen, es wird ein Zahlungsabkommen inkl. CHF 500 Zuschlag vereinbart. Ist auf diesen Zuschlag MWST geschuldet?",
     options: ["ja", "nein"],
     correct: "ja"
   },
   {
-    q: "Ein Zeitschriftenverlag verkauft ein «Aboset» von normalerweise CHF 110.00, welches sich aus CHF 100.- für die Zeitschriften und CHF 10.- für einen Kugelschreiber zusammensetzt, für den Aktionspreis von CHF 80.00. Welcher Steuersatz ist abzurechnen?",
+    q: "6. Ein Zeitschriftenverlag verkauft ein Aboset für CHF 80.00 (CHF 100 Zeitschriften, CHF 10 Kugelschreiber). Welcher Steuersatz ist abzurechnen?",
     options: ["2.6% und 8.1% anteilig", "8.1%", "2.6%"],
     correct: "2.6%",
-    extra: "Es werden selbständige Leistungen erbracht, die steuerlich nicht gleich zu behandeln sind. Diese werden jedoch zu einem Gesamtentgelt (Pauschalpreis) fakturiert wird und mindestens 70% aller Leistungen zusammen steuerlich gleichbehandelt sind. Art. 19 Abs. 2 MWSTG"
+    extra: "Art. 19 Abs. 2 MWSTG: Leistungen sind unterschiedlich, aber zu einem Gesamtentgelt fakturiert und zu über 70% gleichbehandelt."
   },
   {
-    q: "Die Zoohandlung in Basel verrechnet dem Kunden folgende Leistungen: - 3 Papageien für CHF 200.00 (8.1%) - Vogelfutter für CHF 100.00 (2.6%) - Mäuse für Fütterungszwecke für CHF 100.00 (2.6%) - 9 Zierfische für CHF 200.00 (8.1%) - Verpackung und Transport für CHF 150.00 (2.6% / 8.1%) Wie ist die Verpackung und den Transport zu versteuern?",
+    q: "7. Zoohandlung verkauft: 3 Papageien (8.1%), Vogelfutter (2.6%), Mäuse (2.6%), Zierfische (8.1%), Verpackung/Transport CHF 150. Wie sind Verpackung/Transport zu versteuern?",
     options: ["2.6% und 8.1% anteilig", "8.1%", "2.6%"],
     correct: "2.6% und 8.1% anteilig",
-    extra: "Grundsätzlich wäre die Aufteilung entsprechend der effektiven Anteile auf die Steuersätze vorzunehmen. A dies in der Regel nicht möglich ist, kann im Sinne einer Vereinfachung proportional nach den wertmässigen Anteilen der gelieferten aufgeteilt werden. Da 2/3 des Umsatzes (200+200) der Steuer zum Normalsatz und 1/3 (200) der Steuer zum reduzierten Satz unterliegen, sind die Nebenkosten von CHF 150 entsprechend auszuteilen. Wäre die Aufteilung mit erheblichen Umtrieben verbunden, könnten die Verpackungs- und Transportkosten zum Normalsatz abgerechnet werden."
+    extra: "Da 2/3 Normalsatz und 1/3 reduziert, können Verpackung/Transport entsprechend aufgeteilt werden (Art. 19 Abs. 4 MWSTG)."
   },
   {
-    q: "Das Modehaus in Wetzikon stellt folgende Rechnung an ihren Kunden: - 2 Paar Hosen CHF 180 - 1 Paar Socken CHF 500 - Post-Zustellkosten Inland CHF 20 - Kosten für Express-Luftfracht (Direktimport aus Malaysia auf Ihren Wunsch; vgl. beiliegende Kurierrechnung mit 0% MWST (grenzüberschreitender Warentransport) CHF 300 Auf welchen Betrag ist die Umsatzsteuer geschuldet?",
+    q: "8. Modehausrechnung: Hosen CHF 180, Socken CHF 500, Inland-Zustellung CHF 20, Expressfracht aus Malaysia CHF 300 (0% MWST). Auf welchen Betrag ist MWST geschuldet?",
     options: ["CHF 680", "CHF 700", "CHF 1’000"],
     correct: "CHF 1’000",
-    extra: "Der gesamte Rechnungsbetrag unterliegt der Steuer zum Normalsatz. Zum Entgelt gehört alles, was der Empfänger oder an der Stelle ein Dritter als Gegenleistung für die Lieferung oder die DL aufwendet. Das umfasst auch den Ersatz aller Kosten, auch wenn diese gesondert in Rechnung gestellt werden Art. 24 Abs. 1 MWSTG)"
+    extra: "Art. 24 Abs. 1 MWSTG: Alles was als Gegenleistung gilt, inkl. separat fakturierte Zusatzkosten, gehört zum Entgelt."
   },
   {
-    q: "Ein Gartenbauunternehmen stellt folgende Rechnung: - Anpflanzen von Zierbäumen CHF 400 - 10 Zierbäumen CHF 500 - Mulch und anderes Abdeckmaterial CHF 50 Zu welchem Satz muss der Mulch versteuert werden?",
+    q: "9. Gartenbau: Zierbäume CHF 500, Anpflanzen CHF 400, Mulch CHF 50. Welcher Steuersatz für den Mulch?",
     options: ["8.1%", "2.6%"],
     correct: "8.1%",
-    extra: "wenn sie im Rahmen einer solchen werkvertraglichen Lieferung überlassen werden, sind sie als Nebenleistung Art. 19 Abs. 4 MWSTG auch bei gesonderter Rechnungsstellung der Steuer zum Normalsatz."
+    extra: "Mulch ist Nebenleistung zur werkvertraglichen Lieferung – Art. 19 Abs. 4 MWSTG."
   },
   {
-    q: "Ein Kunstwerk wird von einem nicht im MWST-Register eingetragenen Bildhauer für CHF 20'000 gekauft. Drei Monate später wird das Kunstwerk für CHF 31'000 verkauft. Wie wird der Prozess steuerlich behandelt?",
+    q: "10. Kunstwerk wird für CHF 20'000 gekauft (nicht MWST-pflichtiger Künstler) und später für CHF 31'000 verkauft. Steuerliche Behandlung?",
     options: ["Vorsteuer und Umsatzsteuer", "Fiktiver Vorsteuerabzug", "Margenbesteuerung"],
     correct: "Margenbesteuerung"
   },
   {
-    q: "Wie ist die Bemessungsgrundlage der Margenbesteuerung?",
+    q: "11. Wie ist die Bemessungsgrundlage der Margenbesteuerung?",
     options: ["CHF 31’000", "CHF 20’000", "CHF 11’000"],
     correct: "CHF 11’000"
   }
 ];
 
 const container = document.getElementById("questions");
+
 questions.forEach((item, index) => {
   const section = document.createElement("div");
   section.className = "section";
   const id = `feedback${index+1}`;
 
   const optionsHTML = item.options.map(opt => `
-    <button onclick="selectOption(this, '${opt}' === '${item.correct}', '${id}', '${item.correct}', ${JSON.stringify(item.extra || '')})">${opt}</button>
+    <button onclick="selectOption(this, opt === '${item.correct}', '${id}', '${item.correct}', ${JSON.stringify(item.extra || '')})">${opt}</button>
   `).join('');
 
   section.innerHTML = `
-    <h2>${index + 1}. ${item.q}</h2>
+    <h2>${item.q}</h2>
     <div class="options">
       ${optionsHTML}
     </div>
@@ -149,15 +150,21 @@ questions.forEach((item, index) => {
 
 function selectOption(button, isCorrect, feedbackId, correctText, extraText) {
   const buttons = button.parentElement.querySelectorAll('button');
-  buttons.forEach(btn => btn.disabled = true);
+  buttons.forEach(btn => {
+    btn.disabled = true;
+    if (btn.textContent === correctText) {
+      btn.classList.add('correct');
+    } else if (btn === button && btn.textContent !== correctText) {
+      btn.classList.add('wrong');
+    }
+  });
+
   const feedback = document.getElementById(feedbackId);
   feedback.style.display = 'block';
   if (isCorrect) {
-    button.classList.add('correct');
     feedback.innerHTML = `Richtig! ✅<br>${extraText || ''}`;
     feedback.style.color = 'green';
   } else {
-    button.classList.add('wrong');
     feedback.innerHTML = `Falsch ❌ – Richtige Antwort: ${correctText}<br>${extraText || ''}`;
     feedback.style.color = 'red';
   }
