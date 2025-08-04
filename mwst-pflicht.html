@@ -67,6 +67,7 @@
     .explanation {
       margin-top: 10px;
       font-weight: bold;
+      display: none;
     }
     .back-link {
       display: inline-block;
@@ -82,15 +83,16 @@
 
   <div class="section">
     <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
-    <h2>1. Frau Müller eröffnet auf den 1.1. des Jahres n in Samnaun einen Coiffeur-Salon. Sie budgetiert Einnahmen von CHF 220'000.00. Ist eine Steuerpflicht gegeben?</h2>
+
+    <h2>1. Frau Müller eröffnet auf den 1.1. des Jahres n in Samnaun einen Coiffeur-Salon. Sie budgetiert Einnahmen von CHF 220'000. Ist eine Steuerpflicht gegeben?</h2>
     <div class="options">
-      <button onclick="selectOption(this, true, 'feedback1')">ja</button>
-      <button onclick="selectOption(this, false, 'feedback1')">nein</button>
+      <button onclick="selectOption(this, true, 'feedback1', 'Lösung: ja')">ja</button>
+      <button onclick="selectOption(this, false, 'feedback1', 'Lösung: ja')">nein</button>
     </div>
-    <div id="feedback1" class="explanation">Richtige Antwort: ja</div>
+    <div id="feedback1" class="explanation"></div>
 
     <div class="input-box">
-      <input type="text" id="answer1b" placeholder="Zeitpunkt eingeben...">
+      <input type="text" id="answer1b" placeholder="Ab wann gilt die Steuerpflicht?">
       <button onclick="checkAnswer('answer1b', '1.1.n', 'feedback1b')">OK</button>
     </div>
     <div id="feedback1b" class="explanation"></div>
@@ -99,23 +101,23 @@
   <div class="section">
     <h2>2. Kann eine einfache Gesellschaft eine MWST-Pflicht ausweisen?</h2>
     <div class="options">
-      <button onclick="selectOption(this, true, 'feedback2')">ja</button>
-      <button onclick="selectOption(this, false, 'feedback2')">nein</button>
+      <button onclick="selectOption(this, true, 'feedback2', 'Lösung: ja')">ja</button>
+      <button onclick="selectOption(this, false, 'feedback2', 'Lösung: ja')">nein</button>
     </div>
-    <div id="feedback2" class="explanation">Richtige Antwort: ja</div>
+    <div id="feedback2" class="explanation"></div>
   </div>
 
   <div class="section">
     <h2>3. Ab welchem Datum beginnt jeweils die Steuerpflicht?</h2>
     <div class="options">
-      <button onclick="selectOption(this, false, 'feedback3')">1.1.n</button>
-      <button onclick="selectOption(this, true, 'feedback3')">mit Aufnahme der Tätigkeit</button>
+      <button onclick="selectOption(this, false, 'feedback3', 'Lösung: mit Aufnahme der Tätigkeit')">1.1.n</button>
+      <button onclick="selectOption(this, true, 'feedback3', 'Lösung: mit Aufnahme der Tätigkeit')">mit Aufnahme der Tätigkeit</button>
     </div>
-    <div id="feedback3" class="explanation">Richtige Antwort: mit Aufnahme der Tätigkeit</div>
+    <div id="feedback3" class="explanation"></div>
   </div>
 
   <div class="section">
-    <h2>4. Per wann wird ein Unternehmen verpflichtet, sich im MWST-Register einzutragen, wenn es ein Hotel baut mit Vorsteuern CHF 1.5 Mio?</h2>
+    <h2>4. Per wann wird ein Unternehmen verpflichtet, sich im MWST-Register einzutragen …?</h2>
     <div class="input-box">
       <input type="text" id="answer4" placeholder="Antwort eingeben...">
       <button onclick="checkAnswer('answer4', 'spätestens ab 1. Januar n+2', 'feedback4')">OK</button>
@@ -124,21 +126,21 @@
   </div>
 
   <div class="section">
-    <h2>5. Kann sich das Unternehmen von Aufgabe 4 bereits für die Jahre n und n+1 freiwillig im MWST-Register eintragen lassen?</h2>
+    <h2>5. Kann sich das Unternehmen freiwillig für n und n+1 eintragen lassen?</h2>
     <div class="options">
-      <button onclick="selectOption(this, true, 'feedback5')">ja</button>
-      <button onclick="selectOption(this, false, 'feedback5')">nein</button>
+      <button onclick="selectOption(this, true, 'feedback5', 'Lösung: ja')">ja</button>
+      <button onclick="selectOption(this, false, 'feedback5', 'Lösung: ja')">nein</button>
     </div>
-    <div id="feedback5" class="explanation">Richtige Antwort: ja</div>
+    <div id="feedback5" class="explanation"></div>
   </div>
 
   <div class="section">
-    <h2>6. Nur weil eine AG eine GmbH übernimmt, bedeutet es nicht, dass auch die MWST-Rechte und -Pflichten übernommen werden.</h2>
+    <h2>6. Nur weil eine AG eine GmbH übernimmt, bedeutet es nicht, dass auch die MWST-Rechte übernommen werden.</h2>
     <div class="options">
-      <button onclick="selectOption(this, false, 'feedback6')">richtig</button>
-      <button onclick="selectOption(this, true, 'feedback6')">falsch</button>
+      <button onclick="selectOption(this, false, 'feedback6', 'Lösung: falsch')">richtig</button>
+      <button onclick="selectOption(this, true, 'feedback6', 'Lösung: falsch')">falsch</button>
     </div>
-    <div id="feedback6" class="explanation">Richtige Antwort: falsch</div>
+    <div id="feedback6" class="explanation"></div>
   </div>
 
   <div class="section">
@@ -160,7 +162,7 @@
   </div>
 
   <div class="section">
-    <h2>9. Was kann die ESTV machen, wenn eine ausländische Kollektivgesellschaft sich nicht einträgt?</h2>
+    <h2>9. Was kann die ESTV machen, wenn eine ausländische Kollektivgesellschaft keine MWST abrechnet?</h2>
     <div class="input-box">
       <input type="text" id="answer9" placeholder="Antwort eingeben...">
       <button onclick="checkAnswer('answer9', 'Der Inhaber 2 haftet für die Steuerschuld', 'feedback9')">OK</button>
@@ -179,6 +181,7 @@
       const answer = normalize(input.value);
       const correct = normalize(correctAnswer);
 
+      feedback.style.display = 'block';
       if (answer.includes(correct)) {
         input.classList.add('correct');
         feedback.textContent = "Richtig! ✅";
@@ -191,20 +194,25 @@
       }
     }
 
-    function selectOption(button, isCorrect, feedbackId) {
+    function selectOption(button, isCorrect, feedbackId, explanationText) {
       const buttons = button.parentElement.querySelectorAll('button');
       buttons.forEach(btn => btn.disabled = true);
 
+      const feedback = document.getElementById(feedbackId);
+      feedback.style.display = 'block';
+
       if (isCorrect) {
         button.classList.add('correct');
+        feedback.textContent = "Richtig! ✅ " + explanationText;
+        feedback.style.color = 'green';
       } else {
         button.classList.add('wrong');
+        feedback.textContent = "Falsch ❌ – " + explanationText;
+        feedback.style.color = 'red';
       }
-
-      const feedback = document.getElementById(feedbackId);
-      feedback.style.color = isCorrect ? 'green' : 'red';
     }
   </script>
 </body>
 </html>
+
 
