@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MWST-Pflicht</title>
+  <title>MWST-Pflicht – Aufgabenset</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,59 +13,58 @@
       padding: 40px 20px;
       color: black;
     }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 40px;
+    .section {
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
     h2 {
-      text-align: center;
+      font-size: 20px;
+      margin-bottom: 16px;
     }
-    .question {
-      margin-bottom: 30px;
-    }
-    .question p {
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-    .options, .input-box {
-      margin-top: 5px;
-    }
-    .options button {
-      background-color: black;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      margin: 5px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .options button.correct {
-      background-color: green;
-    }
-    .options button.incorrect {
-      background-color: red;
+    .input-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
     }
     .input-box input {
+      flex: 1;
       padding: 10px;
       border-radius: 6px;
       border: 2px solid #ccc;
       font-size: 16px;
-      width: 300px;
     }
     .input-box button {
+      margin-left: 10px;
       padding: 10px 16px;
       font-size: 16px;
       background-color: black;
       color: white;
       border: none;
       border-radius: 6px;
-      margin-left: 10px;
       cursor: pointer;
     }
-    .feedback {
+    .options button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+    .correct {
+      background-color: lightgreen !important;
+    }
+    .wrong {
+      background-color: lightcoral !important;
+    }
+    .explanation {
       margin-top: 10px;
       font-weight: bold;
     }
@@ -80,25 +79,132 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <a class="back-link" href="mwst.html">← Zurück</a>
-    <h2>MWST-Pflicht</h2>
 
-    <div class="question" data-answer="ja">
-      <p>1. Frau Müller eröffnet auf den 1.1. des Jahres n in Samnaun einen Coiffeur-Salon. Sie budgetiert Einnahmen von CHF 220'000.00. Ist eine Steuerpflicht gegeben?</p>
-      <div class="options">
-        <button>ja</button>
-        <button>nein</button>
-      </div>
+  <div class="section">
+    <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
+    <h2>1. Frau Müller eröffnet auf den 1.1. des Jahres n in Samnaun einen Coiffeur-Salon. Sie budgetiert Einnahmen von CHF 220'000.00. Ist eine Steuerpflicht gegeben?</h2>
+    <div class="options">
+      <button onclick="selectOption(this, true, 'feedback1')">ja</button>
+      <button onclick="selectOption(this, false, 'feedback1')">nein</button>
     </div>
-    <div class="question" data-answer="1.1.n">
-      <p>Falls ja, ab welchem Zeitpunkt gilt die Steuerpflicht?</p>
-      <div class="input-box">
-        <input type="text" id="q1_input" placeholder="Antwort eingeben...">
-        <button onclick="checkInput('q1_input', '1.1.n')">OK</button>
-        <div class="feedback" id="q1_input_feedback"></div>
-      </div>
-    </div>
+    <div id="feedback1" class="explanation">Richtige Antwort: ja</div>
 
-    <div class="question" data-answer="ja">
-      <p>2. Kann eine einfache Gesellschaft eine MWST-Pflicht ausweisen
+    <div class="input-box">
+      <input type="text" id="answer1b" placeholder="Zeitpunkt eingeben...">
+      <button onclick="checkAnswer('answer1b', '1.1.n', 'feedback1b')">OK</button>
+    </div>
+    <div id="feedback1b" class="explanation"></div>
+  </div>
+
+  <div class="section">
+    <h2>2. Kann eine einfache Gesellschaft eine MWST-Pflicht ausweisen?</h2>
+    <div class="options">
+      <button onclick="selectOption(this, true, 'feedback2')">ja</button>
+      <button onclick="selectOption(this, false, 'feedback2')">nein</button>
+    </div>
+    <div id="feedback2" class="explanation">Richtige Antwort: ja</div>
+  </div>
+
+  <div class="section">
+    <h2>3. Ab welchem Datum beginnt jeweils die Steuerpflicht?</h2>
+    <div class="options">
+      <button onclick="selectOption(this, false, 'feedback3')">1.1.n</button>
+      <button onclick="selectOption(this, true, 'feedback3')">mit Aufnahme der Tätigkeit</button>
+    </div>
+    <div id="feedback3" class="explanation">Richtige Antwort: mit Aufnahme der Tätigkeit</div>
+  </div>
+
+  <div class="section">
+    <h2>4. Per wann wird ein Unternehmen verpflichtet, sich im MWST-Register einzutragen, wenn es ein Hotel baut mit Vorsteuern CHF 1.5 Mio?</h2>
+    <div class="input-box">
+      <input type="text" id="answer4" placeholder="Antwort eingeben...">
+      <button onclick="checkAnswer('answer4', 'spätestens ab 1. Januar n+2', 'feedback4')">OK</button>
+    </div>
+    <div id="feedback4" class="explanation"></div>
+  </div>
+
+  <div class="section">
+    <h2>5. Kann sich das Unternehmen von Aufgabe 4 bereits für die Jahre n und n+1 freiwillig im MWST-Register eintragen lassen?</h2>
+    <div class="options">
+      <button onclick="selectOption(this, true, 'feedback5')">ja</button>
+      <button onclick="selectOption(this, false, 'feedback5')">nein</button>
+    </div>
+    <div id="feedback5" class="explanation">Richtige Antwort: ja</div>
+  </div>
+
+  <div class="section">
+    <h2>6. Nur weil eine AG eine GmbH übernimmt, bedeutet es nicht, dass auch die MWST-Rechte und -Pflichten übernommen werden.</h2>
+    <div class="options">
+      <button onclick="selectOption(this, false, 'feedback6')">richtig</button>
+      <button onclick="selectOption(this, true, 'feedback6')">falsch</button>
+    </div>
+    <div id="feedback6" class="explanation">Richtige Antwort: falsch</div>
+  </div>
+
+  <div class="section">
+    <h2>7. Was ist bei der Übertragung eines Gesamtvermögens bei einer Fusion besonders?</h2>
+    <div class="input-box">
+      <input type="text" id="answer7" placeholder="Antwort eingeben...">
+      <button onclick="checkAnswer('answer7', 'Anwendung des Meldeverfahrens', 'feedback7')">OK</button>
+    </div>
+    <div id="feedback7" class="explanation"></div>
+  </div>
+
+  <div class="section">
+    <h2>8. Wie haftet das vorherige Unternehmen für MWST-Schulden vor der Übertragung?</h2>
+    <div class="input-box">
+      <input type="text" id="answer8" placeholder="Antwort eingeben...">
+      <button onclick="checkAnswer('answer8', 'solidarisch während 3 Jahren (Art. 15 MWST)', 'feedback8')">OK</button>
+    </div>
+    <div id="feedback8" class="explanation"></div>
+  </div>
+
+  <div class="section">
+    <h2>9. Was kann die ESTV machen, wenn eine ausländische Kollektivgesellschaft sich nicht einträgt?</h2>
+    <div class="input-box">
+      <input type="text" id="answer9" placeholder="Antwort eingeben...">
+      <button onclick="checkAnswer('answer9', 'Der Inhaber 2 haftet für die Steuerschuld', 'feedback9')">OK</button>
+    </div>
+    <div id="feedback9" class="explanation"></div>
+  </div>
+
+  <script>
+    function normalize(text) {
+      return text.toLowerCase().replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function checkAnswer(inputId, correctAnswer, feedbackId) {
+      const input = document.getElementById(inputId);
+      const feedback = document.getElementById(feedbackId);
+      const answer = normalize(input.value);
+      const correct = normalize(correctAnswer);
+
+      if (answer.includes(correct)) {
+        input.classList.add('correct');
+        feedback.textContent = "Richtig! ✅";
+        feedback.style.color = 'green';
+      } else {
+        input.classList.add('wrong');
+        input.value = correctAnswer;
+        feedback.textContent = "Falsch. Die richtige Antwort ist: " + correctAnswer;
+        feedback.style.color = 'red';
+      }
+    }
+
+    function selectOption(button, isCorrect, feedbackId) {
+      const buttons = button.parentElement.querySelectorAll('button');
+      buttons.forEach(btn => btn.disabled = true);
+
+      if (isCorrect) {
+        button.classList.add('correct');
+      } else {
+        button.classList.add('wrong');
+      }
+
+      const feedback = document.getElementById(feedbackId);
+      feedback.style.color = isCorrect ? 'green' : 'red';
+    }
+  </script>
+</body>
+</html>
+
