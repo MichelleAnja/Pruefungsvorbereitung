@@ -84,15 +84,16 @@
   <div class="section">
     <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
 
-    <h2>1. Frau Müller eröffnet auf den 1.1. des Jahres n in Samnaun einen Coiffeur-Salon. Sie budgetiert Einnahmen von CHF 220'000. Ist eine Steuerpflicht gegeben?</h2>
+    <h2>1. Frau Müller eröffnet auf den 1.1. des Jahres n in Samnaun einen Coiffeur-Salon. Sie budgetiert Einnahmen von CHF 220'000.00. Ist eine Steuerpflicht gegeben?</h2>
     <div class="options">
       <button onclick="selectOption(this, true, 'feedback1', 'Lösung: ja')">ja</button>
       <button onclick="selectOption(this, false, 'feedback1', 'Lösung: ja')">nein</button>
     </div>
     <div id="feedback1" class="explanation"></div>
 
+    <h2>Ab wann gilt in diesem Fall die Steuerpflicht?</h2>
     <div class="input-box">
-      <input type="text" id="answer1b" placeholder="Ab wann gilt die Steuerpflicht?">
+      <input type="text" id="answer1b" placeholder="Antwort eingeben...">
       <button onclick="checkAnswer('answer1b', '1.1.n', 'feedback1b')">OK</button>
     </div>
     <div id="feedback1b" class="explanation"></div>
@@ -117,7 +118,7 @@
   </div>
 
   <div class="section">
-    <h2>4. Per wann wird ein Unternehmen verpflichtet, sich im MWST-Register einzutragen …?</h2>
+    <h2>4. Ein Unternehmen kauft im Jahr n ein Grundstück, reisst ein altes Gebäude ab und baut ein neues Hotel. Im ersten Jahr fallen bereits Vorsteuern von CHF 700'000 an. Bis zur geplanten Betriebsaufnahme im Februar n+2 werden etwa CHF 1.5 Mio. Vorsteuern anfallen. Die Einnahmen im Jahr n+2 werden auf CHF 8 Mio. geschätzt. Per wann ist das Unternehmen verpflichtet, sich im MWST-Register einzutragen?</h2>
     <div class="input-box">
       <input type="text" id="answer4" placeholder="Antwort eingeben...">
       <button onclick="checkAnswer('answer4', 'spätestens ab 1. Januar n+2', 'feedback4')">OK</button>
@@ -126,7 +127,7 @@
   </div>
 
   <div class="section">
-    <h2>5. Kann sich das Unternehmen freiwillig für n und n+1 eintragen lassen?</h2>
+    <h2>5. Kann sich das Unternehmen aus Aufgabe 4 bereits für die Jahre n und n+1 freiwillig im MWST-Register eintragen lassen?</h2>
     <div class="options">
       <button onclick="selectOption(this, true, 'feedback5', 'Lösung: ja')">ja</button>
       <button onclick="selectOption(this, false, 'feedback5', 'Lösung: ja')">nein</button>
@@ -135,7 +136,7 @@
   </div>
 
   <div class="section">
-    <h2>6. Nur weil eine AG eine GmbH übernimmt, bedeutet es nicht, dass auch die MWST-Rechte übernommen werden.</h2>
+    <h2>6. Nur weil eine AG eine GmbH übernimmt, bedeutet das nicht automatisch, dass auch die Rechten und Pflichten im Sinne der MWST übernommen werden.</h2>
     <div class="options">
       <button onclick="selectOption(this, false, 'feedback6', 'Lösung: falsch')">richtig</button>
       <button onclick="selectOption(this, true, 'feedback6', 'Lösung: falsch')">falsch</button>
@@ -144,7 +145,7 @@
   </div>
 
   <div class="section">
-    <h2>7. Was ist bei der Übertragung eines Gesamtvermögens bei einer Fusion besonders?</h2>
+    <h2>7. Was ist bei der Übertragung eines Gesamtvermögens bei einer Umstrukturierung bzw. Fusion besonders?</h2>
     <div class="input-box">
       <input type="text" id="answer7" placeholder="Antwort eingeben...">
       <button onclick="checkAnswer('answer7', 'Anwendung des Meldeverfahrens', 'feedback7')">OK</button>
@@ -153,7 +154,7 @@
   </div>
 
   <div class="section">
-    <h2>8. Wie haftet das vorherige Unternehmen für MWST-Schulden vor der Übertragung?</h2>
+    <h2>8. Wie haftet das vorherige Unternehmen bzw. die vorherige Person für Steuerschulden, die vor der Übertragung entstanden sind?</h2>
     <div class="input-box">
       <input type="text" id="answer8" placeholder="Antwort eingeben...">
       <button onclick="checkAnswer('answer8', 'solidarisch während 3 Jahren (Art. 15 MWST)', 'feedback8')">OK</button>
@@ -162,7 +163,7 @@
   </div>
 
   <div class="section">
-    <h2>9. Was kann die ESTV machen, wenn eine ausländische Kollektivgesellschaft keine MWST abrechnet?</h2>
+    <h2>9. Was kann die ESTV machen, wenn eine deutsche Kollektivgesellschaft (Inhaber 1 in Deutschland wohnhaft, Inhaber 2 in der Schweiz) in der Schweiz eine Zweigniederlassung betreibt und keine MWST abrechnet oder sich einträgt?</h2>
     <div class="input-box">
       <input type="text" id="answer9" placeholder="Antwort eingeben...">
       <button onclick="checkAnswer('answer9', 'Der Inhaber 2 haftet für die Steuerschuld', 'feedback9')">OK</button>
@@ -180,7 +181,6 @@
       const feedback = document.getElementById(feedbackId);
       const answer = normalize(input.value);
       const correct = normalize(correctAnswer);
-
       feedback.style.display = 'block';
       if (answer.includes(correct)) {
         input.classList.add('correct');
@@ -197,10 +197,8 @@
     function selectOption(button, isCorrect, feedbackId, explanationText) {
       const buttons = button.parentElement.querySelectorAll('button');
       buttons.forEach(btn => btn.disabled = true);
-
       const feedback = document.getElementById(feedbackId);
       feedback.style.display = 'block';
-
       if (isCorrect) {
         button.classList.add('correct');
         feedback.textContent = "Richtig! ✅ " + explanationText;
