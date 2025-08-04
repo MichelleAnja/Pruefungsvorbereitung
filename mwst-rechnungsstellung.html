@@ -31,11 +31,18 @@
       width: 100%;
       padding: 10px;
       font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .options button {
+      padding: 8px 16px;
+      font-size: 16px;
       border: none;
       border-radius: 6px;
-      background-color: black;
+      background-color: #333;
       color: white;
-      margin-bottom: 10px;
+      cursor: pointer;
     }
     .correct {
       background-color: lightgreen !important;
@@ -97,7 +104,11 @@ questions.forEach((item, index) => {
   const input = document.createElement("input");
   input.type = "text";
   input.placeholder = "Antwort eingeben";
-  input.addEventListener("blur", () => checkInput(input, item.correct, id));
+  input.id = `input${index}`;
+
+  const button = document.createElement("button");
+  button.innerText = "OK";
+  button.addEventListener("click", () => checkInput(input, item.correct, id));
 
   const feedback = document.createElement("div");
   feedback.id = id;
@@ -106,6 +117,7 @@ questions.forEach((item, index) => {
   const optionsDiv = document.createElement("div");
   optionsDiv.className = "options";
   optionsDiv.appendChild(input);
+  optionsDiv.appendChild(button);
 
   section.appendChild(optionsDiv);
   section.appendChild(feedback);
