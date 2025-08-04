@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steuersätze – Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h2 {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .options button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+    .correct {
+      background-color: lightgreen !important;
+    }
+    .wrong {
+      background-color: lightcoral !important;
+    }
+    .explanation {
+      margin-top: 10px;
+      font-weight: bold;
+      display: none;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<a class="back-link" href="mwst.html">← Zurück</a>
+<h2 style="text-align:center">Zu welchen Steuersätzen werden diese Leistungen versteuert?</h2>
+
+<script>
+  function selectOption(button, isCorrect, feedbackId, correctText) {
+    const buttons = button.parentElement.querySelectorAll('button');
+    buttons.forEach(btn => btn.disabled = true);
+    const feedback = document.getElementById(feedbackId);
+    feedback.style.display = 'block';
+    if (isCorrect) {
+      button.classList.add('correct');
+      feedback.textContent = "Richtig! ✅";
+      feedback.style.color = 'green';
+    } else {
+      button.classList.add('wrong');
+      feedback.textContent = "Falsch ❌ – Richtige Antwort: " + correctText;
+      feedback.style.color = 'red';
+    }
+  }
+</script>
+
+<div id="questions"></div>
+
+<script>
+  const data = [
+    ["1 Falsche Wein", "Normalsatz"],
+    ["Depot pro Weinflasche", "keine MWST"],
+    ["5kg Waschmittel", "Normalsatz"],
+    ["Damenbinden", "reduzierter Satz"],
+    ["Zahnpasta", "Normalsatz"],
+    ["Buch «Harry Potter»", "reduzierter Satz"],
+    ["Tageszeitung «Blick»", "reduzierter Satz"],
+    ["Kerichtsackmarken", "Normalsatz"],
+    ["Abonnemente für gedruckte Zeitungen", "reduzierter Satz"],
+    ["Abonnement für digitale Zeitungen", "reduzierter Satz"],
+    ["Verkauf von gedruckten Zeitungen am Kiosk", "reduzierter Satz"],
+    ["Inserateeinnahmen", "Normalsatz"],
+    ["Todesanzeigen (Einnahmen)", "Normalsatz"],
+    ["Entschädigung des Automatenbetreibers für das Aufstellen von Flipper-Kästen in Restaurants", "Normalsatz"],
+    ["Werbespots und Sponsoringgelder im TV für Leistungsempfänger im Ausland.", "keine MWST"],
+    ["Vermietung von Ferienwohnungen", "Sondersatz"],
+    ["Vermietung von Plätzen auf Campingplätzen", "Sondersatz"],
+    ["Benutzung der Duschen auf Campingplätzen", "Sondersatz"],
+    ["Beherbergung von Heimbewohnern in Altersheimen.", "ausgenommen"],
+    ["Vermietung eines Saales in einem Hotel- und Restaurantbetrieb.", "Normalsatz"],
+    ["Vermietung von Einstellplätzen in einem Parkhaus", "Normalsatz"]
+  ];
+
+  const container = document.getElementById("questions");
+
+  data.forEach((item, index) => {
+    const section = document.createElement("div");
+    section.className = "section";
+    const id = `feedback${index+1}`;
+
+    section.innerHTML = `
+      <h2>${index + 1}. ${item[0]}</h2>
+      <div class="options">
+        <button onclick="selectOption(this, '${item[1]}'==='Normalsatz', '${id}', '${item[1]}')">Normalsatz</button>
+        <button onclick="selectOption(this, '${item[1]}'==='reduzierter Satz', '${id}', '${item[1]}')">reduzierter Satz</button>
+        <button onclick="selectOption(this, '${item[1]}'==='keine MWST', '${id}', '${item[1]}')">keine MWST</button>
+        ${item[1] === 'Sondersatz' || item[1] === 'ausgenommen' ? `
+          <button onclick="selectOption(this, '${item[1]}'==='Sondersatz', '${id}', '${item[1]}')">Sondersatz</button>
+          <button onclick="selectOption(this, '${item[1]}'==='ausgenommen', '${id}', '${item[1]}')">ausgenommen</button>
+        ` : ''}
+      </div>
+      <div id="${id}" class="explanation"></div>
+    `;
+
+    container.appendChild(section);
+  });
+</script>
+
+</body>
+</html>
