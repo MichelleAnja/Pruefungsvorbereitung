@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interaktives Formular – Rechnungsstellung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h2 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      font-weight: normal;
+    }
+    .options input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: black;
+      color: white;
+      margin-bottom: 10px;
+    }
+    .correct {
+      background-color: lightgreen !important;
+      color: black !important;
+    }
+    .wrong {
+      background-color: lightcoral !important;
+      color: black !important;
+    }
+    .explanation {
+      margin-top: 10px;
+      font-weight: bold;
+      display: none;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<a class="back-link" href="mwst.html">← Zurück</a>
+<h2 style="text-align:center">Rechnungsstellung</h2>
+<div id="form"></div>
+
+<script>
+const questions = [
+  {
+    q: "1. Gibt es Fälle, in denen formelle Erleichterungen in Abweichung zu den grundsätzlichen Voraussetzungen Art. 26 MWSTG gewährt werden?",
+    type: "text",
+    correct: "Ja, bei Kassazettel bis zu CHF 400.00 kann auf Angaben und Namen und Ort des Kunden verzichtet werden."
+  },
+  {
+    q: "2. In welchen 3 Fällen ist der Hinweis auf die Steuer auf Rechnungen nicht berechtigt?",
+    type: "text",
+    correct: "- von nicht steuerpflichtigen Personen\n- Bei Anwendung der Margenbesteuerung\n- Wenn das Meldeverfahren angewendet wird"
+  },
+  {
+    q: "3. Was ist bei einem Verkauf in einer anderen Währung zu beachten?",
+    type: "text",
+    correct: "Die Berechnung der geschuldeten Steuer ist im Moment der Entstehung der Steuerschuld in CHF umzurechnen."
+  }
+];
+
+const container = document.getElementById("form");
+questions.forEach((item, index) => {
+  const section = document.createElement("div");
+  section.className = "section";
+  const id = `feedback${index+1}`;
+
+  const title = document.createElement("h2");
+  title.innerText = item.q;
+  section.appendChild(title);
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.placeholder = "Antwort eingeben";
+  input.addEventListener("blur", () => checkInput(input, item.correct, id));
+
+  const feedback = document.createElement("div");
+  feedback.id = id;
+  feedback.className = "explanation";
+
+  const optionsDiv = document.createElement("div");
+  optionsDiv.className = "options";
+  optionsDiv.appendChild(input);
+
+  section.appendChild(optionsDiv);
+  section.appendChild(feedback);
+  container.appendChild(section);
+});
+
+function normalize(text) {
+  return text.trim().toLowerCase().replace(/[.,!\-\n]/g, '').replace(/\s+/g, ' ');
+}
+
+function checkInput(input, correctAnswer, feedbackId) {
+  const feedback = document.getElementById(feedbackId);
+  feedback.style.display = 'block';
+  const userAnswer = normalize(input.value);
+  const correct = normalize(correctAnswer);
+  if (userAnswer === correct) {
+    input.classList.add('correct');
+    feedback.innerHTML = `Richtig! ✅`;
+    feedback.style.color = 'green';
+  } else {
+    input.classList.add('wrong');
+    feedback.innerHTML = `Falsch ❌ – Richtige Antwort: ${correctAnswer}`;
+    feedback.style.color = 'red';
+  }
+  input.disabled = true;
+}
+</script>
+</body>
+</html>
