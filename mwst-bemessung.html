@@ -134,34 +134,42 @@ questions.forEach((item, index) => {
   const section = document.createElement("div");
   section.className = "section";
   const id = `feedback${index+1}`;
+  const feedback = document.createElement("div");
+  feedback.id = id;
+  feedback.className = "explanation";
 
-  const optionsHTML = item.options.map(opt => `
-    <button onclick="selectOption(this, '${opt}', '${item.correct}', '${id}', ${JSON.stringify(item.extra || '')})">${opt}</button>
-  `).join('');
+  const title = document.createElement("h2");
+  title.innerText = `${index + 1}. ${item.q}`;
+  section.appendChild(title);
 
-  section.innerHTML = `
-    <h2>${index + 1}. ${item.q}</h2>
-    <div class="options">
-      ${optionsHTML}
-    </div>
-    <div id="${id}" class="explanation"></div>
-  `;
+  const optionsDiv = document.createElement("div");
+  optionsDiv.className = "options";
+
+  item.options.forEach(opt => {
+    const button = document.createElement("button");
+    button.innerText = opt;
+    button.addEventListener("click", () => selectOption(button, opt, item.correct, id, item.extra));
+    optionsDiv.appendChild(button);
+  });
+
+  section.appendChild(optionsDiv);
+  section.appendChild(feedback);
   container.appendChild(section);
 });
 
 function selectOption(button, chosen, correct, feedbackId, extraText) {
-  const buttons = button.parentElement.querySelectorAll('button');
+  const buttons = button.parentElement.querySelectorAll("button");
   buttons.forEach(btn => btn.disabled = true);
   const feedback = document.getElementById(feedbackId);
-  feedback.style.display = 'block';
+  feedback.style.display = "block";
   if (chosen === correct) {
-    button.classList.add('correct');
-    feedback.innerHTML = `Richtig! ✅<br>${extraText || ''}`;
-    feedback.style.color = 'green';
+    button.classList.add("correct");
+    feedback.innerHTML = `Richtig! ✅<br>${extraText || ""}`;
+    feedback.style.color = "green";
   } else {
-    button.classList.add('wrong');
-    feedback.innerHTML = `Falsch ❌ – Richtige Antwort: ${correct}<br>${extraText || ''}`;
-    feedback.style.color = 'red';
+    button.classList.add("wrong");
+    feedback.innerHTML = `Falsch ❌ – Richtige Antwort: ${correct}<br>${extraText || ""}`;
+    feedback.style.color = "red";
   }
 }
 </script>
