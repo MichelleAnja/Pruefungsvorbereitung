@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interaktives Formular – Eigenverbrauch</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h2 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      font-weight: normal;
+    }
+    .options {
+      margin-bottom: 10px;
+    }
+    .options button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+    .correct {
+      background-color: lightgreen !important;
+      color: black !important;
+    }
+    .wrong {
+      background-color: lightcoral !important;
+      color: black !important;
+    }
+    .explanation {
+      margin-top: 10px;
+      font-weight: bold;
+      display: none;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<a class="back-link" href="mwst.html">← Zurück</a>
+<h2 style="text-align:center">Eigenverbrauch</h2>
+<div id="form"></div>
+
+<script>
+const questions = [
+  {
+    q: "1. Der Inhaber des Kameraunternehmens verschenkt eine Kamera zum Einstandspreis von CHF 250 und zum Ladenpreis von CHF 420 an seine nicht im Geschäft mitarbeitende Tochter:",
+    options: ["Eigenverbrauch", "keine Vorsteuerkürzung"],
+    correct: "Eigenverbrauch",
+    extra: "8.1% von CHF 250 (100%)"
+  },
+  {
+    q: "2. Der Inhaber des Kameraunternehmens verschenkt eine Kamera zum Einstandspreis von CHF 250 und zum Ladenpreis von CHF 420 an seine Mitarbeiterin zum Geburtstag:",
+    options: ["Eigenverbrauch", "Keine Vorsteuerkorrektur"],
+    correct: "Keine Vorsteuerkorrektur",
+    extra: "Übliche Geschenke bis zu CHF 500.00 sind nicht auf dem Lohnausweis auszuweisen. Also kommt hier Art. 47 MWSTV zur Anwendung. Die Leistung gilt als unentgeltlich erbracht und es wird ein unternehmerischer Grund vermutet."
+  },
+  {
+    q: "3. Ein Händler bezieht ein neues Uhrenmodell im Wert von CHF 600 und gibt es gratis an Detailhändler ab, damit diese die Uhr in das Verkaufssortiment ausnehmen:",
+    options: ["Vorsteuerkorrektur", "Keine Vorsteuerkorrektur"],
+    correct: "Keine Vorsteuerkorrektur",
+    extra: "Es handelt sich um ein Warenmuster für eine unternehmerische Tätigkeit."
+  },
+  {
+    q: "4. Es werden Taschenmesser mit eingraviertem Firmenlogo, zwecks Gratisabgabe an die Kunden bezogen:",
+    options: ["Vorsteuerkorrektur", "Keine Vorsteuerkorrektur"],
+    correct: "Keine Vorsteuerkorrektur",
+    extra: "Da es sich hier um Werbegeschenke handelt."
+  }
+];
+
+const container = document.getElementById("form");
+questions.forEach((item, index) => {
+  const section = document.createElement("div");
+  section.className = "section";
+  const id = `feedback${index+1}`;
+
+  const title = document.createElement("h2");
+  title.innerText = item.q;
+  section.appendChild(title);
+
+  const feedback = document.createElement("div");
+  feedback.id = id;
+  feedback.className = "explanation";
+
+  const optionsDiv = document.createElement("div");
+  optionsDiv.className = "options";
+
+  item.options.forEach(opt => {
+    const button = document.createElement("button");
+    button.innerText = opt;
+    button.addEventListener("click", () => handleChoice(button, opt, item.correct, id, item.extra));
+    optionsDiv.appendChild(button);
+  });
+
+  section.appendChild(optionsDiv);
+  section.appendChild(feedback);
+  container.appendChild(section);
+});
+
+function handleChoice(button, chosen, correct, feedbackId, extraText) {
+  const buttons = button.parentElement.querySelectorAll("button");
+  buttons.forEach(btn => btn.disabled = true);
+  const feedback = document.getElementById(feedbackId);
+  feedback.style.display = "block";
+  if (chosen.toLowerCase() === correct.toLowerCase()) {
+    button.classList.add("correct");
+    feedback.innerHTML = `Richtig! ✅<br>${extraText || ''}`;
+    feedback.style.color = 'green';
+  } else {
+    button.classList.add("wrong");
+    feedback.innerHTML = `Falsch ❌ – Richtige Antwort: ${correct}<br>${extraText || ''}`;
+    feedback.style.color = 'red';
+  }
+}
+</script>
+</body>
+</html>
