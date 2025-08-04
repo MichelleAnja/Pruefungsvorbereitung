@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interaktives Formular – Vorsteuerabzug</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h2 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      font-weight: normal;
+    }
+    .options {
+      margin-bottom: 10px;
+    }
+    .options button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+    .options input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .options .submit-btn {
+      margin-top: 5px;
+      background-color: #333;
+    }
+    .correct {
+      background-color: lightgreen !important;
+      color: black !important;
+    }
+    .wrong {
+      background-color: lightcoral !important;
+      color: black !important;
+    }
+    .explanation {
+      margin-top: 10px;
+      font-weight: bold;
+      display: none;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<a class="back-link" href="mwst.html">← Zurück</a>
+<h2 style="text-align:center">Vorsteuerabzug</h2>
+<div id="form"></div>
+
+<script>
+const questions = [
+  {
+    q: "1. Ist das Vorliegen des Beleges gem. Art. 26 MWST zwingend für den Vorsteuerabzug?",
+    options: ["Ja", "Nein"],
+    correct: "Nein",
+    extra: "Es muss nachgewiesen werden, dass eine Steuer (erkennbar) überwälzt wurde und dass diese auch beglichen wurde. Erkennbar = «Inkl. 8.1% MWST», Nicht erkennbar = «Inkl. MWST»."
+  },
+  {
+    q: "2. In welchen Fällen ist ein Vorsteuerabzug selbst dann möglich, wenn auf der Rechnung keine MWST ausgewiesen wird?",
+    type: "text",
+    correct: "- Bei Rechnungen von nicht steuerpflichtigen Urproduzenten\n- Bei Bezügen von individualisierbaren beweglichen Gegenständen ohne MWST"
+  },
+  {
+    q: "3. Wann darf kein Vorsteuerabzug gemacht werden, selbst wenn auf der Rechnung die MWST vorhanden ist und die Vorsteuer bezahlt wurde?",
+    type: "text",
+    correct: "- Verwendung für nicht unternehmerische Zwecke\n- Verwendung für unternehmerische Zwecke, die von der Steuer ausgenommen sind",
+    extra: "Verwendung für nicht unternehmerische Zwecke wie:\n- Erzielung von eigenen Mittelflüssen, die mangels Leistung im MWST-Sinn nicht als Entgelt gelten (z. B. unselbständig ausgeübte Erwerbstätigkeiten wie VR-Honorare)\n- private Tätigkeiten\n- Leistungen, die vorwiegend der Freude oder dem Amüsement dienen. Auch Leistungen im Zusammenhang mit der Kundenbetreuung oder Förderung des Betriebsklimas."
+  },
+  {
+    q: "4. Ist der Vorsteuerabzug für einen antiken Tisch zur Ausstattung des Kundenempfangsbereichs berechtigt, wenn auf der Rechnung «Margenbesteuerung» steht?",
+    options: ["ja", "nein"],
+    correct: "nein"
+  },
+  {
+    q: "5. Ist ein fiktiver Vorsteuerabzug möglich, wenn ein Unternehmen bei einem deutschen Werbeunternehmen ein Inserat für den Verkauf einer Gewerbeliegenschaft in der Schweiz macht?",
+    options: ["ja", "nein"],
+    correct: "ja"
+  },
+  {
+    q: "6. Ein Unternehmen kauft Holzplatten für CHF 1'000 und schenkt sie dem Mitarbeiter zum Geburtstag. Ist dieser Vorgang vorsteuerabzugsberechtigt?",
+    options: ["ja", "nein"],
+    correct: "ja",
+    extra: "Naturalgeschenke über CHF 500.00 müssen auf dem Lohnausweis vermerkt werden, damit sie als entgeltlich erbracht gelten."
+  }
+];
+
+const container = document.getElementById("form");
+questions.forEach((item, index) => {
+  const section = document.createElement("div");
+  section.className = "section";
+  const id = `feedback${index+1}`;
+
+  const title = document.createElement("h2");
+  title.innerText = item.q;
+  section.appendChild(title);
+
+  const feedback = document.createElement("div");
+  feedback.id = id;
+  feedback.className = "explanation";
+
+  const optionsDiv = document.createElement("div");
+  optionsDiv.className = "options";
+
+  if (item.options) {
+    item.options.forEach(opt => {
+      const button = document.createElement("button");
+      button.innerText = opt;
+      button.addEventListener("click", () => handleChoice(button, opt, item.correct, id, item.extra));
+      optionsDiv.appendChild(button);
+    });
+  } else {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "Antwort eingeben";
+    input.id = `input${index}`;
+
+    const btn = document.createElement("button");
+    btn.innerText = "OK";
+    btn.className = "submit-btn";
+    btn.addEventListener("click", () => checkInput(input, item.correct, id, item.extra));
+
+    optionsDiv.appendChild(input);
+    optionsDiv.appendChild(btn);
+  }
+
+  section.appendChild(optionsDiv);
+  section.appendChild(feedback);
+  container.appendChild(section);
+});
+
+function handleChoice(button, chosen, correct, feedbackId, extraText) {
+  const buttons = button.parentElement.querySelectorAll("button");
+  buttons.forEach(btn => btn.disabled = true);
+  const feedback = document.getElementById(feedbackId);
+  feedback.style.display = "block";
+  if (chosen.toLowerCase() === correct.toLowerCase()) {
+    button.classList.add("correct");
+    feedback.innerHTML = `Richtig! ✅<br>${extraText || ''}`;
+    feedback.style.color = 'green';
+  } else {
+    button.classList.add("wrong");
+    feedback.innerHTML = `Falsch ❌ – Richtige Antwort: ${correct}<br>${extraText || ''}`;
+    feedback.style.color = 'red';
+  }
+}
+
+function normalize(text) {
+  return text.trim().toLowerCase().replace(/[.,!\-\n]/g, '').replace(/\s+/g, ' ');
+}
+
+function checkInput(input, correctAnswer, feedbackId, extraText) {
+  const feedback = document.getElementById(feedbackId);
+  feedback.style.display = 'block';
+  const userAnswer = normalize(input.value);
+  const correct = normalize(correctAnswer);
+  if (userAnswer === correct) {
+    input.classList.add('correct');
+    feedback.innerHTML = `Richtig! ✅<br>${extraText || ''}`;
+    feedback.style.color = 'green';
+  } else {
+    input.classList.add('wrong');
+    feedback.innerHTML = `Falsch ❌ – Richtige Antwort: ${correctAnswer}<br>${extraText || ''}`;
+    feedback.style.color = 'red';
+  }
+  input.disabled = true;
+}
+</script>
+</body>
+</html>
