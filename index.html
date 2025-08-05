@@ -2,62 +2,56 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Motivation</title>
+  <title>Eidg. Fachausweis Treuhand</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background: url("hintergrund.jpg") no-repeat center center fixed;
       background-size: cover;
-      margin: 0;
-      padding: 40px 20px;
-      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      padding-top: 60px;
     }
-    .back-link {
-      display: inline-block;
-      margin-bottom: 30px;
-      font-size: 18px;
+
+    h1 {
+      font-size: 28px;
+      color: black;
+      margin-bottom: 40px;
+    }
+
+    .button {
+      background-color: hotpink;
+      color: black;
       font-weight: bold;
-      color: black;
+      padding: 15px 40px;
+      margin: 10px 0;
+      width: 300px;
+      text-align: center;
       text-decoration: none;
-    }
-    .content {
-      max-width: 800px;
-      margin: 0 auto;
-      font-size: 18px;
-      line-height: 1.6;
-    }
-    h2 {
-      margin-top: 40px;
-      font-size: 24px;
-    }
-    .heart {
-      color: gold;
-    }
-    .hug-image {
+      border-radius: 8px;
+      transition: background-color 0.3s;
       display: block;
-      margin: 50px auto 0 auto;
-      max-width: 300px;
-      width: 100%;
+    }
+
+    .button:hover {
+      background-color: deeppink;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <a class="back-link" href="hug.html">← Zurück</a>
+  <h1>Eidg. Fachausweis Treuhand</h1>
 
-  <div class="content">
-    <h2>Deine Motivation <span class="heart">💛</span></h2>
-    <p>Du hast dir so oft Sorgen gemacht – aber ich weiß, dass in dir mehr Stärke steckt, als du selbst siehst.</p>
-    <p>Vielleicht brauchst du diesen Schub nicht – aber falls doch, soll er dich daran erinnern, dass jemand an dich glaubt.</p>
-    <p>Du packst das, ganz sicher – Schritt für Schritt.</p>
-    <p>Ich möchte dich oben sehen. Ich möchte, dass du alles erreichst mit möglichst wenig Aufwand.</p>
-
-    <h2>Meine Motivation</h2>
-    <p>Ich habe diese Unterlagen zusammengestellt, weil ich weiß, wie viel wir leisten können, wenn wir an uns glauben – auch wenn alles schwer ist, momentan.</p>
-    <p>Ich wollte etwas schaffen, das nicht perfekt sein muss, aber hilfreich und ehrlich ist.</p>
-    <p>Es ist mein kleiner Beitrag dazu, dass nicht nur ich, sondern auch jemand, der mir wichtig ist, weiterkommt.</p>
-
-    <img src="hug.jpg" alt="Umarmung" class="hug-image">
-  </div>
+  <a class="button" href="revision.html">Revision</a>
+  <a class="button" href="uwb.html">UWB</a>
+  <a class="button" href="steuern.html">Steuern</a>
+  <a class="button" href="mwst.html">MWST</a>
+  <a class="button" href="frw.html">FRW</a>
+  <a class="button" href="kostenrechnung.html">Kostenrechnung</a>
+    <a class="button" href="motivation.html">Motivation</a>
 </body>
 </html>
