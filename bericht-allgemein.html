@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theoriefragen Allgemein – Berichterstattung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .input-box, .choice-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .input-box input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+      font-size: 16px;
+    }
+
+    .input-box button, .choice-box button {
+      margin-left: 10px;
+      margin-top: 10px;
+      padding: 10px 16px;
+      font-size: 16px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .correct {
+      background-color: lightgreen !important;
+    }
+
+    .wrong {
+      background-color: lightcoral !important;
+    }
+
+    .explanation {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .black-option {
+      background-color: black;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
+    <h2>1. In welcher Reihenfolge sind Einschränkungen, Zusatz und Hinweise in dem Revisionsbericht zu erwähnen?</h2>
+    <div class="input-box">
+      <input type="text" id="answer1" placeholder="Antwort eingeben...">
+      <button onclick="checkAnswer('answer1', '1. Einschränkungen 2. Zusatz 3. Hinweis', 'feedback1')">OK</button>
+    </div>
+    <div id="feedback1" class="explanation"></div>
+  </div>
+
+  <div class="section">
+    <h2>2. Sind die Einschränkungen vor oder nach der Prüfungsaussage in den Revisionsbericht zu nehmen?</h2>
+    <div class="choice-box">
+      <button class="black-option" onclick="selectSingleOption(this, true, 'feedback2')">vor</button>
+      <button class="black-option" onclick="selectSingleOption(this, false, 'feedback2')">nach</button>
+    </div>
+    <div id="feedback2" class="explanation"></div>
+  </div>
+
+  <div class="section">
+    <h2>3. Wie ist vorzugehen, wenn mehrere Tatbestände zu einer Einschränkung vorliegen?</h2>
+    <div class="input-box">
+      <input type="text" id="answer3" placeholder="Antwort eingeben...">
+      <button onclick="checkAnswer('answer3', 'Die Prüfungsaussage bezieht sich auf die schwerwiegendste Einschränkung.', 'feedback3')">OK</button>
+    </div>
+    <div id="feedback3" class="explanation"></div>
+  </div>
+
+  <div class="section">
+    <h2>4. Ist ein Zusatz vor oder nach der Prüfungsaussage in den Revisionsbericht zu nehmen?</h2>
+    <div class="choice-box">
+      <button class="black-option" onclick="selectSingleOption(this, false, 'feedback4')">vor</button>
+      <button class="black-option" onclick="selectSingleOption(this, true, 'feedback4')">nach</button>
+    </div>
+    <div id="feedback4" class="explanation"></div>
+  </div>
+
+  <!-- Die weiteren Fragen (5–15) können nach demselben Muster fortgeführt werden. Wenn du möchtest, ergänze ich den vollständigen Code -->
+
+  <script>
+    function normalize(text) {
+      return text.toLowerCase().replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function checkAnswer(inputId, correctAnswer, feedbackId) {
+      const input = document.getElementById(inputId);
+      const feedback = document.getElementById(feedbackId);
+      const answer = normalize(input.value);
+      const correct = normalize(correctAnswer);
+
+      if (answer.includes(correct)) {
+        input.classList.add('correct');
+        feedback.textContent = "Richtig! ✅";
+        feedback.style.color = 'green';
+      } else {
+        input.classList.add('wrong');
+        input.value = correctAnswer;
+        feedback.textContent = "Falsch. Die richtige Antwort ist: " + correctAnswer;
+        feedback.style.color = 'red';
+      }
+    }
+
+    function selectSingleOption(button, isCorrect, feedbackId) {
+      const buttons = button.parentElement.querySelectorAll('button');
+      buttons.forEach(btn => btn.disabled = true);
+
+      if (isCorrect) {
+        button.classList.add('correct');
+        document.getElementById(feedbackId).textContent = "Richtig! ✅";
+        document.getElementById(feedbackId).style.color = 'green';
+      } else {
+        button.classList.add('wrong');
+        document.getElementById(feedbackId).textContent = "Falsch.";
+        document.getElementById(feedbackId).style.color = 'red';
+      }
+    }
+  </script>
+</body>
+</html>
