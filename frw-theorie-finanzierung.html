@@ -1,632 +1,198 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Theoriefragen Allgemein – Berichterstattung</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finanzierungslehre – Was wird beschrieben?</title>
   <style>
-    body {
+    body{
       font-family: Arial, sans-serif;
       background: url("hintergrund.jpg") no-repeat center center fixed;
       background-size: cover;
-      margin: 0;
-      padding: 40px 20px;
-      color: black;
+      margin:0;
+      padding:40px 20px;
+      color:black;
     }
-
-    .section {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 40px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+    .section{
+      background: rgba(255,255,255,.9);
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:40px;
+      max-width:800px;
+      margin-left:auto;
+      margin-right:auto;
     }
-
-    h2 {
-      font-size: 20px;
-      margin-bottom: 16px;
+    h2{ font-size:20px; margin-bottom:16px; }
+    .choice-box{
+      display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px;
     }
-
-    .input-box, .choice-box {
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
+    .black-option{
+      background:black; color:white; border:none; border-radius:6px;
+      padding:10px 16px; cursor:pointer;
     }
-
-    .input-box input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 6px;
-      border: 2px solid #ccc;
-      font-size: 16px;
+    .correct{ background-color: lightgreen !important; color:black !important; }
+    .wrong{ background-color: lightcoral !important; }
+    .explanation{ margin-top:10px; font-weight:bold; display:none; }
+    .back-link{
+      display:inline-block; margin-bottom:20px; font-size:18px; font-weight:bold; color:black; text-decoration:none;
     }
-
-    .input-box button, .choice-box button {
-      margin-left: 10px;
-      margin-top: 10px;
-      padding: 10px 16px;
-      font-size: 16px;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .correct {
-      background-color: lightgreen !important;
-    }
-
-    .wrong {
-      background-color: lightcoral !important;
-    }
-
-    .explanation {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .black-option {
-      background-color: black;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 6px;
-      margin: 5px;
-      cursor: pointer;
-      border: none;
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-bottom: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      color: black;
-      text-decoration: none;
+    /* Mobile tweaks */
+    @media (max-width: 480px){
+      h2{ font-size:18px; }
+      .black-option{ flex:1 1 calc(50% - 10px); text-align:center; }
     }
   </style>
 </head>
 <body>
   <div class="section">
     <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
-    <h2>1. In welcher Reihenfolge sind Einschränkungen, Zusatz und Hinweise in dem Revisionsbericht zu erwähnen?</h2>
-    <div class="input-box">
-      <input type="text" id="answer1" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer1', '1. Einschränkungen 2. Zusatz 3. Hinweis', 'feedback1')">OK</button>
-    </div>
-    <div id="feedback1" class="explanation"></div>
+    <h2>Finanzierungslehre<br/>Was wird beschrieben?</h2>
   </div>
 
+  <!-- 1 -->
   <div class="section">
-    <h2>2. Sind die Einschränkungen vor oder nach der Prüfungsaussage in den Revisionsbericht zu nehmen?</h2>
-    <div class="choice-box">
-      <button class="black-option" onclick="selectSingleOption(this, true, 'feedback2')">vor</button>
-      <button class="black-option" onclick="selectSingleOption(this, false, 'feedback2')">nach</button>
+    <h2>1. Es bedeutet, dass ein Unternehmen Kapital von externen Quellen aufnimmt, also von außerhalb des Unternehmens. Typische Beispiele sind:<br>
+      • Bankkredite<br>
+      • Investoren (z.B. durch den Verkauf von Aktien)<br>
+      • Anleihen (Schuldverschreibungen, die das Unternehmen ausgibt)
+    </h2>
+    <div class="choice-box" data-correct="Aussenfinanzierung" data-extra="Der Unterschied zur Innenfinanzierung ist, dass bei der Außenfinanzierung das Kapital von außen kommt, also nicht aus dem Unternehmen selbst.">
+      <button class="black-option">Aussenfinanzierung</button>
+      <button class="black-option">Innenfinanzierung</button>
+      <button class="black-option">Fremdfinanzierung</button>
+      <button class="black-option">Eigenfinanzierung</button>
+      <button class="black-option">Verflüssigungsfinanzierung</button>
+      <button class="black-option">Mezzanine-Finanzierung</button>
     </div>
-    <div id="feedback2" class="explanation"></div>
+    <div class="explanation"></div>
   </div>
 
+  <!-- 2 -->
   <div class="section">
-    <h2>3. Wie ist vorzugehen, wenn mehrere Tatbestände zu einer Einschränkung vorliegen?</h2>
-    <div class="input-box">
-      <input type="text" id="answer3" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer3', 'Die Prüfungsaussage bezieht sich auf die schwerwiegendste Einschränkung.', 'feedback3')">OK</button>
+    <h2>2. Hier wird Kapital aus dem Unternehmen selbst generiert, ohne externe Hilfe. Das kann zum Beispiel durch folgende Wege geschehen:<br>
+      • Gewinne aus dem operativen Geschäft (z.B. Gewinne, die im Unternehmen bleiben und nicht ausgeschüttet werden)<br>
+      • Abschreibungen (diese reduzieren den Gewinn, bieten aber eine Möglichkeit, Liquidität zu schaffen)<br>
+      • Rücklagenbildung (z.B. wenn ein Unternehmen einen Teil seiner Gewinne spart)
+    </h2>
+    <div class="choice-box" data-correct="Innenfinanzierung" data-extra="Innenfinanzierung bedeutet also, dass das Unternehmen seine eigene finanzielle Grundlage nutzt.">
+      <button class="black-option">Aussenfinanzierung</button>
+      <button class="black-option">Innenfinanzierung</button>
+      <button class="black-option">Fremdfinanzierung</button>
+      <button class="black-option">Eigenfinanzierung</button>
+      <button class="black-option">Verflüssigungsfinanzierung</button>
+      <button class="black-option">Mezzanine-Finanzierung</button>
     </div>
-    <div id="feedback3" class="explanation"></div>
+    <div class="explanation"></div>
   </div>
 
+  <!-- 3 -->
   <div class="section">
-    <h2>4. Ist ein Zusatz vor oder nach der Prüfungsaussage in den Revisionsbericht zu nehmen?</h2>
-    <div class="choice-box">
-      <button class="black-option" onclick="selectSingleOption(this, false, 'feedback4')">vor</button>
-      <button class="black-option" onclick="selectSingleOption(this, true, 'feedback4')">nach</button>
+    <h2>3. Hier nimmt das Unternehmen Kapital von externen Dritten auf, das später zurückgezahlt werden muss. Dies kann zum Beispiel in Form von Krediten oder Anleihen geschehen. Das Unternehmen zahlt Zinsen und muss das Kapital in der Zukunft zurückzahlen.</h2>
+    <div class="choice-box" data-correct="Fremdfinanzierung" data-extra="Fremdfinanzierung hat also den Nachteil, dass das Unternehmen Verschuldung aufnimmt und in der Zukunft Rückzahlungen leisten muss. Im Gegenzug erhält es aber das benötigte Kapital.">
+      <button class="black-option">Aussenfinanzierung</button>
+      <button class="black-option">Innenfinanzierung</button>
+      <button class="black-option">Fremdfinanzierung</button>
+      <button class="black-option">Eigenfinanzierung</button>
+      <button class="black-option">Verflüssigungsfinanzierung</button>
+      <button class="black-option">Mezzanine-Finanzierung</button>
     </div>
-    <div id="feedback4" class="explanation"></div>
+    <div class="explanation"></div>
   </div>
 
+  <!-- 4 -->
   <div class="section">
-    <h2>5. Welche Arten von Einschränkungen gibt es?</h2>
-    <div class="input-box">
-      <input type="text" id="answer5" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer5', '1. Eingeschränkte Prüfungsaussage 2. Verneinende Prüfungsaussage 3. Unmöglichkeit einer Prüfungsaussage', 'feedback5')">OK</button>
+    <h2>4. Hier stammt das Kapital aus dem eigenen Unternehmen. Das bedeutet, dass entweder:<br>
+      • Eigenkapitalgeber (z.B. die Eigentümer des Unternehmens) mehr Geld in das Unternehmen investieren.<br>
+      • Gewinne (die nicht ausgeschüttet, sondern im Unternehmen behalten werden) als Kapital genutzt werden.
+    </h2>
+    <div class="choice-box" data-correct="Eigenfinanzierung" data-extra="Eigenfinanzierung ist weniger risikobehaftet, weil keine Rückzahlungspflichten bestehen, aber das Unternehmen kann sein Eigentum verwässern, wenn es neue Investoren aufnimmt.">
+      <button class="black-option">Aussenfinanzierung</button>
+      <button class="black-option">Innenfinanzierung</button>
+      <button class="black-option">Fremdfinanzierung</button>
+      <button class="black-option">Eigenfinanzierung</button>
+      <button class="black-option">Verflüssigungsfinanzierung</button>
+      <button class="black-option">Mezzanine-Finanzierung</button>
     </div>
-    <div id="feedback5" class="explanation"></div>
+    <div class="explanation"></div>
   </div>
 
+  <!-- 5 -->
   <div class="section">
-    <h2>6. Welche Arten einer Eingeschränkten Prüfungsaussage gibt es?</h2>
-    <div class="input-box">
-      <input type="text" id="answer6" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer6', '1. Meinungsverschiedenheit festgestellter Sachverhalt 2. Meinungsverschiedenheit angenommener Sachverhalt, NICHT grundlegend 3. Beschränkung Prüfungsumfang, NICHT grundlegend', 'feedback6')">OK</button>
+    <h2>5. Es bedeutet, dass ein Unternehmen bestehende Vermögenswerte (z.B. Grundstücke, Maschinen, Lagerbestände) verkauft oder anderweitig verwertet, um Liquidität zu erhalten. Diese Art der Finanzierung ist kurzfristig und führt oft zu einer Reduzierung von Vermögenswerten.<br>
+      Es ist eine Möglichkeit, an Geld zu kommen, ohne externe Schulden aufnehmen zu müssen, aber es kann die langfristige Wertbasis des Unternehmens beeinträchtigen.
+    </h2>
+    <div class="choice-box" data-correct="Verflüssigungsfinanzierung">
+      <button class="black-option">Aussenfinanzierung</button>
+      <button class="black-option">Innenfinanzierung</button>
+      <button class="black-option">Fremdfinanzierung</button>
+      <button class="black-option">Eigenfinanzierung</button>
+      <button class="black-option">Verflüssigungsfinanzierung</button>
+      <button class="black-option">Mezzanine-Finanzierung</button>
     </div>
-    <div id="feedback6" class="explanation"></div>
+    <div class="explanation"></div>
   </div>
 
+  <!-- 6 -->
   <div class="section">
-    <h2>7. Welche Arten einer verneinenden Prüfungsaussage gibt es?</h2>
-    <div class="input-box">
-      <input type="text" id="answer7" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer7', 'Meinungsverschiedenheit, festgestellter Sachverhalt, grundlegend', 'feedback7')">OK</button>
+    <h2>6. Es ist eine Mischform zwischen Eigen- und Fremdfinanzierung. Dabei handelt es sich um Kapital, das dem Unternehmen von Investoren zur Verfügung gestellt wird, aber nicht unbedingt in Form von klassischen Krediten oder Eigenkapital.<br>
+      Typische Merkmale:<br>
+      • Höhere Rendite für die Investoren im Vergleich zu traditionellen Krediten, da sie ein höheres Risiko tragen.<br>
+      • Flexibilität für das Unternehmen, da es nicht sofort Eigenkapital aufgeben oder hohe Zinsen zahlen muss.<br>
+      • Mezzanine-Kapitalgeber erhalten in der Regel eine Form von Beteiligung oder Optionen, um im Falle eines Erfolges vom Wachstum des Unternehmens zu profitieren.
+    </h2>
+    <div class="choice-box" data-correct="Mezzanine-Finanzierung" data-extra="Mezzanine-Finanzierung wird häufig von Wachstumsunternehmen oder bei Übernahmen genutzt, um zusätzliches Kapital zu beschaffen, ohne die Kontrolle abzugeben.">
+      <button class="black-option">Aussenfinanzierung</button>
+      <button class="black-option">Innenfinanzierung</button>
+      <button class="black-option">Fremdfinanzierung</button>
+      <button class="black-option">Eigenfinanzierung</button>
+      <button class="black-option">Verflüssigungsfinanzierung</button>
+      <button class="black-option">Mezzanine-Finanzierung</button>
     </div>
-    <div id="feedback7" class="explanation"></div>
+    <div class="explanation"></div>
   </div>
 
-  <div class="section">
-    <h2>8. Welche Arten von Unmöglichkeit einer Prüfungsaussage gibt es?</h2>
-    <div class="input-box">
-      <input type="text" id="answer8" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer8', '1. Meinungsverschiedenheit, angenommener Sachverhalt, grundlegend 2. Beschränkung des Prüfungsumfangs, grundlegend', 'feedback8')">OK</button>
-    </div>
-    <div id="feedback8" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>9. Wann muss eine Einschränkung vorgenommen werden?</h2>
-    <div class="input-box">
-      <input type="text" id="answer9" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer9', '1. Beschränkung des Prüfungsumfangs 2. Verstoss gegen die Bewertungsgrundsätze 3. Verstoss gegen die Darstellung (Mindestgliederung) 4. Verstoss gegen die Offenlegung (Anhang) 5. Verstoss gegen Grundsätze ordnungsmässiger Rechnungslegung', 'feedback9')">OK</button>
-    </div>
-    <div id="feedback9" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>10. Wann ist ein Fehler grundlegend? Wenn durch die Korrektur des Fehlers folgendes passiert:</h2>
-    <div class="input-box">
-      <input type="text" id="answer10" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer10', '1. ½ Kapitalverlust 2. Überschuldung 3. Dividendenauszahlung nicht mehr möglich 4. Vielfaches der Gesamtwesentlichkeit', 'feedback10')">OK</button>
-    </div>
-    <div id="feedback10" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>11. Was ist eine Einschränkung?</h2>
-    <div class="input-box">
-      <input type="text" id="answer11" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer11', 'Sie modifiziert die Prüfungsaussage. Der Prüfer ist nicht in allen wesentlichen Punkten einverstanden.', 'feedback11')">OK</button>
-    </div>
-    <div id="feedback11" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>12. Was ist ein Zusatz?</h2>
-    <div class="input-box">
-      <input type="text" id="answer12" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer12', 'Hervorhebung eines wichtigen Sachverhalts Ergänzt den Bericht zur Vermeidung von Missverständnissen Bezieht sich auf Prüfung, darf keine Geheimhaltung verletzen', 'feedback12')">OK</button>
-    </div>
-    <div id="feedback12" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>13. Was ist ein Hinweis?</h2>
-    <div class="input-box">
-      <input type="text" id="answer13" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer13', 'Verstösse gegen andere gesetzliche Vorschriften in der Jahresrechnung Kein Einfluss auf die Prüfungsaussage', 'feedback13')">OK</button>
-    </div>
-    <div id="feedback13" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>14. Was sind Beispiele einer redaktionellen Erläuterung? (SER 136-137)</h2>
-    <div class="input-box">
-      <input type="text" id="answer14" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer14', 'Doppelmandat Überlanges / verkürztes Geschäftsjahr Vorjahr Opting-out Vorjahr andere Revisionsgesellschaft falls Vergleichszahlen nicht geprüft werden Beilagen (GFR), falls diese von angewendeter Rechnungslegung vorgesehen wird', 'feedback14')">OK</button>
-    </div>
-    <div id="feedback14" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>15. Was ist der Inhalt im Revisionsbericht bei der eingeschränkten Revision? Art. 729b OR</h2>
-    <div class="input-box">
-      <input type="text" id="answer15" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer15', 'Hinweis auf eingeschränkte Natur der Revision Stellungnahme zum Ergebnis der Prüfung Angaben zur Unabhängigkeit (allenfalls Doppelmandat) Angaben zum leitenden Revisor inkl. Zulassung', 'feedback15')">OK</button>
-    </div>
-    <div id="feedback15" class="explanation"></div>
-  </div>
   <script>
-    function normalize(text) {
-      return text.toLowerCase().replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    }
+    // Helper: normalize text for comparison
+    function norm(t){ return t.toLowerCase().trim(); }
 
-    function checkAnswer(inputId, correctAnswer, feedbackId) {
-      const input = document.getElementById(inputId);
-      const feedback = document.getElementById(feedbackId);
-      const answer = normalize(input.value);
-      const correct = normalize(correctAnswer);
+    // Handle all multiple-choice boxes (black buttons)
+    document.querySelectorAll('.choice-box').forEach(box => {
+      const correct = norm(box.dataset.correct || "");
+      const extra = box.dataset.extra || "";
+      const feedback = box.parentElement.querySelector('.explanation');
 
-      if (answer.includes(correct)) {
-        input.classList.add('correct');
-        feedback.textContent = "Richtig! ✅";
-        feedback.style.color = 'green';
-      } else {
-        input.classList.add('wrong');
-        input.value = correctAnswer;
-        feedback.textContent = "Falsch. Die richtige Antwort ist: " + correctAnswer;
-        feedback.style.color = 'red';
-      }
-    }
+      box.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // lock all buttons
+          box.querySelectorAll('button').forEach(b => b.disabled = true);
 
-    function selectSingleOption(button, isCorrect, feedbackId) {
-      const buttons = button.parentElement.querySelectorAll('button');
-      buttons.forEach(btn => btn.disabled = true);
+          const chosen = norm(btn.textContent);
+          const isCorrect = correct && chosen === norm(correct);
 
-      const feedback = document.getElementById(feedbackId);
-      if (isCorrect) {
-        button.classList.add('correct');
-        feedback.textContent = "Richtig! ✅";
-        feedback.style.color = 'green';
-      } else {
-        button.classList.add('wrong');
-        feedback.textContent = "Falsch.";
-        feedback.style.color = 'red';
-      }
-    }
+          if(isCorrect){
+            btn.classList.add('correct');
+            feedback.textContent = "Richtig! ✅";
+            feedback.style.color = "green";
+          }else{
+            btn.classList.add('wrong');
+            feedback.textContent = "Falsch.";
+            feedback.style.color = "red";
+          }
+
+          // show feedback only AFTER a choice
+          feedback.style.display = "block";
+
+          // append Zusatz zur Lösung AFTER selection (if provided)
+          if(extra){
+            const extraDiv = document.createElement('div');
+            extraDiv.style.marginTop = "8px";
+            extraDiv.innerHTML = "<em>" + extra + "</em>";
+            feedback.appendChild(extraDiv);
+          }
+        });
+      });
+    });
   </script>
-<div class="section">
-  <h2>16. Es handelt sich um ein überlanges / verkürztes Geschäftsjahr</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback16')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback16')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback16')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback16')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback16" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>17. Eine Gesellschaft wäre überschuldet, jedoch wurde ein Rangrücktritt gemacht.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback17')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback17')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback17')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback17')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback17" class="explanation"></div>
-</div>
-
-
-<div class="section">
-  <h2>1. Im laufenden Jahr wird bemerkt, dass die Verlustverrechnung gem. Art. 674 OR nicht gemacht wurde.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback101')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback101')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback101')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback101')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback101" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>2. Im Folgejahr wird bemerkt, dass die Verlustverrechnung gem. Art. 674 OR nicht gemacht wurde.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback102')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback102')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback102')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback102')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback102" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>3. Die Gesellschaft befindet sich im ½ Kapitalverlust und der VR hat Sanierungsmassnahmen ergriffen.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback103')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback103')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback103')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback103')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback103" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>4. Die Gesellschaft befindet sich im ½ Kapitalverlust und der VR hat keine Sanierungsmassnahmen ergriffen.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback104')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback104')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback104')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback104')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback104" class="explanation">💡 Es kann hier zusätzlich auch ein Zusatz gemacht werden, der auf den ½ KV hinweist.</div>
-</div>
-
-<div class="section">
-  <h2>5. Bei der Prüfung zur Gewinnverwendung wird festgestellt, dass keine Reservenzuweisung gemacht wurde.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback105')">Einschränkung der Prüfungsaussage</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback105')">Einschränkung zur Gewinnverwendung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback105')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback105')">Zusatz</button>
-  </div>
-  <div id="feedback105" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>6. Im Folgejahr wird festgestellt, dass trotz Covid-19 Kredit eine Dividende ausgeschüttet wird, obwohl im Gewinnverwendungsvorschlag keine Dividende erwähnt wurde.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback106')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback106')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback106')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback106')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback106" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>7. Im Folgejahr wird festgestellt, dass eine höhere Dividende ausgeschüttet wurde, als durch die Revisionsstelle geprüft wurde. Die Mehrdividende verursacht aus heutiger Sicht keine Probleme.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback107')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback107')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback107')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback107')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback107" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>8. Die Gewinnverwendung im laufenden Jahr ist aufgrund von der Liquiditätssituation nicht vertretbar.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback108')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback108')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback108')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback108')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback108" class="explanation">💡 Verstoss gegen Art. 717 Abs. 1 Sorgfaltspflicht VR</div>
-</div>
-
-<div class="section">
-  <h2>9. Im laufenden Jahr wird ein Antrag auf Gewinnverwendung gemacht, obwohl ein Covid-19 Kredit vorhanden ist.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback109')">Einschränkung der Prüfungsaussage</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback109')">Einschränkung zur Gewinnverwendung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback109')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback109')">Zusatz</button>
-  </div>
-  <div id="feedback109" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>10. Die Gewinnverwendung im laufenden Jahr ist aufgrund von der Liquiditätssituation knapp vertretbar.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback110')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback110')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback110')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback110')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback110" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>11. Das Vorjahr wurde durch eine andere Revisionsstelle geprüft.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback111')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback111')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback111')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback111')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback111" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>12. Der Antrag zur Gewinnverwendung ist nicht ok.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback112')">Einschränkung der Prüfungsaussage</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback112')">Einschränkung zur Gewinnverwendung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback112')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback112')">Zusatz</button>
-  </div>
-  <div id="feedback112" class="explanation">💡 immer verneinende Prüfungsaussage zur Gewinnverwendung</div>
-</div>
-
-<div class="section">
-  <h2>13. Im Vorjahr befand sich die Gesellschaft im Opting-Out</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback113')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback113')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback113')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback113')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback113" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>14. Bei einem Aktivdarlehen an eine nahestehende Person ist zu prüfen, ob ein Drittvergleich gegeben ist. Falls kein Drittvergleich gegeben ist, ist das ausschüttbare Eigenkapital zu reduzieren. Ansonsten ist die Gewinnverwendung nicht ok.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback114')">richtig</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback114')">falsch</button>
-  </div>
-  <div id="feedback114" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>15. Ein solches Darlehen ist erlaubt, falls in der Gewinnverwendung explizit die Verrechnung offengelegt ist.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback115')">richtig</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback115')">falsch</button>
-  </div>
-  <div id="feedback115" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>18. Die GV wurde nicht innert 6 Monaten einberufen</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback118')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback118')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback118')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback118')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback118" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>19. Ein Doppelmandat ist gegeben.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback119')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback119')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback119')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback119')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback119" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>20. Es ist kein freies Eigenkapital für den Erwerb eigener Aktiven vorhanden.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback120')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback120')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback120')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback120')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback120" class="explanation">💡 Art. 659 Abs. 1 OR</div>
-</div>
-
-<div class="section">
-  <h2>21. Die Gesellschaft hat Going-Concern Probleme, jedoch ist die Offenlegung im Anhang genügend.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback121')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback121')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback121')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback121')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback121" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>22. Die Vergleichszahlen konnten nicht geprüft werden</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback122')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback122')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback122')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback122')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback122" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>23. Die Gesellschaft ist in einem Gerichtsverfahren involviert, wobei der Ausgang des Verfahrens noch unklar ist. Dieser Tatbestand wird im Anhang genügend offengelegt.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback123')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback123')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback123')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback123')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback123" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>24. Der Tatbestand der Einlagerückgewähr (quantitatives Kriterium) gem. Art. 680 Abs. 2 OR ist gegeben.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback124')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback124')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback124')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback124')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback124" class="explanation">💡 Wir weisen darauf hin, dass das Darlehen an Aktionäre von CHF xx mangels frei verwendbarer Reserven eine nach Art. 680 Abs. 2 OR verbotene Kapitalrückzahlung darstellt. SER Bsp. 14</div>
-</div>
-
-<div class="section">
-  <h2>25. Die Gesellschaft befindet sich im ½ KV und der VR hat keinen Zwischenabschluss zu FW (+ evtl VW) erstellt.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback125')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback125')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback125')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback125')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback125" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>26. Die angewendete Rechnungslegung sieht Beilagen wie GFR vor.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback126')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback126')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback126')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback126')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback126" class="explanation"></div>
-</div>
-<div class="section">
-  <h2>Finanzierungslehre – Was wird beschrieben?</h2>
-</div>
-
-<div class="section">
-  <h2>1. Es bedeutet, dass ein Unternehmen Kapital von externen Quellen aufnimmt, also von außerhalb des Unternehmens. Typische Beispiele sind:<br>• Bankkredite<br>• Investoren (z.B. durch den Verkauf von Aktien)<br>• Anleihen (Schuldverschreibungen, die das Unternehmen ausgibt)</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback201')">Aussenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback201')">Innenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback201')">Fremdfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback201')">Eigenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback201')">Verflüssigungsfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback201')">Mezzanine-Finanzierung</button>
-  </div>
-  <div id="feedback201" class="explanation">💡 Der Unterschied zur Innenfinanzierung ist, dass bei der Außenfinanzierung das Kapital von außen kommt, also nicht aus dem Unternehmen selbst.</div>
-</div>
-
-<div class="section">
-  <h2>2. Hier wird Kapital aus dem Unternehmen selbst generiert, ohne externe Hilfe. Das kann zum Beispiel durch folgende Wege geschehen:<br>• Gewinne aus dem operativen Geschäft (z.B. Gewinne, die im Unternehmen bleiben und nicht ausgeschüttet werden)<br>• Abschreibungen (diese reduzieren den Gewinn, bieten aber eine Möglichkeit, Liquidität zu schaffen)<br>• Rücklagenbildung (z.B. wenn ein Unternehmen einen Teil seiner Gewinne spart)</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback202')">Aussenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback202')">Innenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback202')">Fremdfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback202')">Eigenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback202')">Verflüssigungsfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback202')">Mezzanine-Finanzierung</button>
-  </div>
-  <div id="feedback202" class="explanation">💡 Innenfinanzierung bedeutet also, dass das Unternehmen seine eigene finanzielle Grundlage nutzt.</div>
-</div>
-
-<div class="section">
-  <h2>3. Hier nimmt das Unternehmen Kapital von externen Dritten auf, das später zurückgezahlt werden muss. Dies kann zum Beispiel in Form von Krediten oder Anleihen geschehen. Das Unternehmen zahlt Zinsen und muss das Kapital in der Zukunft zurückzahlen.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback203')">Aussenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback203')">Innenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback203')">Fremdfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback203')">Eigenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback203')">Verflüssigungsfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback203')">Mezzanine-Finanzierung</button>
-  </div>
-  <div id="feedback203" class="explanation">💡 Fremdfinanzierung hat also den Nachteil, dass das Unternehmen Verschuldung aufnimmt und in der Zukunft Rückzahlungen leisten muss. Im Gegenzug erhält es aber das benötigte Kapital.</div>
-</div>
-
-<div class="section">
-  <h2>4. Hier stammt das Kapital aus dem eigenen Unternehmen. Das bedeutet, dass entweder:<br>• Eigenkapitalgeber (z.B. die Eigentümer des Unternehmens) mehr Geld in das Unternehmen investieren.<br>• Gewinne (die nicht ausgeschüttet, sondern im Unternehmen behalten werden) als Kapital genutzt werden.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback204')">Aussenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback204')">Innenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback204')">Fremdfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback204')">Eigenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback204')">Verflüssigungsfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback204')">Mezzanine-Finanzierung</button>
-  </div>
-  <div id="feedback204" class="explanation">💡 Eigenfinanzierung ist weniger risikobehaftet, weil keine Rückzahlungspflichten bestehen, aber das Unternehmen kann sein Eigentum verwässern, wenn es neue Investoren aufnimmt.</div>
-</div>
-
-<div class="section">
-  <h2>5. Es bedeutet, dass ein Unternehmen bestehende Vermögenswerte (z.B. Grundstücke, Maschinen, Lagerbestände) verkauft oder anderweitig verwertet, um Liquidität zu erhalten. Diese Art der Finanzierung ist kurzfristig und führt oft zu einer Reduzierung von Vermögenswerten.<br>Es ist eine Möglichkeit, an Geld zu kommen, ohne externe Schulden aufnehmen zu müssen, aber es kann die langfristige Wertbasis des Unternehmens beeinträchtigen.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback205')">Aussenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback205')">Innenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback205')">Fremdfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback205')">Eigenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback205')">Verflüssigungsfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback205')">Mezzanine-Finanzierung</button>
-  </div>
-  <div id="feedback205" class="explanation"></div>
-</div>
-
-<div class="section">
-  <h2>6. Es ist eine Mischform zwischen Eigen- und Fremdfinanzierung. Dabei handelt es sich um Kapital, das dem Unternehmen von Investoren zur Verfügung gestellt wird, aber nicht unbedingt in Form von klassischen Krediten oder Eigenkapital.<br>Typische Merkmale:<br>• Höhere Rendite für die Investoren im Vergleich zu traditionellen Krediten, da sie ein höheres Risiko tragen.<br>• Flexibilität für das Unternehmen, da es nicht sofort Eigenkapital aufgeben oder hohe Zinsen zahlen muss.<br>• Mezzanine-Kapitalgeber erhalten in der Regel eine Form von Beteiligung oder Optionen, um im Falle eines Erfolges vom Wachstum des Unternehmens zu profitieren.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback206')">Aussenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback206')">Innenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback206')">Fremdfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback206')">Eigenfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback206')">Verflüssigungsfinanzierung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback206')">Mezzanine-Finanzierung</button>
-  </div>
-  <div id="feedback206" class="explanation">💡 Mezzanine-Finanzierung wird häufig von Wachstumsunternehmen oder bei Übernahmen genutzt, um zusätzliches Kapital zu beschaffen, ohne die Kontrolle abzugeben.</div>
-</div>
-</body>
 </body>
 </html>
+
