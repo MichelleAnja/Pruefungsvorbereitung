@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mindestgliederung</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin:0;
+      padding:40px 20px;
+      color:black;
+    }
+    .section{
+      background: rgba(255,255,255,.9);
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:40px;
+      max-width:800px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    h2{ font-size:20px; margin-bottom:16px; }
+    .choice-box{
+      display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px;
+    }
+    .black-option{
+      background:black; color:white; border:none; border-radius:6px;
+      padding:10px 16px; cursor:pointer;
+    }
+    .correct{ background-color: lightgreen !important; color:black !important; }
+    .wrong{ background-color: lightcoral !important; }
+    .explanation{ margin-top:10px; font-weight:bold; display:none; }
+    .back-link{
+      display:inline-block; margin-bottom:20px; font-size:18px; font-weight:bold; color:black; text-decoration:none;
+    }
+    @media (max-width: 480px){
+      h2{ font-size:18px; }
+      .black-option{ flex:1 1 calc(50% - 10px); text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="fer-theorien.html">← Zurück</a>
+    <h2>Mindestgliederung</h2>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <h2>1. Wertberichtigungen des Umlaufvermögens werden nach FER in der Bilanz gesondert gegliedert.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Wertberichtigungen des Umlaufvermögens dürfen nur im Anhang ausgewiesen werden – Nettobestand in der Bilanz">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <h2>2. Wo ist das nicht einbezahlte Grundkapital nach FER zu zeigen?</h2>
+    <div class="choice-box" data-correct="Minusposition im EK">
+      <button class="black-option">Minusposition im EK</button>
+      <button class="black-option">Aktivseite der Bilanz</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <h2>3. Wo ist das nicht einbezahlte Grundkapital nach OR zu zeigen?</h2>
+    <div class="choice-box" data-correct="Aktivseite der Bilanz">
+      <button class="black-option">Minusposition im EK</button>
+      <button class="black-option">Aktivseite der Bilanz</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <h2>4. Der Eigenkapitalnachweis ist ein zusätzliches Element der Jahresrechnung nach FER</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <script>
+    function norm(t){ return t.toLowerCase().trim(); }
+
+    document.querySelectorAll('.choice-box').forEach(box => {
+      const correctRaw = box.dataset.correct || "";
+      const correctSet = correctRaw.split('|').map(s => norm(s));
+      const extra = box.dataset.extra || "";
+      const feedback = box.parentElement.querySelector('.explanation');
+
+      box.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          box.querySelectorAll('button').forEach(b => b.disabled = true);
+
+          const chosen = norm(btn.textContent);
+          const isCorrect = correctSet.includes(chosen);
+
+          if(isCorrect){
+            btn.classList.add('correct');
+            feedback.textContent = "Richtig! ✅";
+            feedback.style.color = "green";
+          }else{
+            btn.classList.add('wrong');
+            feedback.textContent = "Falsch.";
+            feedback.style.color = "red";
+            // Markiere zusätzlich die korrekte Antwort grün
+            box.querySelectorAll('button').forEach(b => {
+              if(correctSet.includes(norm(b.textContent))){
+                b.classList.add('correct');
+              }
+            });
+          }
+
+          feedback.style.display = "block";
+
+          if(extra){
+            const extraDiv = document.createElement('div');
+            extraDiv.style.marginTop = "8px";
+            extraDiv.innerHTML = "<em>" + extra + "</em>";
+            feedback.appendChild(extraDiv);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
