@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ereignisse nach dem Bilanzstichtag – Vor Genehmigung der Jahresrechnung</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin:0;
+      padding:40px 20px;
+      color:black;
+    }
+    .section{
+      background: rgba(255,255,255,.9);
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:40px;
+      max-width:800px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    h2{ font-size:20px; margin-bottom:16px; }
+    .choice-box{
+      display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px;
+    }
+    .black-option{
+      background:black; color:white; border:none; border-radius:6px;
+      padding:10px 16px; cursor:pointer;
+    }
+    .correct{ background-color: lightgreen !important; color:black !important; }
+    .wrong{ background-color: lightcoral !important; }
+    .explanation{ margin-top:10px; font-weight:bold; display:none; }
+    .back-link{
+      display:inline-block; margin-bottom:20px; font-size:18px; font-weight:bold; color:black; text-decoration:none;
+    }
+    @media (max-width: 480px){
+      h2{ font-size:18px; }
+      .black-option{ flex:1 1 calc(50% - 10px); text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
+    <h2>Ereignisse nach dem Bilanzstichtag <br>Vor Genehmigung der Jahresrechnung</h2>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <h2>1. Die JRG nach Swiss GAAP FER ist NIE für die Steuerbemessung massgebend. Auf welchen Betrag wird der latente Steueraufwand berechnet?</h2>
+    <div class="choice-box" data-correct="Differenz Gewinn OR zu Swiss GAAP FER">
+      <button class="black-option">Gewinn nach OR</button>
+      <button class="black-option">Gewinn nach Swiss GAAP FER</button>
+      <button class="black-option">Differenz Gewinn OR zu Swiss GAAP FER</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <h2>2. Kann innerhalb einer Bilanzposition verschiedene Bewertungsgrundlagen / -grundsätze angewendet werden?</h2>
+    <div class="choice-box" data-correct="nein">
+      <button class="black-option">ja</button>
+      <button class="black-option">nein</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <h2>3. Die Bewertungsgrundsätze und -grundlagen für die Einzelpositionen sind im Anhang offen zu legen.</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <h2>4. Bewertung: Wertschriften im Umlaufvermögen mit Kurswert.</h2>
+    <div class="choice-box" data-correct="Aktueller Wert">
+      <button class="black-option">Aktueller Wert</button>
+      <button class="black-option">Historischer Wert</button>
+      <button class="black-option">Wahlrecht</button>
+      <button class="black-option">POCM</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <h2>5. Bewertung: Wertschriften im Umlaufvermögen ohne Kurswert.</h2>
+    <div class="choice-box" data-correct="Historischer Wert">
+      <button class="black-option">Aktueller Wert</button>
+      <button class="black-option">Historischer Wert</button>
+      <button class="black-option">Wahlrecht</button>
+      <button class="black-option">POCM</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <h2>6. Bewertung: Forderungen.</h2>
+    <div class="choice-box" data-correct="Historischer Wert" data-extra="(Nominalwert – WB)">
+      <button class="black-option">Aktueller Wert</button>
+      <button class="black-option">Historischer Wert</button>
+      <button class="black-option">Wahlrecht</button>
+      <button class="black-option">POCM</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <h2>7. Bewertung: langfristige Aufträge.</h2>
+    <div class="choice-box" data-correct="POCM|Aktueller Wert" data-extra="anteiliger Umsatz mit Gewinn, es geht auch als Historischer Wert die CCM Methode, für die IST-Kosten">
+      <button class="black-option">Aktueller Wert</button>
+      <button class="black-option">Historischer Wert</button>
+      <button class="black-option">Wahlrecht</button>
+      <button class="black-option">POCM</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <h2>8. Bewertung: Sachanlage zu Renditezwecken</h2>
+    <div class="choice-box" data-correct="Wahlrecht">
+      <button class="black-option">Aktueller Wert</button>
+      <button class="black-option">Historischer Wert</button>
+      <button class="black-option">Wahlrecht</button>
+      <button class="black-option">POCM</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section">
+    <h2>9. Bewertung: Vorräte.</h2>
+    <div class="choice-box" data-correct="Historischer Wert">
+      <button class="black-option">Aktueller Wert</button>
+      <button class="black-option">Historischer Wert</button>
+      <button class="black-option">Wahlrecht</button>
+      <button class="black-option">POCM</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section">
+    <h2>10. Bewertung: Wertschriften der Finanzanlagen.</h2>
+    <div class="choice-box" data-correct="Wahlrecht">
+      <button class="black-option">Aktueller Wert</button>
+      <button class="black-option">Historischer Wert</button>
+      <button class="black-option">Wahlrecht</button>
+      <button class="black-option">POCM</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 11 -->
+  <div class="section">
+    <h2>11. Bewertung: Sachanlagen und immaterielle Anlagen</h2>
+    <div class="choice-box" data-correct="Historischer Wert">
+      <button class="black-option">Aktueller Wert</button>
+      <button class="black-option">Historischer Wert</button>
+      <button class="black-option">Wahlrecht</button>
+      <button class="black-option">POCM</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 12 -->
+  <div class="section">
+    <h2>12. Bewertung: Finanzanlagen</h2>
+    <div class="choice-box" data-correct="Historischer Wert">
+      <button class="black-option">Aktueller Wert</button>
+      <button class="black-option">Historischer Wert</button>
+      <button class="black-option">Wahlrecht</button>
+      <button class="black-option">POCM</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 13 -->
+  <div class="section">
+    <h2>13. Bewertung: Verbindlichkeiten.</h2>
+    <div class="choice-box" data-correct="Nominalwert">
+      <button class="black-option">Aktueller Wert</button>
+      <button class="black-option">Historischer Wert</button>
+      <button class="black-option">Wahlrecht</button>
+      <button class="black-option">Nominalwert</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 14 -->
+  <div class="section">
+    <h2>14. Bei den historisch bewerteten Aktiven ist auf jeden Bilanzstichtag zu prüfen, ob Anzeichen bestehen, dass der Buchwert den erzielbaren Wert (höherer Wert aus Netto-Marktwert und Nutzwert) übersteigt. Falls sich dies beim Impairmenttest (Werthaltigkeitstest) bestätigt, ist der Buchwert auf den erzielbaren Wert zu reduzieren.</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 15 -->
+  <div class="section">
+    <h2>15. Wenn sich der erzielbare Wert wieder massgeblich verbessert hat in einem Folgejahr muss folgende Buchung aus den Vorjahren teilweise oder ganz aufgehoben werden:</h2>
+    <div class="choice-box" data-correct="Wertbeeinträchtigung">
+      <button class="black-option">Wertbeeinträchtigung</button>
+      <button class="black-option">Abschreibung</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 16 -->
+  <div class="section">
+    <h2>16. Auf welchen Wert von folgenden ist bei einer Wiederaufwertung zu bewerten:<br>
+      - Erzielbarer Wert<br>
+      - Buchwert nach planmässiger Abschreibung (als hätte es nie WB gegeben)
+    </h2>
+    <div class="choice-box" data-correct="den tieferen">
+      <button class="black-option">den tieferen</button>
+      <button class="black-option">den höheren</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 17 -->
+  <div class="section">
+    <h2>17. Eine ausserplanmässige Abschreibung wird _____ der planmässigen Abschreibung des Jahres berechnet und erfasst.</h2>
+    <div class="choice-box" data-correct="nach">
+      <button class="black-option">vor</button>
+      <button class="black-option">nach</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <script>
+    function norm(t){ return t.toLowerCase().trim(); }
+
+    // Multiple-choice handling with optional multiple correct answers (pipe-separated)
+    document.querySelectorAll('.choice-box').forEach(box => {
+      const correctRaw = box.dataset.correct || "";
+      const correctSet = correctRaw.split('|').map(s => norm(s));
+      const extra = box.dataset.extra || "";
+      const feedback = box.parentElement.querySelector('.explanation');
+
+      box.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // lock all buttons
+          box.querySelectorAll('button').forEach(b => b.disabled = true);
+
+          const chosen = norm(btn.textContent);
+          const isCorrect = correctSet.includes(chosen);
+
+          if(isCorrect){
+            btn.classList.add('correct');
+            feedback.textContent = "Richtig! ✅";
+            feedback.style.color = "green";
+          }else{
+            btn.classList.add('wrong');
+            feedback.textContent = "Falsch.";
+            feedback.style.color = "red";
+          }
+
+          // show feedback only AFTER a choice
+          feedback.style.display = "block";
+
+          // append Zusatz zur Lösung AFTER selection (if provided)
+          if(extra){
+            const extraDiv = document.createElement('div');
+            extraDiv.style.marginTop = "8px";
+            extraDiv.innerHTML = "<em>" + extra + "</em>";
+            feedback.appendChild(extraDiv);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
