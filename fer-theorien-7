@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Latente Steuern</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin:0;
+      padding:40px 20px;
+      color:black;
+    }
+    .section{
+      background: rgba(255,255,255,.9);
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:40px;
+      max-width:800px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    h2{ font-size:20px; margin-bottom:16px; }
+    .choice-box{
+      display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px;
+    }
+    .black-option{
+      background:black; color:white; border:none; border-radius:6px;
+      padding:10px 16px; cursor:pointer;
+    }
+    .correct{ background-color: lightgreen !important; color:black !important; }
+    .wrong{ background-color: lightcoral !important; }
+    .explanation{ margin-top:10px; font-weight:bold; display:none; }
+    .back-link{
+      display:inline-block; margin-bottom:20px; font-size:18px; font-weight:bold; color:black; text-decoration:none;
+    }
+    @media (max-width: 480px){
+      h2{ font-size:18px; }
+      .black-option{ flex:1 1 calc(50% - 10px); text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
+    <h2>Latente Steuern</h2>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <h2>1. Der laufende Steueraufwand wird auf dem Abschluss nach ______ erhoben.</h2>
+    <div class="choice-box" data-correct="or">
+      <button class="black-option">OR</button>
+      <button class="black-option">FER</button>
+      <button class="black-option">Bewertungsdifferenz OR und FER</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <h2>2. Der latente Steueraufwand wird auf dem Abschluss nach _____ erhoben.</h2>
+    <div class="choice-box" data-correct="bewertungsdifferenzen or und fer">
+      <button class="black-option">OR</button>
+      <button class="black-option">FER</button>
+      <button class="black-option">Bewertungsdifferenzen OR und FER</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <h2>3. Die passiven latenten Steuern werden als _____ ausgewiesen.</h2>
+    <div class="choice-box" data-correct="steuerrückstellungen">
+      <button class="black-option">Steuerrückstellungen</button>
+      <button class="black-option">Finanzanlagen</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <h2>4. Die aktiven latenten Steuern werden als _____ ausgewiesen.</h2>
+    <div class="choice-box" data-correct="finanzanlagen">
+      <button class="black-option">Steuerrückstellungen</button>
+      <button class="black-option">Finanzanlagen</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <h2>5. Veränderung der stillen Reserven x Steuersatz</h2>
+    <div class="choice-box" data-correct="latenter steuererfolg">
+      <button class="black-option">latenter Steuererfolg</button>
+      <button class="black-option">Bestand Steuerrückstellung</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <h2>6. Bestand stille Reserven in Bilanz x Steuersatz</h2>
+    <div class="choice-box" data-correct="bestand steuerrückstellung">
+      <button class="black-option">latenter Steuererfolg</button>
+      <button class="black-option">Bestand Steuerrückstellung</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <h2>7. Veränderung Verlust – Verrechnung x Steuersatz</h2>
+    <div class="choice-box" data-correct="latenter steuererfolg">
+      <button class="black-option">latenter Steuererfolg</button>
+      <button class="black-option">Bestand aktiv latente Steuern</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <h2>8. Stand Verlustvortrag x Steuersatz</h2>
+    <div class="choice-box" data-correct="bestand aktiv latente steuern" data-extra="Sofern die Verrechenbarkeit wahrscheinlich ist, muss der Verlustvortrag x Steuersatz als „Aktiv latente Steuern“ aktiviert werden. Nutzen in der Zukunft, da weniger Steuern bezahlt werden müssen.">
+      <button class="black-option">latenter Steuererfolg</button>
+      <button class="black-option">Bestand aktiv latente Steuern</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <script>
+    function norm(t){
+      return t
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
+    document.querySelectorAll('.choice-box').forEach(box => {
+      const correctRaw = box.dataset.correct || "";
+      const correctSet = correctRaw.split('|').map(s => norm(s));
+      const extra = box.dataset.extra || "";
+      const feedback = box.parentElement.querySelector('.explanation');
+
+      box.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          box.querySelectorAll('button').forEach(b => b.disabled = true);
+          const chosen = norm(btn.textContent);
+          const isCorrect = correctSet.includes(chosen);
+
+          if(isCorrect){
+            btn.classList.add('correct');
+            feedback.textContent = "Richtig! ✅";
+            feedback.style.color = "green";
+          }else{
+            btn.classList.add('wrong');
+            box.querySelectorAll('button').forEach(b => {
+              if(correctSet.includes(norm(b.textContent))){
+                b.classList.add('correct');
+              }
+            });
+            feedback.textContent = "Falsch.";
+            feedback.style.color = "red";
+          }
+          feedback.style.display = "block";
+          if(extra){
+            const extraDiv = document.createElement('div');
+            extraDiv.style.marginTop = "8px";
+            extraDiv.innerHTML = "<em>" + extra + "</em>";
+            feedback.appendChild(extraDiv);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
