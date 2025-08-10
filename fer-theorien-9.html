@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Langfristige Aufträge</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin:0;
+      padding:40px 20px;
+      color:black;
+    }
+    .section{
+      background: rgba(255,255,255,.9);
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:40px;
+      max-width:900px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    h2{ font-size:20px; margin-bottom:16px; }
+    .choice-box{
+      display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px;
+    }
+    .black-option{
+      background:black; color:white; border:none; border-radius:6px;
+      padding:10px 16px; cursor:pointer;
+    }
+    .correct{ background-color: lightgreen !important; color:black !important; }
+    .wrong{ background-color: lightcoral !important; }
+    .explanation{ margin-top:10px; font-weight:bold; display:none; }
+    .back-link{
+      display:inline-block; margin-bottom:20px; font-size:18px; font-weight:bold; color:black; text-decoration:none;
+    }
+    @media (max-width: 480px){
+      h2{ font-size:18px; }
+      .black-option{ flex:1 1 calc(50% - 10px); text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
+    <h2>Langfristige Aufträge</h2>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <h2>1. Langfristige Aufträge sind Erbringung einer spezifischen Leistung für einen Dritten (Kunden). Die Dauer der Leistung erstreckt sich über einen längeren Zeitraum (mehrere Monate und über einen Abschlussstichtag hinweg). Meistens handelt es sich um Festpreisaufträge (Einheitspreisaufträge pro Stück), es können aber auch Aufwand + Marge-Aufträge sein.</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <h2>2. Anteilmässige Umsatzbilanzierung</h2>
+    <div class="choice-box" data-correct="poc-methode">
+      <button class="black-option">POC-Methode</button>
+      <button class="black-option">CC-Methode</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <h2>3. Kostenbilanzierung</h2>
+    <div class="choice-box" data-correct="cc-methode">
+      <button class="black-option">POC-Methode</button>
+      <button class="black-option">CC-Methode</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <h2>4. Verbuchung der Kosten als Aufwand und den anteiligen Erlös als Umsatz.</h2>
+    <div class="choice-box" data-correct="poc-methode">
+      <button class="black-option">POC-Methode</button>
+      <button class="black-option">CC-Methode</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <h2>5. Gewinn pro Periode gemäss Fortschritt</h2>
+    <div class="choice-box" data-correct="poc-methode">
+      <button class="black-option">POC-Methode</button>
+      <button class="black-option">CC-Methode</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <h2>6. Aktivierung der Kosten oder Kosten als Aufwand und Umsatz</h2>
+    <div class="choice-box" data-correct="cc-methode">
+      <button class="black-option">POC-Methode</button>
+      <button class="black-option">CC-Methode</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <h2>7. Gewinn gesamthaft nach Fertigstellung</h2>
+    <div class="choice-box" data-correct="cc-methode">
+      <button class="black-option">POC-Methode</button>
+      <button class="black-option">CC-Methode</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <h2>8. Die POC-Methode muss bei kumulativer Erfüllung der folgenden Kriterien angewendet werden:<br>
+      - Vorliegen einer vertraglichen Basis (Vertrag mit Kunde) <br>
+      - Hohe Wahrscheinlichkeit der beidseitigen Vertragserfüllung (ist z.B. bei Zahlungsschwierigkeiten des Kunden nicht gegeben) <br>
+      - Geeignete Auftragsorganisation (sollte i.d.R. gegeben sein) <br>
+      - Zuverlässige Ermittlung von Auftragsaufwendungen, Auftragserlösen und Fertigstellungsgrad
+    </h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Sie kann bei Erfüllung aller dieser Kriterien angewendet werden.">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section">
+    <h2>9. Wenn eines oder mehrere dieser Kriterien nicht erfüllt sind, kommt die CC-Methode zur Anwendung.</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section">
+    <h2>10. Die folgenden Ermittlungsmöglichkeiten können für die Berechnung des Fertigstellungsgrades eines langfristigen Auftrages verwendet werden:<br>
+      1. Cost to cost-Methode (IST-Kosten im Verhältnis zu den erwarteten Gesamtkosten) <br>
+      2. Efforts expended-Methode (IST-Stunden im Verhältnis zu den erwarteten Gesamtstunden → v.a. bei Dienstleistungsaufträgen anwendbar) <br>
+      3. Units of delivery-Methode (Fertig hergestellte/abgelieferte Einheiten im Verhältnis zu den gesamthaft herzustellenden Einheiten)
+    </h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 11 -->
+  <div class="section">
+    <h2>11. Bei der Completed-Contract-Methode müssen die aufgelaufenden Kosten als Ertrag aktiviert werden.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Aktivierung der aufgelaufenen Kosten als Aufwandminderung oder Ertrag">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 12 -->
+  <div class="section">
+    <h2>12. Bei der Percentage-of-Completion-Methode (POCM) ist wie folgt vorzugehen:<br>
+      1. Bestimmung des Fertigstellungsgrades in % anhand Cost-to-Cost (IST-Kosten : Totalkosten), Units-of-Delivery (abgelieferte Stück : Gesamtstückzahl) oder Fortschrittsgutachten <br>
+      2. Aktivierung des anteilmässigen Umsatzes als Ertrag (Festpreis x Fertigstellungsgrad)
+    </h2>
+    <div class="choice-box" data-correct="richtig" data-extra="➔ Als Umsatz: IST-Kosten gemäss Fertigstellungsgrad + anteilmässiger Gewinn<br>➔ Als Umsatz: Fertigstellungsgrad x fixer Gesamtpreis">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 13 -->
+  <div class="section">
+    <h2>13. Erkennbare Verluste aufgrund der Restschätzungen sind bei POCM abhängig vom Fertigstellungsgrad zu berücksichtigen.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Erkennbare Verluste aufgrund der Restschätzungen sind sofort und vollumfänglich (bei POCM unabhängig vom Fertigstellungsgrad) zu berücksichtigen.">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 14 -->
+  <div class="section">
+    <h2>14. Bei erkennbaren Verlusten ist eine Wertberichtigung des Aktivums «Langfristige Aufträge» zu machen oder eine Rückstellung in der Differenz zu bilden, sofern das Aktivum «langfristige Aufträge» keinen Wert mehr aufweist.</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 15 -->
+  <div class="section">
+    <h2>15. Als Umsatz resp. Aufwandsminderung / Aktivierung sind die IST-Kosten abzüglich erkennbarem Gesamtverlust (=netto einbringbare Kosten) zu verbuchen</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 16 -->
+  <div class="section">
+    <h2>16. Bei der Verbuchung nach POCM Methode sind die Kosten immer dem ausserordentlichen Aufwand zu belasten.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Diverses operativer Aufwand / Verbindlichkeiten L&amp;L (oder liquide Mittel) ➔ Diese sind immer „normal“ dem operativen Aufwand zu belasten">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 17 -->
+  <div class="section">
+    <h2>17. Der Ertrag wird bei der POCM mit der Formel „Zunahme Fertigstellungsgrad des Jahres in % x Gesamtpreis des langfristigen Auftrags“ ermittelt. Der Ertrag kann auch mit dem Fertigstellungsgrad in % per Stichtag ermittelt werden, indem dann jeweils die Differenz zum Vorjahresstand verbucht wird (häufig einfacher). Damit wird der anteilige Umsatz inkl. Gewinn erfasst.</h2>
+    <div class="choice-box" data-correct="richtig" data-extra="Langfristige Aufträge (Aktivum Umlaufvermögen) / Ertrag aus L&amp;L (POC-Umsatz)">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 18 -->
+  <div class="section">
+    <h2>18.  Der Aufwand / Die Kosten werden bei der CC-Methode immer über den Operativen Aufwand gebucht.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Aufwand/Kosten Variante 2:<br>Langfristige Aufträge (Aktivum Umlaufvermögen) / Verbindlichkeiten L&amp;L (oder liq.Mittel)">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 19 -->
+  <div class="section">
+    <h2>19. Der Ertrag wird bei der CC-Methode über das Konto Ertrag aus L&amp;L gebucht: <br>
+      Langfristige Aufträge (Aktivum Umlaufvermögen) / Ertrag aus L&amp;L
+    </h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 20 -->
+  <div class="section">
+    <h2>20. Bei der Verrechnung der Verlusten aus langfristigen Aufträgen gibt es Unterschiede zwischen der POCM und der CC-Methode.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Die Verluste sind bei beiden Methoden gleich zu verbuchen. Und zwar vollumfänglich und unabhängig des Fertigstellungsgrades.">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 21 -->
+  <div class="section">
+    <h2>21. Wie werden Akontozahlungen bei langfristigen Aufträgen verbucht?</h2>
+    <div class="choice-box" data-correct="erfolgsneutral" data-extra="Sie werden als Minusaktivposten unter den langfristigen Aufträgen verbucht. Das Gegenkonto ist im Fremdkapital als Anzahlung mit Rückforderungsrecht">
+      <button class="black-option">erfolgswirksam</button>
+      <button class="black-option">erfolgsneutral</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 22 -->
+  <div class="section">
+    <h2>22. Im Anhang sind Anzahlungen wie folgt offenzulegen:<br>
+      Langfristige Aufträge brutto<br>
+      - Anzahlungen<br>
+      = Ausgewiesene langfristige Aufträge
+    </h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <script>
+    // Normalize (lowercase, trim, remove diacritics)
+    function norm(t){
+      return t
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
+
+    // Choice handler: on wrong -> clicked red AND correct green; show extras after selection
+    document.querySelectorAll('.choice-box').forEach(box => {
+      const correctRaw = box.dataset.correct || "";
+      const correctSet = correctRaw.split('|').map(s => norm(s));
+      const extra = box.dataset.extra || "";
+      const feedback = box.parentElement.querySelector('.explanation');
+
+      box.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // lock all buttons
+          box.querySelectorAll('button').forEach(b => b.disabled = true);
+
+          const chosen = norm(btn.textContent);
+          const isCorrect = correctSet.includes(chosen);
+
+          if(isCorrect){
+            btn.classList.add('correct');
+            feedback.textContent = "Richtig! ✅";
+            feedback.style.color = "green";
+          }else{
+            btn.classList.add('wrong');
+            // mark the correct answer(s) as green, too
+            box.querySelectorAll('button').forEach(b => {
+              if(correctSet.includes(norm(b.textContent))){
+                b.classList.add('correct');
+              }
+            });
+            feedback.textContent = "Falsch.";
+            feedback.style.color = "red";
+          }
+
+          // show feedback after selection
+          feedback.style.display = "block";
+
+          // show any extra explanation after selection
+          if(extra){
+            const extraDiv = document.createElement('div');
+            extraDiv.style.marginTop = "8px";
+            extraDiv.innerHTML = "<em>" + extra + "</em>";
+            feedback.appendChild(extraDiv);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
