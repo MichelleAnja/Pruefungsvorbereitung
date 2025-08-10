@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grundgliederung der GFR</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin:0;
+      padding:40px 20px;
+      color:black;
+    }
+    .section{
+      background: rgba(255,255,255,.9);
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:40px;
+      max-width:800px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    h2{ font-size:20px; margin-bottom:16px; }
+    .choice-box, .input-box{
+      display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px;
+    }
+    .black-option{
+      background:black; color:white; border:none; border-radius:6px;
+      padding:10px 16px; cursor:pointer;
+    }
+    .ok-btn{
+      background:black; color:white; border:none; border-radius:6px;
+      padding:10px 16px; cursor:pointer;
+    }
+    .input-box input{
+      flex:1; padding:10px; border-radius:6px; border:2px solid #ccc; font-size:16px;
+    }
+    .correct{ background-color: lightgreen !important; color:black !important; }
+    .wrong{ background-color: lightcoral !important; }
+    .explanation{ margin-top:10px; font-weight:bold; display:none; }
+    .back-link{
+      display:inline-block; margin-bottom:20px; font-size:18px; font-weight:bold; color:black; text-decoration:none;
+    }
+    @media (max-width: 480px){
+      h2{ font-size:18px; }
+      .black-option{ flex:1 1 calc(50% - 10px); text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
+    <h2>Grundgliederung der GFR</h2>
+  </div>
+
+  <!-- 1 (BF) -->
+  <div class="section">
+    <h2>1. Wie heissen die Bereiche der GFR?</h2>
+    <div class="input-box" data-contains="betriebsbereich|investitionsbereich|finanzierungsbereich">
+      <input type="text" placeholder="Antwort eingeben… (z.B. Betriebsbereich, Investitionsbereich, Finanzierungsbereich)"/>
+      <button class="ok-btn">OK</button>
+    </div>
+    <div class="explanation" data-extra="- Betriebsbereich<br>- Investitionsbereich<br>- Finanzierungsbereich"></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <h2>2. Was sind Kasse, Sichtguthaben bei Post und Bank, geldnahe Mittel → sehr liquide/schnell verflüssigbar, nur unwesentliche Kursschwankungen, Restlaufzeit max. 90 Tage</h2>
+    <div class="choice-box" data-correct="flüssige mittel">
+      <button class="black-option">flüssige Mittel</button>
+      <button class="black-option">Netto flüssige Mittel</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <h2>3. Was sind Fonds flüssige Mittel aber unter Abzug von Bankkontokorrentschulden</h2>
+    <div class="choice-box" data-correct="netto flüssige mittel">
+      <button class="black-option">flüssige Mittel</button>
+      <button class="black-option">Netto flüssige Mittel</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <h2>4. + Einzahlungen von Kunden <br>- Zahlungen an Lieferanten <br>- Zahlungen an Mitarbeitende <br>+ Sonstige Einzahlungen <br>- Sonstige Auszahlungen <br>= Geldfluss aus Betriebstätigkeit (operativer Cashflow)</h2>
+    <div class="choice-box" data-correct="direkte ermittlung">
+      <button class="black-option">direkte Ermittlung</button>
+      <button class="black-option">indirekte Ermittlung</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <h2>5. +/- Abschreibungen/Aufwertungen und Wertbeeinträchtigungen auf Anlagevermögen <br>+/- Zunahme/Abnahme von Rückstellungen über die Erfolgsrechnung <br>+/- Sonstige liquiditätsunwirksame Aufwendungen/Erträge <br>+/- Verluste/Gewinne aus Abgängen im Anlagevermögen <br>+/- Abnahme/Zunahme der Forderungen aus Lieferungen &amp; Leistungen <br>+/- Abnahme/Zunahme von Vorräten <br>+/- Abnahme/Zunahme von übrigen Forderungen und aktiven Rechnungsabgrenzungen <br>+/- Zunahme/Abnahme der Verbindlichkeiten aus Lieferungen &amp; Leistungen <br>+/- Zunahme/Abnahme übriger kfr. Verbindlichkeiten und passiven Rechnungsabgrenzungen <br>= Geldfluss aus Betriebstätigkeit (operativer Cashflow)</h2>
+    <div class="choice-box" data-correct="indirekte ermittlung">
+      <button class="black-option">direkte Ermittlung</button>
+      <button class="black-option">indirekte Ermittlung</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <h2>6. - Ausgaben für den Kauf von Sachanlagen <br>+ Einnahmen aus dem Verkauf von Sachanlagen <br>- Ausgaben für Investitionen in Finanzanlagen <br>+ Einnahmen aus dem Verkauf von Finanzanlagen <br>- Ausgaben für den Kauf von immateriellen Anlagen <br>+ Einnahmen aus dem Verkauf von immateriellen Anlagen</h2>
+    <div class="choice-box" data-correct="investitionstätigkeit">
+      <button class="black-option">Finanzierungsbereich</button>
+      <button class="black-option">Investitionstätigkeit</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <h2>7. + Einnahmen aus Kapitalerhöhungen (inkl. Agio) - Ausgaben aus Kapitalherabsetzungen <br>- Gewinnausschüttungen an die Anteilinhaber <br>-/+ Kauf/Verkauf von eigenen Aktien und Anteilen <br>+ Einnahmen aus Aufnahme von Obligationenanleihen <br>- Ausgaben für die Rückzahlung von Obligationenanleihen <br>+/- Aufnahme/Rückzahlung von kurzfristigem finanziellem Fremdkapital <br>+/- Aufnahme/Rückzahlung von langfristigem finanziellem Fremdkapital</h2>
+    <div class="choice-box" data-correct="finanzierungsbereich">
+      <button class="black-option">Finanzierungsbereich</button>
+      <button class="black-option">Investitionstätigkeit</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <h2>8. Nichtliquiditätswirksame Vorgänge, wie Aktienkapitalerhöhung mittels Sacheinlage, Ausgabe von Gratisaktien, Übernahme einer Sachanlage im Finanzierungsleasing werden nicht in der Geldflussrechnung erfasst. Diese Vorgänge sind im Anhang und anderen Jahresrechnungsteilen offenzulegen</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <script>
+    // Normalize (lowercase, trim, strip diacritics)
+    function norm(t){
+      return t
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+    function compact(t){
+      return norm(t).replace(/[^a-z0-9]/g,"");
+    }
+
+    // Multiple-choice boxes
+    document.querySelectorAll('.choice-box').forEach(box => {
+      const correctRaw = box.dataset.correct || "";
+      // allow multiple correct tokens (not used here but future-proof)
+      const correctSet = correctRaw.split('|').map(s => norm(s));
+      const feedback = box.parentElement.querySelector('.explanation');
+      const extra = box.dataset.extra || "";
+
+      box.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // lock buttons
+          box.querySelectorAll('button').forEach(b => b.disabled = true);
+
+          const chosen = norm(btn.textContent);
+          const isCorrect = correctSet.includes(chosen);
+
+          if(isCorrect){
+            btn.classList.add('correct');
+            feedback.textContent = "Richtig! ✅";
+            feedback.style.color = "green";
+          }else{
+            btn.classList.add('wrong');
+            // also mark the correct button(s) green
+            box.querySelectorAll('button').forEach(b => {
+              if (correctSet.includes(norm(b.textContent))) {
+                b.classList.add('correct');
+              }
+            });
+            feedback.textContent = "Falsch.";
+            feedback.style.color = "red";
+          }
+
+          // show feedback AFTER selection
+          feedback.style.display = "block";
+          // show extra AFTER selection (if present)
+          if(extra){
+            const extraDiv = document.createElement('div');
+            extraDiv.style.marginTop = "8px";
+            extraDiv.innerHTML = "<em>" + extra + "</em>";
+            feedback.appendChild(extraDiv);
+          }
+        });
+      });
+    });
+
+    // Input (BF) question 1
+    document.querySelectorAll('.input-box').forEach(box => {
+      const tokens = (box.dataset.contains || "").split('|').map(compact);
+      const input = box.querySelector('input');
+      const btn = box.querySelector('button.ok-btn');
+      const feedback = box.parentElement.querySelector('.explanation');
+      const extra = box.parentElement.querySelector('.explanation').dataset.extra || "";
+
+      btn.addEventListener('click', () => {
+        const txt = compact(input.value);
+        const allPresent = tokens.every(t => txt.includes(t));
+        if(allPresent){
+          input.classList.add('correct');
+          feedback.textContent = "Richtig! ✅";
+          feedback.style.color = "green";
+        }else{
+          input.classList.add('wrong');
+          feedback.innerHTML = "Falsch. Richtige Antwort:<br>" + extra;
+          feedback.style.color = "red";
+        }
+        feedback.style.display = "block";
+      });
+    });
+  </script>
+</body>
+</html>
