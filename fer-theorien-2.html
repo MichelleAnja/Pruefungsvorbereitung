@@ -44,7 +44,7 @@
 </head>
 <body>
   <div class="section">
-    <a class="back-link" href="fer-theorien-2.html">← Zurück</a>
+    <a class="back-link" href="fer-theorien.html">← Zurück</a>
     <h2>Ereignisse nach dem Bilanzstichtag <br>Vor Genehmigung der Jahresrechnung</h2>
   </div>
 
@@ -266,14 +266,20 @@
             feedback.style.color = "green";
           }else{
             btn.classList.add('wrong');
+            // zusätzlich die korrekte(n) Antwort(en) grün markieren
+            box.querySelectorAll('button').forEach(b => {
+              if (correctSet.includes(norm(b.textContent))) {
+                b.classList.add('correct');
+              }
+            });
             feedback.textContent = "Falsch.";
             feedback.style.color = "red";
           }
 
-          // show feedback only AFTER a choice
+          // Feedback erst NACH Auswahl anzeigen
           feedback.style.display = "block";
 
-          // append Zusatz zur Lösung AFTER selection (if provided)
+          // Zusatz zur Lösung (falls vorhanden) erst nach Auswahl einblenden
           if(extra){
             const extraDiv = document.createElement('div');
             extraDiv.style.marginTop = "8px";
