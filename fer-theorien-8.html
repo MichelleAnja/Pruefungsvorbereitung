@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vorräte und Sachanlagen</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin:0;
+      padding:40px 20px;
+      color:black;
+    }
+    .section{
+      background: rgba(255,255,255,.9);
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:40px;
+      max-width:800px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    h2{ font-size:20px; margin-bottom:16px; }
+    .choice-box{
+      display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px;
+    }
+    .black-option{
+      background:black; color:white; border:none; border-radius:6px;
+      padding:10px 16px; cursor:pointer;
+    }
+    .correct{ background-color: lightgreen !important; color:black !important; }
+    .wrong{ background-color: lightcoral !important; }
+    .explanation{ margin-top:10px; font-weight:bold; display:none; }
+    .back-link{
+      display:inline-block; margin-bottom:20px; font-size:18px; font-weight:bold; color:black; text-decoration:none;
+    }
+    @media (max-width: 480px){
+      h2{ font-size:18px; }
+      .black-option{ flex:1 1 calc(50% - 10px); text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
+    <h2>Vorräte und Sachanlagen</h2>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <h2>1. Bei den Vorräten wird der höhere von Netto-Marktwert und Anschaffungskosten / Herstellkosten bilanziert.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Niederstwertprinzip ist massgebend.">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <h2>2. Ist der Einstandspreis / Herstellkosten CHF 40'000.00 und der Netto-Marktwert CHF 30'000.00, so ist ein WB als Bestandesabnahme zu verbuchen.</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <h2>3. Die Bewertung von Bezügen ab dem Lager muss entweder mit der Durchschnittspreismethode oder nach dem Prinzip FIFO (First in first out) vorgenommen werden.</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <h2>4. Skontoabzüge müssen als Anschaffungswertminderung erfasst werden.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Skontoabzüge können entweder als Finanzertrag oder Anschaffungswertminderung erfasst werden.">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <h2>5. Die gewählte Methode von Punkt 4 ist im Anhang offen zu legen.</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <h2>6. Aktivierungsfähig bei physisch vorhandenen Sachanlagen sind der Kaufpreis und alle weiteren notwendigen Kosten bis die Sachanlage in der Unternehmung betriebsbereit ist.</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <h2>7. Bei selbst hergestellten Sachanlagen können die Zinsaufwendungen freiwillig aktiviert werden, wenn folgende Bedingungen erfüllt sind;<br>
+      - Keine Überschreitung Nutzwert<br>
+      - Zinsberechnung max. auf durchschnittlichem Anlagewert zu durchschnittlichem Fremdkapitalzins<br>
+      - nur effektiv bezahlte Fremdkapitalzinsen
+    </h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <h2>8. Der Wert der bilanzierten Sachanlage kann nicht mehr erhöht werden.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Eines oder mehrere Kriterien müssen erfüllt sein;<br>- Erhöhung des Marktwertes<br>- Erhöhung des Nutzwertes<br>- Wesentliche Verlängerung der Nutzungsdauer">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section">
+    <h2>9. Sachanlagen, die zum Nutzen gehalten werden, können entweder zum historischen oder zum aktuellen Wert bewertet werden.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Nur zum historischen mit planmässigen Abschreibungen und Werthaltigkeitstests">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section">
+    <h2>10. Sachanlagen, die zur Rendite gehalten werden, können entweder zum historischen oder zum aktuellen Wert bewertet werden.</h2>
+    <div class="choice-box" data-correct="richtig" data-extra="zum historischen mit planmässigen Abschreibungen und Werthaltigkeitstests oder zum aktuellen ohne planmässige Abschreibungen und ohne Werthaltigkeitstests">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 11 -->
+  <div class="section">
+    <h2>11.  Für die Ermittlung des aktuellen Wertes sind folgendes verwendbar:<br>
+      - Expertengutachten und -schätzungen<br>
+      - Vergleichsschätzung mit ähnlichen Objekten<br>
+      - Nutzwertberechnung mittels Abzinsung der zukünftigen Cashflows
+    </h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- 12 -->
+  <div class="section">
+    <h2>12. Wo sind Sachverlagen mit Absicht des kurzfristigen Wiederverkaufs zu bilanzieren?</h2>
+    <div class="choice-box" data-correct="uv" data-extra="Zum erwarteten Nettomarktwert zu bewerten (nicht zum Nutzwert!">
+      <button class="black-option">Einzelne Position im AV</button>
+      <button class="black-option">UV</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <script>
+    // Normalize (lowercase, trim, strip diacritics)
+    function norm(t){
+      return t
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
+
+    // Multiple-choice handler: wrong -> clicked red AND correct green; extra text after selection
+    document.querySelectorAll('.choice-box').forEach(box => {
+      const correctRaw = box.dataset.correct || "";
+      const correctSet = correctRaw.split('|').map(s => norm(s));
+      const extra = box.dataset.extra || "";
+      const feedback = box.parentElement.querySelector('.explanation');
+
+      box.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // lock buttons
+          box.querySelectorAll('button').forEach(b => b.disabled = true);
+
+          const chosen = norm(btn.textContent);
+          const isCorrect = correctSet.includes(chosen);
+
+          if(isCorrect){
+            btn.classList.add('correct');
+            feedback.textContent = "Richtig! ✅";
+            feedback.style.color = "green";
+          }else{
+            btn.classList.add('wrong');
+            // also mark correct button(s) green
+            box.querySelectorAll('button').forEach(b => {
+              if (correctSet.includes(norm(b.textContent))) {
+                b.classList.add('correct');
+              }
+            });
+            feedback.textContent = "Falsch.";
+            feedback.style.color = "red";
+          }
+
+          // show feedback AFTER selection
+          feedback.style.display = "block";
+
+          // Zusatz zur Lösung AFTER selection (if any)
+          if(extra){
+            const extraDiv = document.createElement('div');
+            extraDiv.style.marginTop = "8px";
+            extraDiv.innerHTML = "<em>" + extra + "</em>";
+            feedback.appendChild(extraDiv);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
