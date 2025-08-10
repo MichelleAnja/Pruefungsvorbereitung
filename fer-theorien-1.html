@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FER Theorieaufgaben</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+    .section {
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h2 { font-size: 20px; margin-bottom: 16px; }
+    .choice-box, .input-box {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 12px;
+    }
+    .black-option {
+      background: black; color: white; border: none; border-radius: 6px; padding: 10px 16px; cursor: pointer;
+    }
+    .correct { background-color: lightgreen !important; color: black !important; }
+    .wrong { background-color: lightcoral !important; }
+    .explanation { margin-top: 10px; font-weight: bold; display: none; }
+    input {
+      flex: 1; padding: 10px; border-radius: 6px; border: 2px solid #ccc; font-size: 16px;
+    }
+    button.ok-btn {
+      padding: 10px 16px; font-size: 16px; background-color: black; color: white; border: none; border-radius: 6px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="pruefung_vorbereitung.html">← Zurück</a>
+    <h2>FER Theorieaufgaben</h2>
+  </div>
+
+  <!-- Frage 1 -->
+  <div class="section">
+    <h2>1. Was sind Bestandteile des Geschäftsberichts?</h2>
+    <div class="input-box" data-correct="Jahresrechnung, Jahresbericht">
+      <input type="text" placeholder="Antwort eingeben..." />
+      <button class="ok-btn">OK</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- Frage 2 -->
+  <div class="section">
+    <h2>2. Was sind Bestandteile der Jahresrechnung nach FER?</h2>
+    <div class="input-box" data-correct="Bilanz, Erfolgsrechnung, Geldflussrechnung, Eigenkapitalnachweis, Anhang">
+      <input type="text" placeholder="Antwort eingeben..." />
+      <button class="ok-btn">OK</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- Frage 3 -->
+  <div class="section">
+    <h2>3. Was sind Bestandteile des Jahresberichts nach FER?</h2>
+    <div class="input-box" data-correct="Geschäftsumfeld, Vergangenes Geschäftsjahr, Ausblick" data-extra="1. Beschreibung des wirtschaftlichen Umfelds (IST-Zustand) des vergangenen Jahres<br>2. Kommentierung der Jahresrechnung mit Kennzahlen<br>3. Ausblick/Prognose Folgejahr oder noch für weitere Jahre">
+      <input type="text" placeholder="Antwort eingeben..." />
+      <button class="ok-btn">OK</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- Frage 4 -->
+  <div class="section">
+    <h2>4. Bei der erstmaligen Anwendung von Swiss GAAP FER muss die Vorjahresbilanz sowie die Vorjahreserfolgsrechnung zu Vergleichszwecken ebenfalls nach Swiss GAAP FER offengelegt werden.</h2>
+    <div class="choice-box" data-correct="falsch" data-extra="Nur die Vorjahresbilanz">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- Frage 5 -->
+  <div class="section">
+    <h2>5. Änderungen der Stetigkeit infolge Änderungen von Rechnungslegungsgrundsätzen oder Aufgrund Fehlern von früheren Jahresrechnungen müssen im Anhang offengelegt werden.</h2>
+    <div class="choice-box" data-correct="Retrospektive Anpassung">
+      <button class="black-option">Retrospektive Anpassung</button>
+      <button class="black-option">Prospektive Anpassung</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- Frage 6 -->
+  <div class="section">
+    <h2>6. Änderungen der Stetigkeit infolge Änderungen von Schätzungen (z.B. Nutzungsdauer beim AV).</h2>
+    <div class="choice-box" data-correct="Prospektive Anpassung">
+      <button class="black-option">Retrospektive Anpassung</button>
+      <button class="black-option">Prospektive Anpassung</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- Frage 7 -->
+  <div class="section">
+    <h2>7. Bei retrospektiven Anpassungen werden folgende Jahresrechnungen angepasst:</h2>
+    <div class="choice-box" data-correct="laufende sowie Vorjahresrechnungen">
+      <button class="black-option">nur laufende Jahresrechnung</button>
+      <button class="black-option">laufende sowie Vorjahresrechnungen</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- Frage 8 -->
+  <div class="section">
+    <h2>8. Bei prospektiven Anpassungen werden folgende Jahresrechnungen angepasst:</h2>
+    <div class="choice-box" data-correct="nur laufende Jahresrechnung">
+      <button class="black-option">nur laufende Jahresrechnung</button>
+      <button class="black-option">laufende sowie Vorjahresrechnungen</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <!-- Frage 9 -->
+  <div class="section">
+    <h2>9. Forderungen aus der operativen Tätigkeit gehören immer zum Umlaufvermögen, auch wenn eine Zahlungsfrist von mehr als 12 Monaten vereinbart wurde.</h2>
+    <div class="choice-box" data-correct="richtig">
+      <button class="black-option">richtig</button>
+      <button class="black-option">falsch</button>
+    </div>
+    <div class="explanation"></div>
+  </div>
+
+  <script>
+    function norm(t) { return t.toLowerCase().trim(); }
+
+    document.querySelectorAll('.choice-box').forEach(box => {
+      const correct = norm(box.dataset.correct || "");
+      const extra = box.dataset.extra || "";
+      const feedback = box.parentElement.querySelector('.explanation');
+      box.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          box.querySelectorAll('button').forEach(b => b.disabled = true);
+          const isCorrect = norm(btn.textContent) === correct;
+          if (isCorrect) {
+            btn.classList.add('correct');
+            feedback.innerHTML = "Richtig! ✅";
+            feedback.style.color = "green";
+          } else {
+            btn.classList.add('wrong');
+            feedback.innerHTML = "Falsch.";
+            feedback.style.color = "red";
+          }
+          if (extra) {
+            feedback.innerHTML += `<div style="margin-top:8px;"><em>${extra}</em></div>`;
+          }
+          feedback.style.display = 'block';
+        });
+      });
+    });
+
+    document.querySelectorAll('.input-box').forEach(box => {
+      const correct = norm(box.dataset.correct || "");
+      const extra = box.dataset.extra || "";
+      const input = box.querySelector('input');
+      const btn = box.querySelector('button');
+      const feedback = box.parentElement.querySelector('.explanation');
+      btn.addEventListener('click', () => {
+        if (norm(input.value).includes(correct.replace(/,/g, '').replace(/ /g, ''))) {
+          input.classList.add('correct');
+          feedback.innerHTML = "Richtig! ✅";
+          feedback.style.color = "green";
+        } else {
+          input.classList.add('wrong');
+          feedback.innerHTML = "Falsch. Richtige Antwort: " + box.dataset.correct;
+          feedback.style.color = "red";
+        }
+        if (extra) {
+          feedback.innerHTML += `<div style="margin-top:8px;"><em>${extra}</em></div>`;
+        }
+        feedback.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>
