@@ -1,0 +1,201 @@
+<!-- === Drop-in Styles (passt sich bestehender Optik an, minimal-invasiv) === -->
+<style>
+  .qa-section{background:rgba(255,255,255,.9);border-radius:12px;padding:20px;margin:24px auto;max-width:920px}
+  .qa-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+  .qa-btn{background:#000;color:#fff;border:0;border-radius:6px;padding:10px 16px;cursor:pointer}
+  .ok-btn{background:#000;color:#fff;border:0;border-radius:6px;padding:10px 16px;cursor:pointer}
+  .qa-correct{background:lightgreen !important;color:#000 !important}
+  .qa-wrong{background:lightcoral !important}
+  .qa-explain{margin-top:10px;font-weight:bold;display:none;color:#000}
+  @media (max-width:480px){ .qa-btn{flex:1 1 calc(50% - 10px)} }
+</style>
+
+<!-- ===================== UWB / Prüfungsplanung – Beispiele ===================== -->
+
+<div class="qa-section">
+  <h3>1. Welche Arten von Wesentlichkeiten gibt es?</h3>
+  <!-- Aufgabenset (OK), nach Klick nur Lösung in schwarz, keine Rot/Grün -->
+  <div class="qa-row">
+    <button class="ok-btn"
+      data-type="ok"
+      data-solution-title="Bitte Lösung als Aufzählung (alle müssen vorkommen):"
+      data-solution="- Gesamtwesentlichkeit<br>- Toleranzwesentlichkeit<br>- Nichtaufgriffsgrenze<br>- Spezifische Wesentlichkeit">
+      OK
+    </button>
+  </div>
+  <div class="qa-explain"></div>
+</div>
+
+<div class="qa-section">
+  <h3>2. Was ist der Zweck der Gesamtwesentlichkeit?</h3>
+  <div class="qa-row">
+    <button class="ok-btn" data-type="ok" data-solution="«Bezieht sich auf die Aussage eines oder mehrerer kumulierter Fehler in Bezug auf die JR als Ganzes. Es wird somit klargestellt, dass (nur) eine Gesamtwesentlichkeit für sämtliche Elemente des Abschlusses zu bestimmen ist. Die Festlegung verschiedener Wesentlichkeiten für beispielsweise Bilanz, Erfolgsrechnung oder Anhang ist nicht vorgesehen bzw. notwendig. Die Gesamtwesentlichkeit beeinflusst die Entscheidungen des Abschlussprüfers bei der Identifikation und Beurteilung der Risiken wesentlicher falscher Darstellungen. Legt der Abschlussprüfer für einen Abschluss eine tiefere Gesamtwesentlichkeit fest, ist das Risiko wesentlicher falscher Darstellungen höher, als wenn für denselben Abschluss eine höhere Gesamtwesentlichkeit massgeblich wäre.»">OK</button>
+  </div>
+  <div class="qa-explain"></div>
+</div>
+
+<div class="qa-section">
+  <h3>3. Was ist der Zweck der Toleranzwesentlichkeit?</h3>
+  <div class="qa-row">
+    <button class="ok-btn" data-type="ok" data-solution="«Wird tiefer angesetzt als die Gesamtwesentlichkeit. Wird für die Planung der Prüfungshandlungen verwendet. Prüfer setzt dadurch eine «Sicherheitsmarge» ein, reduziert das Risiko, dass die nicht aufgedeckten Fehler die Gesamtwesentlichkeit überschreiten. Ebenfalls relevant ist die TW für die Berichterstattung: Fehler &gt; TW (Aussageebene, d.h. Mindestgliederung) führen zu Einschränkungen im Revisionsbericht.»">OK</button>
+  </div>
+  <div class="qa-explain"></div>
+</div>
+
+<div class="qa-section">
+  <h3>4. Was ist der Zweck der Nichtaufgriffsgrenze?</h3>
+  <div class="qa-row">
+    <button class="ok-btn" data-type="ok" data-solution="«Gewisse kleinere während der Prüfung festgestellte Fehler für die Beurteilung der Jahresrechnung sind unwichtig; d.h. auf die Fehlerliste kommen nur Beträge &gt; NAG. Ebenfalls relevant für die Prüfungshandlungen auf der Aktivseite: Beträge &lt; NAG werden grundsätzlich nicht geprüft.»">OK</button>
+  </div>
+  <div class="qa-explain"></div>
+</div>
+
+<div class="qa-section">
+  <h3>5. Was ist der Zweck der Spezifischen Wesentlichkeit?</h3>
+  <div class="qa-row">
+    <button class="ok-btn" data-type="ok" data-solution="«Falls vernünftigerweise erwartet werden kann, dass falsche Darstellungen von spezifischen Geschäftsvorfällen, Kontensalden oder Abschlussangaben die Entscheidungen von Nutzern beeinflussen könnten, muss der Abschlussprüfer eine oder mehrere spezifische Wesentlichkeitsgrenzen festlegen, welche tiefer als die Gesamtwesentlichkeit anzusetzen sind. Beispielsweise können falsche Darstellungen von Transaktionen, Beständen oder innerhalb der Anhangsangaben die Nutzer der Abschlüsse in ihren wirtschaftlichen Entscheidungen beeinflussen … daher kann es notwendig sein, für solche Abschlussangaben eine spezifische Wesentlichkeitsgrenze festzulegen.»">OK</button>
+  </div>
+  <div class="qa-explain"></div>
+</div>
+
+<!-- 6: Richtwerte GW – mehrere Felder, jeweils eigener OK-Button (nur Lösung zeigen) -->
+<div class="qa-section">
+  <h3>6. Was sind die Richtwerte der GW?</h3>
+  <div class="qa-row">
+    <button class="ok-btn" data-type="ok" data-solution="3 – 10 %"><span>OK</span></button>
+    <button class="ok-btn" data-type="ok" data-solution="3 – 5 %"><span>OK</span></button>
+    <button class="ok-btn" data-type="ok" data-solution="1 – 3 %"><span>OK</span></button>
+    <button class="ok-btn" data-type="ok" data-solution="1 – 3 %"><span>OK</span></button>
+    <button class="ok-btn" data-type="ok" data-solution="1 – 3 %"><span>OK</span></button>
+  </div>
+  <div class="qa-explain"></div>
+  <div class="qa-explain" style="display:block; font-weight:normal; margin-top:6px">
+    «Gewinn vor Steuern (bereinigt)» • «Eigenkapital» • «Nettoerlös» • «Bilanzsumme» • «Aufwendungen»
+  </div>
+</div>
+
+<!-- 7: Richtwert TW – nur Lösungstext, aber mit Sonderregel (50–75% von GW/Gesamtwesentlichkeit) -->
+<div class="qa-section">
+  <h3>7. Was ist der Richtwert der TW?</h3>
+  <div class="qa-row">
+    <button class="ok-btn" data-type="ok" data-solution="«50%–75% von GW / Gesamtwesentlichkeit»">OK</button>
+  </div>
+  <div class="qa-explain"></div>
+</div>
+
+<!-- 8: Richtwert NAG – zwei Modi: allgemeiner Satz + eine MC-Frage (Nettoerlöse) -->
+<div class="qa-section">
+  <h3>8. Was ist der Richtwert der NAG?</h3>
+  <div class="qa-row">
+    <button class="ok-btn" data-type="ok" data-solution="«3 – 10% von GW / Gesamtwesentlichkeit» (GW oder Gesamtwesentlichkeit ist akzeptiert)">OK</button>
+  </div>
+  <div class="qa-explain"></div>
+
+  <div class="qa-row" data-type="mc" data-correct="1 – 3 % der nettoerlöse">
+    <button class="qa-btn">1 – 3 % der Nettoerlöse</button>
+    <button class="qa-btn">1 – 3 % der Bilanzsumme</button>
+    <button class="qa-btn">1 – 3 % des Gesamtaufwands</button>
+  </div>
+  <div class="qa-explain"></div>
+</div>
+
+<!-- 9: MC – nur eine korrekte Antwort -->
+<div class="qa-section">
+  <h3>9. Welchen Richtwert wählst du bei einem gewinnorientierten Unternehmen mit volatilen Jahresergebnissen?</h3>
+  <div class="qa-row" data-type="mc" data-correct="3 – 5 %  des eigenkapitals">
+    <button class="qa-btn">3 – 10 % des Jahresgewinns (bereinigt)</button>
+    <button class="qa-btn">3 – 5 %  des Eigenkapitals</button>
+    <button class="qa-btn">1 – 3 % der Bilanzsumme</button>
+    <button class="qa-btn">1 – 3 % der Nettoerlöse</button>
+    <button class="qa-btn">1 – 3 % des Gesamtaufwands</button>
+  </div>
+  <div class="qa-explain"></div>
+</div>
+
+<!-- 10 -->
+<div class="qa-section">
+  <h3>10. Welchen Richtwert wählst du bei einem gewinnorientierten Unternehmen in Verlustsituation?</h3>
+  <div class="qa-row" data-type="mc" data-correct="3 – 10 % des jahresgewinns (bereinigt)">
+    <button class="qa-btn">3 – 10 % des Jahresgewinns (bereinigt)</button>
+    <button class="qa-btn">3 – 5 %  des Eigenkapitals</button>
+    <button class="qa-btn">1 – 3 % der Bilanzsumme</button>
+    <button class="qa-btn">1 – 3 % der Nettoerlöse</button>
+    <button class="qa-btn">1 – 3 % des Gesamtaufwands</button>
+  </div>
+  <div class="qa-explain"></div>
+</div>
+
+<!-- … usw. (gleiche Struktur für alle weiteren Fragen 11–52) … -->
+
+<!-- ===================== Engine ===================== -->
+<script>
+  // Helpers
+  const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+
+  // Handle ALL OK buttons (reveal-only)
+  document.querySelectorAll('.ok-btn[data-type="ok"]').forEach(btn=>{
+    const box = btn.closest('.qa-section');
+    const exp = box.querySelector('.qa-explain');
+    btn.addEventListener('click', ()=>{
+      const title = btn.dataset.solutionTitle || "";
+      const text  = btn.dataset.solution || "";
+      exp.style.display = 'block';
+      exp.style.color = '#000';
+      exp.innerHTML = (title ? `<div style="margin-bottom:4px;">${title}</div>` : "") + text;
+    }, { once:true });
+  });
+
+  // Handle MC rows (red/green)
+  document.querySelectorAll('.qa-row[data-type="mc"]').forEach(row=>{
+    const correct = norm(row.dataset.correct || "");
+    const exp = row.nextElementSibling && row.nextElementSibling.classList.contains('qa-explain')
+      ? row.nextElementSibling : null;
+
+    row.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        // lock
+        row.querySelectorAll('button').forEach(b=>b.disabled=true);
+
+        const chosen = norm(btn.textContent);
+        if(chosen === correct){
+          btn.classList.add('qa-correct');
+          if(exp){ exp.textContent = "Richtig! ✅"; exp.style.color = "green"; exp.style.display="block"; }
+        }else{
+          btn.classList.add('qa-wrong');
+          // mark correct green
+          row.querySelectorAll('button').forEach(b=>{
+            if(norm(b.textContent) === correct){ b.classList.add('qa-correct'); }
+          });
+          if(exp){ exp.textContent = "Falsch."; exp.style.color = "red"; exp.style.display="block"; }
+        }
+      }, { once:true });
+    });
+  });
+
+  // (Optional) BF-Freitext-Felder: falls du sie brauchst, markiere Container mit data-type="bf",
+  // setze data-accept="wort1|wort2|..." und gib dem Feld eine .ok-btn
+  document.querySelectorAll('.qa-row[data-type="bf"]').forEach(row=>{
+    const accepts = (row.dataset.accept || "").split('|').map(norm);
+    const input = row.querySelector('input[type="text"], textarea');
+    const ok = row.querySelector('.ok-btn');
+    const exp = row.nextElementSibling && row.nextElementSibling.classList.contains('qa-explain')
+      ? row.nextElementSibling : null;
+
+    ok.addEventListener('click', ()=>{
+      const val = norm(input.value).replace(/\s+/g,' ');
+      const okHit = accepts.every(a => val.includes(a));
+      if(okHit){
+        input.classList.add('qa-correct');
+        if(exp){ exp.textContent = "Richtig! ✅"; exp.style.color="green"; exp.style.display="block"; }
+      }else{
+        input.classList.add('qa-wrong');
+        if(exp){
+          exp.innerHTML = "Falsch. Erwartet:<br>• " + accepts.join("<br>• ");
+          exp.style.color="red"; exp.style.display="block";
+        }
+      }
+      ok.disabled = true;
+      if(input) input.disabled = true;
+    }, { once:true });
+  });
+</script>
