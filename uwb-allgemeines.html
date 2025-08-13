@@ -5,141 +5,202 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UWB Allgemein</title>
   <style>
-    body{
+    body {
       font-family: Arial, sans-serif;
       background: url("hintergrund.jpg") no-repeat center center fixed;
       background-size: cover;
-      margin:0;
-      padding:40px 20px;
-      color:black;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
     }
-    .section{
-      background: rgba(255,255,255,.9);
-      border-radius:12px;
-      padding:20px;
-      margin-bottom:40px;
-      max-width:900px;
-      margin-left:auto;
-      margin-right:auto;
+
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    h2{ font-size:20px; margin-bottom:16px; }
-    .choice-box{
-      display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px;
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 16px;
     }
-    .black-option{
-      background:black; color:white; border:none; border-radius:6px;
-      padding:10px 16px; cursor:pointer;
+
+    .input-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
     }
-    .correct{ background-color: lightgreen !important; color:black !important; }
-    .wrong{ background-color: lightcoral !important; }
-    .explanation{ margin-top:10px; font-weight:bold; display:none; }
-    .back-link{
-      display:inline-block; margin-bottom:20px; font-size:18px; font-weight:bold; color:black; text-decoration:none;
+
+    .input-box input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+      font-size: 16px;
+      min-width: 180px;
     }
-    @media (max-width: 480px){
-      h2{ font-size:18px; }
-      .black-option{ flex:1 1 calc(50% - 10px); text-align:center; }
+
+    .input-box button {
+      margin-left: 10px;
+      padding: 10px 16px;
+      font-size: 16px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .correct {
+      background-color: lightgreen !important;
+      color: black !important;
+    }
+
+    .wrong {
+      background-color: lightcoral !important;
+      color: black !important;
+    }
+
+    .explanation {
+      margin-top: 10px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .options button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <div class="section">
     <a class="back-link" href="uwb.html">← Zurück</a>
-    <h2>UWB Allgemein</h2>
   </div>
 
-  <!-- 1 -->
-  <div class="section">
-    <h2>1. Warum ist die Kollektivgesellschaft keine «offene» Gesellschaft?</h2>
-    <div class="explanation" style="display:block;">
-      - Gesellschafterbeschlüsse müssen einstimmig sein.<br>
-      - Falls ein neuer Gesellschafter dazu trifft, sind Vertragsänderungen nötig
-    </div>
-  </div>
-
-  <!-- 2 -->
-  <div class="section">
-    <h2>2. Haften neue Kollektivgesellschafter für alte Schulden der Kollektivgesellschaft?</h2>
-    <div class="choice-box" data-correct="ja">
-      <button class="black-option">ja</button>
-      <button class="black-option">nein</button>
-    </div>
-    <div class="explanation"></div>
-  </div>
-
-  <!-- 3 -->
-  <div class="section">
-    <h2>3. Wie kann der Einfluss von neuen Aktionären auf die Entscheidung der AG beschränkt werden?</h2>
-    <div class="explanation" style="display:block;">
-      - Stimmrechtsaktien (Art. 693 OR)<br>
-      - anstelle von Aktien PS ausgeben
-    </div>
-  </div>
-
-  <!-- 4 -->
-  <div class="section">
-    <h2>4. Wie wird der bisherige Aktionär geschützt, wenn man mittels Kapitalerhöhung ausschliesslich neue Aktionäre «an Board» holen will?</h2>
-    <div class="explanation" style="display:block;">
-      Mittels Bezugsrecht
-    </div>
-  </div>
-
-  <!-- 5 -->
-  <div class="section">
-    <h2>5. Kann das Bezugsrecht umgangen werden?</h2>
-    <div class="choice-box" data-correct="ja" data-extra="Aber nur aus wichtigen Gründen">
-      <button class="black-option">ja</button>
-      <button class="black-option">nein</button>
-    </div>
-    <div class="explanation"></div>
-  </div>
+  <div id="quiz-container"></div>
 
   <script>
-    function norm(t){
-      return t
-        .toLowerCase()
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        .trim();
+    function normalize(text) {
+      return text.toLowerCase().replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
 
-    document.querySelectorAll('.choice-box').forEach(box => {
-      const correctRaw = box.dataset.correct || "";
-      const correctSet = correctRaw.split('|').map(s => norm(s));
-      const extra = box.dataset.extra || "";
-      const feedback = box.parentElement.querySelector('.explanation');
+    function checkWord(inputId, correctWord, feedbackId, explanation = "") {
+      const input = document.getElementById(inputId);
+      const feedback = document.getElementById(feedbackId);
+      const userAnswer = normalize(input.value);
+      const correctAnswer = normalize(correctWord);
 
-      box.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          box.querySelectorAll('button').forEach(b => b.disabled = true);
-          const chosen = norm(btn.textContent);
-          const isCorrect = correctSet.includes(chosen);
+      feedback.innerHTML = "";
 
-          if(isCorrect){
-            btn.classList.add('correct');
-            feedback.textContent = "Richtig! ✅";
-            feedback.style.color = "green";
-          }else{
-            btn.classList.add('wrong');
-            box.querySelectorAll('button').forEach(b => {
-              if(correctSet.includes(norm(b.textContent))){
-                b.classList.add('correct');
-              }
-            });
-            feedback.textContent = "Falsch.";
-            feedback.style.color = "red";
-          }
+      if (userAnswer === correctAnswer) {
+        input.classList.add("correct");
+        input.classList.remove("wrong");
+        feedback.textContent = "Richtig! ✅";
+        feedback.style.color = "green";
+      } else {
+        input.classList.add("wrong");
+        input.classList.remove("correct");
+        input.value = correctWord;
+        feedback.textContent = "Falsch. Richtige Antwort: " + correctWord;
+        feedback.style.color = "red";
+      }
 
-          feedback.style.display = "block";
+      if (explanation) {
+        const info = document.createElement('div');
+        info.className = 'explanation';
+        info.textContent = explanation;
+        feedback.appendChild(info);
+      }
+    }
 
-          if(extra){
-            const extraDiv = document.createElement('div');
-            extraDiv.style.marginTop = "8px";
-            extraDiv.innerHTML = "<em>" + extra + "</em>";
-            feedback.appendChild(extraDiv);
-          }
-        });
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation = "") {
+      const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) {
+          btn.classList.add('correct');
+        }
+        if (idx === clickedIndex && idx !== correctIndex) {
+          btn.classList.add('wrong');
+        }
       });
+
+      const feedback = document.getElementById('f_' + groupId);
+      feedback.style.display = 'block';
+      feedback.innerHTML = explanation || "";
+    }
+
+    const tasks = [
+      { q: "1. Warum ist die Kollektivgesellschaft keine «offene» Gesellschaft?", id: "e1", type: "text", answer: "Gesellschafterbeschlüsse müssen einstimmig sein. Falls ein neuer Gesellschafter dazu trifft, sind Vertragsänderungen nötig" },
+
+      { q: "2. Haften neue Kollektivgesellschafter für alte Schulden der Kollektivgesellschaft?", id: "e2", type: "mc", options: ["ja", "nein"], correct: 0 },
+
+      { q: "3. Wie kann der Einfluss von neuen Aktionären auf die Entscheidung der AG beschränkt werden?", id: "e3", type: "text", answer: "Stimmrechtsaktien (Art. 693 OR). anstelle von Aktien PS ausgeben" },
+
+      { q: "4. Wie wird der bisherige Aktionär geschützt, wenn man mittels Kapitalerhöhung ausschliesslich neue Aktionäre «an Board» holen will?", id: "e4", type: "text", answer: "Mittels Bezugsrecht" },
+
+      { q: "5. Kann das Bezugsrecht umgangen werden?", id: "e5", type: "mc", options: ["ja", "nein"], correct: 0, explanation: "Aber nur aus wichtigen Gründen" }
+    ];
+
+    const container = document.getElementById("quiz-container");
+
+    tasks.forEach(task => {
+      const section = document.createElement("div");
+      section.className = "section";
+      section.innerHTML = `<h2>${task.q}</h2>`;
+
+      if (task.type === "mc") {
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+        task.options.forEach((opt, index) => {
+          const btn = document.createElement("button");
+          btn.innerText = opt;
+          btn.dataset.group = task.id;
+          btn.onclick = () => selectOptionGroup(task.id, task.correct, index, task.explanation || "");
+          optionsDiv.appendChild(btn);
+        });
+        section.appendChild(optionsDiv);
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        fb.style.display = "none";
+        section.appendChild(fb);
+      } else {
+        const inputBox = document.createElement("div");
+        inputBox.className = "input-box";
+        inputBox.innerHTML = `<input type='text' id='${task.id}' placeholder='Antwort eingeben...'>
+          <button onclick="checkWord('${task.id}', \`${task.answer}\`, 'f_${task.id}', \`${task.explanation || ''}\`)">OK</button>`;
+        section.appendChild(inputBox);
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        section.appendChild(fb);
+      }
+
+      container.appendChild(section);
     });
   </script>
 </body>
 </html>
+
