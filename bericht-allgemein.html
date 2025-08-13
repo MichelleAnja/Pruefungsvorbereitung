@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Theoriefragen Allgemein – Berichterstattung</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UWB Allgemein</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -29,7 +29,7 @@
       margin-bottom: 16px;
     }
 
-    .input-box, .choice-box {
+    .input-box {
       display: flex;
       align-items: center;
       margin-bottom: 12px;
@@ -42,11 +42,11 @@
       border-radius: 6px;
       border: 2px solid #ccc;
       font-size: 16px;
+      min-width: 180px;
     }
 
-    .input-box button, .choice-box button {
+    .input-box button {
       margin-left: 10px;
-      margin-top: 10px;
       padding: 10px 16px;
       font-size: 16px;
       background-color: black;
@@ -58,25 +58,29 @@
 
     .correct {
       background-color: lightgreen !important;
+      color: black !important;
     }
 
     .wrong {
       background-color: lightcoral !important;
+      color: black !important;
     }
 
     .explanation {
       margin-top: 10px;
       font-weight: bold;
+      color: black;
     }
 
-    .black-option {
+    .options button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
       background-color: black;
       color: white;
-      padding: 10px 16px;
-      border-radius: 6px;
-      margin: 5px;
-      cursor: pointer;
-      border: none;
     }
 
     .back-link {
@@ -91,178 +95,112 @@
 </head>
 <body>
   <div class="section">
-    <a class="back-link" href="revision-bericht.html">← Zurück</a>
-    <h2>1. In welcher Reihenfolge sind Einschränkungen, Zusatz und Hinweise in dem Revisionsbericht zu erwähnen?</h2>
-    <div class="input-box">
-      <input type="text" id="answer1" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer1', '1. Einschränkungen 2. Zusatz 3. Hinweis', 'feedback1')">OK</button>
-    </div>
-    <div id="feedback1" class="explanation"></div>
+    <a class="back-link" href="uwb.html">← Zurück</a>
   </div>
 
-  <div class="section">
-    <h2>2. Sind die Einschränkungen vor oder nach der Prüfungsaussage in den Revisionsbericht zu nehmen?</h2>
-    <div class="choice-box">
-      <button class="black-option" onclick="selectSingleOption(this, true, 'feedback2')">vor</button>
-      <button class="black-option" onclick="selectSingleOption(this, false, 'feedback2')">nach</button>
-    </div>
-    <div id="feedback2" class="explanation"></div>
-  </div>
+  <div id="quiz-container"></div>
 
-  <div class="section">
-    <h2>3. Wie ist vorzugehen, wenn mehrere Tatbestände zu einer Einschränkung vorliegen?</h2>
-    <div class="input-box">
-      <input type="text" id="answer3" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer3', 'Die Prüfungsaussage bezieht sich auf die schwerwiegendste Einschränkung.', 'feedback3')">OK</button>
-    </div>
-    <div id="feedback3" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>4. Ist ein Zusatz vor oder nach der Prüfungsaussage in den Revisionsbericht zu nehmen?</h2>
-    <div class="choice-box">
-      <button class="black-option" onclick="selectSingleOption(this, false, 'feedback4')">vor</button>
-      <button class="black-option" onclick="selectSingleOption(this, true, 'feedback4')">nach</button>
-    </div>
-    <div id="feedback4" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>5. Welche Arten von Einschränkungen gibt es?</h2>
-    <div class="input-box">
-      <input type="text" id="answer5" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer5', '1. Eingeschränkte Prüfungsaussage 2. Verneinende Prüfungsaussage 3. Unmöglichkeit einer Prüfungsaussage', 'feedback5')">OK</button>
-    </div>
-    <div id="feedback5" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>6. Welche Arten einer Eingeschränkten Prüfungsaussage gibt es?</h2>
-    <div class="input-box">
-      <input type="text" id="answer6" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer6', '1. Meinungsverschiedenheit festgestellter Sachverhalt 2. Meinungsverschiedenheit angenommener Sachverhalt, NICHT grundlegend 3. Beschränkung Prüfungsumfang, NICHT grundlegend', 'feedback6')">OK</button>
-    </div>
-    <div id="feedback6" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>7. Welche Arten einer verneinenden Prüfungsaussage gibt es?</h2>
-    <div class="input-box">
-      <input type="text" id="answer7" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer7', 'Meinungsverschiedenheit, festgestellter Sachverhalt, grundlegend', 'feedback7')">OK</button>
-    </div>
-    <div id="feedback7" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>8. Welche Arten von Unmöglichkeit einer Prüfungsaussage gibt es?</h2>
-    <div class="input-box">
-      <input type="text" id="answer8" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer8', '1. Meinungsverschiedenheit, angenommener Sachverhalt, grundlegend 2. Beschränkung des Prüfungsumfangs, grundlegend', 'feedback8')">OK</button>
-    </div>
-    <div id="feedback8" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>9. Wann muss eine Einschränkung vorgenommen werden?</h2>
-    <div class="input-box">
-      <input type="text" id="answer9" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer9', '1. Beschränkung des Prüfungsumfangs 2. Verstoss gegen die Bewertungsgrundsätze 3. Verstoss gegen die Darstellung (Mindestgliederung) 4. Verstoss gegen die Offenlegung (Anhang) 5. Verstoss gegen Grundsätze ordnungsmässiger Rechnungslegung', 'feedback9')">OK</button>
-    </div>
-    <div id="feedback9" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>10. Wann ist ein Fehler grundlegend? Wenn durch die Korrektur des Fehlers folgendes passiert:</h2>
-    <div class="input-box">
-      <input type="text" id="answer10" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer10', '1. ½ Kapitalverlust 2. Überschuldung 3. Dividendenauszahlung nicht mehr möglich 4. Vielfaches der Gesamtwesentlichkeit', 'feedback10')">OK</button>
-    </div>
-    <div id="feedback10" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>11. Was ist eine Einschränkung?</h2>
-    <div class="input-box">
-      <input type="text" id="answer11" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer11', 'Sie modifiziert die Prüfungsaussage. Der Prüfer ist nicht in allen wesentlichen Punkten einverstanden.', 'feedback11')">OK</button>
-    </div>
-    <div id="feedback11" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>12. Was ist ein Zusatz?</h2>
-    <div class="input-box">
-      <input type="text" id="answer12" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer12', 'Hervorhebung eines wichtigen Sachverhalts Ergänzt den Bericht zur Vermeidung von Missverständnissen Bezieht sich auf Prüfung, darf keine Geheimhaltung verletzen', 'feedback12')">OK</button>
-    </div>
-    <div id="feedback12" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>13. Was ist ein Hinweis?</h2>
-    <div class="input-box">
-      <input type="text" id="answer13" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer13', 'Verstösse gegen andere gesetzliche Vorschriften in der Jahresrechnung Kein Einfluss auf die Prüfungsaussage', 'feedback13')">OK</button>
-    </div>
-    <div id="feedback13" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>14. Was sind Beispiele einer redaktionellen Erläuterung? (SER 136-137)</h2>
-    <div class="input-box">
-      <input type="text" id="answer14" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer14', 'Doppelmandat Überlanges / verkürztes Geschäftsjahr Vorjahr Opting-out Vorjahr andere Revisionsgesellschaft falls Vergleichszahlen nicht geprüft werden Beilagen (GFR), falls diese von angewendeter Rechnungslegung vorgesehen wird', 'feedback14')">OK</button>
-    </div>
-    <div id="feedback14" class="explanation"></div>
-  </div>
-
-  <div class="section">
-    <h2>15. Was ist der Inhalt im Revisionsbericht bei der eingeschränkten Revision? Art. 729b OR</h2>
-    <div class="input-box">
-      <input type="text" id="answer15" placeholder="Antwort eingeben...">
-      <button onclick="checkAnswer('answer15', 'Hinweis auf eingeschränkte Natur der Revision Stellungnahme zum Ergebnis der Prüfung Angaben zur Unabhängigkeit (allenfalls Doppelmandat) Angaben zum leitenden Revisor inkl. Zulassung', 'feedback15')">OK</button>
-    </div>
-    <div id="feedback15" class="explanation"></div>
-  </div>
   <script>
     function normalize(text) {
       return text.toLowerCase().replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
 
-    function checkAnswer(inputId, correctAnswer, feedbackId) {
+    function checkWord(inputId, correctWord, feedbackId, explanation = "") {
       const input = document.getElementById(inputId);
       const feedback = document.getElementById(feedbackId);
-      const answer = normalize(input.value);
-      const correct = normalize(correctAnswer);
+      const userAnswer = normalize(input.value);
+      const correctAnswer = normalize(correctWord);
 
-      if (answer.includes(correct)) {
-        input.classList.add('correct');
+      feedback.innerHTML = "";
+
+      if (userAnswer === correctAnswer) {
+        input.classList.add("correct");
+        input.classList.remove("wrong");
         feedback.textContent = "Richtig! ✅";
-        feedback.style.color = 'green';
+        feedback.style.color = "green";
       } else {
-        input.classList.add('wrong');
-        input.value = correctAnswer;
-        feedback.textContent = "Falsch. Die richtige Antwort ist: " + correctAnswer;
-        feedback.style.color = 'red';
+        input.classList.add("wrong");
+        input.classList.remove("correct");
+        input.value = correctWord;
+        feedback.textContent = "Falsch. Richtige Antwort: " + correctWord;
+        feedback.style.color = "red";
+      }
+
+      if (explanation) {
+        const info = document.createElement('div');
+        info.className = 'explanation';
+        info.textContent = explanation;
+        feedback.appendChild(info);
       }
     }
 
-    function selectSingleOption(button, isCorrect, feedbackId) {
-      const buttons = button.parentElement.querySelectorAll('button');
-      buttons.forEach(btn => btn.disabled = true);
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation = "") {
+      const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) {
+          btn.classList.add('correct');
+        }
+        if (idx === clickedIndex && idx !== correctIndex) {
+          btn.classList.add('wrong');
+        }
+      });
 
-      const feedback = document.getElementById(feedbackId);
-      if (isCorrect) {
-        button.classList.add('correct');
-        feedback.textContent = "Richtig! ✅";
-        feedback.style.color = 'green';
-      } else {
-        button.classList.add('wrong');
-        feedback.textContent = "Falsch.";
-        feedback.style.color = 'red';
-      }
+      const feedback = document.getElementById('f_' + groupId);
+      feedback.style.display = 'block';
+      feedback.innerHTML = explanation || "";
     }
+
+    const tasks = [
+      { q: "1. Warum ist die Kollektivgesellschaft keine «offene» Gesellschaft?", id: "e1", type: "text", answer: "Gesellschafterbeschlüsse müssen einstimmig sein. Falls ein neuer Gesellschafter dazu trifft, sind Vertragsänderungen nötig" },
+
+      { q: "2. Haften neue Kollektivgesellschafter für alte Schulden der Kollektivgesellschaft?", id: "e2", type: "mc", options: ["ja", "nein"], correct: 0 },
+
+      { q: "3. Wie kann der Einfluss von neuen Aktionären auf die Entscheidung der AG beschränkt werden?", id: "e3", type: "text", answer: "Stimmrechtsaktien (Art. 693 OR). anstelle von Aktien PS ausgeben" },
+
+      { q: "4. Wie wird der bisherige Aktionär geschützt, wenn man mittels Kapitalerhöhung ausschliesslich neue Aktionäre «an Board» holen will?", id: "e4", type: "text", answer: "Mittels Bezugsrecht" },
+
+      { q: "5. Kann das Bezugsrecht umgangen werden?", id: "e5", type: "mc", options: ["ja", "nein"], correct: 0, explanation: "Aber nur aus wichtigen Gründen" }
+    ];
+
+    const container = document.getElementById("quiz-container");
+
+    tasks.forEach(task => {
+      const section = document.createElement("div");
+      section.className = "section";
+      section.innerHTML = `<h2>${task.q}</h2>`;
+
+      if (task.type === "mc") {
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+        task.options.forEach((opt, index) => {
+          const btn = document.createElement("button");
+          btn.innerText = opt;
+          btn.dataset.group = task.id;
+          btn.onclick = () => selectOptionGroup(task.id, task.correct, index, task.explanation || "");
+          optionsDiv.appendChild(btn);
+        });
+        section.appendChild(optionsDiv);
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        fb.style.display = "none";
+        section.appendChild(fb);
+      } else {
+        const inputBox = document.createElement("div");
+        inputBox.className = "input-box";
+        inputBox.innerHTML = `<input type='text' id='${task.id}' placeholder='Antwort eingeben...'>
+          <button onclick="checkWord('${task.id}', \`${task.answer}\`, 'f_${task.id}', \`${task.explanation || ''}\`)">OK</button>`;
+        section.appendChild(inputBox);
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        section.appendChild(fb);
+      }
+
+      container.appendChild(section);
+    });
   </script>
 </body>
 </html>
+
