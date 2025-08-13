@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Auflösung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h2 { font-size: 20px; margin-bottom: 16px; }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .options button {
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+
+    .correct { background-color: lightgreen !important; color: black !important; }
+    .wrong   { background-color: lightcoral !important; color: black !important; }
+
+    .explanation { margin-top: 10px; font-weight: bold; color: black; display: none; }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 24px 12px; }
+      h2 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="uwb.html">← Zurück</a>
+    <h2>Auflösung</h2>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation = "") {
+      const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) btn.classList.add('correct');
+        if (idx === clickedIndex && idx !== correctIndex) btn.classList.add('wrong');
+      });
+
+      const feedback = document.getElementById('f_' + groupId);
+      if (explanation) {
+        feedback.style.display = 'block';
+        feedback.innerHTML = explanation;
+      }
+    }
+
+    const tasks = [
+      {
+        q: "1. Eine Aktiengesellschaft wird ordentlich aufgelöst, indem die Generalversammlung die Auflösung mit ______ Mehr beschliesst und einen Liquidator wählt.",
+        id: "a1",
+        type: "mc",
+        options: ["qualitativem", "qualifiziertem"],
+        correct: 1
+      },
+      {
+        q: "2. Der Beschluss der Generalversammlung über die Auflösung bedarf der öffentlichen Beurkundung.",
+        id: "a2",
+        type: "mc",
+        options: ["richtig", "falsch"],
+        correct: 0
+      },
+      {
+        q: "3. Nach Schuldenruf kann die Verteilung des Vermögens frühestens nach Ablauf eines Jahres erfolgen. Die Jahresfrist kann auf _______ verkürzt werden, wenn ein zugelassener Revisionsexperte bestätigt, dass die Schulden getilgt sind und keine Interessen weiterer Personen gefährdet werden.",
+        id: "a3",
+        type: "mc",
+        options: ["1 Monat", "3 Monate", "6 Monate"],
+        correct: 1
+      }
+    ];
+
+    const container = document.getElementById("quiz-container");
+
+    tasks.forEach(task => {
+      const section = document.createElement("div");
+      section.className = "section";
+
+      const title = document.createElement("h2");
+      title.textContent = task.q;
+      section.appendChild(title);
+
+      const optionsDiv = document.createElement("div");
+      optionsDiv.className = "options";
+      task.options.forEach((opt, index) => {
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.dataset.group = task.id;
+        btn.onclick = () => selectOptionGroup(task.id, task.correct, index, task.explanation || "");
+        optionsDiv.appendChild(btn);
+      });
+      section.appendChild(optionsDiv);
+
+      const fb = document.createElement("div");
+      fb.id = "f_" + task.id;
+      fb.className = "explanation";
+      section.appendChild(fb);
+
+      container.appendChild(section);
+    });
+  </script>
+</body>
+</html>
