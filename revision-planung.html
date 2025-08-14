@@ -1,201 +1,389 @@
-<!-- === Drop-in Styles (passt sich bestehender Optik an, minimal-invasiv) === -->
-<style>
-  .qa-section{background:rgba(255,255,255,.9);border-radius:12px;padding:20px;margin:24px auto;max-width:920px}
-  .qa-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-  .qa-btn{background:#000;color:#fff;border:0;border-radius:6px;padding:10px 16px;cursor:pointer}
-  .ok-btn{background:#000;color:#fff;border:0;border-radius:6px;padding:10px 16px;cursor:pointer}
-  .qa-correct{background:lightgreen !important;color:#000 !important}
-  .qa-wrong{background:lightcoral !important}
-  .qa-explain{margin-top:10px;font-weight:bold;display:none;color:#000}
-  @media (max-width:480px){ .qa-btn{flex:1 1 calc(50% - 10px)} }
-</style>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prüfungsplanung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+    .section {
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { font-size: 22px; margin: 0; }
+    h2 { font-size: 20px; margin: 0 0 12px; }
 
-<!-- ===================== UWB / Prüfungsplanung – Beispiele ===================== -->
+    .options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .options button {
+      padding: 10px 16px; font-size: 16px; border: none; border-radius: 6px;
+      cursor: pointer; background-color: black; color: white;
+    }
 
-<div class="qa-section">
-  <h3>1. Welche Arten von Wesentlichkeiten gibt es?</h3>
-  <!-- Aufgabenset (OK), nach Klick nur Lösung in schwarz, keine Rot/Grün -->
-  <div class="qa-row">
-    <button class="ok-btn"
-      data-type="ok"
-      data-solution-title="Bitte Lösung als Aufzählung (alle müssen vorkommen):"
-      data-solution="- Gesamtwesentlichkeit<br>- Toleranzwesentlichkeit<br>- Nichtaufgriffsgrenze<br>- Spezifische Wesentlichkeit">
-      OK
-    </button>
+    .input-box { display: flex; align-items: center; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+    .input-box input {
+      flex: 1; min-width: 220px; padding: 10px; border-radius: 6px; border: 2px solid #ccc; font-size: 16px;
+    }
+    .input-box button {
+      padding: 10px 16px; font-size: 16px; background-color: black; color: white; border: none; border-radius: 6px; cursor: pointer;
+    }
+
+    .correct { background-color: lightgreen !important; color: black !important; }
+    .wrong   { background-color: lightcoral !important; color: black !important; }
+
+    .explanation { margin-top: 10px; font-weight: bold; color: black; display: none; }
+
+    .back-link {
+      display: inline-block; margin-bottom: 20px; font-size: 18px; font-weight: bold; color: black; text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 24px 12px; }
+      h1 { font-size: 20px; }
+      h2 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="revision.html">← Zurück</a>
+    <h1>Prüfungsplanung</h1>
   </div>
-  <div class="qa-explain"></div>
-</div>
 
-<div class="qa-section">
-  <h3>2. Was ist der Zweck der Gesamtwesentlichkeit?</h3>
-  <div class="qa-row">
-    <button class="ok-btn" data-type="ok" data-solution="«Bezieht sich auf die Aussage eines oder mehrerer kumulierter Fehler in Bezug auf die JR als Ganzes. Es wird somit klargestellt, dass (nur) eine Gesamtwesentlichkeit für sämtliche Elemente des Abschlusses zu bestimmen ist. Die Festlegung verschiedener Wesentlichkeiten für beispielsweise Bilanz, Erfolgsrechnung oder Anhang ist nicht vorgesehen bzw. notwendig. Die Gesamtwesentlichkeit beeinflusst die Entscheidungen des Abschlussprüfers bei der Identifikation und Beurteilung der Risiken wesentlicher falscher Darstellungen. Legt der Abschlussprüfer für einen Abschluss eine tiefere Gesamtwesentlichkeit fest, ist das Risiko wesentlicher falscher Darstellungen höher, als wenn für denselben Abschluss eine höhere Gesamtwesentlichkeit massgeblich wäre.»">OK</button>
-  </div>
-  <div class="qa-explain"></div>
-</div>
+  <div id="quiz-container"></div>
 
-<div class="qa-section">
-  <h3>3. Was ist der Zweck der Toleranzwesentlichkeit?</h3>
-  <div class="qa-row">
-    <button class="ok-btn" data-type="ok" data-solution="«Wird tiefer angesetzt als die Gesamtwesentlichkeit. Wird für die Planung der Prüfungshandlungen verwendet. Prüfer setzt dadurch eine «Sicherheitsmarge» ein, reduziert das Risiko, dass die nicht aufgedeckten Fehler die Gesamtwesentlichkeit überschreiten. Ebenfalls relevant ist die TW für die Berichterstattung: Fehler &gt; TW (Aussageebene, d.h. Mindestgliederung) führen zu Einschränkungen im Revisionsbericht.»">OK</button>
-  </div>
-  <div class="qa-explain"></div>
-</div>
+  <script>
+    /* ---------- (BF)L: Tippfehler-tolerant ---------- */
+    function normalize(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/\s+/g, ' ')        // viele Whitespaces zu einem Space
+        .trim()
+        .normalize("NFD")            // Akzente entfernen
+        .replace(/[\u0300-\u036f]/g, "");
+    }
 
-<div class="qa-section">
-  <h3>4. Was ist der Zweck der Nichtaufgriffsgrenze?</h3>
-  <div class="qa-row">
-    <button class="ok-btn" data-type="ok" data-solution="«Gewisse kleinere während der Prüfung festgestellte Fehler für die Beurteilung der Jahresrechnung sind unwichtig; d.h. auf die Fehlerliste kommen nur Beträge &gt; NAG. Ebenfalls relevant für die Prüfungshandlungen auf der Aktivseite: Beträge &lt; NAG werden grundsätzlich nicht geprüft.»">OK</button>
-  </div>
-  <div class="qa-explain"></div>
-</div>
-
-<div class="qa-section">
-  <h3>5. Was ist der Zweck der Spezifischen Wesentlichkeit?</h3>
-  <div class="qa-row">
-    <button class="ok-btn" data-type="ok" data-solution="«Falls vernünftigerweise erwartet werden kann, dass falsche Darstellungen von spezifischen Geschäftsvorfällen, Kontensalden oder Abschlussangaben die Entscheidungen von Nutzern beeinflussen könnten, muss der Abschlussprüfer eine oder mehrere spezifische Wesentlichkeitsgrenzen festlegen, welche tiefer als die Gesamtwesentlichkeit anzusetzen sind. Beispielsweise können falsche Darstellungen von Transaktionen, Beständen oder innerhalb der Anhangsangaben die Nutzer der Abschlüsse in ihren wirtschaftlichen Entscheidungen beeinflussen … daher kann es notwendig sein, für solche Abschlussangaben eine spezifische Wesentlichkeitsgrenze festzulegen.»">OK</button>
-  </div>
-  <div class="qa-explain"></div>
-</div>
-
-<!-- 6: Richtwerte GW – mehrere Felder, jeweils eigener OK-Button (nur Lösung zeigen) -->
-<div class="qa-section">
-  <h3>6. Was sind die Richtwerte der GW?</h3>
-  <div class="qa-row">
-    <button class="ok-btn" data-type="ok" data-solution="3 – 10 %"><span>OK</span></button>
-    <button class="ok-btn" data-type="ok" data-solution="3 – 5 %"><span>OK</span></button>
-    <button class="ok-btn" data-type="ok" data-solution="1 – 3 %"><span>OK</span></button>
-    <button class="ok-btn" data-type="ok" data-solution="1 – 3 %"><span>OK</span></button>
-    <button class="ok-btn" data-type="ok" data-solution="1 – 3 %"><span>OK</span></button>
-  </div>
-  <div class="qa-explain"></div>
-  <div class="qa-explain" style="display:block; font-weight:normal; margin-top:6px">
-    «Gewinn vor Steuern (bereinigt)» • «Eigenkapital» • «Nettoerlös» • «Bilanzsumme» • «Aufwendungen»
-  </div>
-</div>
-
-<!-- 7: Richtwert TW – nur Lösungstext, aber mit Sonderregel (50–75% von GW/Gesamtwesentlichkeit) -->
-<div class="qa-section">
-  <h3>7. Was ist der Richtwert der TW?</h3>
-  <div class="qa-row">
-    <button class="ok-btn" data-type="ok" data-solution="«50%–75% von GW / Gesamtwesentlichkeit»">OK</button>
-  </div>
-  <div class="qa-explain"></div>
-</div>
-
-<!-- 8: Richtwert NAG – zwei Modi: allgemeiner Satz + eine MC-Frage (Nettoerlöse) -->
-<div class="qa-section">
-  <h3>8. Was ist der Richtwert der NAG?</h3>
-  <div class="qa-row">
-    <button class="ok-btn" data-type="ok" data-solution="«3 – 10% von GW / Gesamtwesentlichkeit» (GW oder Gesamtwesentlichkeit ist akzeptiert)">OK</button>
-  </div>
-  <div class="qa-explain"></div>
-
-  <div class="qa-row" data-type="mc" data-correct="1 – 3 % der nettoerlöse">
-    <button class="qa-btn">1 – 3 % der Nettoerlöse</button>
-    <button class="qa-btn">1 – 3 % der Bilanzsumme</button>
-    <button class="qa-btn">1 – 3 % des Gesamtaufwands</button>
-  </div>
-  <div class="qa-explain"></div>
-</div>
-
-<!-- 9: MC – nur eine korrekte Antwort -->
-<div class="qa-section">
-  <h3>9. Welchen Richtwert wählst du bei einem gewinnorientierten Unternehmen mit volatilen Jahresergebnissen?</h3>
-  <div class="qa-row" data-type="mc" data-correct="3 – 5 %  des eigenkapitals">
-    <button class="qa-btn">3 – 10 % des Jahresgewinns (bereinigt)</button>
-    <button class="qa-btn">3 – 5 %  des Eigenkapitals</button>
-    <button class="qa-btn">1 – 3 % der Bilanzsumme</button>
-    <button class="qa-btn">1 – 3 % der Nettoerlöse</button>
-    <button class="qa-btn">1 – 3 % des Gesamtaufwands</button>
-  </div>
-  <div class="qa-explain"></div>
-</div>
-
-<!-- 10 -->
-<div class="qa-section">
-  <h3>10. Welchen Richtwert wählst du bei einem gewinnorientierten Unternehmen in Verlustsituation?</h3>
-  <div class="qa-row" data-type="mc" data-correct="3 – 10 % des jahresgewinns (bereinigt)">
-    <button class="qa-btn">3 – 10 % des Jahresgewinns (bereinigt)</button>
-    <button class="qa-btn">3 – 5 %  des Eigenkapitals</button>
-    <button class="qa-btn">1 – 3 % der Bilanzsumme</button>
-    <button class="qa-btn">1 – 3 % der Nettoerlöse</button>
-    <button class="qa-btn">1 – 3 % des Gesamtaufwands</button>
-  </div>
-  <div class="qa-explain"></div>
-</div>
-
-<!-- … usw. (gleiche Struktur für alle weiteren Fragen 11–52) … -->
-
-<!-- ===================== Engine ===================== -->
-<script>
-  // Helpers
-  const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
-
-  // Handle ALL OK buttons (reveal-only)
-  document.querySelectorAll('.ok-btn[data-type="ok"]').forEach(btn=>{
-    const box = btn.closest('.qa-section');
-    const exp = box.querySelector('.qa-explain');
-    btn.addEventListener('click', ()=>{
-      const title = btn.dataset.solutionTitle || "";
-      const text  = btn.dataset.solution || "";
-      exp.style.display = 'block';
-      exp.style.color = '#000';
-      exp.innerHTML = (title ? `<div style="margin-bottom:4px;">${title}</div>` : "") + text;
-    }, { once:true });
-  });
-
-  // Handle MC rows (red/green)
-  document.querySelectorAll('.qa-row[data-type="mc"]').forEach(row=>{
-    const correct = norm(row.dataset.correct || "");
-    const exp = row.nextElementSibling && row.nextElementSibling.classList.contains('qa-explain')
-      ? row.nextElementSibling : null;
-
-    row.querySelectorAll('button').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        // lock
-        row.querySelectorAll('button').forEach(b=>b.disabled=true);
-
-        const chosen = norm(btn.textContent);
-        if(chosen === correct){
-          btn.classList.add('qa-correct');
-          if(exp){ exp.textContent = "Richtig! ✅"; exp.style.color = "green"; exp.style.display="block"; }
-        }else{
-          btn.classList.add('qa-wrong');
-          // mark correct green
-          row.querySelectorAll('button').forEach(b=>{
-            if(norm(b.textContent) === correct){ b.classList.add('qa-correct'); }
-          });
-          if(exp){ exp.textContent = "Falsch."; exp.style.color = "red"; exp.style.display="block"; }
-        }
-      }, { once:true });
-    });
-  });
-
-  // (Optional) BF-Freitext-Felder: falls du sie brauchst, markiere Container mit data-type="bf",
-  // setze data-accept="wort1|wort2|..." und gib dem Feld eine .ok-btn
-  document.querySelectorAll('.qa-row[data-type="bf"]').forEach(row=>{
-    const accepts = (row.dataset.accept || "").split('|').map(norm);
-    const input = row.querySelector('input[type="text"], textarea');
-    const ok = row.querySelector('.ok-btn');
-    const exp = row.nextElementSibling && row.nextElementSibling.classList.contains('qa-explain')
-      ? row.nextElementSibling : null;
-
-    ok.addEventListener('click', ()=>{
-      const val = norm(input.value).replace(/\s+/g,' ');
-      const okHit = accepts.every(a => val.includes(a));
-      if(okHit){
-        input.classList.add('qa-correct');
-        if(exp){ exp.textContent = "Richtig! ✅"; exp.style.color="green"; exp.style.display="block"; }
-      }else{
-        input.classList.add('qa-wrong');
-        if(exp){
-          exp.innerHTML = "Falsch. Erwartet:<br>• " + accepts.join("<br>• ");
-          exp.style.color="red"; exp.style.display="block";
+    // Levenshtein-Distanz
+    function levenshtein(a, b) {
+      const m = a.length, n = b.length;
+      if (m === 0) return n;
+      if (n === 0) return m;
+      const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+      for (let i = 0; i <= m; i++) dp[i][0] = i;
+      for (let j = 0; j <= n; j++) dp[0][j] = j;
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+          dp[i][j] = Math.min(
+            dp[i - 1][j] + 1,        // Löschung
+            dp[i][j - 1] + 1,        // Einfügung
+            dp[i - 1][j - 1] + cost  // Ersetzung
+          );
         }
       }
-      ok.disabled = true;
-      if(input) input.disabled = true;
-    }, { once:true });
-  });
-</script>
+      return dp[m][n];
+    }
+
+    // Ähnlichkeit 0..1 (1 = identisch). "typo tolerant"
+    function similarity(a, b) {
+      const na = normalize(a);
+      const nb = normalize(b);
+      if (!na && !nb) return 1;
+      const dist = levenshtein(na, nb);
+      const maxLen = Math.max(na.length, nb.length);
+      return 1 - dist / maxLen;
+    }
+
+    function checkWord(inputId, correctWord, feedbackId, explanation = "") {
+      const input = document.getElementById(inputId);
+      const feedback = document.getElementById(feedbackId);
+      const userAnswer = input.value;
+
+      feedback.innerHTML = "";
+
+      // Schwellwert für "Tippfehler ok"
+      const sim = similarity(userAnswer, correctWord);
+      const isCorrect = sim >= 0.85; // ~15% Fehlerquote toleriert
+
+      if (isCorrect) {
+        input.classList.add("correct");
+        input.classList.remove("wrong");
+        feedback.textContent = "Richtig! ✅";
+        feedback.style.display = 'block';
+        feedback.style.color = "green";
+      } else {
+        input.classList.add("wrong");
+        input.classList.remove("correct");
+        input.value = correctWord;
+        feedback.textContent = "Falsch. Richtige Antwort: " + correctWord;
+        feedback.style.display = 'block';
+        feedback.style.color = "red";
+      }
+
+      if (explanation) {
+        const info = document.createElement('div');
+        info.textContent = explanation;
+        info.className = 'explanation';
+        info.style.display = 'block';
+        feedback.appendChild(info);
+      }
+    }
+
+    /* ---------- Multiple Choice ---------- */
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation = "") {
+      const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) btn.classList.add('correct');
+        if (idx === clickedIndex && idx !== correctIndex) btn.classList.add('wrong');
+      });
+      const feedback = document.getElementById('f_' + groupId);
+      if (explanation) {
+        feedback.style.display = 'block';
+        feedback.innerHTML = explanation;
+      }
+    }
+
+    /* ---------- Aufgaben ---------- */
+    const tasks = [
+      // 1
+      { q: "1. Welche Arten von Wesentlichkeiten gibt es?", id: "p1", type: "text",
+        answer: `Gesamtwesentlichkeit
+Toleranzwesentlichkeit
+Nichtaufgriffsgrenze
+Spezifische Wesentlichkeit`
+      },
+
+      // 2
+      { q: "2. Was ist der Zweck der Gesamtwesentlichkeit?", id: "p2", type: "text",
+        answer: `Bezieht sich auf die Aussage eines oder mehrerer kumulierter Fehler in Bezug auf die JR als Ganzes. Es wird somit klargestellt, dass (nur) eine Gesamtwesentlichkeit für sämtliche Elemente des Abschlusses zu bestimmen ist. Die Festlegung verschiedener Wesentlichkeiten für beispielsweise Bilanz, Erfolgsrechnung oder Anhang ist nicht vorgesehen bzw. notwendig. Die Gesamtwesentlichkeit beeinflusst die Entscheidungen des Abschlussprüfers bei der Identifikation und Beurteilung der Risiken wesentlicher falscher Darstellungen. Legt der Abschlussprüfer für einen Abschluss eine tiefere Gesamtwesentlichkeit fest, ist das Risiko wesentlicher falscher Darstellungen höher, als wenn für denselben Abschluss eine höhere Wesentlichkeit massgeblich wäre.`
+      },
+
+      // 3
+      { q: "3. Was ist der Zweck der Toleranzwesentlichkeit?", id: "p3", type: "text",
+        answer: `Wird tiefer angesetzt als die Gesamtwesentlichkeit. Wird für die Planung der Prüfungshandlungen verwendet. Prüfer setzt dadurch eine Sicherheitsmarge ein und reduziert das Risiko, dass die nicht aufgedeckten Fehler die Gesamtwesentlichkeit überschreiten. Ebenfalls relevant ist die TW für die Berichterstattung: Fehler grösser TW (Aussageebene, d.h. Mindestgliederung) führen zu Einschränkungen im Revisionsbericht.`
+      },
+
+      // 4
+      { q: "4. Was ist der Zweck der Nichtaufgriffsgrenze?", id: "p4", type: "text",
+        answer: `Gewisse kleinere während der Prüfung festgestellte Fehler sind für die Beurteilung der Jahresrechnung unwichtig; d.h. auf die Fehlerliste kommen nur Beträge grösser NAG. Ebenso relevant für Prüfungshandlungen auf der Aktivseite: Beträge kleiner NAG werden grundsätzlich nicht geprüft.`
+      },
+
+      // 5
+      { q: "5. Was ist der Zweck der Spezifischen Wesentlichkeit?", id: "p5", type: "text",
+        answer: `Wenn falsche Darstellungen von spezifischen Geschäftsvorfällen, Kontensalden oder Abschlussangaben die Entscheidungen der Nutzer beeinflussen könnten, sind spezifische Wesentlichkeitsgrenzen festzulegen, tiefer als die Gesamtwesentlichkeit (z.B. Transaktionen, Bestände oder Anhangsangaben – etwa Entschädigungen GL/VR).`
+      },
+
+      // 6-12 Richtwerte
+      { q: "6. Was ist der Richtwert der GW bei Gewinn vor Steuern (bereinigt)?", id: "p6", type: "mc",
+        options: ["3-10%", "3-5%", "1-3%"], correct: 0 },
+      { q: "7. Was ist der Richtwert der GW bei Nettoerlös?", id: "p7", type: "mc",
+        options: ["3-10%", "3-5%", "1-3%"], correct: 2 },
+      { q: "8. Was ist der Richtwert der GW bei Eigenkapital?", id: "p8", type: "mc",
+        options: ["3-10%", "3-5%", "1-3%"], correct: 1 },
+      { q: "9. Was ist der Richtwert der GW bei Aufwendungen?", id: "p9", type: "mc",
+        options: ["3-10%", "3-5%", "1-3%"], correct: 2 },
+      { q: "10. Was ist der Richtwert der GW bei Bilanzsumme?", id: "p10", type: "mc",
+        options: ["3-10%", "3-5%", "1-3%"], correct: 2 },
+      { q: "11. Der Richtwert der TW ist _____ der GW.", id: "p11", type: "mc",
+        options: ["30-50%", "50-75%"], correct: 1 },
+      { q: "12. Der Richtwert der NAG ist ____ der GW.", id: "p12", type: "mc",
+        options: ["3-10%", "10-20%"], correct: 0 },
+
+      // 13-17 Auswahl nach Situation
+      { q: "13. Richtwert bei gewinnorientiertem Unternehmen mit volatilen Jahresergebnissen?", id: "p13", type: "mc",
+        options: ["3-10% des Gewinns", "3-5% des EKs", "1-3% der Bilanzsumme", "1-3% des Nettoerlöses", "1-3% des Gesamtaufwandes"], correct: 3 },
+      { q: "14. Richtwert bei gewinnorientiertem Unternehmen in Verlustsituation?", id: "p14", type: "mc",
+        options: ["3-10% des Gewinns", "3-5% des EKs", "1-3% der Bilanzsumme", "1-3% des Nettoerlöses", "1-3% des Gesamtaufwandes"], correct: 1 },
+      { q: "15. Richtwert bei gewinnorientiertem Unternehmen mit stabilen Jahreskennzahlen?", id: "p15", type: "mc",
+        options: ["3-10% des Gewinns", "3-5% des EKs", "1-3% der Bilanzsumme", "1-3% des Nettoerlöses", "1-3% des Gesamtaufwandes"], correct: 0 },
+      { q: "16. Richtwert bei gewinnorientiertem anlageintensivem Unternehmen (z. B. Holding)?", id: "p16", type: "mc",
+        options: ["3-10% des Gewinns", "3-5% des EKs", "1-3% der Bilanzsumme", "1-3% des Nettoerlöses", "1-3% des Gesamtaufwandes"], correct: 2 },
+      { q: "17. Richtwert bei nicht gewinnorientiertem Unternehmen?", id: "p17", type: "mc",
+        options: ["3-10% des Gewinns", "3-5% des EKs", "1-3% der Bilanzsumme", "1-3% des Nettoerlöses", "1-3% des Gesamtaufwandes"], correct: 4 },
+
+      // 18
+      { q: "18. (Wesentlichkeit je Prüffeld) Die ____ Wesentlichkeitsgrenze ist die maximale Fehlaussage pro Prüffeld. Möglicher Richtwert: ____ = 50% (Erstprüfung) bis max. 75% (Folgeprüfung) der abschlussbezogenen Wesentlichkeit.", id: "p18", type: "mc",
+        options: ["spezifische", "aussagebezogene"], correct: 1 },
+
+      // 19
+      { q: "19. Welche Kenntnisse muss der Prüfer über das Unternehmen erlangen?", id: "p19", type: "text",
+        answer: `Umfeld (Branche, gesetzliches und regulatives Umfeld)
+Strategie und Ziele
+Anreize
+Organisation (Organigramm, Aktionäre, nahestehende Parteien, etc.)
+Finanzielle Gegebenheiten`
+      },
+
+      // 20
+      { q: "20. Beurteilung plausibler Beziehungen (z. B. Vorjahresvergleich, SV-Relationen zum Bruttolohn).", id: "p20", type: "mc",
+        options: ["Detailprüfungen", "analytische Prüfungshandlungen"], correct: 1 },
+
+      // 21
+      { q: "21. Schritte einer analytischen Prüfungshandlung?", id: "p21", type: "text",
+        answer: `1. Bildung einer Erwartung
+2. Vergleich Ist-Zustand mit der Erwartung
+3. Evaluation der Abweichungen`
+      },
+
+      // 22
+      { q: "22. «Anfälligkeit einer Aussage ... vor Berücksichtigung von Kontrollen»", id: "p22", type: "mc",
+        options: ["inhärentes Risiko", "Toleranzwesentlichkeit", "Prüfungsrisiko"], correct: 0 },
+
+      // 23
+      { q: "23. Faktoren (z. B. zukünftige Ereignisse, Komplexität, Wertschwankungen, Ermessensspielräume) beeinflussen das inhärente Risiko wesentlich.", id: "p23", type: "mc",
+        options: ["richtig", "falsch"], correct: 0 },
+
+      // 24
+      { q: "24. Vorgehen bei eingeschränkter Revision: wesentliche inhärente Risiken festgestellt – was tun?", id: "p24", type: "mc",
+        options: ["Detailprüfungen", "Weitergehende Prüfungshandlungen"], correct: 1 },
+
+      // 25-31 Prüfziele
+      { q: "25. Prüfungsziel v. a. für Aktiven wichtig; Verbot fiktiver Verbindlichkeiten aber auch für Passiven relevant.", id: "p25", type: "mc",
+        options: ["Vorhandensein", "Bewertung", "Rechte und Verpflichtungen", "Eintritt", "Erfassung und Periodenabgrenzung", "Vollständigkeit", "Darstellung und Offenlegung"], correct: 0 },
+      { q: "26. Wurden Transaktionen in der Periode realisiert und dem Unternehmen zugeordnet?", id: "p26", type: "mc",
+        options: ["Vorhandensein", "Bewertung", "Rechte und Verpflichtungen", "Eintritt", "Erfassung und Periodenabgrenzung", "Vollständigkeit", "Darstellung und Offenlegung"], correct: 3 },
+      { q: "27. Betragsmässig richtig und zeitlich korrekt verbucht?", id: "p27", type: "mc",
+        options: ["Vorhandensein", "Bewertung", "Rechte und Verpflichtungen", "Eintritt", "Erfassung und Periodenabgrenzung", "Vollständigkeit", "Darstellung und Offenlegung"], correct: 4 },
+      { q: "28. Eigentum/Nutzungsrecht an bilanzierten Aktiven vorhanden?", id: "p28", type: "mc",
+        options: ["Vorhandensein", "Bewertung", "Rechte und Verpflichtungen", "Eintritt", "Erfassung und Periodenabgrenzung", "Vollständigkeit", "Darstellung und Offenlegung"], correct: 2 },
+      { q: "29. Einhaltung Mindestgliederung/Anhang – Beurteilung durch den Prüfer.", id: "p29", type: "mc",
+        options: ["Vorhandensein", "Bewertung", "Rechte und Verpflichtungen", "Eintritt", "Erfassung und Periodenabgrenzung", "Vollständigkeit", "Darstellung und Offenlegung"], correct: 6 },
+      { q: "30. Bewertung: monetäre Aktiven ~ Nominalwert (abzgl. WB), nicht monetäre Aktiven/Beteiligungen abhängig von künftigen Erträgen.", id: "p30", type: "mc",
+        options: ["Vorhandensein", "Bewertung", "Rechte und Verpflichtungen", "Eintritt", "Erfassung und Periodenabgrenzung", "Vollständigkeit", "Darstellung und Offenlegung"], correct: 1 },
+      { q: "31. Vollständige Bilanzierung und Abbildung aller Transaktionen; vollständige Anhangsangaben.", id: "p31", type: "mc",
+        options: ["Vorhandensein", "Bewertung", "Rechte und Verpflichtungen", "Eintritt", "Erfassung und Periodenabgrenzung", "Vollständigkeit", "Darstellung und Offenlegung"], correct: 5 },
+
+      // 32-33 quantitative/qualitative
+      { q: "32. Herleitung z. B. aus Umsatz, Bilanzsumme oder Ergebnis; häufig Gewinn vor Steuern als Bezugsgrösse.", id: "p32", type: "mc",
+        options: ["Quantitative Anhaltspunkte", "Qualitative Anhaltspunkte"], correct: 0 },
+      { q: "33. Drohende Illiquidität/Überschuldung, Gewinn wird zu Verlust etc. → oft tiefere Wesentlichkeit; häufig EK als Basis.", id: "p33", type: "mc",
+        options: ["Quantitative Anhaltspunkte", "Qualitative Anhaltspunkte"], correct: 1 },
+
+      // 34-36 Beispiele Handlungstypen
+      { q: "34. Vorjahresvergleich beim Personalaufwand", id: "p34", type: "mc",
+        options: ["Befragung", "Analytische Prüfungshandlung", "Angemessene Prüfungshandlung"], correct: 1 },
+      { q: "35. Befragung über Vorgehen zur Bestimmung des Delkredere", id: "p35", type: "mc",
+        options: ["Befragung", "Analytische Prüfungshandlung", "Angemessene Prüfungshandlung"], correct: 0 },
+      { q: "36. Abstimmung Saldobilanz (Vorräte) mit Inventarliste", id: "p36", type: "mc",
+        options: ["Befragung", "Analytische Prüfungshandlung", "Angemessene Prüfungshandlung"], correct: 2 },
+
+      // 37-38 Plan vs. Programm
+      { q: "37. Inhalt/Struktur auf Ebene Felder/Positionen – bei eingeschränkter Revision stark fokussiert.", id: "p37", type: "mc",
+        options: ["Prüfungsprogramm", "Prüfungsplan"], correct: 1 },
+      { q: "38. Auf dem Plan aufbauend – konkrete Prüfungshandlungen zur Zielerreichung.", id: "p38", type: "mc",
+        options: ["Prüfungsprogramm", "Arbeitspapiere"], correct: 0 },
+
+      // 39-44 Diverse Regelungen
+      { q: "39. Bei eingeschränkter Revision darf auf die Anwesenheit der Revisionsstelle bei der GV verzichtet werden.", id: "p39", type: "mc",
+        options: ["richtig", "falsch"], correct: 0 },
+      { q: "40. Der Revisionsbericht kann nach der GV ausgestellt werden.", id: "p40", type: "mc",
+        options: ["richtig", "falsch"], correct: 1 },
+      { q: "41. Aufbewahrungsdauer für Revisionsunterlagen?", id: "p41", type: "mc",
+        options: ["5 Jahre", "10 Jahre", "20 Jahre"], correct: 1 },
+      { q: "42. Statuten und GV können der Revisionsstelle zusätzliche Aufgaben erteilen.", id: "p42", type: "mc",
+        options: ["richtig", "falsch"], correct: 0 },
+      { q: "43. Wenn alle Aktionäre einverstanden sind, kann die Revisionsstelle auf den schriftlichen Bericht verzichten.", id: "p43", type: "mc",
+        options: ["richtig", "falsch"], correct: 1 },
+      { q: "44. Eine Kollektivgesellschaft kann geprüft werden.", id: "p44", type: "mc",
+        options: ["richtig", "falsch"], correct: 1 },
+
+      // 45
+      { q: "45. Welche drei Gruppen von Prüfungshandlungen gibt es?", id: "p45", type: "text",
+        answer: `Allgemeine Prüfungshandlungen, Empfohlene Prüfungshandlungen, Weitergehende Prüfungshandlungen`
+      },
+
+      // 46
+      { q: "46. Vorgehen bei erhöhtem inhärentem Risiko oder angenommenen Fehlern:", id: "p46", type: "mc",
+        options: ["weitergehende Prüfungshandlungen", "allgemeine Prüfungshandlung", "Weitergehende Prüfungshandlungen"], correct: 0 },
+
+      // 47
+      { q: "47. Was sind das (Beispiele wie GoR 958c OR, Fehlerbeurteilung, stille Reserven, Abstimmungen, Protokolle lesen, ...)?", id: "p47", type: "mc",
+        options: ["weitergehende Prüfungshandlungen", "allgemeine Prüfungshandlungen", "Weitergehende Prüfungshandlungen"], correct: 1 },
+
+      // 48-51 direkt/indirekt, progressiv/retograd
+      { q: "48. Eine Information aus der Buchhaltung wird direkt mit dem zugrunde liegenden Beleg geprüft.", id: "p48", type: "mc",
+        options: ["indirekte Prüfung", "direkte Prüfung"], correct: 1 },
+      { q: "49. Prüfung ohne Belege, z. B. Kennzahlenanalyse, Globalabstimmungen.", id: "p49", type: "mc",
+        options: ["indirekte Prüfung", "direkte Prüfung"], correct: 0 },
+      { q: "50. Vom Beleg auf die Buchhaltung schliessen – geeignet für Vollständigkeit (z. B. bezahlte Kreditoren im Folgejahr).", id: "p50", type: "mc",
+        options: ["retograd", "progressiv"], correct: 1 },
+      { q: "51. Von der Buchhaltung/ JR ausgehend, dann Belege prüfen – geeignet für Vorhandensein (z. B. Bankabstimmung).", id: "p51", type: "mc",
+        options: ["retograd", "progressiv"], correct: 0 },
+
+      // 52
+      { q: "52. Ausmass der definierten Prüfungshandlungen – Anzahl/Art/Tiefe.", id: "p52", type: "mc",
+        options: ["Prüfungsumfang", "Prüfungsplan", "angemessene Detailprüfung", "Auswahlverfahren"], correct: 0 },
+
+      // 53
+      { q: "53. Was für Arten von Fehlern gibt es?", id: "p53", type: "text",
+        answer: `tatsächliche, aber unwesentliche Fehler; tatsächliche wesentliche Fehler (unbestritten und festgestellt); angenommene Fehler`
+      },
+
+      // 54-56
+      { q: "54. Fehler, die aufgrund festgestellter systematischer Fehler + hohem Risiko angenommen werden müssen.", id: "p54", type: "mc",
+        options: ["direkte Fehler", "angenommene Fehler"], correct: 1 },
+      { q: "55. Prüfer kann annehmen, dass keine weiteren Fehler existieren.", id: "p55", type: "mc",
+        options: ["systematische Fehler", "isolierte Fehler"], correct: 1 },
+      { q: "56. Systematisch in einer Bilanzposition etwas aktiviert, was nicht aktivierungsfähig ist (auch kleine Beträge).", id: "p56", type: "mc",
+        options: ["systematische Fehler", "isolierte Fehler"], correct: 0 }
+    ];
+
+    /* ---------- Render ---------- */
+    const container = document.getElementById("quiz-container");
+
+    tasks.forEach(task => {
+      const section = document.createElement("div");
+      section.className = "section";
+
+      const title = document.createElement("h2");
+      title.textContent = task.q;
+      section.appendChild(title);
+
+      if (task.type === "mc") {
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+        task.options.forEach((opt, index) => {
+          const btn = document.createElement("button");
+          btn.innerText = opt;
+          btn.dataset.group = task.id;
+          btn.onclick = () => selectOptionGroup(task.id, task.correct, index, task.explanation || "");
+          optionsDiv.appendChild(btn);
+        });
+        section.appendChild(optionsDiv);
+
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        section.appendChild(fb);
+      } else if (task.type === "text") {
+        const inputBox = document.createElement("div");
+        inputBox.className = "input-box";
+        inputBox.innerHTML = `
+          <input type="text" id="${task.id}" placeholder="Antwort eingeben...">
+          <button onclick="checkWord('${task.id}', \`${task.answer}\`, 'f_${task.id}', \`${task.explanation || ''}\`)">OK</button>
+        `;
+        section.appendChild(inputBox);
+
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        section.appendChild(fb);
+      }
+
+      container.appendChild(section);
+    });
+  </script>
+</body>
+</html>
