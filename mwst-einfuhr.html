@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Einfuhrsteuer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1 { font-size: 22px; margin: 0; }
+    h2 { font-size: 20px; margin: 0 0 12px; }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .options button {
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+
+    .correct { background-color: lightgreen !important; color: black !important; }
+    .wrong   { background-color: lightcoral !important; color: black !important; }
+
+    .explanation { margin-top: 10px; font-weight: bold; color: black; display: none; }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 24px 12px; }
+      h1 { font-size: 20px; }
+      h2 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="mwst.html">← Zurück</a>
+    <h1>Einfuhrsteuer</h1>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation = "") {
+      const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) btn.classList.add('correct');
+        if (idx === clickedIndex && idx !== correctIndex) btn.classList.add('wrong');
+      });
+
+      const feedback = document.getElementById('f_' + groupId);
+      if (explanation) {
+        feedback.style.display = 'block';
+        feedback.innerHTML = explanation;
+      }
+    }
+
+    const tasks = [
+      {
+        q: "1. Die Einfuhrsteuer ist immer im Zeitpunkt der Einfuhr fällig und sofort zu bezahlen.",
+        id: "e1",
+        type: "mc",
+        options: ["richtig", "falsch"],
+        correct: 1,
+        explanation: "Das BAZG kann Importeuren/Spediteuren gegen Sicherheit (z. B. Generalbürgschaft, Bankgarantie) eine Zahlungsfrist von 60 Tagen gewähren."
+      },
+      {
+        q: "2. Damit man von der 60-Tage-Frist profitieren kann, muss man ein ZAZ-Konto (zentralisiertes Abrechnungsverfahren der Zollverwaltung) eröffnen.",
+        id: "e2",
+        type: "mc",
+        options: ["richtig", "falsch"],
+        correct: 0
+      },
+      {
+        q: "3. Bei der Einfuhrsteuer sind nur der Normalsteuersatz und der reduzierte Steuersatz zu berücksichtigen.",
+        id: "e3",
+        type: "mc",
+        options: ["richtig", "falsch"],
+        correct: 0
+      },
+      {
+        q: "4. Beim Import ist der Zollschuldner auch Schuldner für die Einfuhrsteuer (Importeur, sein Auftraggeber oder der, für dessen Rechnung eingeführt wird).",
+        id: "e4",
+        type: "mc",
+        options: ["richtig", "falsch"],
+        correct: 0
+      },
+      {
+        q: "5. Kosten für Transport bis zum ersten Bestimmungsort in der Schweiz, Zoll, Versicherungen usw. sind in der Bemessungsgrundlage der Einfuhr-MWST einzubeziehen.",
+        id: "e5",
+        type: "mc",
+        options: ["richtig", "falsch"],
+        correct: 0,
+        explanation: "Die Einfuhrsteuer bemisst sich nach dem Marktwert inklusive solcher Nebenkosten."
+      }
+    ];
+
+    const container = document.getElementById("quiz-container");
+
+    tasks.forEach(task => {
+      const section = document.createElement("div");
+      section.className = "section";
+
+      const title = document.createElement("h2");
+      title.textContent = task.q;
+      section.appendChild(title);
+
+      const optionsDiv = document.createElement("div");
+      optionsDiv.className = "options";
+      task.options.forEach((opt, index) => {
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.dataset.group = task.id;
+        btn.onclick = () => selectOptionGroup(task.id, task.correct, index, task.explanation || "");
+        optionsDiv.appendChild(btn);
+      });
+      section.appendChild(optionsDiv);
+
+      const fb = document.createElement("div");
+      fb.id = "f_" + task.id;
+      fb.className = "explanation";
+      section.appendChild(fb);
+
+      container.appendChild(section);
+    });
+  </script>
+</body>
+</html>
