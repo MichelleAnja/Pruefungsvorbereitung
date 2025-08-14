@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bezugsteuer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 40px 20px;
+      color: black;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1 { font-size: 22px; margin: 0; }
+    h2 { font-size: 20px; margin: 0 0 12px; }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .options button {
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+
+    .input-box {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .input-box input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+      font-size: 16px;
+      min-width: 180px;
+    }
+
+    .correct { background-color: lightgreen !important; color: black !important; }
+    .wrong   { background-color: lightcoral !important; color: black !important; }
+
+    .explanation { margin-top: 10px; font-weight: bold; color: black; display: none; }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 24px 12px; }
+      h1 { font-size: 20px; }
+      h2 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a class="back-link" href="mwst.html">← Zurück</a>
+    <h1>Bezugsteuer</h1>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    // Normalisierung für (BF)L-Eingaben (tolerant gegen Tippfehler im Sinne von Groß-/Kleinschreibung, Leerzeichen, Akzente)
+    function normalize(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/\s+/g, '')
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function checkWord(inputId, correctWord, feedbackId, explanation = "") {
+      const input = document.getElementById(inputId);
+      const feedback = document.getElementById(feedbackId);
+      const userAnswer = normalize(input.value);
+      const correctAnswer = normalize(correctWord);
+
+      feedback.innerHTML = "";
+
+      if (userAnswer === correctAnswer) {
+        input.classList.add("correct");
+        input.classList.remove("wrong");
+        feedback.textContent = "Richtig! ✅";
+        feedback.style.color = "green";
+      } else {
+        input.classList.add("wrong");
+        input.classList.remove("correct");
+        input.value = correctWord;
+        feedback.textContent = "Falsch. Richtige Antwort: " + correctWord;
+        feedback.style.color = "red";
+      }
+
+      if (explanation) {
+        const info = document.createElement('div');
+        info.textContent = explanation;
+        info.className = 'explanation';
+        info.style.display = 'block';
+        feedback.appendChild(info);
+      }
+    }
+
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation = "") {
+      const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) btn.classList.add('correct');
+        if (idx === clickedIndex && idx !== correctIndex) btn.classList.add('wrong');
+      });
+
+      const feedback = document.getElementById('f_' + groupId);
+      if (explanation) {
+        feedback.style.display = 'block';
+        feedback.innerHTML = explanation;
+      }
+    }
+
+    const tasks = [
+      {
+        q: "1. Der Bezugssteuern unterliegen Dienstleistungen, deren Ort sich nach Artikel _____ im Inland befindet und die erbracht werden durch Unternehmen mit Sitz im Ausland, die nicht im Register der steuerpflichtigen Personen eingetragen sind.",
+        id: "b1",
+        type: "mc",
+        options: ["8 Abs 1", "8 Abs 2", "7 Abs 2"],
+        correct: 0,
+        explanation: "Ausnahme: Telekommunikations- oder elektronische Dienstleistungen an nicht steuerpflichtige Empfängerinnen und Empfänger."
+      },
+      {
+        q: "2. Der Bezugssteuern unterliegt die Einfuhr von Datenträgern mit Marktwert mit den darin enthaltenen Dienstleistungen und Rechten.",
+        id: "b2",
+        type: "mc",
+        options: ["richtig", "falsch"],
+        correct: 1,
+        explanation: "Richtig ist: die Einfuhr von Datenträgern ohne Marktwert mit den darin enthaltenen Dienstleistungen und Rechten."
+      },
+      {
+        q: "3. Der Bezugssteuer unterliegen die Lieferung von _____ Gegenständen im Inland, die nicht der Einfuhrsteuer unterliegt und die erbracht wird durch Unternehmen mit Sitz im Ausland, die nicht im Register der steuerpflichtigen Personen eingetragen sind.",
+        id: "b3",
+        type: "mc",
+        options: ["beweglichen", "unbeweglichen"],
+        correct: 1
+      },
+      {
+        q: "4. Auch die Überlassung zum Gebrauch oder Nutzen solcher Gegenstände gemäss Frage 3 unterliegt der Bezugssteuer.",
+        id: "b4",
+        type: "mc",
+        options: ["richtig", "falsch"],
+        correct: 1
+      },
+      {
+        q: "5. Der Bezugssteuer unterliegt die Lieferung von Elektrizität in Leitungen, Gas über das Erdgasverteilnetz und Fernwärme durch Unternehmen mit Sitz im Ausland an ______ Personen im Inland.",
+        id: "b5",
+        type: "mc",
+        options: ["nicht steuerpflichtige", "steuerpflichtige"],
+        correct: 1
+      },
+      {
+        q: "6. Der Bezugssteuer unterliegen die Übertragung von Emissionsrechten, Zertifikaten und Bescheinigungen für Emissionsverminderungen, Herkunftsnachweisen für Elektrizität und ähnlichen Rechten, Bescheinigungen und Zertifikaten durch Unternehmen mit Sitz, Wohnsitz oder Betriebsstätte im Ausland oder Inland, die nicht nach Artikel 21 Absatz 2 Ziffer 19 Buchstabe e von der Inlandsteuer ausgenommen ist.",
+        id: "b6",
+        type: "mc",
+        options: ["richtig", "falsch"],
+        correct: 0
+      },
+      {
+        q: "7. Eine Steuerpflicht für die Bezugssteuer hat der Empfänger solcher Leistungen, wenn er nach Art. 10 MWSTG steuerpflichtig ist, oder im Kalenderjahr solche Leistungen für mehr als CHF _____ bezieht.",
+        id: "b7",
+        type: "mc",
+        options: ["5000", "10000", "20000", "50000"],
+        correct: 1
+      },
+      {
+        q: "8. Ein französisches Transportunternehmen befördert im Auftrag der in Zürich ansässigen Handels AG eine Maschine von Marseille (FR) nach Lausanne.",
+        id: "b8",
+        type: "mc",
+        options: ["Bezugssteuerpflichtig", "Keine Bezugssteuer"],
+        correct: 1,
+        explanation: "DL nach Art. 8 Abs. 1; gemäss Art. 10 Abs. 2 lit. b Inlandsteuer befreit; Leistung gemäss Art. 23 Abs. 2 Ziff. 5 MWSTG von der Steuer befreit."
+      },
+      {
+        q: "9. Ein deutscher Architekt erstellt im Auftrag der in Basel ansässigen Novartis AG Planungsarbeiten für ein Fabrikgebäude in Rheinfelden (CH).",
+        id: "b9",
+        type: "mc",
+        options: ["Bezugssteuerpflichtig", "Keine Bezugssteuer"],
+        correct: 1,
+        explanation: "Ort der gelegenen Sache (Art. 8 Abs. 2 MWSTG). Erbringt die Leistung in der Schweiz und muss sich bei weltweitem Umsatz ≥ CHF 100'000 im MWST-Register eintragen."
+      },
+      {
+        q: "10. Die in Deutschland ansässige Lager AG lagert im Auftrag der Bank Kuhn AG in Kreuzlingen Werbematerial in einem Lager in Deutschland.",
+        id: "b10",
+        type: "mc",
+        options: ["Bezugssteuerpflichtig", "Keine Bezugssteuer"],
+        correct: 1,
+        explanation: "Ort gemäss Art. 8 Abs. 1 in Kreuzlingen; Inlandsteuerpflicht befreit (Art. 10 Abs. 2 lit. b). Da Lager in DE: Art. 23 Abs. 2 Ziff. 7 lit. a MWSTG – keine Bezugssteuer."
+      },
+      {
+        q: "11. Die in Singen (DE) ansässige Immo AG vermietet der in Schaffhausen ansässigen Imark AG drei in Schaffhausen gelegene Aussenparkplätze.",
+        id: "b11",
+        type: "mc",
+        options: ["Bezugssteuerpflichtig", "Keine Bezugssteuer"],
+        correct: 1,
+        explanation: "Ort der Leistung: Schaffhausen; Inlandsteuerpflichtig, aber ausgenommen (Überlassung von Nutzen und Gebrauch; Art. 45 Abs. 1 lit. c). Bei weltweitem Umsatz ≥ CHF 100'000 Eintragungspflicht im MWST-Register."
+      },
+      {
+        q: "12. Der Veranstalter des Tennisturniers in Gstaad zahlt dem spanischen Tennisstar eine Gage von CHF 130'000 für die Teilnahme.",
+        id: "b12",
+        type: "mc",
+        options: ["Bezugssteuer", "Keine Bezugssteuer"],
+        correct: 1,
+        explanation: "Ort der Tätigkeit (Art. 8 Abs. 2 MWSTG); solche Leistungen unterliegen nie der Bezugssteuer."
+      },
+      {
+        q: "13. Muss der Tennisstar sich im Schweizer MWST-Register eintragen lassen?",
+        id: "b13",
+        type: "mc",
+        options: ["ja", "nein"],
+        correct: 0
+      },
+      {
+        q: "14. Ein deutsches Transportunternehmen befördert im Auftrag der in Zürich ansässigen Handels AG eine Abfüllanlage von Zürich nach Genf.",
+        id: "b14",
+        type: "mc",
+        options: ["Bezugssteuerpflichtig", "Keine Bezugssteuer"],
+        correct: 0
+      },
+      {
+        q: "15. Die Verwaltungs AG in Lörrach verwaltet Liegenschaften eines CH-Immobilienbesitzers. Die Immobilie befindet sich in Basel.",
+        id: "b15",
+        type: "mc",
+        options: ["Bezugssteuerpflichtig", "Keine Bezugssteuer"],
+        correct: 1,
+        explanation: "Dienstleistung gemäss Art. 8 Abs. 2 (Ort der gelegenen Sache)."
+      },
+      {
+        q: "16. Muss sich die Verwaltungs AG von Punkt 15 im CH-MWST-Register eintragen lassen, falls sie weltweit mehr Umsatz als CHF 100'000 erzielt?",
+        id: "b16",
+        type: "mc",
+        options: ["ja", "nein"],
+        correct: 0
+      },
+      {
+        q: "17. Die UBS AG in Zürich erhält vom Deutschen Verlag eine Rechnung von EUR 2'500 für eine Werbekampagne.",
+        id: "b17",
+        type: "mc",
+        options: ["Bezugssteuerpflichtig", "Keine Bezugssteuer"],
+        correct: 0
+      },
+      {
+        q: "18. Kann die UBS AG die entrichtete Bezugssteuer im vollen Umfang als Vorsteuerabzug geltend machen?",
+        id: "b18",
+        type: "mc",
+        options: ["ja", "nein"],
+        correct: 1,
+        explanation: "Vorsteuerabzug nur anteilmässig, da Banken überwiegend von der Steuer ausgenommene Umsätze erzielen."
+      },
+      {
+        q: "19. Die UBS AG in Zürich bezahlt dem spanischen Tennisstar CHF 500'000 für das Tragen der Aufschrift «UBS» auf dem Dress bei Turnieren in der Schweiz und im Ausland.",
+        id: "b19",
+        type: "mc",
+        options: ["Bezugssteuerpflichtig", "Keine Bezugssteuer"],
+        correct: 0
+      },
+      {
+        q: "20. Ein nicht im MWST-Register eingetragener Arzt in Genf erhält von einem französischen Treuhandbüro für Jahr n eine Rechnung über CHF 13'000 (Buchhaltung & Steuererklärung).",
+        id: "b20",
+        type: "mc",
+        options: ["Bezugssteuerpflichtig", "Keine Bezugssteuer"],
+        correct: 0
+      },
+      {
+        q: "21. Muss sich der Arzt von Punkt 20 im MWST-Register eintragen lassen?",
+        id: "b21",
+        type: "mc",
+        options: ["ja", "nein"],
+        correct: 0,
+        explanation: "Er bezieht Leistungen, die der Bezugssteuer unterliegen, über CHF 10'000."
+      }
+    ];
+
+    const container = document.getElementById("quiz-container");
+
+    tasks.forEach(task => {
+      const section = document.createElement("div");
+      section.className = "section";
+
+      const title = document.createElement("h2");
+      title.textContent = task.q;
+      section.appendChild(title);
+
+      if (task.type === "mc") {
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+        task.options.forEach((opt, index) => {
+          const btn = document.createElement("button");
+          btn.innerText = opt;
+          btn.dataset.group = task.id;
+          btn.onclick = () => selectOptionGroup(task.id, task.correct, index, task.explanation || "");
+          optionsDiv.appendChild(btn);
+        });
+        section.appendChild(optionsDiv);
+
+        const fb = document.createElement("div");
+        fb.id = "f_" + task.id;
+        fb.className = "explanation";
+        section.appendChild(fb);
+      }
+
+      if (task.type === "text") {
+        const inputBox = document.createElement("div");
+        inputBox.className = "input-box";
+        inputBox.innerHTML = `
+          <input type="text" id="${task.id}" placeholder="Antwort eingeben...">
+          <button onclick="checkWord('${task.id}', \`${task.answer}\`, 'f_${task.id}', \`${task.explanation || ''}\`)">OK</button>
+        `;
+        section.appendChild(inputBox);
+
+        const fb2 = document.createElement("div");
+        fb2.id = "f_" + task.id;
+        fb2.className = "explanation";
+        section.appendChild(fb2);
+      }
+
+      container.appendChild(section);
+    });
+  </script>
+</body>
+</html>
