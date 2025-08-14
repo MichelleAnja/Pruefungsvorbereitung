@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MWST – Sonstiges</title>
+  <title>MWST-Sonstiges</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,7 +13,6 @@
       padding: 40px 20px;
       color: black;
     }
-
     .section {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 12px;
@@ -23,17 +22,14 @@
       margin-left: auto;
       margin-right: auto;
     }
-
     h1 { font-size: 22px; margin: 0; }
     h2 { font-size: 20px; margin: 0 0 12px; }
-
     .options {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 8px;
     }
-
     .options button {
       padding: 10px 16px;
       font-size: 16px;
@@ -43,29 +39,31 @@
       background-color: black;
       color: white;
     }
-
     .input-box {
       display: flex;
       align-items: center;
-      margin-top: 8px;
       gap: 10px;
-      flex-wrap: wrap;
+      margin-top: 8px;
     }
-
     .input-box input {
       flex: 1;
       padding: 10px;
       border-radius: 6px;
       border: 2px solid #ccc;
       font-size: 16px;
-      min-width: 180px;
     }
-
+    .input-box button {
+      padding: 10px 16px;
+      font-size: 16px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
     .correct { background-color: lightgreen !important; color: black !important; }
     .wrong   { background-color: lightcoral !important; color: black !important; }
-
     .explanation { margin-top: 10px; font-weight: bold; color: black; display: none; }
-
     .back-link {
       display: inline-block;
       margin-bottom: 20px;
@@ -74,7 +72,6 @@
       color: black;
       text-decoration: none;
     }
-
     @media (max-width: 480px) {
       body { padding: 24px 12px; }
       h1 { font-size: 20px; }
@@ -85,50 +82,34 @@
 <body>
   <div class="section">
     <a class="back-link" href="mwst.html">← Zurück</a>
-    <h1>MWST – Sonstiges</h1>
+    <h1>MWST-Sonstiges</h1>
   </div>
 
   <div id="quiz-container"></div>
 
   <script>
     function normalize(text) {
-      return String(text || "")
-        .toLowerCase()
-        .replace(/\s+/g, '')
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+      return text.toLowerCase().replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
-
     function checkWord(inputId, correctWord, feedbackId, explanation = "") {
       const input = document.getElementById(inputId);
       const feedback = document.getElementById(feedbackId);
       const userAnswer = normalize(input.value);
       const correctAnswer = normalize(correctWord);
-
       feedback.innerHTML = "";
-
       if (userAnswer === correctAnswer) {
         input.classList.add("correct");
         input.classList.remove("wrong");
-        feedback.textContent = "Richtig! ✅";
-        feedback.style.color = "green";
       } else {
         input.classList.add("wrong");
         input.classList.remove("correct");
         input.value = correctWord;
-        feedback.textContent = "Falsch. Richtige Antwort: " + correctWord;
-        feedback.style.color = "red";
       }
-
       if (explanation) {
-        const info = document.createElement('div');
-        info.textContent = explanation;
-        info.className = 'explanation';
-        info.style.display = 'block';
-        feedback.appendChild(info);
+        feedback.style.display = 'block';
+        feedback.innerHTML = explanation;
       }
     }
-
     function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation = "") {
       const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
       buttons.forEach((btn, idx) => {
@@ -136,34 +117,31 @@
         if (idx === correctIndex) btn.classList.add('correct');
         if (idx === clickedIndex && idx !== correctIndex) btn.classList.add('wrong');
       });
-
       const feedback = document.getElementById('f_' + groupId);
       if (explanation) {
         feedback.style.display = 'block';
         feedback.innerHTML = explanation;
       }
     }
-
     const tasks = [
-      { q: "1. Haben Rückvergütungen oder Entschädigungen an Arbeitgeber eine Vorsteuerkorrektur zur Folge? (Taggelder, Bezugsprovision-QSt)", id: "m1", type: "mc", options: ["ja", "nein"], correct: 1 },
-      { q: "2. Haben nicht eingelöste Geschenkgutscheine eine Vorsteuerkorrektur zur Folge?", id: "m2", type: "mc", options: ["ja", "nein"], correct: 1 },
-      { q: "3. Wann muss die Vorsteuerkorrektur in Folge der gemischten Verwendung gemacht werden?", id: "m3", type: "mc", options: ["quartalsweise", "im letzten Quartal"], correct: 1 },
-      { q: "4. Muss der Urproduzent für den Abzug der fiktiven Vorsteuer den Sitz im Inland haben?", id: "m4", type: "mc", options: ["ja", "nein"], correct: 0 },
-      { q: "5. Welche Basis hat das bezahlte Entgelt bei einem fiktiven Vorsteuerabzug?", id: "m5", type: "mc", options: ["100%", "100%+MWST"], correct: 0 },
-      { q: "6. Wie erfolgt die Vorsteuerkorrektur bei Gruppenbesteuerung?", id: "m6", type: "text", answer: "Jedes Gruppenmitglied ermittelt aufgrund der selbst gegenüber Dritten (Nicht-Gruppenmitgliedern) erbrachten Aussenleistungen seine eigene Vorsteuerabzugsquote beziehungsweise Vorsteuerkorrektur infolge gemischter Verwendung. Gruppeninnenumsätze unterliegen nicht der MWST" },
-      { q: "7. Stellt das Erwerben, Halten und Veräussern von Beteiligungen (gem. MWST mind. 10% vom Kapital) eine unternehmerische Tätigkeit dar?", id: "m7", type: "mc", options: ["ja", "nein"], correct: 0, explanation: "Der Handel mit Wertschriften, die keine Beteiligungen sind, ist hingegen von der Steuer ausgenommen." }
+      { q: "1. Haben Rückvergütungen oder Entschädigungen an Arbeitgeber eine Vorsteuerkorrektur zur Folge? (Taggelder, Bezugsprovision-QSt)", id: "e1", type: "mc", options: ["ja", "nein"], correct: 1 },
+      { q: "2. Haben nicht eingelöste Geschenkgutscheine eine Vorsteuerkorrektur zur Folge?", id: "e2", type: "mc", options: ["ja", "nein"], correct: 1 },
+      { q: "3. Wann muss die Vorsteuerkorrektur in Folge der gemischten Verwendung gemacht werden?", id: "e3", type: "mc", options: ["quartalsweise", "im letzten Quartal"], correct: 1 },
+      { q: "4. Muss der Urproduktzent für den Abzug der fiktiven Vorsteuer den Sitz im Inland haben?", id: "e4", type: "mc", options: ["ja", "nein"], correct: 0 },
+      { q: "5. Welche Basis hat das bezahlte Entgelt bei einem fiktiven Vorsteuerabzug?", id: "e5", type: "mc", options: ["100%", "100%+MWST"], correct: 0 },
+      { q: "6. Wie erfolgt die Vorsteuerkorrektur bei Gruppenbesteuerung?", id: "e6", type: "text", answer: "Jedes Gruppenmitglied ermittelt aufgrund der selbst gegenüber Dritten (Nicht-Gruppenmitgliedern) erbrachten Aussenleistungen seine eigene Vorsteuerabzugsquote beziehungsweise Vorsteuerkorrektur infolge gemischter Verwendung. Gruppeninnenumsätze unterliegen nicht der MWST" },
+      { q: "7. Stellt das Erwerben, Halten und Veräusserung von Beteiligungen (gem. MWST mind. 10% vom Kapital) eine unternehmerische Tätigkeit dar?", id: "e7", type: "mc", options: ["ja", "nein"], correct: 0, explanation: "Der Handel mit Wertschriften, die keine Beteiligungen sind, ist hingegen eine von der Steuer ausgenommene Leistung." },
+      { q: "8. Die ESTV kann eine Kontrolle über die letzten 5 Jahre machen.", id: "e8", type: "mc", options: ["richtig", "falsch"], correct: 1, explanation: "Über die letzten 5 Jahre – Art. 42 Abs. 1 MWSTG" },
+      { q: "9. Eine versäumte Einlageentsteuerung bei Verkauf einer Liegenschaft mit Option kann bis zu 5 Jahre nachträglich der ESTV geltend gemacht werden.", id: "e9", type: "mc", options: ["richtig", "falsch"], correct: 0, explanation: "Art. 42 Abs. 1 MWSTG" },
+      { q: "10. Die absolute Verjährungsfrist bei der MWST beträgt:", id: "e10", type: "mc", options: ["5 Jahre", "10 Jahre", "15 Jahre"], correct: 1, explanation: "Art. 42 Abs. 6 MWSTG" }
     ];
-
     const container = document.getElementById("quiz-container");
-
     tasks.forEach(task => {
       const section = document.createElement("div");
       section.className = "section";
-
       const title = document.createElement("h2");
       title.textContent = task.q;
       section.appendChild(title);
-
       if (task.type === "mc") {
         const optionsDiv = document.createElement("div");
         optionsDiv.className = "options";
@@ -175,28 +153,21 @@
           optionsDiv.appendChild(btn);
         });
         section.appendChild(optionsDiv);
-
         const fb = document.createElement("div");
         fb.id = "f_" + task.id;
         fb.className = "explanation";
         section.appendChild(fb);
-      }
-
-      if (task.type === "text") {
+      } else if (task.type === "text") {
         const inputBox = document.createElement("div");
         inputBox.className = "input-box";
-        inputBox.innerHTML = `
-          <input type="text" id="${task.id}" placeholder="Antwort eingeben...">
-          <button onclick="checkWord('${task.id}', \`${task.answer}\`, 'f_${task.id}', \`${task.explanation || ''}\`)">OK</button>
-        `;
+        inputBox.innerHTML = `<input type='text' id='${task.id}' placeholder='Antwort eingeben...'>
+          <button onclick="checkWord('${task.id}', \`${task.answer}\`, 'f_${task.id}', \`${task.explanation || ''}\`)">OK</button>`;
         section.appendChild(inputBox);
-
         const fb = document.createElement("div");
         fb.id = "f_" + task.id;
         fb.className = "explanation";
         section.appendChild(fb);
       }
-
       container.appendChild(section);
     });
   </script>
