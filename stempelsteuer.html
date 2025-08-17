@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stempelabgabegesetz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0; padding: 40px 20px;
+    }
+    .section {
+      background: rgba(255,255,255,0.92);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 900px;
+    }
+    h1 { font-size: 22px; margin: 0 0 12px; }
+    h2 { font-size: 18px; margin: 16px 0 8px; }
+
+    .options { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .options button {
+      padding: 8px 14px; border:none; border-radius:6px;
+      background:#000; color:#fff; cursor:pointer;
+    }
+    .correct { background:lightgreen !important; color:#000 !important; }
+    .wrong { background:lightcoral !important; color:#000 !important; }
+    .explanation { margin-top:6px; display:none; font-weight:bold; color:#000; }
+
+    .back-link {
+      display:inline-block; margin-bottom:20px;
+      font-size:18px; font-weight:bold; color:#000; text-decoration:none;
+    }
+
+    @media(max-width:480px){
+      body{padding:20px 12px;}
+      h1{font-size:20px;} h2{font-size:16px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a href="steuern.html" class="back-link">← Zurück</a>
+    <h1>Stempelabgabegesetz</h1>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation=""){
+      const buttons=document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn,i)=>{
+        btn.disabled=true;
+        if(i===correctIndex) btn.classList.add("correct");
+        if(i===clickedIndex && i!==correctIndex) btn.classList.add("wrong");
+      });
+      const fb=document.getElementById("f_"+groupId);
+      if(explanation){
+        fb.style.display="block";
+        fb.innerHTML=explanation;
+      }
+    }
+
+    const tasks=[
+      {q:"Frage 1: Die Emissionsabgabe wird auf der Ausgabe neuer Aktien und Stammanteile erhoben.", id:"q1",
+        options:["richtig","falsch"], correct:0, expl:"Art. 5 StG – Steuerobjekt sind Beteiligungsrechte wie Aktien, PS, Stammanteile und Genossenschaftsanteile."},
+      {q:"Frage 2: Zuschüsse von Aktionären ohne Kapitalerhöhung sind emissionsabgabepflichtig.", id:"q2",
+        options:["richtig","falsch"], correct:0, expl:"Art. 5 Abs.2 StG – «einlagenähnliche Leistungen» sind steuerbar."},
+      {q:"Frage 3: Die Ausgabe von Obligationen (Fremdkapital) löst Emissionsabgabe aus.", id:"q3",
+        options:["richtig","falsch"], correct:1, expl:"Obligationen sind seit 2012 von der Emissionsabgabe befreit."},
+      {q:"Frage 4: Wer ist Schuldner der Emissionsabgabe?", id:"q4",
+        options:["Aktionäre","Die Gesellschaft","Die ESTV","Verwaltungsrat"], correct:1, expl:"Art.10 StG – Schuldner ist die Gesellschaft."},
+      {q:"Frage 5: Die Bemessungsgrundlage umfasst nur den Nennwert der Aktien.", id:"q5",
+        options:["richtig","falsch"], correct:1, expl:"Art.8 StG – auch Agio und weitere Gegenleistungen sind erfasst."},
+      {q:"Frage 6: Wie hoch ist der Steuersatz bei der Emissionsabgabe?", id:"q6",
+        options:["0.15 %","1 %","5 %","0.30 %"], correct:1, expl:"Art.8 Abs.1 StG – 1 %."},
+      {q:"Frage 7: Welche Befreiung ist korrekt?", id:"q7",
+        options:["Die ersten CHF 1 Mio. Eigenkapital sind abgabefrei","Alle Kapitalerhöhungen sind abgabefrei","Sanierungsbeiträge sind immer abgabepflichtig","Kapitalzuführungen aus Agio sind abgabepflichtig"], correct:0, expl:"Art.6 Abs.1bis StG – Freibetrag 1 Mio."},
+      {q:"Frage 8: Bei Kapitalerhöhungen tragen die Investoren rechtlich die Emissionsabgabe.", id:"q8",
+        options:["richtig","falsch"], correct:1, expl:"Schuldner ist die Gesellschaft, oft Überwälzung auf Investoren."},
+
+      {q:"Frage 9: Die Umsatzabgabe fällt nur bei entgeltlichen Umsätzen an.", id:"q9",
+        options:["richtig","falsch"], correct:0, expl:"Steuerobjekt sind entgeltliche Umsätze mit Urkunden (Art.13 StG)."},
+      {q:"Frage 10: Welche Urkunden sind steuerbar?", id:"q10",
+        options:["Aktien, GmbH-Anteile, Fondsanteile und Obligationen","Immobilienkaufvertrag","Lebensversicherungspolice","Fahrzeugausweis"], correct:0, expl:"Art.13/14 StG – diese Wertpapiere sind steuerbar."},
+      {q:"Frage 11: Umsatzabgabe entsteht nur, wenn ein Effektenhändler Vertragspartei oder Vermittler ist.", id:"q11",
+        options:["richtig","falsch"], correct:0, expl:"Art.13 Abs.3 StG – ohne Effektenhändler keine Umsatzabgabe."},
+      {q:"Frage 12: Wer gilt als Effektenhändler?", id:"q12",
+        options:["Bank in Zürich","Privatperson mit Aktienpaket von CHF 100 Mio.","Handwerksbetrieb mit 2 Mitarbeitenden","Einzelunternehmer mit CHF 500'000 Wertschriften"], correct:0, expl:"Banken, Versicherungen, PKs, grosse Unternehmen >10 Mio."},
+      {q:"Frage 13: Wie hoch ist die Umsatzabgabe bei ausländischen Urkunden?", id:"q13",
+        options:["0.15 %","0.30 %","1 %","5 %"], correct:1, expl:"Art.16 StG – 0.15 % Inland, 0.30 % Ausland."},
+      {q:"Frage 14: Wenn zwei Effektenhändler direkt handeln, wer zahlt?", id:"q14",
+        options:["Beide je zur Hälfte","Nur der Käufer","Nur der Verkäufer","Niemand"], correct:0, expl:"Art.17 Abs.3 StG – hälftig."},
+      {q:"Frage 15: Ein Effektenhändler darf die Abgabe auf Kunden überwälzen.", id:"q15",
+        options:["richtig","falsch"], correct:0, expl:"Gesetzlich Schuldner Händler, praktisch Überwälzung."},
+      {q:"Frage 16: Welche Umsätze sind befreit?", id:"q16",
+        options:["Emission neuer Aktien","Kauf von Aktien an der Börse durch Privatperson","Handel zwischen zwei Privatpersonen","Kauf eines ausländischen Fondsanteils"], correct:0, expl:"Primärmarktgeschäfte (Emission/Rückzahlung) steuerfrei."},
+
+      {q:"Frage 17: Die Versicherungsabgabe beträgt 5 % auf Bruttoprämien.", id:"q17",
+        options:["richtig","falsch"], correct:0, expl:"Art.45 StG – 5 %."},
+      {q:"Frage 18: Steuerschuldner ist der Versicherungsnehmer.", id:"q18",
+        options:["richtig","falsch"], correct:1, expl:"Art.47 StG – Schuldner ist der Versicherer."},
+      {q:"Frage 19: Welche Versicherung ist befreit?", id:"q19",
+        options:["Lebensversicherung","Hausratversicherung","Motorfahrzeugversicherung","Gebäudeversicherung"], correct:0, expl:"Art.46 Abs.2 StG – Lebensversicherung etc. befreit."},
+      {q:"Frage 20: Eine Motorfahrzeugversicherung unterliegt der Abgabe.", id:"q20",
+        options:["richtig","falsch"], correct:0, expl:"Sachversicherung → steuerbar."},
+
+      {q:"Frage 21: Stempelabgaben werden durch die ESTV veranlagt, basierend auf Selbstdeklaration.", id:"q21",
+        options:["richtig","falsch"], correct:0, expl:"Art.64 ff. StG."},
+      {q:"Frage 22: Fälligkeit tritt bei Ausführung des Vorgangs ein.", id:"q22",
+        options:["richtig","falsch"], correct:0, expl:"z. B. bei Kapitalerhöhung, Prämienzahlung, Vertragsabschluss."},
+      {q:"Frage 23: Welcher Rechtsmittelweg gilt?", id:"q23",
+        options:["Einsprache → ESTV → Bundesverwaltungsgericht → Bundesgericht","Direkter Gang ans Bundesgericht","Einsprache → Kantonales Steuergericht → Bundesgericht","Nur Einsprache möglich"], correct:0, expl:"Art.67 ff. StG."},
+
+      {q:"Frage 24: Die Emissionsabgabe wird kritisiert, da sie Eigenkapitalbeschaffung hemmt.", id:"q24",
+        options:["richtig","falsch"], correct:0, expl:"Verteuert Eigenkapitalzuflüsse."},
+      {q:"Frage 25: Die Umsatzabgabe belastet nur Banken, nie Privatanleger.", id:"q25",
+        options:["richtig","falsch"], correct:1, expl:"Privatanleger zahlen indirekt, da Banken überwälzen."},
+      {q:"Frage 26: Die Versicherungsabgabe betrifft fast alle Haushalte.", id:"q26",
+        options:["richtig","falsch"], correct:0, expl:"Sachversicherungen alltäglich → breite Wirkung."}
+    ];
+
+    const container=document.getElementById("quiz-container");
+    tasks.forEach(t=>{
+      const sec=document.createElement("div"); sec.className="section";
+      const h=document.createElement("h2"); h.textContent=t.q; sec.appendChild(h);
+      const opts=document.createElement("div"); opts.className="options";
+      t.options.forEach((opt,i)=>{
+        const b=document.createElement("button"); b.innerText=opt; b.dataset.group=t.id;
+        b.onclick=()=>selectOptionGroup(t.id,t.correct,i,t.expl);
+        opts.appendChild(b);
+      });
+      sec.appendChild(opts);
+      const fb=document.createElement("div"); fb.id="f_"+t.id; fb.className="explanation"; sec.appendChild(fb);
+      container.appendChild(sec);
+    });
+  </script>
+</body>
+</html>
