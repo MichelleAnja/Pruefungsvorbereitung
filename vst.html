@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verrechnungssteuer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0; padding: 40px 20px;
+    }
+    .section {
+      background: rgba(255,255,255,0.92);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 900px;
+    }
+    h1 { font-size: 22px; margin: 0 0 12px; }
+    h2 { font-size: 18px; margin: 16px 0 8px; }
+
+    .options { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .options button {
+      padding: 8px 14px; border:none; border-radius:6px;
+      background:#000; color:#fff; cursor:pointer;
+    }
+    .correct { background:lightgreen !important; color:#000 !important; }
+    .wrong { background:lightcoral !important; color:#000 !important; }
+    .explanation { margin-top:6px; display:none; font-weight:bold; color:#000; }
+
+    .back-link {
+      display:inline-block; margin-bottom:20px;
+      font-size:18px; font-weight:bold; color:#000; text-decoration:none;
+    }
+
+    @media(max-width:480px){
+      body{padding:20px 12px;}
+      h1{font-size:20px;} h2{font-size:16px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a href="steuern.html" class="back-link">← Zurück</a>
+    <h1>Verrechnungssteuer</h1>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation=""){
+      const buttons=document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn,i)=>{
+        btn.disabled=true;
+        if(i===correctIndex) btn.classList.add("correct");
+        if(i===clickedIndex && i!==correctIndex) btn.classList.add("wrong");
+      });
+      const fb=document.getElementById("f_"+groupId);
+      if(explanation){
+        fb.style.display="block";
+        fb.innerHTML=explanation;
+      }
+    }
+
+    const tasks=[
+      {q:"Frage 1: Welche Leistung unterliegt der Verrechnungssteuer?",id:"q1",options:["Kaufpreiszahlung für Aktien","Spende an eine Stiftung","Dividende einer AG","Erbschaftssteuerzahlung"],correct:2,expl:"Art. 4 Abs.1 lit.a VStG – Gewinnanteile aus Aktien sind steuerbar."},
+      {q:"Frage 2: Zinsen aus Obligationen sind verrechnungssteuerpflichtig.",id:"q2",options:["richtig","falsch"],correct:0,expl:"Art. 4 Abs.1 lit.a VStG – Obligationenzinsen gehören zum Steuerobjekt."},
+      {q:"Frage 3: Ausschüttungen aus Kapitaleinlagereserven (KER) sind mit VSt belastet.",id:"q3",options:["richtig","falsch"],correct:1,expl:"Art. 5 Abs.1bis VStG – KER-Ausschüttungen sind steuerfrei."},
+      {q:"Frage 4: Welche Leistung ist von der VSt befreit?",id:"q4",options:["Gratisaktien aus Gewinnreserven","Kapitaleinlagereserven","Liquidationsüberschüsse","verdeckte Gewinnausschüttungen"],correct:1,expl:"Nur KER sind steuerfrei; andere gelten als steuerbare geldwerte Leistungen."},
+      {q:"Frage 5: Lotteriegewinne unterliegen ab CHF … der VSt.",id:"q5",options:["1'000","10'000","100","5'000"],correct:0,expl:"Art. 4 Abs.1 lit.d VStG – Gewinne über CHF 1’000 sind steuerbar."},
+
+      {q:"Frage 6: Wer ist Schuldner der Verrechnungssteuer bei Dividenden?",id:"q6",options:["Die ESTV","Die Gesellschaft","Der Verwaltungsrat persönlich","Die Aktionäre"],correct:1,expl:"Art.10 VStG – Schuldner ist die Gesellschaft."},
+      {q:"Frage 7: Bei Versicherungsleistungen aus Einmalprämienverträgen ist der Versicherungsnehmer Schuldner.",id:"q7",options:["richtig","falsch"],correct:1,expl:"Schuldner ist der Versicherer (Art.10 VStG)."},
+
+      {q:"Frage 8: Die Verrechnungssteuer beträgt auf allen steuerbaren Leistungen:",id:"q8",options:["45 %","15 %","35 %","25 %"],correct:2,expl:"Art.13 VStG – 35 %."},
+      {q:"Frage 9: Bei verdeckter Gewinnausschüttung mit Übernahme durch die Gesellschaft wird …",id:"q9",options:["steuerfrei belassen","nur mit 50 % belastet","aufgerechnet (bruttohochgerechnet)","direkt beim Aktionär abgezogen"],correct:2,expl:"Praxis: Hochrechnung (Bruttomethode)."},
+
+      {q:"Frage 10: Rückerstattung der VSt ist nur möglich, wenn …",id:"q10",options:["Einkünfte im Ausland erzielt wurden","Einkünfte deklariert und versteuert wurden","Steuerpflichtiger minderjährig ist","Spendenquittung beigefügt wird"],correct:1,expl:"Art.21 VStG – Deklarationsprinzip."},
+      {q:"Frage 11: Juristische Personen mit Sitz in CH erhalten die VSt …",id:"q11",options:["nur zur Hälfte zurück","vollumfänglich zurück","nie zurück","nur bei Sanierung zurück"],correct:1,expl:"Volle Rückerstattung bei Steuerpflicht."},
+      {q:"Frage 12: Ein deutscher Aktionär kann die VSt teilweise zurückfordern.",id:"q12",options:["richtig","falsch"],correct:0,expl:"DBA D–CH → Reduktion auf 15 %, Rückerstattung 20 %."},
+      {q:"Frage 13: Welche Frist gilt für Rückerstattungsanträge?",id:"q13",options:["10 Jahre","1 Jahr","5 Jahre","3 Jahre"],correct:3,expl:"Art.32 VStG – 3 Jahre nach Ende des Kalenderjahres."},
+
+      {q:"Frage 14: Welche Ausschüttung ist VSt-befreit?",id:"q14",options:["Gewinnreserven","Kapitaleinlagereserven","Gratisaktien aus Gewinnreserven","Liquidationsüberschüsse"],correct:1,expl:"Nur KER sind steuerfrei (Art.5 Abs.1bis VStG)."},
+      {q:"Frage 15: Bei Umstrukturierungen (Fusion, Spaltung, Umwandlung) fällt VSt an.",id:"q15",options:["richtig","falsch"],correct:1,expl:"Steuerneutral, sofern keine Gewinnausschüttung erfolgt."},
+
+      {q:"Frage 16: Rückerstattung wird verweigert, wenn …",id:"q16",options:["eine Ausschüttung aus KER erfolgt","ein steuerlicher Missbrauch vorliegt","die Gesellschaft Gewinn erwirtschaftet","der Empfänger 65 Jahre alt ist"],correct:1,expl:"Art.21 Abs.2 VStG – Missbrauch → keine Rückerstattung."},
+      {q:"Frage 17: Zwischenschaltung einer Briefkastengesellschaft ohne Substanz ist zulässig.",id:"q17",options:["richtig","falsch"],correct:1,expl:"In solchen Fällen wird verweigert."},
+
+      {q:"Frage 18: Gratisaktien aus Gewinnreserven sind VSt-pflichtig.",id:"q18",options:["richtig","falsch"],correct:0,expl:"Sie gelten als geldwerte Leistung."},
+      {q:"Frage 19: Zinsen aus Kassascheinen unterliegen nicht der VSt.",id:"q19",options:["falsch","richtig"],correct:0,expl:"Kassascheine sind obligationenähnlich → VSt-pflichtig."},
+      {q:"Frage 20: Welche Leistungen aus Lebensversicherungen unterliegen der VSt?",id:"q20",options:["Leistungen aus UVG","Kapitalleistungen aus Einmalprämien","Kapitalleistungen aus KVG","Renten aus periodischen Prämien"],correct:1,expl:"Art.4 Abs.1 lit.b VStG – Einmalprämien steuerbar."},
+
+      {q:"Frage 21: Die Abrechnung muss innert … nach Fälligkeit erfolgen.",id:"q21",options:["60 Tagen","30 Tagen","10 Tagen","90 Tagen"],correct:1,expl:"Art.14 VStG – innert 30 Tagen."},
+      {q:"Frage 22: Welche Behörde erhebt die VSt?",id:"q22",options:["Die Kantone","Eidg. Bankenkommission","Die ESTV","Die FINMA"],correct:2,expl:"Zentral durch ESTV."},
+      {q:"Frage 23: Bei Nichtabführung der VSt haftet …",id:"q23",options:["die Gesellschaft","niemand","nur der Aktionär","die Gemeinde"],correct:0,expl:"Schuldner haftet für die Abgabe."},
+      {q:"Frage 24: Welche Sanktionen sind möglich bei Steuerhinterziehung?",id:"q24",options:["nur Kürzung","nur Verwarnung","keine Sanktionen","Geldbusse oder Freiheitsstrafe"],correct:3,expl:"VStG sieht Geldbusse oder Freiheitsstrafe vor."},
+
+      {q:"Frage 25: Die VSt dient primär als Ertragssteuer für den Bund.",id:"q25",options:["richtig","falsch"],correct:1,expl:"Sie ist Sicherungssteuer, nicht Ertragssteuer."},
+      {q:"Frage 26: Die steuerfreie Rückzahlung von KER ist seit 2011 möglich.",id:"q26",options:["falsch","richtig"],correct:1,expl:"Art.5 Abs.1bis VStG – seit 1.1.2011."},
+      {q:"Frage 27: Die Abschaffung der VSt auf inländischen Obligationenzinsen wurde beschlossen, um …",id:"q27",options:["Sozialversicherungen finanzieren","Steuerstrafrecht vereinfachen","Schweizer Kapitalmarkt stärken","MWST senken"],correct:2,expl:"Politisches Ziel: Kapitalmarkt CH stärken."}
+    ];
+
+    const container=document.getElementById("quiz-container");
+    tasks.forEach(t=>{
+      const sec=document.createElement("div"); sec.className="section";
+      const h=document.createElement("h2"); h.textContent=t.q; sec.appendChild(h);
+      const opts=document.createElement("div"); opts.className="options";
+      t.options.forEach((opt,i)=>{
+        const b=document.createElement("button"); b.innerText=opt; b.dataset.group=t.id;
+        b.onclick=()=>selectOptionGroup(t.id,t.correct,i,t.expl);
+        opts.appendChild(b);
+      });
+      sec.appendChild(opts);
+      const fb=document.createElement("div"); fb.id="f_"+t.id; fb.className="explanation"; sec.appendChild(fb);
+      container.appendChild(sec);
+    });
+  </script>
+</body>
+</html>
