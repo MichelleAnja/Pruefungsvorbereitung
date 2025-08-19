@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Steuerausscheidung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0; padding: 40px 20px; color: #000;
+    }
+    .section {
+      background: rgba(255,255,255,0.92);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 1000px;
+    }
+    h1 { font-size: 22px; margin: 0 0 12px; }
+    h2 { font-size: 18px; margin: 16px 0 8px; }
+
+    .options { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .options button {
+      padding: 10px 16px; border:none; border-radius:6px;
+      background:#000; color:#fff; cursor:pointer; font-size:16px;
+    }
+    .correct { background: lightgreen !important; color:#000 !important; }
+    .wrong   { background: lightcoral !important; color:#000 !important; }
+    .explanation { margin-top:6px; display:none; font-weight:bold; color:#000; }
+
+    .back-link {
+      display:inline-block; margin-bottom:20px;
+      font-size:18px; font-weight:bold; color:#000; text-decoration:none;
+    }
+
+    @media (max-width:480px){
+      body{padding:24px 12px;}
+      h1{font-size:20px;} h2{font-size:16px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a href="steuern.html" class="back-link">← Zurück</a>
+    <h1>Steuerausscheidung</h1>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation=""){
+      const buttons = document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) btn.classList.add('correct');
+        if (idx === clickedIndex && idx !== correctIndex) btn.classList.add('wrong');
+      });
+      const fb = document.getElementById('f_' + groupId);
+      if (explanation) { fb.style.display = 'block'; fb.innerHTML = explanation; }
+    }
+
+    const tasks = [
+      { q:"1. Ist eine natürliche Person Gesellschafter einer Kollektivgesellschaft in einem anderen Kanton, so ist der Lohn am ___ zu versteuern.", id:"q1",
+        options:["Wohnsitz","Sitz der Kollektivgesellschaft"], correct:0 },
+
+      { q:"2. ... der anteilige Geschäftgewinn am ___ zu versteuern.", id:"q2",
+        options:["Wohnsitz","Sitz der Kollektivgesellschaft"], correct:1 },
+
+      { q:"3. ... die Privatschulden ____ zu versteuern", id:"q3",
+        options:["am Wohnsitz","am Sitz der Kollektivgesellschaft","gem. Lage der Aktiven"], correct:0,
+        expl:"Das gleiche gilt für die Schuldzinsen." },
+
+      { q:"4. ... der Anteil der Geschäftsschulden ____ zu versteuern", id:"q4",
+        options:["am Wohnsitz","am Sitz der Kollektivgesellschaft","gem. Lage der Aktiven"], correct:1,
+        expl:"Zu versteuern sind die anteiligen Aktiven – die anteiligen Passiven." },
+
+      { q:"5. Einzelunternehmen in einem anderen Kanton: Lohn der selbständigen Tätigkeit am ____ zu versteuern.", id:"q5",
+        options:["Wohnsitz","Sitz des Einzelunternehmens"], correct:1 },
+
+      { q:"6. Einzelunternehmen in einem anderen Kanton: Privatschulden ____ zu versteuern", id:"q6",
+        options:["am Wohnsitz","am Sitz der Kollektivgesellschaft","gem. Lage der Aktiven"], correct:2,
+        expl:"Das gleiche gilt für die Schuldzinsen." },
+
+      { q:"7. Einzelunternehmen in einem anderen Kanton: anteilige Geschäftsschulden ____ zu versteuern", id:"q7",
+        options:["am Wohnsitz","am Sitz der Kollektivgesellschaft","gem. Lage der Aktiven"], correct:2,
+        expl:"Das gleiche gilt für die Schuldzinsen." },
+
+      { q:"8. JP wechselt während der Steuerperiode den Sitz in einen anderen Kanton → in beiden Kantonen für die ganze Periode steuerpflichtig.", id:"q8",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"9. Veranlagungsbehörde ist:", id:"q9",
+        options:["Sitz am Ende der Steuerperiode","Längere Dauer des Sitzes"], correct:0 },
+
+      { q:"10. Die kantonale Steuerausscheidung ist immer gleich; je Person nur eine Ausscheidung nötig.", id:"q10",
+        options:["richtig","falsch"], correct:1,
+        expl:"Immer aus Sicht des jeweiligen Kantons vorzunehmen – jeder beteiligte Kanton macht eine eigene Ausscheidung." },
+
+      { q:"11. Vermögens-/Ertragsbestandteile direkt dem Kanton zuordnen, wo sie belegen/entstanden sind (z. B. Liegenschaften an Standortkanton).", id:"q11",
+        options:["Aktivenquote","Ertragsquote","Lohnsummenquote","direkte Zuweisung"], correct:3 },
+
+      { q:"12. Mobile Aktiven werden proportional zu den unbeweglichen Aktiven je Kanton verteilt (typisch Produktionsunternehmen mit Gebäuden).", id:"q12",
+        options:["Aktivenquote","Ertragsquote","Lohnsummenquote","direkte Zuweisung"], correct:0 },
+
+      { q:"13. Gewinnverteilung im Verhältnis der Lohnsummen in den Kantonen (personalintensive Dienstleistungen).", id:"q13",
+        options:["Aktivenquote","Ertragsquote","Lohnsummenquote","direkte Zuweisung"], correct:2 },
+
+      { q:"14. Gewinnverteilung nach Betriebsertrag pro Kanton (dezentral erbrachte Leistungen, gut messbar).", id:"q14",
+        options:["Aktivenquote","Ertragsquote","Lohnsummenquote","direkte Zuweisung"], correct:1 },
+
+      { q:"15. Jede Position (z. B. Forderungen, Vorräte) wird einzeln nach Quote verteilt.", id:"q15",
+        options:["Quotenmässig direkte Methode","Quotenmässig indirekte Methode"], correct:0 },
+
+      { q:"16. Gesamtbetrag (z. B. gesamtes mobiles Vermögen) einmalig nach Quote verteilt.", id:"q16",
+        options:["Quotenmässig direkte Methode","Quotenmässig indirekte Methode"], correct:1 },
+
+      { q:"17. Wie beginnt man bei der Ausscheidung einer JP?", id:"q17",
+        options:["Aufteilung immobile Konten","Aufteilung mobile Konten","Einkommensausscheidung"], correct:0,
+        expl:"Direkt zuweisbare Konten wie Immobilien, Warenlager, Einrichtungen." },
+
+      { q:"18. Zu welchen Konten gehören Beteiligungen?", id:"q18",
+        options:["immobile Konten","mobile Konten"], correct:0,
+        expl:"Beteiligungen werden immer ganz dem Sitzkanton zugewiesen." },
+
+      { q:"19. Was folgt nach der Aufteilung der immobilen Konten?", id:"q19",
+        options:["Einkommensausscheidung","mobile Konten"], correct:1 },
+
+      { q:"20. Mobile Konten nach Aktivenschlüssel der immobilen Konten verteilt →", id:"q20",
+        options:["Produktionsunternehmen","Handelsunternehmen"], correct:0,
+        expl:"Mehrere Produktionsstandorte = selbständige Einheiten → mobiles Vermögen anteilig nach Aktivschlüssel." },
+
+      { q:"21. Mobile Konten dem Sitzkanton zugewiesen →", id:"q21",
+        options:["Produktionsunternehmen","Handelsunternehmen"], correct:1,
+        expl:"Auswärtige Standorte meist Hilfsbetriebsstätten; mobiles Vermögen dem Sitzkanton." },
+
+      { q:"22. Nach Zuteilung der immobilen & mobilen Konten erhält man:", id:"q22",
+        options:["die steuerliche Bemessungsgrundlage je Kanton","Den Aktivschlüssel für das steuerbare Kapital"], correct:1 },
+
+      { q:"23. Der Beteiligungsabzug ist nur dem Sitzkanton zuzuordnen.", id:"q23",
+        options:["richtig","falsch"], correct:0,
+        expl:"Ausnahme: wenn Beteiligung einer einzelnen Betriebsstätte dient." },
+
+      { q:"24. Für die Berechnung des Beteiligungsabzugs ist der Wert der Beteiligung dem ____ gegenüberzustellen:", id:"q24",
+        options:["Gesamtgewinn","Gewinn Sitzkanton"], correct:0,
+        expl:"Falls Kanton auch Kapital-Beteiligungsabzug kennt, besondere Regel für Kapitalseite." },
+
+      { q:"25. Wird der Beteiligungsabzug normalerweise auch auf dem Kapital gemacht?", id:"q25",
+        options:["Beides","Nur Gewinn"], correct:1,
+        expl:"Einige Kantone (z. B. SG) kennen zusätzlich einen Kapitalabzug." },
+
+      { q:"26. Gewinnausscheidung bei Produktionsunternehmen:", id:"q26",
+        options:["Aktivenschlüssel","Quote nach Ertrag"], correct:0 },
+
+      { q:"27. Kapitalisierung von Miet- und Lohnaufwand nur bei Verteilung nach Aktivenschlüssel nötig.", id:"q27",
+        options:["richtig","falsch"], correct:0,
+        expl:"Mietwert & Lohnkapitalisierung dem Standort zurechnen (reale Betriebsbedeutung)." },
+
+      { q:"28. Kapitalisierungssatz Lohnkapitalisierung:", id:"q28",
+        options:["6 fache","10 fache"], correct:0 },
+
+      { q:"29. Kapitalisierungssatz Mietkapitalisierung:", id:"q29",
+        options:["6 fache","10 fache"], correct:1 },
+
+      { q:"30. Der Beteiligungsabzug bei der Gewinnausscheidung wird nur dem Sitzkanton zugewiesen.", id:"q30",
+        options:["richtig","falsch"], correct:1,
+        expl:"Bei der Gewinnausscheidung wird der Beteiligungsabzug auf alle Kantone angewendet (Berechnung auf Gesamtgewinn)." },
+
+      { q:"31. Handelsunternehmen: mobile Konten werden gemäss Aktivenschlüssel auf Kantone verteilt.", id:"q31",
+        options:["richtig","falsch"], correct:1,
+        expl:"Beim Handel wird das mobile Vermögen grundsätzlich dem Sitzkanton zugeordnet." },
+
+      { q:"32. Produziert ein Handelsstandort selbst / verwaltet Einkauf selbständig → mobile Konten auch dort einteilen?", id:"q32",
+        options:["ja","nein"], correct:0,
+        expl:"Dann gilt der Standort als Betriebsstätte; mobiles Vermögen anteilig nach Aktivschlüssel." },
+
+      { q:"33. Vorausanteil (Präzipuum) SSK – Standard Handelsunternehmen, Sitzkanton mit vollwertiger Zentrale:", id:"q33",
+        options:["10%","20%","30%"], correct:1 },
+
+      { q:"34. Vorausanteil (Präzipuum) SSK – Standard Dienstleistungsunternehmen, Sitzkanton mit vollwertiger Zentrale:", id:"q34",
+        options:["10%","20%","30%"], correct:0 },
+
+      { q:"35. Umsatz 100% – Vorausanteil 20% = Rest 80% → Rest quotenmässig verteilen; danach 20% dem Hauptsitz zuschlagen.", id:"q35",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"36. Liegenschaftsverkauf: für Kapitalausscheidung gilt immer der Wert per 31.12.", id:"q36",
+        options:["richtig","falsch"], correct:1,
+        expl:"Buchwert per 1.1. / 12 × Monate Besitzdauer; Korrektur vom Sitzkanton an Liegenschaftskanton (Art. 68 Abs. 2 StHG)." },
+
+      { q:"37. Renditeliegenschaften (nicht operativ genutzt): Erträge & Aufwände separat berechnen, bevor Unternehmensgewinn ausgeschieden wird.", id:"q37",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"38. Verwaltungskosten & Zinsen bei Renditeliegenschaften analog Beteiligungsabzug berechnen.", id:"q38",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"39. Abschreibungen & Unterhalt können nicht einzelnen Liegenschaften belastet werden.", id:"q39",
+        options:["richtig","falsch"], correct:1,
+        expl:"Sie sind vor der Gewinnausscheidung den betroffenen Kantonen zu belasten." },
+
+      { q:"40. Punkte 37–39 gelten nur für Renditeliegenschaften (nicht operativ genutzt).", id:"q40",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"41. Provisionen beim Unterhalt von Renditeliegenschaften können direkt dem betroffenen Kanton zugeteilt werden.", id:"q41",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"42. Verkauf Renditeliegenschaft: Veräusserungsgewinn wird mit Gesamtgewinn quotenmässig verteilt.", id:"q42",
+        options:["richtig","falsch"], correct:1,
+        expl:"Renditeliegenschaft: Gewinn & Mieten direkt dem Liegenschaftskanton zuweisen (inkl. aufgelöste Abschreibungen). Betriebsnotwendige Liegenschaft: Verkauf mit Gesamtgewinn quotenmässig verteilen." },
+
+      { q:"43. Kanton einer Renditeliegenschaft ist ein …", id:"q43",
+        options:["Spezialsteuerdomizil","Nebensteuerdomizil"], correct:0 },
+
+      { q:"44. Kompletter Verkaufserlös einer Betriebsliegenschaft dem Liegenschaftskanton zugeteilt.", id:"q44",
+        options:["richtig","falsch"], correct:1,
+        expl:"Nur der Gewinn (Ertrag über Anlagekosten) dem Liegenschaftskanton; aufgelöste Abschreibungen dem zu verteilenden Geschäftsgewinn." },
+
+      { q:"45. Mieteinnahmen & Unterhalt/Eigenmietwert einer Betriebsliegenschaft werden dem total noch aufzuteilenden Gewinn zugeteilt.", id:"q45",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"46. Beim Verkauf einer Betriebsliegenschaft: Anteil Verwaltungskosten = Ertrag × 5%.", id:"q46",
+        options:["richtig","falsch"], correct:1,
+        expl:"Zulässig: 5% der Hypothekarzinsen als Verwaltungskosten in Abzug bringen." },
+
+      { q:"47. Diese 5% Verwaltungskosten (Hypozinsen) sind dem Liegenschaftskanton zuzuweisen.", id:"q47",
+        options:["richtig","falsch"], correct:1,
+        expl:"Sie werden mit dem anteiligen Finanzaufwand vom noch zu verteilenden Gesamtgewinn abgezogen." },
+
+      { q:"48. Anteil der Zinsen der verkauften Betriebsliegenschaft wird wie gewohnt über den Aktivenschlüssel der Liegenschaft berechnet.", id:"q48",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"49. Sind Aufwendungen einer Liegenschaft grösser als der Ertrag → Gewinnungskostenüberschuss.", id:"q49",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"50. Umgang mit Gewinnungskostenüberschuss aus ausserkantonaler Liegenschaft:", id:"q50",
+        options:["Verrechnung mit dem Wohnsitzkanton","Aufteilung unter den restlichen Kantonen"], correct:0,
+        expl:"Reicht der Wohnsitzkanton nicht, Rest mit anderen Liegenschaftskantonen verrechnen." },
+
+      { q:"51. Für korrekte Zuweisung der Schulden: Liegenschaften zuerst /100 × (Rep.-Wert des eigenen Kantons) rechnen.", id:"q51",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"52. Danach die umgerechneten Liegenschaften /100 × den Rep.-Wert des ausscheidenden Kantons rechnen; dann Liegenschaftswert abziehen → Minus-Betrag.", id:"q52",
+        options:["richtig","falsch"], correct:0 }
+    ];
+
+    const container = document.getElementById("quiz-container");
+    tasks.forEach(t => {
+      const sec = document.createElement("div"); sec.className = "section";
+      const h = document.createElement("h2"); h.textContent = t.q; sec.appendChild(h);
+
+      const opts = document.createElement("div"); opts.className = "options";
+      t.options.forEach((opt, i) => {
+        const b = document.createElement("button");
+        b.innerText = opt; b.dataset.group = t.id;
+        b.onclick = () => selectOptionGroup(t.id, t.correct, i, t.expl || "");
+        opts.appendChild(b);
+      });
+      sec.appendChild(opts);
+
+      const fb = document.createElement("div"); fb.id = "f_" + t.id; fb.className = "explanation"; sec.appendChild(fb);
+      container.appendChild(sec);
+    });
+  </script>
+</body>
+</html>
