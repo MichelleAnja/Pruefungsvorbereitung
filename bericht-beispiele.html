@@ -1,355 +1,168 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Theoriefragen Allgemein – Berichterstattung</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Berichterstattung – Beispiele</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: url("hintergrund.jpg") no-repeat center center fixed;
       background-size: cover;
-      margin: 0;
-      padding: 40px 20px;
-      color: black;
+      margin: 0; padding: 40px 20px; color:#000;
     }
-
     .section {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255,255,255,0.92);
       border-radius: 12px;
       padding: 20px;
-      margin-bottom: 40px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 20px auto;
+      max-width: 1000px;
     }
+    h1 { font-size: 22px; margin: 0 0 12px; }
+    h2 { font-size: 18px; margin: 16px 0 8px; }
 
-    h2 {
-      font-size: 20px;
-      margin-bottom: 16px;
+    .options { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .options button {
+      padding:10px 16px; border:none; border-radius:6px;
+      background:#000; color:#fff; cursor:pointer; font-size:16px;
     }
-
-    .input-box, .choice-box {
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-
-    .input-box input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 6px;
-      border: 2px solid #ccc;
-      font-size: 16px;
-    }
-
-    .input-box button, .choice-box button {
-      margin-left: 10px;
-      margin-top: 10px;
-      padding: 10px 16px;
-      font-size: 16px;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .correct {
-      background-color: lightgreen !important;
-    }
-
-    .wrong {
-      background-color: lightcoral !important;
-    }
-
-    .explanation {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .black-option {
-      background-color: black;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 6px;
-      margin: 5px;
-      cursor: pointer;
-      border: none;
-    }
+    .correct { background:lightgreen !important; color:#000 !important; }
+    .wrong   { background:lightcoral !important; color:#000 !important; }
+    .explanation { margin-top:6px; display:none; font-weight:bold; color:#000; }
 
     .back-link {
-      display: inline-block;
-      margin-bottom: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      color: black;
-      text-decoration: none;
+      display:inline-block; margin-bottom:20px;
+      font-size:18px; font-weight:bold; color:#000; text-decoration:none;
+    }
+
+    @media (max-width:480px){
+      body{padding:24px 12px;}
+      h1{font-size:20px;} h2{font-size:16px;}
     }
   </style>
 </head>
 <body>
-<div class="section">
-  <h2>1. Im laufenden Jahr wird bemerkt, dass die Verlustverrechnung gem. Art. 674 OR nicht gemacht wurde.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback101')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback101')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback101')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback101')">Redaktionelle Erläuterung</button>
+  <div class="section">
+    <a href="revision.html" class="back-link">← Zurück</a>
+    <h1>Berichterstattung – Beispiele</h1>
   </div>
-  <div id="feedback101" class="explanation"></div>
-</div>
 
-<div class="section">
-  <h2>2. Im Folgejahr wird bemerkt, dass die Verlustverrechnung gem. Art. 674 OR nicht gemacht wurde.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback102')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback102')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback102')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback102')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback102" class="explanation"></div>
-</div>
+  <div id="quiz-container"></div>
 
-<div class="section">
-  <h2>3. Die Gesellschaft befindet sich im ½ Kapitalverlust und der VR hat Sanierungsmassnahmen ergriffen.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback103')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback103')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback103')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback103')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback103" class="explanation"></div>
-</div>
+  <script>
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation=""){
+      const buttons=document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn,i)=>{
+        btn.disabled=true;
+        if(i===correctIndex) btn.classList.add('correct');
+        if(i===clickedIndex && i!==correctIndex) btn.classList.add('wrong');
+      });
+      const fb=document.getElementById('f_'+groupId);
+      if(explanation){ fb.style.display='block'; fb.innerHTML=explanation; }
+    }
 
-<div class="section">
-  <h2>4. Die Gesellschaft befindet sich im ½ Kapitalverlust und der VR hat keine Sanierungsmassnahmen ergriffen.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback104')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback104')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback104')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback104')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback104" class="explanation">💡 Es kann hier zusätzlich auch ein Zusatz gemacht werden, der auf den ½ KV hinweist.</div>
-</div>
+    const tasks = [
+      {q:"1. Im laufenden Jahr wird bemerkt, dass die Verlustverrechnung gem. Art. 674 OR nicht gemacht wurde.", id:"q1",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:3},
 
-<div class="section">
-  <h2>5. Bei der Prüfung zur Gewinnverwendung wird festgestellt, dass keine Reservenzuweisung gemacht wurde.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback105')">Einschränkung der Prüfungsaussage</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback105')">Einschränkung zur Gewinnverwendung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback105')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback105')">Zusatz</button>
-  </div>
-  <div id="feedback105" class="explanation"></div>
-</div>
+      {q:"2. Im Folgejahr wird bemerkt, dass die Verlustverrechnung gem. Art. 674 OR nicht gemacht wurde.", id:"q2",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:1},
 
-<div class="section">
-  <h2>6. Im Folgejahr wird festgestellt, dass trotz Covid-19 Kredit eine Dividende ausgeschüttet wird, obwohl im Gewinnverwendungsvorschlag keine Dividende erwähnt wurde.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback106')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback106')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback106')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback106')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback106" class="explanation"></div>
-</div>
+      {q:"3. ½-Kapitalverlust, VR hat Sanierungsmassnahmen ergriffen.", id:"q3",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:2},
 
-<div class="section">
-  <h2>7. Im Folgejahr wird festgestellt, dass eine höhere Dividende ausgeschüttet wurde, als durch die Revisionsstelle geprüft wurde. Die Mehrdividende verursacht aus heutiger Sicht keine Probleme.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback107')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback107')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback107')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback107')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback107" class="explanation"></div>
-</div>
+      {q:"4. ½-Kapitalverlust, VR hat keine Sanierungsmassnahmen ergriffen.", id:"q4",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:1,
+        expl:"Zusätzlich kann ein Zusatz aufgenommen werden, der auf den ½-KV hinweist."},
 
-<div class="section">
-  <h2>8. Die Gewinnverwendung im laufenden Jahr ist aufgrund von der Liquiditätssituation nicht vertretbar.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback108')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback108')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback108')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback108')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback108" class="explanation">💡 Verstoss gegen Art. 717 Abs. 1 Sorgfaltspflicht VR</div>
-</div>
+      {q:"5. Bei der Prüfung zur Gewinnverwendung wurde keine Reservenzuweisung gemacht.", id:"q5",
+        options:["Einschränkung der Prüfungsaussage","Einschränkung zur Gewinnverwendung","Hinweis","Zusatz"], correct:1},
 
-<div class="section">
-  <h2>9. Im laufenden Jahr wird ein Antrag auf Gewinnverwendung gemacht, obwohl ein Covid-19 Kredit vorhanden ist.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback109')">Einschränkung der Prüfungsaussage</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback109')">Einschränkung zur Gewinnverwendung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback109')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback109')">Zusatz</button>
-  </div>
-  <div id="feedback109" class="explanation"></div>
-</div>
+      {q:"6. Im Folgejahr wurde trotz Covid-19-Kredit eine Dividende ausgeschüttet, obwohl im GV-Vorschlag keine Dividende stand.", id:"q6",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:1},
 
-<div class="section">
-  <h2>10. Die Gewinnverwendung im laufenden Jahr ist aufgrund von der Liquiditätssituation knapp vertretbar.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback110')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback110')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback110')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback110')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback110" class="explanation"></div>
-</div>
+      {q:"7. Im Folgejahr wurde eine höhere Dividende ausgeschüttet als geprüft; Mehrdividende verursacht keine Probleme.", id:"q7",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:2},
 
-<div class="section">
-  <h2>11. Das Vorjahr wurde durch eine andere Revisionsstelle geprüft.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback111')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback111')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback111')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback111')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback111" class="explanation"></div>
-</div>
+      {q:"8. Gewinnverwendung im laufenden Jahr ist wegen Liquidität nicht vertretbar.", id:"q8",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:1,
+        expl:"Verstoss gegen Art. 717 Abs. 1 OR (Sorgfaltspflicht des VR)."},
 
-<div class="section">
-  <h2>12. Der Antrag zur Gewinnverwendung ist nicht ok.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback112')">Einschränkung der Prüfungsaussage</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback112')">Einschränkung zur Gewinnverwendung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback112')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback112')">Zusatz</button>
-  </div>
-  <div id="feedback112" class="explanation">💡 immer verneinende Prüfungsaussage zur Gewinnverwendung</div>
-</div>
+      {q:"9. Im laufenden Jahr Antrag auf Gewinnverwendung trotz Covid-19-Kredit.", id:"q9",
+        options:["Einschränkung der Prüfungsaussage","Einschränkung zur Gewinnverwendung","Hinweis","Zusatz"], correct:1},
 
-<div class="section">
-  <h2>13. Im Vorjahr befand sich die Gesellschaft im Opting-Out</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback113')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback113')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback113')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback113')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback113" class="explanation"></div>
-</div>
+      {q:"10. Gewinnverwendung im laufenden Jahr ist knapp vertretbar.", id:"q10",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:2},
 
-<div class="section">
-  <h2>14. Bei einem Aktivdarlehen an eine nahestehende Person ist zu prüfen, ob ein Drittvergleich gegeben ist. Falls kein Drittvergleich gegeben ist, ist das ausschüttbare Eigenkapital zu reduzieren. Ansonsten ist die Gewinnverwendung nicht ok.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback114')">richtig</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback114')">falsch</button>
-  </div>
-  <div id="feedback114" class="explanation"></div>
-</div>
+      {q:"11. Das Vorjahr wurde von einer anderen Revisionsstelle geprüft.", id:"q11",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:3},
 
-<div class="section">
-  <h2>15. Ein solches Darlehen ist erlaubt, falls in der Gewinnverwendung explizit die Verrechnung offengelegt ist.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback115')">richtig</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback115')">falsch</button>
-  </div>
-  <div id="feedback115" class="explanation"></div>
-</div>
+      {q:"12. Der Antrag zur Gewinnverwendung ist nicht ok.", id:"q12",
+        options:["Einschränkung der Prüfungsaussage","Einschränkung zur Gewinnverwendung","Hinweis","Zusatz"], correct:1,
+        expl:"Immer verneinende Prüfungsaussage zur Gewinnverwendung."},
 
-<div class="section">
-  <h2>18. Die GV wurde nicht innert 6 Monaten einberufen</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback118')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback118')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback118')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback118')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback118" class="explanation"></div>
-</div>
+      {q:"13. Im Vorjahr Opting-Out.", id:"q13",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:3},
 
-<div class="section">
-  <h2>19. Ein Doppelmandat ist gegeben.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback119')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback119')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback119')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback119')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback119" class="explanation"></div>
-</div>
+      {q:"14. Aktivdarlehen an Nahestehende: Drittvergleich? Falls nein → EK kürzen, sonst Gewinnverwendung nicht ok.", id:"q14",
+        options:["richtig","falsch"], correct:0},
 
-<div class="section">
-  <h2>20. Es ist kein freies Eigenkapital für den Erwerb eigener Aktiven vorhanden.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback120')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback120')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback120')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback120')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback120" class="explanation">💡 Art. 659 Abs. 1 OR</div>
-</div>
+      {q:"15. Solches Darlehen ist erlaubt, wenn in der Gewinnverwendung die Verrechnung explizit offengelegt ist.", id:"q15",
+        options:["richtig","falsch"], correct:0},
 
-<div class="section">
-  <h2>21. Die Gesellschaft hat Going-Concern Probleme, jedoch ist die Offenlegung im Anhang genügend.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback121')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback121')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback121')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback121')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback121" class="explanation"></div>
-</div>
+      {q:"16. Überlanges/verkürztes Geschäftsjahr.", id:"q16",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:3},
 
-<div class="section">
-  <h2>22. Die Vergleichszahlen konnten nicht geprüft werden</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback122')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback122')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback122')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback122')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback122" class="explanation"></div>
-</div>
+      {q:"17. Gesellschaft wäre überschuldet, aber Rangrücktritt liegt vor.", id:"q17",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:2},
 
-<div class="section">
-  <h2>23. Die Gesellschaft ist in einem Gerichtsverfahren involviert, wobei der Ausgang des Verfahrens noch unklar ist. Dieser Tatbestand wird im Anhang genügend offengelegt.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback123')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback123')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback123')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback123')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback123" class="explanation"></div>
-</div>
+      {q:"18. GV nicht innert 6 Monaten einberufen.", id:"q18",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:1},
 
-<div class="section">
-  <h2>24. Der Tatbestand der Einlagerückgewähr (quantitatives Kriterium) gem. Art. 680 Abs. 2 OR ist gegeben.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback124')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback124')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback124')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback124')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback124" class="explanation">💡 Wir weisen darauf hin, dass das Darlehen an Aktionäre von CHF xx mangels frei verwendbarer Reserven eine nach Art. 680 Abs. 2 OR verbotene Kapitalrückzahlung darstellt. SER Bsp. 14</div>
-</div>
+      {q:"19. Doppelmandat ist gegeben.", id:"q19",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:3},
 
-<div class="section">
-  <h2>25. Die Gesellschaft befindet sich im ½ KV und der VR hat keinen Zwischenabschluss zu FW (+ evtl VW) erstellt.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback125')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback125')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback125')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback125')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback125" class="explanation"></div>
-</div>
+      {q:"20. Kein freies EK für Erwerb eigener Aktiven vorhanden.", id:"q20",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:1,
+        expl:"Art. 659 Abs. 1 OR."},
 
-<div class="section">
-  <h2>26. Die angewendete Rechnungslegung sieht Beilagen wie GFR vor.</h2>
-  <div class="choice-box">
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback126')">Einschränkung</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback126')">Hinweis</button>
-    <button class="black-option" onclick="selectSingleOption(this, false, 'feedback126')">Zusatz</button>
-    <button class="black-option" onclick="selectSingleOption(this, true, 'feedback126')">Redaktionelle Erläuterung</button>
-  </div>
-  <div id="feedback126" class="explanation"></div>
-</div>
-</body>
+      {q:"21. Going-Concern-Probleme, Offenlegung im Anhang ist ausreichend.", id:"q21",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:2},
+
+      {q:"22. Vergleichszahlen konnten nicht geprüft werden.", id:"q22",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:3},
+
+      {q:"23. Gesellschaft in Gerichtsverfahren; Ausgang unklar, Anhang offengelegt.", id:"q23",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:2},
+
+      {q:"24. Einlagerückgewähr (quantitatives Kriterium) gem. Art. 680 Abs. 2 OR liegt vor.", id:"q24",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:1,
+        expl:"Hinweistext z. B.: «Darlehen an Aktionäre von CHF xx stellt mangels freier Reserven eine nach Art. 680 Abs. 2 OR verbotene Kapitalrückzahlung dar.» (SER Bsp. 14)"},
+
+      {q:"25. ½-Kapitalverlust; VR hat keinen Zwischenabschluss zu FW (+ evtl. VW) erstellt.", id:"q25",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:1},
+
+      {q:"26. Angewendete Rechnungslegung sieht Beilagen (z. B. Geldflussrechnung) vor.", id:"q26",
+        options:["Einschränkung","Hinweis","Zusatz","Redaktionelle Erläuterung"], correct:3}
+    ];
+
+    const container=document.getElementById("quiz-container");
+    tasks.forEach(t=>{
+      const sec=document.createElement("div"); sec.className="section";
+      const h=document.createElement("h2"); h.textContent=t.q; sec.appendChild(h);
+      const opts=document.createElement("div"); opts.className="options";
+      t.options.forEach((opt,i)=>{
+        const b=document.createElement("button");
+        b.innerText=opt; b.dataset.group=t.id;
+        b.onclick=()=>selectOptionGroup(t.id,t.correct,i,t.expl||"");
+        opts.appendChild(b);
+      });
+      sec.appendChild(opts);
+      const fb=document.createElement("div"); fb.id="f_"+t.id; fb.className="explanation"; sec.appendChild(fb);
+      container.appendChild(sec);
+    });
+  </script>
 </body>
 </html>
+
 
