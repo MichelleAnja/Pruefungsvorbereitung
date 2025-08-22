@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Änderungen MWST per 01.01.2025</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0; padding: 40px 20px; color:#000;
+    }
+    .section {
+      background: rgba(255,255,255,0.92);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 1000px;
+    }
+    h1 { font-size: 22px; margin: 0 0 12px; }
+    h2 { font-size: 18px; margin: 16px 0 8px; }
+
+    .options { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .options button {
+      padding:10px 16px; border:none; border-radius:6px;
+      background:#000; color:#fff; cursor:pointer; font-size:16px;
+    }
+    .correct { background:lightgreen !important; color:#000 !important; }
+    .wrong   { background:lightcoral !important; color:#000 !important; }
+    .explanation { margin-top:6px; display:none; font-weight:bold; color:#000; }
+
+    .back-link {
+      display:inline-block; margin-bottom:20px;
+      font-size:18px; font-weight:bold; color:#000; text-decoration:none;
+    }
+
+    @media (max-width:480px){
+      body{padding:24px 12px;}
+      h1{font-size:20px;} h2{font-size:16px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a href="mwst.html" class="back-link">← Zurück</a>
+    <h1>Änderungen MWST per 01.01.2025</h1>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation=""){
+      const buttons=document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn,i)=>{
+        btn.disabled=true;
+        if(i===correctIndex) btn.classList.add('correct');
+        if(i===clickedIndex && i!==correctIndex) btn.classList.add('wrong');
+      });
+      const fb=document.getElementById('f_'+groupId);
+      if(explanation){ fb.style.display='block'; fb.innerHTML=explanation; }
+    }
+
+    const tasks = [
+      { q:"1.\tUnternehmen mit einem Jahresumsatz bis CHF 5'005'000 können die MWST auf Antrag hin neu ____ abrechnen.", id:"q1",
+        options:["halbjährlich","jährlich"], correct:1,
+        expl:"Voraussetzungen: Die bisherigen und künftigen MWST-Abrechnungen wurden fristgerecht eingereicht und vollumfänglich bezahlt." },
+
+      { q:"2.\tAuch bei der jährlichen Abrechnung können Korrekturabrechnungen, Jahresabstimmungen eingereicht und Fristverlängerungen beantragt werden.", id:"q2",
+        options:["richtig","falsch"], correct:0,
+        expl:"Die jährliche Abrechnung muss bis Ende Februar des Folgejahres eingereicht und bezahlt werden." },
+
+      { q:"3.\tEine Überweisung an die MWST ist bei der jährlichen Abrechnung somit erst im Folgejahr zu machen.", id:"q3",
+        options:["richtig","falsch"], correct:1,
+        expl:"Die jährliche Abrechnung ist mit Verpflichtung zu Ratenzahlung. Die Raten werden von der ESTV festgesetzt und sind jeweils ab April im e Portal verfügbar." },
+
+      { q:"4.\tNeue Unternehmen haben ___ Tage Zeit um die jährliche Abrechnung vie ePortal zu beantragen.", id:"q4",
+        options:["30 Tage","60 Tage","90 Tage"], correct:1,
+        expl:"Zur jährlichen Abrechnung für das Jahr 2025 hatte man bis zum 28. Februar 2025 Zeit" },
+
+      { q:"5.\tBei der effektiven und Pauschalsteuersatzmethode sind ___ Raten und bei der SSS-Methode ist eine Rate zu bezahlten:", id:"q5",
+        options:["2","3","4"], correct:1,
+        expl:"Fälligkeiten: 30. Mai, 30. August, 30. November. Bei SSS: 30. August" },
+
+      { q:"6.\tBei verspätet bezahlten Raten wie auch auf der jährlichen Abrechnung sind Verzugszinsen geschuldet.", id:"q6",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"7.\tDie Höhe der Raten ist jedes Jahr aufs Neue der ESTV mitzuteilen.", id:"q7",
+        options:["richtig","falsch"], correct:1,
+        expl:"Die Höhe der Raten wird anhand der Steuerforderung der letzten Steuerperiode festgelegt. Die steuerpflichtige Person hat die Möglichkeit, die Höhe der Rate bis zehn Tage vor Fälligkeit im ePortal nach oben und nach unten anzupassen." },
+
+      { q:"8.\tDie Mindestratenhöhe bei der effektiven und Pauschalsteuersatzmethode ist CHF ___", id:"q8",
+        options:["500","1000","1500"], correct:0 },
+
+      { q:"9.\tDie Mindestratenhöhe bei der Saldosteuersatzmethode beträgt CHF ___", id:"q9",
+        options:["500","1000","1500"], correct:1 },
+
+      { q:"10.\tDie steuerpflichtige Person kann die jährliche Abrechnung via ePortal bis spätestens Ende Februar nach Beginn der Steuerperiode widerrufen.", id:"q10",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"11.\tDie ESTV kann die jährliche Abrechnung auf die nächste Steuerperiode widerrufen, sofern die steuerpflichtige Person die Umsatzgrenze auf ___ aufeinanderfolgenden Steuerperioden überschreiten.", id:"q11",
+        options:["2","3","5"], correct:1 },
+
+      { q:"12.\tDie ESTV widerruft die jährliche Abrechnung auf die _____ Steuerperiode, sofern die steuerpflichtige Person die jährliche Abrechnung nicht fristgerecht einreicht resp. Nicht fristgerecht und vollständig bezahlt oder die Raten zu stark herabsetzt. Die Raten sind dann zu stark herabgesetzt, wenn diese bei der effektiven und der Pauschalsteuersatzmethode weniger als 50% und bei der SSS weniger als 35% der gesamten Steuerforderung beträgt.", id:"q12",
+        options:["laufende","nächste","übernächste"], correct:2 },
+
+      { q:"13.\tNeu können bei der SSS-Methode mehr als 2 Saldosteuersätze gewählt werden. Massgebend bleibt weiterhin die 10%-Regel.", id:"q13",
+        options:["richtig","falsch"], correct:0,
+        expl:"Das heisst ein neuer Saldosteuersatz ist anzuwenden, sofern der Umsatzanteil der jeweiligen Tätigkeit mehr als 10% steuerbaren Gesamtumsatz beträgt." },
+
+      { q:"14.\tBeim Wechsel von der effektiven Abrechnungsmethode zur SSS-Methode müssen Korrekturen vorgenommen werden: \nAuf dem Zeitwert der Gegenstände und Dienstleistungen im Zeitpunkt des Wechsels müssen Sie die früher in Abzug gebrachte Vorsteuer einschliesslich ihrer als Einlageentsteuerung korrigierten Anteile der ESTV zurückzuerstatten.", id:"q14",
+        options:["richtig","falsch"], correct:0,
+        expl:"In der Ziffer 415" },
+
+      { q:"15.\tBeim Wechsel von der SSS-Methode in die effektive Abrechnungsmethode können die im Zeitpunkt des Wechsels auf dem Zeitwert der Gegenstände und Dienstleistungen lastenden Steuern nicht mehr geltend gemacht werden.", id:"q15",
+        options:["richtig","falsch"], correct:1,
+        expl:"In der Ziffer 410" },
+
+      { q:"16.\tDie jährliche Abschreibung für den Zeitwert eines beweglichen Gegenstands sowie Dienstleistungen beträgt jährlich _____.", id:"q16",
+        options:["5%","20%"], correct:1,
+        expl:"Art. 31 MWSTG" },
+
+      { q:"17.\tDie jährliche Abschreibung für den Zeitwert eines unbeweglichen Gegenstands beträgt jährlich _____.", id:"q17",
+        options:["5%","20%"], correct:1,
+        expl:"Art. 31 MWSTG" },
+
+      { q:"18.\tPer 1.1.2025 wurden keine Saldo- und Pauschalsteuersätze angepasst. Es sind alle gleich hoch wie im 2024.", id:"q18",
+        options:["richtig","falsch"], correct:1,
+        expl:"Es gab einige Anpassungen." },
+
+      { q:"19.\tFür die SSS-Methode gibt es nach wie vor besondere Verfahren bei Exportlieferungen, Anrechnung der fiktiven Vorsteuern und Margenbesteuerung.", id:"q19",
+        options:["richtig","falsch"], correct:1,
+        expl:"Diese fallen per 01.01.2025 ebenfalls weg." },
+
+      { q:"20.\tNeue Saldosteuersätze müssen ausschliesslich über das ePortal beantragt werden.", id:"q20",
+        options:["richtig","falsch"], correct:1,
+        expl:"Tätigkeiten, die einen zusätzlichen Saldosteuersatz bedürfen, können direkt in der MWST-Abrechnung beantragt und deklariert werden. Die Prüfung und Bewilligung durch die ESTV erfolgt im Nachgang." },
+
+      { q:"21.\tDie bisher bewilligten SS-Sätze werden automatisch in der Abrechnung angepasst und angezeigt.", id:"q21",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"22.\tDie Mischbranchen und 50%-Regel fallen per 1.1.2025 weg.", id:"q22",
+        options:["richtig","falsch"], correct:0,
+        expl:"Branchen, in denen üblicherweise mehrere Tätigkeiten ausgeübt werden, die für sich allein betrachtet zu unterschiedlichen SSS abzurechnen wären, konnten bisher die aufgeführten Nebentätigkeiten zum bewilligten Saldosteuersatz abrechnen, sofern die Umsätze aus Nebentätigkeiten nicht mehr als 50% des steuerbaren Gesamtumsatzes betrugen." },
+
+      { q:"23.\tNeu ist für jede Tätigkeit, deren Anteil am steuerbaren Gesamtumsatz mehr als 10% beträgt, nach dem jeweiligen Saldosteuersatz abzurechnen.", id:"q23",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"24.\tDer Saldosteuersatz für «Reisebüro; reiner Retailer» bleibt weiterhin.", id:"q24",
+        options:["richtig","falsch"], correct:1,
+        expl:"Diese Leistungen sind neu von der MWST ausgenommen und in der MWST-Abrechnung in Ziffer 230 zu deklarieren. Bei der SSS-Methode ist keine Option möglich." },
+
+      { q:"25.\tSofern ein Unternehmen mit SSS-Methode nur Reisebüro : reine Retailer-Leistungen erbringt, ist dieses auf dem MWST-Register zu löschen.", id:"q25",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"26.\tWann ist ein Wechsel von der effektiven Abrechnungsmethode zur Pauschalsteuersatzmethode möglich?", id:"q26",
+        options:["immer","nach einer ganzen Steuerperiode","nach 3 Steuerperioden"], correct:1 },
+
+      { q:"27.\tWann ist ein Wechsel von der Pauschalsteuersatzmethode zur effektiven <immer>\t<nach einer ganzen Steuerperiode>\t<nach 3 Steuerperioden>", id:"q27",
+        options:["immer","nach einer ganzen Steuerperiode","nach 3 Steuerperioden"], correct:1 },
+
+      { q:"28.\tAuch beim Wechsel in und von der Pauschalsteuersatzmethode sind die Zeitwerten Korrekturen wie bei der SSS-Methode zu machen.", id:"q28",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"29.\tDie Lieferung zwischen dem Verkäufer und dem Plattformbetreiber ist ____.", id:"q29",
+        options:["steuerbar","steuerbefreit"], correct:1,
+        expl:"Art. 23 Abs. 2 Ziffer 13 MWSTG. In der MWST-Abrechnung muss die Lieferung unter Ziffer 220 (steuer befreite Leitungen) deklariert werden." },
+
+      { q:"30.\tEine Option auf die Leistung zwischen Verkäufer und der Plattformbetreiberin ist immer möglich um freiwillig zu versteuern.", id:"q30",
+        options:["richtig","falsch"], correct:1,
+        expl:"Nur mit Einverständnis mit der Plattformbetreiberin. Art. 43a MWSTV" },
+
+      { q:"31.\tEin verkaufter Gegenstand wird ins Inland eingeführt. Der Ort der ersten Lieferung von der Verkäuferin an die Plattformbetreiberin befindet sich somit im Ausland. \nWo sind solche Leistungen bei der steuerpflichtigen Verkäuferin zu deklarieren?", id:"q31",
+        options:["Auslandlieferung","Inlandlieferung"], correct:0 },
+
+      { q:"32.\tPotenzielle steuerpflichtige Plattformbetreiber gem. Art. 20a MWSTG können ____ sein.", id:"q32",
+        options:["Personen mit Sitz im Inland","Personen mit Sitz im Ausland","beides"], correct:2 },
+
+      { q:"33.\tFalls der Verkäufer des Gegenstands eine Rechnung an den Käufer ausstellt und wird darauf die MWST ausgewiesen, so ist zusätzlich die Plattformbetreiberin anzugeben und darauf hinzuweisen, dass es sich um ein Geschäft nach Art. 20a MWSTG handelt.", id:"q33",
+        options:["richtig","falsch"], correct:0,
+        expl:"Bespw. MWST 8.1% mit der ESTV abgerechnet nach Art. 20a MWSTG durch (Name, Vorname und MWST-Nummer der Plattformbetreiberin)" },
+
+      { q:"34.\tSowie im Praxisentwurf vom Juli 2024 vorgesehen, ist per 1. Januar 2025 eine automatische Auskunftspflicht der Platformbetreiberinnen vorgesehen.", id:"q34",
+        options:["richtig","falsch"], correct:1,
+        expl:"Die Plattformbetreiberinnen müssen nicht von sich aus, sondern nur auf Gesuch der ESTV hin Auskunft erteilen." },
+
+      { q:"35.\tBei der Einfuhr von Gegenständen ist eine Abstimmung zwischen den von der Plattform deklarierten und versteuerten Verkäufen und der von dieser deklarierten und abgezogenen Einfuhrsteuer vorerst nicht erforderlich.", id:"q35",
+        options:["richtig","falsch"], correct:0,
+        expl:"kann sich in der Zukunft aber ändern" },
+
+      { q:"36.\tAnwendung findet Art. 20a MWSTG auf Verkäufe ab dem:", id:"q36",
+        options:["31.12.2024","01.01.2025"], correct:1,
+        expl:"Davor abgeschlossene Verkäufe haben keine Anwendung auf die Gesetzesänderung, selbst wenn die Lieferung des Gegenstandes erst ab dem 1.1.2025 erfolgte." },
+
+      { q:"37.\tGem. Übergangsbestimmungen von Art. 115b Abs. 2 MWSTG, wonach die Steuerpflicht für Leistungserbringerinnen nach Art. Art. 20a MWSTG, welche Gegenstände ins Inland liefern, die aufgrund des geringfügigen Steuerbetrags von der Einfuhrsteuer befreit sind (Kleinsendungen), mit Inkrafttreten der Änderung per 1.1.2025 beginnt, wenn;\nSie in den vorangegangenen _____ Monaten mit der Lieferung von Kleinsendungen ein Umsatz von mind. CHF 100'000 Franken erzielt haben und anzunehmen ist, dass auch in den ___ Monaten ab Inkrafttreten dieser Änderung solche Lieferungen ausführen wird.", id:"q37",
+        options:["3","6","12"], correct:2 },
+
+      { q:"38.\tNeu gelten MWST-rechtlich Subventionen nur; wenn ein Gemeinwesen die von ihm ausgerichteten Mittel gegenüber dem Empfänger ausdrücklich als Subvention oder als anderen öffentlich rechtlichen Beitrag bezeichnet.", id:"q38",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"39.\tSolche Subventionen führen zu einer Umsatzsteuer.", id:"q39",
+        options:["richtig","falsch"], correct:1 },
+
+      { q:"40.\tSolche Subventionen können zur Vorsteuerkürzung führen", id:"q40",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"41.\tDas auszuzahlende Gemeinwesen muss gegenüber der ESTV den Beweis erbringen können, dass eine Bezeichnung als Subvention gegenüber dem Empfänger erfolgt ist.", id:"q41",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"42.\tVerzichtet das Gemeinwesen auf die Bezeichnung eines Geldflusses als Subvention, so ist von einem steuerbaren Umsatz auszugehen.", id:"q42",
+        options:["richtig","falsch"], correct:1,
+        expl:"Die ESTV darf gem. Gesetz immer noch prüfen, ob der Geldfluss als Subventionen, als Entgelt, als Gebühr für eine hoheitliche Tätigkeit oder als anderes Nicht-Entgelt zu qualifizieren hat." },
+
+      { q:"43.\tSeit dem 1. Januar 2025 müssen alle MWST-pflichtigen Unternehmen die MWST online via ePortal abrechnen. Das Abrechnungsformular kann nicht mehr auf Papier bestellt werden.", id:"q43",
+        options:["richtig","falsch"], correct:0 }
+    ];
+
+    const container=document.getElementById("quiz-container");
+    tasks.forEach(t=>{
+      const sec=document.createElement("div"); sec.className="section";
+      const h=document.createElement("h2"); h.textContent=t.q; sec.appendChild(h);
+      const opts=document.createElement("div"); opts.className="options";
+      t.options.forEach((opt,i)=>{
+        const b=document.createElement("button"); b.innerText=opt; b.dataset.group=t.id;
+        b.onclick=()=>selectOptionGroup(t.id,t.correct,i,t.expl||"");
+        opts.appendChild(b);
+      });
+      sec.appendChild(opts);
+      const fb=document.createElement("div"); fb.id="f_"+t.id; fb.className="explanation"; sec.appendChild(fb);
+      container.appendChild(sec);
+    });
+  </script>
+</body>
+</html>
