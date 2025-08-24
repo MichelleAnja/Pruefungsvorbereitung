@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saldosteuersatzmethode</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("hintergrund.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0; padding: 40px 20px; color:#000;
+    }
+    .section {
+      background: rgba(255,255,255,0.92);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 1000px;
+    }
+    h1 { font-size: 22px; margin: 0 0 12px; }
+    h2 { font-size: 18px; margin: 16px 0 8px; }
+
+    .options { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .options button {
+      padding:10px 16px; border:none; border-radius:6px;
+      background:#000; color:#fff; cursor:pointer; font-size:16px;
+    }
+    .correct { background:lightgreen !important; color:#000 !important; }
+    .wrong   { background:lightcoral !important; color:#000 !important; }
+    .explanation { margin-top:6px; display:none; font-weight:bold; color:#000; }
+
+    .back-link {
+      display:inline-block; margin-bottom:20px;
+      font-size:18px; font-weight:bold; color:#000; text-decoration:none;
+    }
+
+    @media (max-width:480px){
+      body{padding:24px 12px;}
+      h1{font-size:20px;} h2{font-size:16px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <a href="mwst.html" class="back-link">← Zurück</a>
+    <h1>Saldosteuersatzmethode</h1>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation=""){
+      const buttons=document.querySelectorAll(`[data-group='${groupId}']`);
+      buttons.forEach((btn,i)=>{
+        btn.disabled=true;
+        if(i===correctIndex) btn.classList.add('correct');
+        if(i===clickedIndex && i!==correctIndex) btn.classList.add('wrong');
+      });
+      const fb=document.getElementById('f_'+groupId);
+      if(explanation){ fb.style.display='block'; fb.innerHTML=explanation; }
+    }
+
+    const tasks = [
+      { q:`1.\tSteuerpflichtige Personen, welche nach der Pauschalsteuersatzmethode abrechnen können, dürfen auch nach der SSS-Methode abrechnen.`, id:"q1",
+        options:["richtig","falsch"], correct:1,
+        expl:"Diese müssen die Pauschalsteuersatzmethode anwenden" },
+
+      { q:`2.\tSteuerpflichtige Personen, die das Verlagerungsverfahren anwendet darf nach der SSS-Methode abrechnen.`, id:"q2",
+        options:["richtig","falsch"], correct:1,
+        expl:"Verlagerungsverfahren: Statt die Einfuhrsteuer direkt beim Zoll (BAZG) zu bezahlen – also: du lieferst Standard-Zoll-Gebühren direkt an die Behörde – darfst du diese Steuer unter bestimmten Bedingungen verschieben und stattdessen in deiner regulären Mehrwertsteuerabrechnung mit der ESTV deklarieren." },
+
+      { q:`3.\tDas Veranlagungsverfahren nach Art. 63 MWSTG anwenden dürfen Unternehmen, das nach der effektiven Methode abrechnet, das regelmässig Ware importiert und exportiert und dabei regelmässig einen Vorsteuerüberschuss erzielt.`, id:"q3",
+        options:["richtig","falsch"], correct:0,
+        expl:"Dadurch zahlt das Unternehmen keine Einfuhrsteuer an den Zoll beim Import, sondern deklariert sie stattdessen in der Steuerabrechnung bei der ESTV." },
+
+      { q:`4.\tDie folgenden Voraussetzungen müssen für die Anwendung erfüllt sein;\n- Bewilligung der ESTV\n- detaillierte Buchhaltung, Nachweis über Einfuhr, Lager und Ausfuhr\n- Vorsteuerüberschüsse aus Import / Export müssen deutlich über CHF 10'000 pro Jahr liegen.`, id:"q4",
+        options:["richtig","falsch"], correct:0,
+        expl:"fällt die Voraussetzung zur Bewilligung weg, so muss man dies der ESTV innert 15 Tagen melden." },
+
+      { q:`5.\tPersonen, die die Gruppenbesteuerung anwenden dürfen nach der SSS-Methode abrechnen.`, id:"q5",
+        options:["richtig","falsch"], correct:1 },
+
+      { q:`6.\tSteuerpflichtige Personen, die mehr als 50% ihres Umsatzes aus steuerbaren Leistungen an andere steuerpflichtigen Personen, welche nach der effektiven Methode abrechnen, sofern die beteiligten Personen unter einheitlichen Leitung stehen.`, id:"q6",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:`7.\tSteuerpflichtige Plattformbetreiberinnen dürfen nach der SSS-Methode abrechnen.`, id:"q7",
+        options:["richtig","falsch"], correct:1 },
+
+      { q:`8.\tSteuerpflichtige Personen, die ihren Sitz im Ausland haben, dürfen nach der SSS-Methode abrechnen`, id:"q8",
+        options:["richtig","falsch"], correct:1 },
+
+      { q:`9.\tDie einzige Leistung auf diese bei der SSS optiert werden kann, ist die Besteuerung von im eigenen Betrieb gewonnenen Erzeugnisse durch Landwirte, Viehhändler,…`, id:"q9",
+        options:["richtig","falsch"], correct:0,
+        expl:"Wird die MWST bei anderen ausgenommenen Leistungen auf der Rechnung ausgewiesen, so ist die ausgewiesene Steuer an die ESTV abzurechnen." },
+
+      { q:`10.\tNeue Unternehmen haben ___ Tage Zeit ab Zustellung der MWST-Nummer um der ESTV die Abrechnung über die SSS zu melden.`, id:"q10",
+        options:["30","60","90"], correct:1,
+        expl:"Die ESTV bewilligt die Anwendung der SSS, wenn in den ersten 12 Monaten sowohl der erwartete Umsatz als auch die erwarteten Steuern die Grenzen on Art. 37 Abs. 1 MWSTG nicht überschreiten." },
+
+      { q:`11.\tDie Obergrenze des Umsatzes für die SSS Beträgt CHF ___.`, id:"q11",
+        options:["1’800’000","5'000’000","5'024’000"], correct:2 },
+
+      { q:`12.\tDie Obergrenze der Steuerschuld für die SSS beträgt CHF ___.`, id:"q12",
+        options:["100’000","108’000","124’000"], correct:1 },
+
+      { q:`13.\tNeu gegründete Unternehmen, welche die 60 tage Frist zur Abrechnung der SSS-Methode verpasst haben, können auf die nächste Steuerperiode mit der SSS-Methode abrechnen.`, id:"q13",
+        options:["richtig","falsch"], correct:1,
+        expl:"Das Unternehmen muss zuerst drei ganze Steuerperioden nach der effektiven Methode abrechnen. Ausnahme: Ein Wechsel ist bei der Anpassung des entsprechenden Saldosteuersatzes möglich, wenn die Anpassung nicht aufgrund von der Anpassung der allgemeinen MWST-Sätze zurück zu führen ist." },
+
+      { q:`14.\tEin Wechsel von der SSS-Methode in die effektive Abrechnungsmethode ist erst nach ____ zulässig.`, id:"q14",
+        options:["1 Steuerperiode","3 Steuerperioden"], correct:0,
+        expl:"Auch hier ist der Wechsel zulässig, wenn mind. Einer der angewendeten SS-Sätzen angepasst wurde, ohne dass die allgemeinen MWST-Sätze angepasst wurden." },
+
+      { q:`15.\tWer die Umsatzgrenze oder Grenze der Steuerleistung gem. Art. 37 Abs. 1 MWSTG überschreitet, muss ab der nächsten Steuerperiode mit der effektiven Methode abrechnen.`, id:"q15",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:`16.\tÜbernimmt eine mit SSS-Methode abrechnendes Unternehmen im Meldeverfahren eine Gesamt- oder Teilvermögen einer nach der effektiven Methode abrechnenden Gesellschaft, so kann die gemachte Vorsteuer so übernommen werden.`, id:"q16",
+        options:["richtig","falsch"], correct:1,
+        expl:"Die gemachten Vorsteuern inkl. Einlageentsteuerung sind auf den Zeitwert zu korrigieren." },
+
+      { q:`17.\tEine solche Korrektur ist auch zu machen, wenn das übernommene Gesamt- / Teilvermögen zu einer nicht unternehmerischen Tätigkeit verwendet wurde.`, id:"q17",
+        options:["richtig","falsch"], correct:1 },
+
+      { q:`18.\tWird eine Tätigkeit aufgegeben oder eine neue aufgenommen oder verändern sich die Umsatzanteile der Tätigkeiten derart, dass eine Neuzuteilung der SS-Sätze notwendig wird, so muss sich die steuerpflichtige Person mit der ESTV in Verbindung setzen.`, id:"q18",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:`19.\tSteuerpflichtige Personen, die mehrere Saldosteuersätze zugeteilt erhalten haben, können die Einnahmen über das selbe Ertragskonto verbuchen.`, id:"q19",
+        options:["richtig","falsch"], correct:1 },
+
+      { q:`20.\tFür jede Tätigkeit, deren Anteil am Gesamtumsatz aus steuerbaren Leistungen mehr als ___ beträgt, wird der dafür festgelegte Saldosteuersatz bewilligt.`, id:"q20",
+        options:["10%","20%","50%"], correct:0 },
+
+      { q:`21.\tBei Personen, welche die unternehmerische Tätigkeit neu aufnehmen ist für diese Abklärung der voraussichtliche Umsatz der nächsten ___ Monate für die 10% Regel massgebend.`, id:"q21",
+        options:["3","6","12"], correct:2 },
+
+      { q:`22.\tBei Personen, die von der effektiven Abrechnungsmethode zur SSS-Methode wechseln ist der Umsatz der ____ für die 10% Regel massgebend.`, id:"q22",
+        options:["letzten 3 Steuerperioden","nächsten 12 voraussichtlichen Umsätzen"], correct:0 },
+
+      { q:`23.\tDer Umsatz von Tätigkeiten mit gleichem Saldosteuersatz sind bei der Abklärung ob die 10%-Regel erreicht wird zusammenzurechnen.`, id:"q23",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:`24.\tWenn der Umsatz einer Tätigkeit oder mehrerer Tätigkeiten die 10%-Regel nicht mehr überschreitet, so ist ab der nächsten Steuerperiode die 10%-Regel nicht mehr erreicht und die Bewilligung zur Anwendung des Steuersatzes entfällt.`, id:"q24",
+        options:["richtig","falsch"], correct:1,
+        expl:"überschreitet der Umsatz einer Tätigkeit resp. Mehrerer Tätigkeiten die 10% Grenze während drei aufeinanderfolgenden Steuerperioden die 10%-Grenze nicht mehr, so ist auf den Beginn der vierten Steuerperiode die Bewilligung zur Anwendung des Saldosteuersatzes nicht mehr erfüllt." },
+
+      { q:`25.\tErreicht eine Tätigkeit die 10% Regel nicht, so sind die damit erzielten Umsätze mit dem nächsthöheren bewilligten Saldosteuersatz zu versteuern. Ist kein höherer Saldosteuersatz bewilligt, so sind die Umsätze mit dem nächsttieferen Satz zu versteuern.`, id:"q25",
+        options:["richtig","falsch"], correct:0,
+        expl:"Die steuerpflichtige Person kann den gesamten Umsatz aus steuerbaren Leistungen freiwillig zum höchsten bewilligten Saldosteuersatz abrechnen." },
+
+      { q:`26.\tWerden mehrere voneinander unabhängige Leistungen in einer Leistungskombination angeboten und gilt nach Art. 19 Abs. 2 MWSTG die 70% Regel, so ist  bei der SSS-Methode trotzdem für die restlichen 30% die 10% Regel zu berechnen.`, id:"q26",
+        options:["richtig","falsch"], correct:1,
+        expl:"Ist die 70% Mehrheit gegeben, so können die restlichen 30% bei einer Leistungskombination mit dem SS-Satz der überwiegenden 70% abgerechnet werden." },
+
+      { q:`27.\tIst eine genaue Aufteilung der Leistungen zu den Steuersätzen nicht möglich, resp. Kann diese nicht nachgewiesen werden, so sind all diese Leistungen zum höchsten bewilligten Saldosteuersatz abzurechnen.`, id:"q27",
+        options:["richtig","falsch"], correct:0,
+        expl:"Die steuerpflichtige Person kann den gesamten Umsatz aus steuerbaren Leistungen freiwillig zum höchsten bewilligten Saldosteuersatz abrechnen." },
+
+      { q:`28.\tBezieht eine mit der SSS-Methode anwendende Person Bezugssteuern nach Art. 45 Abs. 1 MWSTG, so hat sie zur effektiven Abrechnungsmethode zu wechseln, sobald die Höhe der bezogenen Bezugssteuer CHF 10'000 erreicht.`, id:"q28",
+        options:["richtig","falsch"], correct:1,
+        expl:"Die SSS-Methode kann weiterhin angewendet werden, die Bezugssteuern sind in der entsprechenden Abrechnungsperiode zum hierfür geltenden Steuersatz zu entrichten." },
+
+      { q:`29.\tDer Eigenverbrauch ist mit der Anwendung der SSS-Methode berücksichtigt.`, id:"q29",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:`30.\tLeistungen an eng verbundene Personen und an das Personal sind mit den Steuersätzen der entsprechenden Leistung abzurechnen.`, id:"q30",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:`31.\tAls Teilvermögen gilt jede kleinste für sich lebensfähige Einheit eines Unternehmens.`, id:"q31",
+        options:["richtig","falsch"], correct:0 }
+    ];
+
+    const container=document.getElementById("quiz-container");
+    tasks.forEach(t=>{
+      const sec=document.createElement("div"); sec.className="section";
+      const h=document.createElement("h2"); h.textContent=t.q; sec.appendChild(h);
+      const opts=document.createElement("div"); opts.className="options";
+      t.options.forEach((opt,i)=>{
+        const b=document.createElement("button");
+        b.innerText=opt; b.dataset.group=t.id;
+        b.onclick=()=>selectOptionGroup(t.id,t.correct,i,t.expl||"");
+        opts.appendChild(b);
+      });
+      sec.appendChild(opts);
+      const fb=document.createElement("div"); fb.id="f_"+t.id; fb.className="explanation"; sec.appendChild(fb);
+      container.appendChild(sec);
+    });
+  </script>
+</body>
+</html>
