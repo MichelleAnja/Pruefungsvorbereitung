@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Theoriefragen Allgemein Berichterstattung</title>
+  <title>Allgemeines</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -21,17 +21,11 @@
     h1 { font-size: 22px; margin: 0 0 12px; }
     h2 { font-size: 18px; margin: 16px 0 8px; }
 
-    .input-box { display:flex; gap:8px; align-items:center; margin-top:8px; }
-    .input-box input {
-      flex:1; padding:10px; border-radius:6px; border:2px solid #ccc; font-size:16px;
-    }
-    .input-box button {
-      padding:10px 16px; border:none; border-radius:6px; background:#000; color:#fff; cursor:pointer; font-size:16px;
-    }
-
     .options { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
-    .options button { padding:10px 16px; border:none; border-radius:6px; background:#000; color:#fff; cursor:pointer; font-size:16px; }
-
+    .options button {
+      padding:10px 16px; border:none; border-radius:6px;
+      background:#000; color:#fff; cursor:pointer; font-size:16px;
+    }
     .correct { background:lightgreen !important; color:#000 !important; }
     .wrong   { background:lightcoral !important; color:#000 !important; }
     .explanation { margin-top:6px; display:none; font-weight:bold; color:#000; }
@@ -49,155 +43,180 @@
 </head>
 <body>
   <div class="section">
-    <a href="revision.html" class="back-link">← Zurück</a>
-    <h1>Theoriefragen Allgemein Berichterstattung</h1>
+    <a href="uwb.html" class="back-link">← Zurück</a>
+    <h1>Allgemeines</h1>
   </div>
 
   <div id="quiz-container"></div>
 
   <script>
-    // ——— Hilfsfunktionen ———
-    function normalize(text){
-      return (text||"")
-        .toLowerCase()
-        .replace(/\s+/g,"")
-        .replace(/[.,;:!?()„“"']/g,"")
-        .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-    }
-    // Levenshtein für leichte Tippfehler
-    function lev(a,b){
-      const m=a.length,n=b.length;
-      const dp=Array.from({length:m+1},()=>Array(n+1).fill(0));
-      for(let i=0;i<=m;i++) dp[i][0]=i;
-      for(let j=0;j<=n;j++) dp[0][j]=j;
-      for(let i=1;i<=m;i++){
-        for(let j=1;j<=n;j++){
-          const cost=a[i-1]===b[j-1]?0:1;
-          dp[i][j]=Math.min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+cost);
-        }
-      }
-      return dp[m][n];
-    }
-    function closeMatch(user, correct){
-      const u=normalize(user), c=normalize(correct);
-      if(!u) return false;
-      if(u===c) return true;
-      const d=lev(u,c);
-      const len=Math.max(3,c.length);
-      const tol = Math.max(1, Math.round(len*0.1)); // ~10% Toleranz
-      return d<=tol;
-    }
-
-    function checkWord(inputId, correctWord, feedbackId, explanation=""){
-      const input=document.getElementById(inputId);
-      const fb=document.getElementById(feedbackId);
-      fb.innerHTML="";
-
-      if(closeMatch(input.value, correctWord)){
-        input.classList.add("correct"); input.classList.remove("wrong");
-        fb.style.display="block"; fb.textContent="Richtig! ✅";
-      } else {
-        input.classList.add("wrong"); input.classList.remove("correct");
-        input.value = correctWord; // richtige Lösung anzeigen
-        fb.style.display="block"; fb.textContent="Falsch. Richtige Antwort: " + correctWord;
-      }
-      if(explanation){
-        const extra=document.createElement("div");
-        extra.className="explanation";
-        extra.style.display="block";
-        extra.textContent=explanation;
-        fb.appendChild(extra);
-      }
-    }
-
     function selectOptionGroup(groupId, correctIndex, clickedIndex, explanation=""){
       const buttons=document.querySelectorAll(`[data-group='${groupId}']`);
       buttons.forEach((btn,i)=>{
         btn.disabled=true;
-        if(i===correctIndex) btn.classList.add("correct");
-        if(i===clickedIndex && i!==correctIndex) btn.classList.add("wrong");
+        if(i===correctIndex) btn.classList.add('correct');
+        if(i===clickedIndex && i!==correctIndex) btn.classList.add('wrong');
       });
-      const fb=document.getElementById("f_"+groupId);
-      if(explanation){ fb.style.display="block"; fb.innerHTML=explanation; }
+      const fb=document.getElementById('f_'+groupId);
+      if(explanation){ fb.style.display='block'; fb.innerHTML=explanation; }
     }
 
-    // ——— Aufgaben ———
     const tasks = [
-      { q:"1.\tIn welcher Reihenfolge sind Einschränkungen, Zusatz und Hinweise in dem Revisionsbericht zu erwähnen?", id:"q1", type:"text",
-        answer:`1. Einschränkungen\n2. Zusatz\n3. Hinweis` },
+      { q:"1.\tWie hoch ist der Emissionspreis der neuen Aktie, wenn das Bezugsverhältnis 2/1 ist und der Kurswert einer alten Aktie 7 und einer neuen Aktie 6 ist.", id:"q1",
+        options:["4","6","8"], correct:0,
+        expl:"Zusatz zur Lösung<br>Kurswert 2 alte Aktien  14<br>Emissionspreis 1 neue Aktie  <br>= Kurswert 3 neue Aktien  18<br>Somit ist der Emissionspreis CHF 4" },
 
-      { q:"2.\tSind die Einschränkungen vor oder nach der Prüfungsaussage in den Revisionsbericht zu nehmen?", id:"q2", type:"mc",
-        options:["vor","nach"], correct:0 },
+      { q:"2.\tWie gross ist das Bezugsrecht im obigen Beispiel?", id:"q2",
+        options:["1","2","4"], correct:0 },
 
-      { q:"3.\tWie ist vorzugehen, wenn mehrere Tatbestände zu einer Einschränkung vorliegen?", id:"q3", type:"text",
-        answer:"Die Prüfungsaussage bezieht sich auf die schwerwiegendste Einschränkung." },
+      { q:"3.\tBei einer Umwandlung einer Einzelunternehmen in eine AG mit Aufnahme eines neuen Aktionärs (20%) sind Stille Reserven von CHF 100'000 vorhanden. Wie viel CHF muss der neue Aktionär in die KER für die stille Reseven einzahlen wenn dies im Rahmen der Gründung verlangt wird.", id:"q3",
+        options:["20’000","25’000"], correct:1,
+        expl:"Zusatz zur Lösung<br>Da die bereits vorhandenen CHF 100'000 den 80% des vorherigen Inhabers entspricht sind zusätzlich 20% einzuzahlen." },
 
-      { q:"4.\tIst ein Zusatz vor oder nach der Prüfungsaussage in den Revisionsbericht zu nehmen?", id:"q4", type:"mc",
-        options:["vor","nach"], correct:1 },
+      { q:"4.\tSind die bereits vorhandenen CHF 100'000 ebenfalls in die KER einzubuchen?", id:"q4",
+        options:["ja","nein"], correct:1,
+        expl:"Zusatz zur Lösung<br>Diese bleiben stille Reserven und sind nicht zu verbuchen." },
 
-      { q:"5.\tWelche Arten von Einschränkungen gibt es?", id:"q5", type:"text",
-        answer:`1. Eingeschränkte Prüfungsaussage\n2. Verneinende Prüfungsaussage\n3. Unmöglichkeit einer Prüfungsaussage` },
+      { q:"5.\tBei einer gemischten Umwandlung ist in der Regel eine Unternehmensbewertung zu machen.", id:"q5",
+        options:["richtig","falsch"], correct:0 },
 
-      { q:"6.\tWelche Arten einer Eingeschränkten Prüfungsaussage gibt es?", id:"q6", type:"text",
-        answer:`1. Meinungsverschiedenheit festgestellter Sachverhalt\n2. Meinungsverschiedenheit angenommener Sachverhalt, NICHT grundlegend\n3. Beschränkung Prüfungsumfang, NICHT grundlegend` },
+      { q:"6.\tBei der Berechnung der Anschaffungskosten eines Fahrzeuges (z.B. für den Eigenverbrauch) kann die Ablieferungspauschale zu den Anschaffungskosten dazu gerechnet werden.", id:"q6",
+        options:["richtig","falsch"], correct:1,
+        expl:"Zusatz zur Lösung<br>Es handelt sich hierbei um eine einmalige Dienstleistung" },
 
-      { q:"7.\tWelche Arten einer verneinenden Prüfungsaussage gibt es?", id:"q7", type:"text",
-        answer:"Meinungsverschiedenheit, festgestellter Sachverhalt, grundlegend" },
+      { q:"7.\tUnternehmen ab einem Umsatz von CHF ____ müssen Abgabe für Radio & Fernseh leisten.", id:"q7",
+        options:["100’000","500’000","1'000’000"], correct:1,
+        expl:"Zusatz zur Lösung:<br>Die MWST-Abrechnung ist die Grundlage für die Berechnung der Radio & Fernseh-Abgabe" },
 
-      { q:"8.\tWelche Arten von Unmöglichkeit einer Prüfungsaussage gibt es?", id:"q8", type:"text",
-        answer:`1. Meinungsverschiedenheit, angenommener Sachverhalt, grundlegend\n2. Beschränkung des Prüfungsumfangs, grundlegend` },
+      { q:"8.\tWenn der Arbeitgeber einen Arbeitnehmer kündigt, welcher bereits das ___ Altersjahr erreicht hat, muss dem Arbeitnehmer über die Möglichkeit der Weiterführung des BVGs informiere.", id:"q8",
+        options:["55","58","60"], correct:1,
+        expl:"Zusatz zur Lösung<br>Dies gilt nicht, wenn der Arbeitnehmer kündigt." },
 
-      { q:"9.\tWann muss eine Einschränkung vorgenommen werden?", id:"q9", type:"text",
-        answer:`1. Beschränkung des Prüfungsumfangs\n2. Verstoss gegen die Bewertungsgrundsätze\n3. Verstoss gegen die Darstellung (Mindestgliederung)\n4. Verstoss gegen die Offenlegung (Anhang)\n5. Verstoss gegen Grundsätze ordnungsmässiger Rechnungslegung` },
+      { q:"9.\tWer muss im Falle einer Weiterführung des BVGs (Siehe Frage 8) die Beiträge bezahlen.", id:"q9",
+        options:["Arbeitgeber","Arbeitnehmer","BVG-Versicherung"], correct:1 },
 
-      { q:"10.\tWann ist ein Fehler grundlegend? Wenn durch die Korrektur des Fehlers folgendes passiert:", id:"q10", type:"text",
-        answer:`1. ½ Kapitalverlust\n2. Überschuldung\n3. Dividendenauszahlung nicht mehr möglich\n4. Vielfaches der Gesamtwesentlichkeit` },
+      { q:"10.\tDie Substanzwertmethode ist eine statische Form der Unternehmensbewertung. Sie bezieht sich auf die Bilanz. Berechnet wird sie Aktiven zu Veräusserungswerten – Schulden. Resp. Eigenkapital + Stille Reserven – latente Steuern auf stille Reserven.", id:"q10",
+        options:["richtig","falsch"], correct:0,
+        expl:"Zusatz zur Lösung:<br>Wenn Firmen kaum oder keine Gewinne erwirtschaftet. Z.B. Holding. <br>Oder bei Startups in einer sehr frühen Phase ohne stabile Gewinne." },
 
-      { q:"11.\tWas ist eine Einschränkung?", id:"q11", type:"text",
-        answer:`- Sie modifiziert die Prüfungsaussage.\n- Der Prüfer ist nicht in allen wesentlichen Punkten einverstanden.` },
+      { q:"11.\tNormalerweise wird die Praktikermethode angewendet. Diese berechnet sich aus _____.", id:"q11",
+        options:["1/3 Substanzwert + 2/3 Ertragswert","1/2 Substanzwert + ½ Ertragswert"], correct:0 },
 
-      { q:"12.\tWas ist ein Zusatz?", id:"q12", type:"text",
-        answer:`- Hervorhebung eines wichtigen Sachverhalts\n- Ergänzt den Bericht zur Vermeidung von Missverständnissen\n- Bezieht sich auf Prüfung, darf keine Geheimhaltung verletzen` },
+      { q:"12.\tDer Ertragswert wird aus den Jahresgewinnen der letzten 2-3 Jahren (nach Steuern) berechnet. Daraus wird der Durchschnitt gezogen. Dieser Wert ist mit dem Kapitalisierungszinssatz zu berechnen. Für das Jahr beträgt dieser ___.", id:"q12",
+        options:["7%","7.5%","8%"], correct:0 },
 
-      { q:"13.\tWas ist ein Hinweis?", id:"q13", type:"text",
-        answer:`- Verstösse gegen andere gesetzliche Vorschriften in der Jahresrechnung\n- Kein Einfluss auf die Prüfungsaussage` },
+      { q:"13.\tBei der Mittelwertmethode wird anders als bei der Praktiker Methode mit dem Durchschnitt der Substanzwertmethode und Ertragswertmethode gerechnet.", id:"q13",
+        options:["richtig","falsch"], correct:0,
+        expl:"Zusatz zur Lösung:<br>Weitere Unternehmungsbewertungsmethoden sind die Discounted Cash Flow-Methode (DCF), die Übergewinnmethode und die Multiplikatormethode." },
 
-      { q:"14.\tWas sind Beispiele einer redaktionellen Erläuterung? (SER 136-137)", id:"q14", type:"text",
-        answer:`- Doppelmandat\n- Überlanges / verkürztes Geschäftsjahr\n- Vorjahr Opting-out\n- Vorjahr andere Revisionsgesellschaft\n- falls Vergleichszahlen nicht geprüft werden\n- Beilagen (GFR), falls diese von angewendeter Rechnungslegung vorgesehen wird` },
+      { q:"14.\tWie berechnet man die kantonale Gewinnsteuer (nicht GGST) bei einem Kanton, der nach dem monistischen System ist.", id:"q14",
+        options:["wiedereingebrachte Abschreibung x Steuersatz","GGST + wiedereingebrachte Abschreibung x Steuersatz"], correct:0 },
 
-      { q:"15.\tWas ist der Inhalt im Revisionsbericht bei der eingeschränkten Revision? Art. 729b OR", id:"q15", type:"text",
-        answer:`- Hinweis auf eingeschränkte Natur der Revision\n- Stellungnahme zum Ergebnis der Prüfung\n- Angaben zur Unabhängigkeit (allenfalls Doppelmandat)\n- Angaben zum leitenden Revisor inkl. Zulassung` }
+      { q:"15.\tWie berechnet man die kantonale Gewinnsteuer (nicht GGST) bei einem Kanton, der nach dem monistischen System ist.", id:"q15",
+        options:["wiedereingebrachte Abschreibung x Steuersatz","GGST + wiedereingebrachte Abschreibung x Steuersatz"], correct:1 },
+
+      { q:"16.\tWie wird ein WB auf das Warenlager verbucht?", id:"q16",
+        options:["Abschreibungsaufwand","Warenaufwand"], correct:1 },
+
+      { q:"17.\tBei Umwandlung einer Einzelunternehmung in eine AG bei Weiterführung der Buchhaltung sind alle Aktiven + Passiven über das Konto Aktionäre einzubuchen.", id:"q17",
+        options:["richtig","falsch"], correct:1,
+        expl:"zusatz zur Lösung<br>Die Buchhaltung wird weitergeführt. Keine Einbuchung ist notwendig." },
+
+      { q:"18.\tEine bedingte sowie eine genehmigte Aktienkapitalerhöhung ist bis zu max. 50% des Aktienkapitals möglich.", id:"q18",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"19.\tIst bei der Investitionsrechnung die gewünschte Rendite gegeben, zu welcher man den Umsatz berechnen soll, so ist der %-Satz der Rendite der neue kalk. Zinssatz. Dieser ist für die Berechnung des Zinssatzes zu verwenden.", id:"q19",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"20.\tBei einem neuen Revisionsmandat sind Prüfungshandlungen für die Vorjahreszahlung im Prüfungsprogramm aufzunehmen. Falls in den Vorjahreszahlen wesentliche Fehlaussagen enthalten sind und die Prüfung nicht modifiziert wurde, ist folgendes zu machen:", id:"q20",
+        options:["Hinweis","Zusatz"], correct:1 },
+
+      { q:"21.\tWurden im Rahmen der Aufgabe 20 die wesentlichen Fehler im Berichtsjahr nicht korrigiert, so ist ___.", id:"q21",
+        options:["Modifizierte Prüfungsaussage","redaktionelle Erläuterung","Hinweis"], correct:0,
+        expl:"Zusatz zur Lösung:<br>Da die Bewertung im Berichtsjahr immer noch falsch ist." },
+
+      { q:"22.\tBei der Absatzerfolgsrechnung sind die BÄ sowie die Erlösminderungen direkt vom Ertrag abzuziehen. Dies ist nicht nur für die BÄ der Fertigfabrikate, sondern auch der Halbfabrikate.", id:"q22",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"23.\tBei der Auszahlung der Rente ins Ausland (Wohnsitz Rentner) sind auf die AHV-Rente die Quellensteuern wie folgt abzurechnen:", id:"q23",
+        options:["1%","4.5%","keine"], correct:2 },
+
+      { q:"24.\tBei der Auszahlung der Rente ins Ausland (Wohnsitz Rentner) sind auf die BVG-Rente die Quellensteuern wie folgt abzurechnen:", id:"q24",
+        options:["1%","4.5%","keine"], correct:0 },
+
+      { q:"25.\tDie Indirekte Teilliquidation kommt nur zur Belastung, wenn nicht betriebsnotwendige Substanz resp. Stille Reserven ausgeschüttet werden / vorhanden sind. Die Besteuerung erfolgt zu 70%.", id:"q25",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"26.\tVerkehrswert – Schulden – Liquidationskosten – Steuern auf stille Reserven", id:"q26",
+        options:["Liquidationserlös","Liquidationsüberschuss"], correct:0 },
+
+      { q:"27.\tLiquidationserlös – Aktienkapital – KER", id:"q27",
+        options:["Liquidationsüberschuss","Fremdkapital"], correct:0 },
+
+      { q:"28.\tWie berechnet man den Umsatz für die MWST bei der Saldosteuersatz-Methode.", id:"q28",
+        options:["Umsatz exkl. MWST","Umsatz inkl. MWST"], correct:1 },
+
+      { q:"29.\tBei der fiktiven Vorsteuer ist der Kaufpreis ___ %", id:"q29",
+        options:["100%","108.1%"], correct:1 },
+
+      { q:"30.\tDer Zeitwert beim Eigenverbrauch ist ab dem folgenden Moment zu berechnen:", id:"q30",
+        options:["Zeitpunkt der Anschaffung","Zeitpunkt der Inbetriebnahme"], correct:1 },
+
+      { q:"31.\tBei der Produktionserfolgsrechnung ist die BÄ Abnahme wie folgt zu erfassen:", id:"q31",
+        options:["+","-"], correct:0 },
+
+      { q:"32.\tBei der Produktionserfolgsrechnung ist die BÄ Zunahme wie folgt zu erfassen:", id:"q32",
+        options:["+","-"], correct:1 },
+
+      { q:"33.\tDie Berechnung der %tigen Senkung der variablen Kosten bei einer fixer Umsatzsteigung ist wie folgt zu berechnen: 100 / variable Kosten x fehlender Umsatz", id:"q33",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"34.\tWenn mehrere Aktien gegeben sind, die einen beobachtbaren Marktpreis haben, ist jeweils der niedrigste Wert zu bilanzieren.", id:"q34",
+        options:["richtig","falsch"], correct:0,
+        expl:"Zusatz zur Lösung:<br>Niederwertsprinzip" },
+
+      { q:"35.\tEigene Aktien dürfen max. ___ Jahre gehalten werden.", id:"q35",
+        options:["2","4","6"], correct:2,
+        expl:"Zusatz zur Lösung:<br>Ansonsten fällt ein steuerbaren Vermögensertrag inkl. Verrechnungssteuer an. Direkte Teilliquidation." },
+
+      { q:"36.\tWerden die eigenen Aktien über die Gewinnreserven ausgebucht gilt dies als direkte Teilliquidation und es fällt ein steuerbarer Vermögensertrag inkl. VST an.", id:"q36",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"37.\tWurde bei einer Kollektivgesellschaft das Kapital zur Beseitigung eines Verlustes verschmälert, so ist vor einer Gewinnverteilung dieses Kapital wieder einzuzahlen.", id:"q37",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"38.\tDer Finanzertrag ist Teil der Umsatzabstimmung.", id:"q38",
+        options:["richtig","falsch"], correct:1,
+        expl:"Zusatz zur Lösung<br>Der Finanzertrag ist NICHT Teil der Umsatzabstimmung." },
+
+      { q:"39.\tBei der Umsatzabstimmung ist die Veränderung der VLL – der noch nicht fälligen UST massgebend.", id:"q39",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"40.\tDas Bezugsverhältnis berechne sich wie folgt:\nAK vor Erhöhung / Betrag der Erhöhung = Kürzung Bruch", id:"q40",
+        options:["richtig","falsch"], correct:0 },
+
+      { q:"41.\tDas Bezugsrecht berechnet sich wie folgt:\nWert Anzahl obere Zahl Bruch alte Aktien + Wert Anzahl untere Zahl Bruch neue Aktien = Total Summe / obere + untere Zahl – Wert 1 alte Aktie = Bezugsverhältnis x-1", id:"q41",
+        options:["richtig","falsch"], correct:0 }
     ];
 
-    // ——— Rendern ———
-    const container = document.getElementById("quiz-container");
-
+    const container=document.getElementById("quiz-container");
     tasks.forEach(t=>{
       const sec=document.createElement("div"); sec.className="section";
       const h=document.createElement("h2"); h.textContent=t.q; sec.appendChild(h);
 
-      if(t.type==="mc"){
-        const opts=document.createElement("div"); opts.className="options";
-        t.options.forEach((opt,i)=>{
-          const btn=document.createElement("button");
-          btn.innerText=opt; btn.dataset.group=t.id;
-          btn.onclick=()=>selectOptionGroup(t.id, t.correct, i, t.expl || "");
-          opts.appendChild(btn);
-        });
-        sec.appendChild(opts);
-        const fb=document.createElement("div"); fb.id="f_"+t.id; fb.className="explanation"; sec.appendChild(fb);
-      } else {
-        const box=document.createElement("div"); box.className="input-box";
-        box.innerHTML = `
-          <input id="${t.id}" type="text" placeholder="Antwort eingeben..."/>
-          <button onclick="checkWord('${t.id}', \`${t.answer}\`, 'f_${t.id}', \`${t.expl||""}\`)">OK</button>
-        `;
-        sec.appendChild(box);
-        const fb=document.createElement("div"); fb.id="f_"+t.id; fb.className="explanation"; sec.appendChild(fb);
-      }
+      const opts=document.createElement("div"); opts.className="options";
+      t.options.forEach((opt,i)=>{
+        const b=document.createElement("button");
+        b.innerText=opt; b.dataset.group=t.id;
+        b.onclick=()=>selectOptionGroup(t.id, t.correct, i, t.expl || "");
+        opts.appendChild(b);
+      });
+      sec.appendChild(opts);
 
+      const fb=document.createElement("div"); fb.id="f_"+t.id; fb.className="explanation"; sec.appendChild(fb);
       container.appendChild(sec);
     });
   </script>
 </body>
 </html>
+
